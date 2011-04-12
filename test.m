@@ -2,9 +2,6 @@ runs = 10000;
 time3 = zeros(1,runs);
 time1 = zeros(1,runs);
 time2 = zeros(1,runs);
-flops3 = zeros(1,runs);
-flops1 = zeros(1,runs);
-flops2 = zeros(1,runs);
 expand1 = zeros(1,runs);
 expand2 = zeros(1,runs);
 expand3 = zeros(1,runs);
@@ -13,8 +10,9 @@ offDiagSum = zeros(1,runs);
 rowSum = zeros(1,runs);
 babai1 = zeros(1,runs);
 babai2 = zeros(1,runs);
-sameCount=0;
-sz = 35;
+
+sz = 3;
+qam = 64;
 for i = 1:runs
     i
     %
@@ -28,10 +26,10 @@ for i = 1:runs
     %B = randn(m,n);
     B = randILS(m,n,6);
     %B = randILS(m,n,12);
-    z_true = (-1*ones(n,1)).^(mod(round(rand(n,1)*10),2)+1).*round(rand(n,1)*upper);
+    z_true = (-1*ones(m,1)).^(mod(round(rand(m,1)*10),2)+1).*ceil(rand(m,1)*sqrt(qam));
     %y = (-1*ones(m,1)).^(mod(round(rand(m,1)*10),2)+1).*round(rand(m,1)*upper);
-    y = B*z_true + 0.5*randn(m,1);
-    %y = randn(m,1)*10;
+    %y = B*z_true + 0.5*randn(m,1);
+    y = randn(m,1)*20;
     p = 1;
     
     l = -inf*(ones(1,n));
@@ -65,5 +63,9 @@ for i = 1:runs
 
     expand1(i) = numExpanded;
     expand2(i) = numExpanded2;
+    
+    if(numExpanded > numExpanded2 + 2 && numExpanded2 > 3)
+        error('test');
+    end
 
 end
