@@ -1,0 +1,220 @@
+\documentclass[12pt,Bold,letterpaper]{mcgilletdclass}
+\usepackage[dvips,final]{graphicx}
+\usepackage[dvips]{geometry}
+\usepackage{float}		% this is to place figures where requested!
+\usepackage{times}		% this uses fonts which will look nice in PDF
+\usepackage{graphicx}		% needed for the figures
+\usepackage{epstopdf}
+\usepackage{url}
+\usepackage{amsfonts }
+\usepackage{amssymb,amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+%\usepackage{program}
+\usepackage{amsthm }
+\usepackage{amsmath}
+\usepackage{tikz}
+
+\newcommand{\bmx}{\begin{bmatrix}}
+\newcommand{\emx}{\end{bmatrix}}
+
+% Equations:
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\beqy}{\begin{eqnarray}}
+\newcommand{\eeqy}{\end{eqnarray}}
+\newcommand{\beqynn}{\begin{eqnarray*}}
+\newcommand{\eeqynn}{\end{eqnarray*}}
+\newcommand{\boxcon}{{\cal B}}
+%\usepackage{tex4ht}
+%\usepackage{amsmath}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Have you configured your TeX system for proper  %%
+%% page alignment? See the McGillETD documentation %%
+%% for two methods that can be used to control     %%
+%% page alignment. One method is demonstrated      %%
+%% below. See documentation and the ufalign.tex    %%
+%% file for instructions on how to adjust these    %%
+%% parameters.                                     %%
+\addtolength{\hoffset}{0pt}                        %%
+\addtolength{\voffset}{0pt}                        %%
+%%                                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%       Define student-specific info
+\SetTitle{\huge{Integer Least Squares\\Search and Reduction Strategies}}%
+\SetAuthor{Stephen Breen}%
+\SetDegreeType{Master of Science}%
+\SetDepartment{School of Computer Science}%
+\SetUniversity{McGill University}%
+\SetUniversityAddr{Montreal,Quebec}%
+\SetThesisDate{August, 2011}%
+\SetRequirements{A thesis submitted to McGill University\\
+in partial fulfilment of the requirements of the degree of\\
+Master of Science in Computer Science}%
+\SetCopyright{\copyright Stephen Breen 2011}%
+
+\makeindex[keylist]
+\makeindex[abbr]
+
+%% Input any special commands below
+%\newcommand{\Kron}[1]{\ensuremath{\delta_{K}\left(#1\right)}}
+\listfiles%
+\begin{document}
+
+\maketitle%
+
+\begin{romanPagenumber}{2}%
+
+\SetDedicationName{\MakeUppercase{Dedication}}%
+\SetDedicationText{}%
+\Dedication%
+
+\SetAcknowledgeName{\MakeUppercase{Acknowledgements}}%
+\SetAcknowledgeText{}%
+\Acknowledge%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%         English Abstract                        %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\SetAbstractEnName{\MakeUppercase{Abstract}}%
+\SetAbstractEnText{In the worst case the integer least squares (ILS) problem is
+NP-Hard. Since its solution has many practical applications, there have been a
+number of algorithms proposed to solve it and some of its variations e.g., the
+box-constrained ILS problem (BILS). There are typically two stages to solving an
+ILS problem, the reduction and the search. Obviously we would like to solve
+instances of the ILS problem as quickly as possible, however most of the
+literature does not compare the run-time or FLOP counts of the algorithms,
+instead they use a more abstract metric (the number of nodes explored during the
+search). This metric does not always co-incide with the algorithms run-time.
+This thesis will review some of the most effective reduction and search
+strategies for both the ILS and BILS problems. By comparing the run-time
+performance of some search algorithms, we are able to see the advantages of
+each, which allows us to propose a new, more efficent search strategy that is a
+combination of two others. We also prove that two very effective BILS reduction
+strategies are theoretically equivalent and propose a new BILS reduction that
+is equivalent to the others but more efficeint.}
+\AbstractEn%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%         French Abstract                         %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\SetAbstractFrName{\MakeUppercase{ABR\'{E}G\'{E}}}%
+\SetAbstractFrText{ The text of the abstract in French begins here.  }%
+\AbstractFr%
+
+\TOCHeading{\MakeUppercase{Table of Contents}}%
+\LOTHeading{\MakeUppercase{List of Tables}}%
+\LOFHeading{\MakeUppercase{List of Figures}}%
+\tableofcontents %
+\listoftables %
+\listoffigures %
+
+\end{romanPagenumber}
+
+%\mainmatter %
+ 
+\chapter{Introduction}
+\section{Least Squares Problem}
+Consider the following linear model for some observation vector $y$,
+\begin{equation}
+\label{eq:realLSModel}
+y = Ax+v.
+\end{equation}
+
+Where $y\in\mathbb{R}^m$, $A\in\mathbb{R}^{m \times n}$ is called the
+``design matrix'' and has full column rank, and $v\in\mathbb{R}^m$ is a
+noise vector which we assume is normally distributed with mean $0$ and
+covariance matrix $\sigma^2I$. We would like to find the unique solution
+$x\in\mathbb{R}^m$ which minimizes the least squares residual,
+\be
+\label{eq:realLSResidual}
+ \left \| Ax - y \right \|^2_2.
+\ee
+
+This is called the least squares (LS) problem. If we expand
+\eqref{eq:realLSResidual} and set its gradient to $0$, we will arrive at the
+well known ``normal equations'' which can be written in matrix form as,
+\begin{align}
+&A^TAx = A^Ty \\
+\label{eq:normalEquations}
+&x = (A^TA)^{-1}A^Ty.
+\end{align}
+
+The solution of the least squares problem has numerous applications in almost
+every field of science and engineering.
+
+\section{Integer Least Squares Problems}
+The integer least squres (ILS) problem is a modification of the LS problem
+where the solution vector $x\in\mathbb{Z}^m$ is an unknown integer vector. We
+no longer have a closed-form solution for $x$ in this case, in fact, the
+problem is provably NP-Hard in the worst case.
+
+A modification to the ILS problem is the box-constrained integer least squares
+problem (BILS). Here we have the following constraint on the solution
+vector, 
+\begin{align}
+&x\in \boxcon\\
+&\boxcon = \{x\in\mathbb{Z}^n : l\le x \le u, l\in \mathbb{Z}^n,
+u\in\mathbb{Z}^n \}.
+\end{align}
+
+Some important applications such as MIMO wireless signal decoding depend on the
+solution of the BILS problem. MIMO stands for ``multiple-input
+multiple-output'', it refers to the case where a wireless system has multiple
+input antennas transmitting a signal which is received by multiple output
+antennas. The signal received is our input vector $y$ from
+\eqref{eq:realLSModel}, it has undergone some linear transformation by the known
+``channel matrix'' $A$ (design matrix) and some noise has been introduced during
+the transmission. Originally, we know that each element of $x$ came from some
+finite set of symbols that we may want to transmit or receive (we model
+this property with \boxcon). The purpose of such a system is to maximize
+throughput, however, the overall throughput of the system will depend on how
+quickly we can solve the BILS problem. Of course we need not solve the BILS
+problem exactly, but under the assumption that the noise has $0$ mean and is
+normally distributed, the BILS solution is more likely than any other possible
+solution to be the true solution $x$.
+
+Other applications of BILS and ILS include global positioning systems,
+cryptography, lattice design, etc... Any application where the elements of $x$
+are known to be integer, we should use ILS. If the elements of $x$ are drawn
+from some finite set, BILS is appropriate.
+
+Even though the problem is NP-Hard, we still have some hope to get solutions
+quickly. In \cite{HasV05} the authors prove that under reasonable assumptions
+on the variance in the noise, the ILS problem can be solved in polynomial time
+using standard search algorithms.
+
+The usual approach to solving an ILS or BILS problem consists of two phases,
+reduction and search. In the reduction phase, we transform the problem into an
+equivalent, but easier one. This involves manipulations such as permutations
+and possibly integer gauss transformations on the design matrix $A$. After
+reduction, we proceed to the search phase where we try to enumerate the possible
+solutions in an efficient manner.
+
+\chapter{Search Algorithms}
+There are many search algorithms that have been proposed to solve the ILS
+problem. This chapter will review some of the most effective search algorithms
+in the literature
+
+\bibHeading{References}
+\bibliography{../ILS}
+\bibliographystyle{plain}
+
+\index[abbr]{LS@LS: Least Squares}
+\index[abbr]{ILS@ILS: Integer Least Squares}
+\index[abbr]{BILS@BILS: Box-constrained Integer Least Squares}
+
+\printindex[keylist]{Index}{Index}{}
+\printindex[abbr]{KEY TO ABBREVIATIONS}{KEY TO ABBREVIATIONS}{}
+
+\end{document}
+
+
+ 
+
+
+
+
+
+

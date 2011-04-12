@@ -1,0 +1,150 @@
+%% The comment character in TeX / LaTeX is the percent character.
+%% The following chunk is called the header
+
+\documentclass[11pt]{article}	% essential first line
+\usepackage{float}		% this is to place figures where requested!
+\usepackage{times}		% this uses fonts which will look nice in PDF format
+\usepackage{graphicx}		% needed for the figures
+\usepackage{url}
+\usepackage{amsfonts }
+\usepackage{amssymb,amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+%\usepackage{program}
+\usepackage{amsthm }
+\usepackage{amsmath}
+%\usepackage{parskip}
+\numberwithin{algorithm}{section} 
+%% Here I adjust the margins
+
+\oddsidemargin -0.25in		% Left margin is 1in + this value
+\textwidth 6.75in		% Right margin is not set explicitly
+%\topmargin -0.75in			% Top margin is 1in + this value
+\textheight 9in			% Bottom margin is not set explicitly
+\columnsep 0.25in		% separation between columns
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\origbar}{|}
+
+%% Define a macro for inserting postscript images
+%% ==============================================
+%% This is a macro which nominally takes 3 parameters, 
+%% it would be used as follows to insert and encapsulated postscript
+%% image at the location where it is used.
+%%
+%% \EPSFIG{epsfilename}{caption}{label}
+%% - epsfilename is the name of the encapsulated postscript file to be
+%%               inserted at this location
+%% - caption is the text to be shown as the figure caption, it will be
+%%           prepended by Figure X.  The number X can be referenced
+%%           using the label parameter.
+%% - label is a name given to the figure, it can be referenced using the
+%%         \ref{label} command.
+
+\def\EPSFIG[#1]#2#3#4{		% Don't be scared by this monsrosity
+\begin{figure}[H]		% it is a macro to save typing later
+\begin{center}			% 
+\includegraphics[#1]{#2}	%
+\end{center}			%
+\caption{#3}			%
+\label{#4}			%
+\end{figure}			%
+}				%
+
+
+%% Define the fields to be displayed by a \maketitle command
+
+\author{author 1\\ author 2}
+\title{Title}
+
+%%
+%% Header now finished
+%%
+
+\begin{document}		% Critical
+
+\begin{center}\begin{large}Computing the Lower Bound Efficiently \end{large}\end{center}
+
+We have 
+\begin{equation*}
+ \left \| y - Rx \right \|^2_2 = \left \| y_{k:m}- R_{k:m,k:m}x_{k:m} \right \|^2_2 + \left \| y_{1:k-1} - R_{1:k-1,1:k-1}x_{1:k-1} - R_{1:k-1,k:m}x_{k:m} \right \|^2_2.
+\end{equation*}
+Suppose that $U = R^{-1}$ has been computed, then the lower bound on the second term of the above equation is:
+\begin{equation*}
+\sigma_{min}(R_{1:k-1,1:k-1}) \min_{x_{1:k-1}}\left \| x_{1:k-1} - U_{1:k-1,1:k-1}(y_{1:k-1}-R_{1:k-1,k:m}x_{k:m}) \right \|_2^2.
+\end{equation*}
+We need to efficiently compute:
+\begin{equation}
+f^{k-1} \equiv U_{1:k-1,1:k-1}(y_{1:k-1}-R_{1:k-1,k:m}x_{k:m}).
+\end{equation}
+
+For $k=m$ we compute $f^{k-1}$ directly by matrix-vector multiplication.
+For $k < m$, a recursion is derived to relate $f^{k-2}$ to the already known $f^{k-1}$.
+
+First split $f^{k-1}$ into 2 parts, $f^{k-1}_{1:k-2}$ and $f^{k-1}_{k-1:m}$ as follows:
+\begin{align*}
+f^{k-1} &= U_{1:k-1,1:k-1}(y_{1:k-1}-R_{1:k-1,k:m}x_{k:m})
+\\
+&=\begin{bmatrix}U_{1:k-2,1:k-2} & U_{1:k-2,k-1}\\ 0 & u_{k-1,k-1} \end{bmatrix} 
+\begin{bmatrix} y_{1:k-2} \\ y_{k-1} \end{bmatrix} 
+- \begin{bmatrix}U_{1:k-2,1:k-2} & U_{1:k-2,k-1}\\ 0 & u_{k-1,k-1} \end{bmatrix} 
+\begin{bmatrix}R_{1:k-2,k:m}\\ R_{k-1,k:m} \end{bmatrix}x_{k:m}.
+\\
+&=\begin{bmatrix}U_{1:k-2,1:k-2}y_{1:k-2}+U_{1:k-2,k-1}y_{k-1}\\ u_{k-1,1:k-1}y_{k-1}\end{bmatrix} -
+\begin{bmatrix}U_{1:k-2,1:k-2}R_{1:k-2,k:m}x_{k:m} + U_{1:k-2,k-1}R_{k-1,k:m}x_{k:m}\\ u_{k-1,k-1}R_{k-1,k:m}x_{k:m} \end{bmatrix}.
+\end{align*}
+So,
+\begin{equation}
+f^{k-1}_{1:k-2} = U_{1:k-2,1:k-2}y_{1:k-2}+U_{1:k-2,k-1}y_{k-1} - U_{1:k-2,1:k-2}R_{1:k-2,k:m}x_{k:m} - U_{1:k-2,k-1}R_{k-1,k:m}x_{k:m}.
+\label{eq:fkm1km2}
+\end{equation}
+
+We also know from (1) that 
+\begin{align} 
+f^{k-2} &= U_{1:k-2,1:k-2}y_{1:k-2}-U_{1:k-2,1:k-2}R_{1:k-2,k-1:m}x_{k-1:m}  \notag
+\\
+&= U_{1:k-2,1:k-2}y_{1:k-2}-U_{1:k-2,1:k-2}
+\begin{bmatrix}
+R_{1:k-2,k-1} & R_{1:k-2,k:m}
+\end{bmatrix}\begin{bmatrix}
+x_{k-1}\\
+x_{k:m} 
+\end{bmatrix}  \notag
+\\
+&= U_{1:k-2,1:k-2}y_{1:k-2}-U_{1:k-2,1:k-2}R_{1:k-2,k:m}x_{k:m}-U_{1:k-2,1:k-2}R_{1:k-2,k-1}x_{k-1}.
+\label{eq:fkm2}
+\end{align}
+Comparing \eqref{eq:fkm1km2} and \eqref {eq:fkm2},
+we  notice that the first 2 terms in (3) also appear in (2) as the first and third term. 
+This gives us the following equation to relate $f^{k-1}$ and $f^{k-2}$:
+\begin{equation}
+f^{k-2} = f^{k-1}_{1:k-2}  - U_{1:k-2,k-1}y_{k-1} + U_{1:k-2,k-1}R_{k-1,k:m}x_{k:m}- U_{1:k-2,1:k-2}R_{1:k-2,k-1}x_{k-1}.
+\label{eq:fkm22}
+\end{equation}
+The last term in the above equality involves the matrix-vector multiplication $U_{1:k-2,1:k-2}R_{1:k-2,k-1}$, which can be simplified.
+In fact, since $UR=I$, it is easy to verify that 
+$$
+\begin{bmatrix} U_{1:k-2,1:k-2} & U_{1:k-2,k-1}\end{bmatrix} \begin{bmatrix} R_{1:k-2,k-1} \\ r_{k-1,k-1}\end{bmatrix} =0.
+$$
+Thus $U_{1:k-2,1:k-2}R_{1:k-2,k-1}=-U_{1:k-2,k-1}r_{k-1,k-1}$. 
+Then from \eqref{eq:fkm22} we have 
+\begin{align*}
+f^{k-2} 
+& = f^{k-1}_{1:k-2}  - U_{1:k-2,k-1}y_{k-1} + U_{1:k-2,k-1}R_{k-1,k:m}x_{k:m} + U_{1:k-2,k-1}r_{k-1,k-1} x_{k-1} \\
+& = f^{k-1}_{1:k-2} - U_{1:k-2,k-1}(y_{k-1} - R_{k-1,k-1:m} x_{k-1:m}).
+\end{align*}
+Notice that $y_{k-1} - R_{k-1,k-1:m} x_{k-1:m}$ is computed in the search process.
+So if $f^{k-1}$ is known,  the  cost for computing $f^{k-2}$ is  about $2k$ flops.
+Note that when $x_{k:m}$ is determined, the lower bound is determined. 
+During the search process, when move from a higher lever to a lower level, we need to compute the lower bound
+and  store the value;  when  move a lower level to a higher level, we just use the stored values of the lower bounds.
+ 
+
+\end{document}

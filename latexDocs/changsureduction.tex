@@ -1,0 +1,106 @@
+
+%% The comment character in TeX / LaTeX is the percent character.
+%% The following chunk is called the header
+
+\documentclass[11pt]{article}	% essential first line
+\usepackage{float}		% this is to place figures where requested!
+\usepackage{times}		% this uses fonts which will look nice in PDF format
+\usepackage{graphicx}		% needed for the figures
+\usepackage{url}
+\usepackage{amsfonts }
+\usepackage{amssymb,amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+%\usepackage{program}
+\usepackage{amsthm }
+\usepackage{amsmath}
+%\usepackage{parskip}
+\numberwithin{algorithm}{section} 
+%% Here I adjust the margins
+
+\oddsidemargin -0.25in		% Left margin is 1in + this value
+\textwidth 6.75in		% Right margin is not set explicitly
+%\topmargin -0.75in			% Top margin is 1in + this value
+\textheight 9in			% Bottom margin is not set explicitly
+\columnsep 0.25in		% separation between columns
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\origbar}{|}
+
+%% Define a macro for inserting postscript images
+%% ==============================================
+%% This is a macro which nominally takes 3 parameters, 
+%% it would be used as follows to insert and encapsulated postscript
+%% image at the location where it is used.
+%%
+%% \EPSFIG{epsfilename}{caption}{label}
+%% - epsfilename is the name of the encapsulated postscript file to be
+%%               inserted at this location
+%% - caption is the text to be shown as the figure caption, it will be
+%%           prepended by Figure X.  The number X can be referenced
+%%           using the label parameter.
+%% - label is a name given to the figure, it can be referenced using the
+%%         \ref{label} command.
+
+\def\EPSFIG[#1]#2#3#4{		% Don't be scared by this monsrosity
+\begin{figure}[H]		% it is a macro to save typing later
+\begin{center}			% 
+\includegraphics[#1]{#2}	%
+\end{center}			%
+\caption{#3}			%
+\label{#4}			%
+\end{figure}			%
+}				%
+
+
+%% Define the fields to be displayed by a \maketitle command
+
+\author{author 1\\ author 2}
+\title{Title}
+
+%%
+%% Header now finished
+%%
+
+\begin{document}		% Critical
+\begin{center}\begin{large}Constrained ILS Reduction - Chang vs Su\end{large}\end{center}
+Consider the ILS problem, 
+\begin{align*}
+&\min_{x\epsilon X}\left \| Ax-y \right \|\\
+&=\min_{x\epsilon X}\left \| Rx-Q^Ty \right \|\\
+&=\min_{x\epsilon X}\left \| Rx-\hat{y} \right \|
+\end{align*}
+Define $G=(A^{-1})^T$ and $G_i$ references the $i^{th}$ column of G. Note that $\forall{j\neq i}\quad G_i \perp A_j$. \\\\
+
+The algorithms preposed by Chang and Su follow the same procedure with the key difference that Su's algorithm does not perform QR factorization on the matrix A and instead uses the the columns of G to acheive the same results. The following will describe both algorithms in a common framework and then show that the values they compute are equivalent at each step. Values with superscript `c' are from Chang's algorithm and superscript `s' are from Su's\\\\
+
+In the first step of Chang's algorithm, for each $i\epsilon 1...n$ we interchange columns $i$ and $n$ in the matrix $R$, then return $R$ to upper-triangular form with a series of Givens rotations. We then compute $a_i^c=\textrm{arg}\min_{x\epsilon X}\left | R_{n,n}x_n - \hat{y_n} \right | = \left \lfloor\hat{y_n}/R_{n,n}\right \rceil$ and $b_i^c = a_i^c \pm 1$ so that $b_i^c$ is the second closest integer in $X$ to $\hat{y_n}/R_{n,n}$. Finally, we compute $dist_i^c = \left | R_{n,n}b_i^c - \hat{y_n} \right |$ which represents the partial residual given when $x_n$ is fixed to $b_i^c$ and column $i$ is chosen to be the $n^{th}$ column in the matrix R. The $n^{th}$ column is chosen to be the one that maximizes $dist_i^c$.\\\\
+
+The first step of Su's algorithm is much the same. For each $i\epsilon 1...n$ we compute $a_i^s = \textrm{arg}\min_{x\epsilon X}\left | y^TG_i - x \right |$ and $b_i^c = a_i^c \pm 1$ so that $b_i^c$ is the second closest integer in $X$ to $y^TG_i$. Then compute $dist_i^s = \left \| \frac{G_iG_i^T}{G_i^TG_i}(y-A_ib_i^s) \right \|_2$. The $n^{th}$ column is chosen to be the one that maximizes $dist_i^s$.\\\\
+
+If $a_i^c$, $b_i^c$ and $dist_i^c$ are equal to $a_i^s$, $b_i^s$ and $dist_i^s$, then both algorithms will choose the same column as the $n^{th}$. It is obvious that $a_i^c$ is just the last element of the real least squares solution rounded to the nearest integer (because that is how we obtained $a_i^c$). Also, $a_i^s=\left \lfloor y^TG_i \right \rceil = \left \lfloor (A^{-1}y)^T_i \right \rceil$, since we are assuming that we will swap column $i$ and $n$, this is also by definition the last element of the real solution. Therefore $a_i^s = a_i^c$. It is obvious that if  $a_i^s = a_i^c$,  $b_i^s = b_i^c$ since it is computed the same way in both algorithms given $a_i$.\\\\
+
+The following is a proof that $dist_i^c = dist_i^s$:
+\begin{align*}
+ dist_i^s&=\left \| \frac{G_iG_i^T}{G_i^TG_i}(y-A_ib_i) \right \|_2\\
+&=\left \| \frac{G_iG_i^T}{G_i^TG_i}y - \frac{G_i}{G_i^TG_i}b_i \right \|_2\\
+&=\left \| \frac{G_i}{G_i^TG_i}(A^{-1}y)_n - \frac{G_i}{G_i^TG_i}b_i \right \|_2\\
+&=\left \| \frac{G_i}{G_i^TG_i}(\frac{\hat{y_n}}{R_{n,n}} - b_i) \right \|_2\\
+&=\left \| \frac{G_i}{G_i^TG_i}\right \|_2  \left | \frac{\hat{y_n}-R_{n,n}b_i}{R_{n,n}} \right |  \\
+&= \frac{1}{\left \|G_i\right \|_2}  \left | \frac{\hat{y_n}-R_{n,n}b_i}{R_{n,n}} \right |  \\
+&= \frac{1}{\left \| (R^{-1}Q^{-1})_n^T \right \|_2}  \left | \frac{\hat{y_n}-R_{n,n}b_i}{R_{n,n}} \right |  \\
+&= \left | \hat{y_n}-R_{n,n}b_i \right | \\
+\end{align*}
+
+Next, Chang's algorithm sets $\hat{y}_{1:n-1} = \hat{y}_{1:n-1} - R_{1:n-1,n}a_i$. And then continues to work on the subproblem, $\left \| R_{1:n-1,1:n-1}x_{1:n-1} - \hat{y}_{1:n-1} \right \|_2^2$. The effect of this is obvious, it fixes $x_n=a_i$ and continues the algorithm.\\\\
+
+Su acheives the same thing by setting $y = (y-A_ia_i) - \frac{G_iG_i^T}{G_i^TG_i}(y-A_ia_i)$. Since $\forall{j\neq i}\quad G_i \perp A_j$, we are subtracting from $y$ the part that is orthoganol to the remaining columns of $A$, this moves $y$ onto the affine set defined by $x_n=a_i$. The columns of G are similarly projected $\forall{j\neq i}\quad G_j = G_j - \frac{G_iG_i^T}{G_i^TG_i}G_j$. Removing the part of the normal that is orthoganol to $G_i$. The algorithm is then repeated with column $i$ removed from $G$.
+
+\end{document}

@@ -1,0 +1,11 @@
+\contentsline {extrachapter}{\MakeUppercase {Dedication}}{ii}
+\contentsline {extrachapter}{\MakeUppercase {Acknowledgements}}{iii}
+\contentsline {extrachapter}{\MakeUppercase {Abstract}}{iv}
+\contentsline {extrachapter}{\MakeUppercase {ABR\'{E}G\'{E}}}{v}
+\contentsline {extrachapter}{\MakeUppercase {List of Tables}}{vii}
+\contentsline {extrachapter}{\MakeUppercase {List of Figures}}{viii}
+\contentsline {chapter}{\numberline {1}Introduction}{1}
+\contentsline {section}{\numberline {1.1}Least Squares Problem}{1}
+\contentsline {section}{\numberline {1.2}Integer Least Squares Problems}{2}
+\contentsline {chapter}{\numberline {2}Search Algorithms}{4}
+\contentsline {extrachapter}{References}{5}

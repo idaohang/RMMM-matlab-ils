@@ -1,0 +1,242 @@
+
+%% The comment character in TeX / LaTeX is the percent character.
+%% The following chunk is called the header
+
+\documentclass[11pt]{article}	% essential first line
+\usepackage{float}		% this is to place figures where requested!
+\usepackage{times}		% this uses fonts which will look nice in PDF
+\usepackage{graphicx}		% needed for the figures
+\usepackage{url}
+\usepackage{amsfonts }
+\usepackage{amssymb,amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+%\usepackage{program}
+\usepackage{amsthm }
+\usepackage{amsmath}
+%\usepackage{parskip}
+\numberwithin{algorithm}{section} 
+%% Here I adjust the margins
+
+\oddsidemargin -0.25in		% Left margin is 1in + this value
+\textwidth 6.75in		% Right margin is not set explicitly
+%\topmargin -0.75in			% Top margin is 1in + this value
+\textheight 9in			% Bottom margin is not set explicitly
+\columnsep 0.25in		% separation between columns
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\origbar}{|}
+
+%% Define a macro for inserting postscript images
+%% ==============================================
+%% This is a macro which nominally takes 3 parameters, 
+%% it would be used as follows to insert and encapsulated postscript
+%% image at the location where it is used.
+%%
+%% \EPSFIG{epsfilename}{caption}{label}
+%% - epsfilename is the name of the encapsulated postscript file to be
+%%               inserted at this location
+%% - caption is the text to be shown as the figure caption, it will be
+%%           prepended by Figure X.  The number X can be referenced
+%%           using the label parameter.
+%% - label is a name given to the figure, it can be referenced using the
+%%         \ref{label} command.
+
+\def\EPSFIG[#1]#2#3#4{		% Don't be scared by this monsrosity
+\begin{figure}[H]		% it is a macro to save typing later
+\begin{center}			% 
+\includegraphics[#1]{#2}	%
+\end{center}			%
+\caption{#3}			%
+\label{#4}			%
+\end{figure}			%
+}				%
+
+
+%% Define the fields to be displayed by a \maketitle command
+
+\author{author 1\\ author 2}
+\title{Title}
+
+%%
+%% Header now finished
+%%
+
+\begin{document}		% Critical
+\begin{center}\begin{large}New Constrained ILS Reduction\end{large}\end{center}
+This document describes a new reduction strategy for the constrained integer
+least squares problem,
+\begin{align*}
+&\min_{x\epsilon X}\left \| Ax-y \right \|_2\\
+&=\min_{x\epsilon X}\left \| Rx-Q^Ty \right \|_2\\
+&=\min_{x\epsilon X}\left \| Rx-\hat{y} \right \|_2
+\end{align*}
+
+This reduction uses ideas from Chang and Han's ``Solving Box-Constrained Integer
+Least Squares Problems'' and Su and Wassel's ``A New Ordering for Efficient
+Sphere Decoding''. First both algorithms will be briefly described, then it will
+be proven that both of these algorithms give the same result. Chang's algorithm
+is easy to understand and implement but much less time-efficient than
+Su's when implemented in a language like MatLab where permutation operations on
+a matrix involve copying data. Su's algorithm is difficult to understand but
+does not involve expensive memory operations. Comparing the flop counts of the
+two algorithms, Chang's algorithm gives a flop count about 1/3rd that of
+Su's. The new algorithm is easy to implement and understand while
+providing runtime performance very close to that of Su's algorithm when
+implemented in MatLab and a flop count less than either of the
+original algorithms.\\\\
+
+In the first step of Chang's algorithm, for $i\epsilon 1...n$ we interchange
+columns $i$ and $n$ in the matrix $R$, then return $R$ to upper-triangular form
+with a series of Givens rotations. We then compute
+$a_i^c=\textrm{arg}\min_{x\epsilon X}\left | r_{n,n}x_n - \hat{y_n} \right | =
+\left \lfloor\hat{y_n}/r_{n,n}\right \rceil_X$ (the subscript $X$ denotes
+rounding to the nearest value in the set $X$ while the subscripts $i$ refer to
+the column that has currently been swapped to the $n^{th}$ position and
+superscript $c$ denotes Changs algorithm). Also, $b_i^c = a_i^c \pm 1$ so that
+$b_i^c$ is the second closest integer in $X$ to $\hat{y_n}/r_{n,n}$. Finally, we
+compute $dist_i^c = \left | r_{n,n}b_i^c - \hat{y_n} \right |$ which represents
+the partial residual given when $x_n$ is fixed to $b_i^c$ and column $i$ is
+chosen to be the $n^{th}$ column in the matrix R. The final value for
+the $n^{th}$ column is chosen to be the column $i$ that maximizes $dist_i^c$.
+The algorithm then applies the Givens rotations that were used to restore R to
+upper triangular to $\hat{y}$ and sets $\hat{y}_{1:n-1} =
+\hat{y}_{1:n-1} - r_{1:n-1,n}a_i^c$ to impose the constraint $x_n = a_i^c$. We
+then continue to work on the subproblem, $\left \| R_{1:n-1,1:n-1}x_{1:n-1} -
+\hat{y}_{1:n-1}\right \|_2$\\\\
+
+The first step of Su's algorithm is much the same. Let $G=(A^{-1})^T$ and $g_i$
+references the $i^{th}$ column of G. Note that $\forall{j\neq i}\quad g_i \perp
+a_j$. In the first iteration, for each $i\epsilon 1...n$ we compute $a_i^s =
+\textrm{arg}\min_{x\epsilon X}\left | y^Tg_i - x \right | = \left \lfloor 
+y^Tg_i \right \rceil_X$. Also, $b_i^s = a_i^s \pm 1$ so that $b_i^s$ is the
+second closest integer in $X$ to $y^Tg_i$. Then compute $dist_i^s = \left \|
+\frac{g_ig_i^T}{g_i^Tg_i}(y-a_ib_i^s) \right \|_2$.
+The $n^{th}$ column is chosen to be the one that maximizes $dist_i^s$. After the
+$n^{th}$ column is determined, we set
+$y=(I-\frac{g_ig_i^T}{g_i^Tg_i})(y-a_ia_i)$ this projects and shifts $y$ into
+the space spanned by the remaining columns of $A$ by removing the part of $y$
+that is orthogonal to those columns ($g_i$). The shift imposes the constraint
+$x_n = a_i^s$. Since we are effectively removing the $i^{th}$ column of $A$, we
+must update the inverse by setting $\forall{j\neq i}\quad g_j = (I -
+\frac{g_ig_i^T}{g_i^Tg_i})g_j$. This gives the pseudoinverse of $A$ with column
+$i$ removed. For proof of this, see ``Representations for the Generalized
+Inverse of a Partitioned Matrix''.\\\\
+
+In order to prove Chang and Su's algorithms produce the same set of
+permutations, it will suffice to prove that $a_i^s = a_i^c, b_i^s = b_i^c,
+dist_i^s = dist_i^c$ and that the subproblems produced for the second step of
+each algorithm are equivalent. Proving $a_i^s = a_i^c$ is not difficult.
+Let $J$ be the product of the Givens rotations used to return $R$ to upper
+triangular after a permutation $P$ is applied. Since $\left\| JRPx - JQ^Ty
+\right \|_2 = \left \| RPx - Q^Ty \right \|_2$, we
+know that when Chang's algorithm swaps column $i$ with column $n$ and returns
+$R$ to upper triangular through Givens rotations, the only effect this has on
+the real LS solution $x$ is that elements $i$ and $n$ are swapped. Therefore
+$a^i_c$ is just the $i^{th}$ element of the real least squares solution rounded
+to the nearest integer in $X$. We can compute this directly by $a_i^c= \left
+\lfloor (A^{-1}y)^T_i \right \rceil = \left \lfloor y^Tg_i \right \rceil$.
+Which is the same as Su's method. Obviously once $a_i^c$ is known $b_i^c$ can be
+easily found. To compute $dist_i^c$ directly, we can use the formula from Su's
+paper, $dist_i^s = \left \| \frac{g_ig_i^T}{g_i^Tg_i}(y-a_ib_i^c) \right \|_2$.
+The following proof shows that this is equivalent to the method Chang uses to
+compute the residual.
+\begin{align*}
+ dist_i^s&=\left \| \frac{g_ig_i^T}{g_i^Tg_i}(y-a_ib_i) \right \|_2\\
+&=\left \| \frac{g_ig_i^T}{g_i^Tg_i}y - \frac{g_i}{g_i^Tg_i}b_i \right \|_2\\
+&=\left \| \frac{g_i}{g_i^Tg_i}(A^{-1}y)_i - \frac{g_i}{g_i^Tg_i}b_i \right
+\|_2\\
+\end{align*}
+Let $\bar{R} = JRP$ denote R after applying permutation matrix $P$ to swap
+columns $i$ and $n$, and the product of Givens rotations $J$ to restore $R$ to
+upper triangular. Then we have,
+\begin{align*}
+&=\left \| \frac{g_i}{g_i^Tg_i}(\frac{\hat{y}_n}{\bar{r}_{n,n}} - b_i) \right
+\|_2\\
+&=\left \| \frac{g_i}{g_i^Tg_i}\right \|_2  \left |
+\frac{\hat{y}_n-\bar{r}_{n,n}b_i}{\bar{r}_{n,n}} \right |  \\
+&= \frac{1}{\left \|g_i\right \|_2}  \left |
+\frac{\hat{y}_n-\bar{r}_{n,n}b_i}{\bar{r}_{n,n}} \right |
+\end{align*}
+Now we must show $\frac{1}{\left \|g_i \right \|_2} = \bar{r}_{n,n}$.
+\begin{align*}
+\left \| g_i \right \|_2 &= \left \| (R^{-T})_i \right \|_2 \\
+&= \left \| J(R^{-T})_i \right \|_2 \\
+&= \left \| (\bar{R}^{-T})_n \right \|_2
+\end{align*}
+Since $\bar{R}^{-1}\bar{R} = I$ and $R$ is upper-triangular, it must be true
+that,
+\begin{align*}
+\left \| (\bar{R}^{-T})_n \right \|_2 &= \left | \frac{1}{r_{n,n}} \right | \\
+&=\left \| g_i \right \|_2
+\end{align*}
+Therefore, $dist_i^s =\left | \hat{y}_n-\bar{r}_{n,n}b_i \right |$
+
+
+Next we must prove that the subproblems in the second step of each algorithm
+are equivalent. Originally we have $\hat{y} =Q^Ty$. Let $\hat{y}^{(2)}
+\epsilon\mathbb{R}^{n-1}$ denote $\hat{y}$ in the second step of Changs
+algorithm and $y^{(2)} \epsilon\mathbb{R}^n$ denote $y$ in the second step
+of Su's. We must show that $\hat{y}^{(2)} = (Q^Ty^{(2)})_{1:n-1}$ and
+$(Q^Ty^{(2)})_n = 0$.
+\begin{align*}
+(Q^Ty^{(2)})_i &= q_i^T(I-\frac{g_ng_n^T}{g_n^Tg_n})(y-a_nx_n) \\
+&= (q_i^T - q_i^T\frac{g_ng_n^T}{g_n^Tg_n})(y-a_nx_n)
+\end{align*}
+This can be simplified by observing that $Q^TG$ is lower triangular.
+\begin{align*}
+Q^TG &= Q^T(QR)^{-T} \\
+&=R^{-T}
+\end{align*}
+So $q_i^Tg_n = 0$ for $i=1..n-1$. When $i=n$, we have $g_n = q_nR^{-T}_{n,n}$.
+Because $Q$ is orthogonal, this
+means $q_n=\frac{g_n}{\left \| g_n \right \|}$ which implies $(q_n^T -
+q_n^T\frac{g_ng_n^T}{g_n^Tg_n}) = 0$. So now for $i \ne n$ we have $(q_i^T -
+q_i^T\frac{g_ng_n^T}{g_n^Tg_n})(y-a_nx_n) = q_i^Ty_n - q_i^Ta_nx_n$. And since
+$R = Q^TA$ implies $r_{i,j} = q_i^Ta_j$, we have 
+\begin{align*}
+q_i^Ty - q_i^Ta_nx_n &= q_i^Ty - r_{i,n}x_n \\
+&= \hat{y}^{(2)} 
+\end{align*}
+Now we know $\hat{y}^{(2)} = (Q^Ty^{(2)})_{1:n-1}$, and from ``Representations
+for the Generalized Inverse of a Partitioned Matrix'' we know that the updated
+$G$ for the second step of the algorithm is the pseudoinverse of $A$ with the
+column that we swapped for the $n^{th}$ removed. This implies that the
+subproblems in the second step of each algorithm are equivalent.\\\\
+
+Now that we know the two algorithms are equivalent, we can take the best
+parts from both and combine them to form a new algorithm. The main cost in
+Chang's algorithm is to interchange the columns of $R$ and return it to
+upper-triangular form. At the $k^{th}$ step of the algorithm we
+must do this $k$ times. We can avoid all but one of these column interchanges by
+computing $a_i^c$, $b_i^c$ and $dist_i^c$ directly. Let $L = R^{-T}$. Then
+we know from the previous proof and the lower triangular structure of $L$ we can
+compute $a_i^c = \left \lfloor \hat{y}_{i:n}^Tl_i \right \rceil_X$ and $b_i^c$
+to be the second closest integer to $\hat{y}^Tl_i$. Similarly, we can compute
+$dist_i^c = \left \|
+\frac{l_{i:n,i}l_{i:n,i}^T}{l_{i:n,i}^Tl_{i:n,i}}(\hat{y_{i:n}}
+-r_{i:n,i}b_i^c) \right \|_2 $\\\\
+
+After the column that maximizes $dist_i^c$ is found, like in Chang's
+algorithm, we swap that column with the $n^{th}$ and use Givens rotations to
+restore the upper-triangular structure of $R$. We also apply the same Givens
+rotations to the target vector $y$. To impose the constraint $x_n = a_i^c$ we
+set $\hat{y}_{1:n-1} = \hat{y}_{1:n-1} - r_{1:n-1,n}a_i^c$. In addition, we must
+also update the inverse matrix L, this is very easy. Suppose $P$ was the
+permutation matrix applied to $R$ and $J$ denotes the product of Givens
+rotations to restore it to upper triangular. So, $R = JRP$ and set $L = R^{-T} =
+(JRP)^{-T} = JLP$. After this, as in Changs algorithm, we continue to work on
+the subproblem of size $n-1$. The advantage of using Chang's idea for this
+second part of the algorithm is that the flop count will be lower since at each
+step we reduce the problem size, and the operations are less costly than Su's
+projections. Also the algebra is easier to understand without considering the
+geometry of the projections.
+
+\end{document}

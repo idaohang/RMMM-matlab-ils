@@ -1,0 +1,78 @@
+%% The comment character in TeX / LaTeX is the percent character.
+%% The following chunk is called the header
+
+\documentclass[11pt]{article}	% essential first line
+\usepackage{float}		% this is to place figures where requested!
+\usepackage{times}		% this uses fonts which will look nice in PDF format
+\usepackage{graphicx}		% needed for the figures
+\usepackage{url}
+\usepackage{amsfonts }
+\usepackage{amssymb,amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+%\usepackage{program}
+\usepackage{amsthm }
+\usepackage{amsmath}
+%\usepackage{parskip}
+\numberwithin{algorithm}{section} 
+%% Here I adjust the margins
+
+\oddsidemargin -0.25in		% Left margin is 1in + this value
+\textwidth 6.75in		% Right margin is not set explicitly
+%\topmargin -0.75in			% Top margin is 1in + this value
+\textheight 9in			% Bottom margin is not set explicitly
+\columnsep 0.25in		% separation between columns
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\origbar}{|}
+
+%% Define a macro for inserting postscript images
+%% ==============================================
+%% This is a macro which nominally takes 3 parameters, 
+%% it would be used as follows to insert and encapsulated postscript
+%% image at the location where it is used.
+%%
+%% \EPSFIG{epsfilename}{caption}{label}
+%% - epsfilename is the name of the encapsulated postscript file to be
+%%               inserted at this location
+%% - caption is the text to be shown as the figure caption, it will be
+%%           prepended by Figure X.  The number X can be referenced
+%%           using the label parameter.
+%% - label is a name given to the figure, it can be referenced using the
+%%         \ref{label} command.
+
+\def\EPSFIG[#1]#2#3#4{		% Don't be scared by this monsrosity
+\begin{figure}[H]		% it is a macro to save typing later
+\begin{center}			% 
+\includegraphics[#1]{#2}	%
+\end{center}			%
+\caption{#3}			%
+\label{#4}			%
+\end{figure}			%
+}				%
+
+
+%% Define the fields to be displayed by a \maketitle command
+
+\author{author 1\\ author 2}
+\title{Title}
+
+%%
+%% Header now finished
+%%
+
+\begin{document}		% Critical
+\begin{center}\begin{large}"A New Ordering for Efficient Sphere Decoding" Constrained ILS Reduction\end{large}\end{center}
+Consider the ILS problem, $\min_{x\epsilon X}\left \| Ax-y \right \|$. Define $G=A^{-1}$ and $G_i$ references the $i^{th}$ column of G. The algorithm starts with all elements of $x$ unfixed and an 'index' set $Index={1...m}$ which will be used to reference columns of $G$.\\\\
+
+In the first iteration, we find the column of G which maximizes the distance to the second nearest integer point. Meaning that for each $i\epsilon Index$ we compute $a=\textrm{arg}\min_{x\epsilon X}\left | y^TG_i - x \right |$ which gives the $a=x_m$ that minimizes the partial residual assuming that we choose column $i$ to be the $m^{th}$ column in the final matrix $A$. We then compute  $b=\textrm{arg}\min_{x\epsilon X\backslash a}\left | y^TG_i - x \right |$ which gives the $b=x_m$ that has the second smallest partial residual. We compute the distance between the target vector $y$ and the affine set defined by fixing $x_m = b$ as $dist=\left \| ( 1/(G_i^TG_i)(G_iG_i^T))(y - A_i*b) \right \|$ where the term $1/(G_i^TG_i)(G_iG_i^T)$ is just the orthogonal projector that projects onto the $i^{th}$ colum of G.\\\\
+
+Since
+\end{document}

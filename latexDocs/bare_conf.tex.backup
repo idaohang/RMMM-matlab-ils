@@ -1,0 +1,2046 @@
+\documentclass[conference]{IEEEtran}
+\usepackage{cite}
+% cite.sty was written by Donald Arseneau
+% V1.6 and later of IEEEtran pre-defines the format of the cite.sty package
+% \cite{} output to follow that of IEEE. Loading the cite package will
+% result in citation numbers being automatically sorted and properly
+% "compressed/ranged". e.g., [1], [9], [2], [7], [5], [6] without using
+% cite.sty will become [1], [2], [5]--[7], [9] using cite.sty. cite.sty's
+% \cite will automatically add leading space, if needed. Use cite.sty's
+% noadjust option (cite.sty V3.8 and later) if you want to turn this off.
+% cite.sty is already installed on most LaTeX systems. Be sure and use
+% version 4.0 (2003-05-27) and later if using hyperref.sty. cite.sty does
+% not currently provide for hyperlinked citations.
+% The latest version can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/cite/
+% The documentation is contained in the cite.sty file itself.
+
+
+
+
+
+
+% *** GRAPHICS RELATED PACKAGES ***
+%
+\ifCLASSINFOpdf
+  % \usepackage[pdftex]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../pdf/}{../jpeg/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+\else
+  % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
+  % will default to the driver specified in the system graphics.cfg if no
+  % driver is specified.
+  % \usepackage[dvips]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../eps/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.eps}
+\fi
+% graphicx was written by David Carlisle and Sebastian Rahtz. It is
+% required if you want graphics, photos, etc. graphicx.sty is already
+% installed on most LaTeX systems. The latest version and documentation can
+% be obtained at: 
+% http://www.ctan.org/tex-archive/macros/latex/required/graphics/
+% Another good source of documentation is "Using Imported Graphics in
+% LaTeX2e" by Keith Reckdahl which can be found as epslatex.ps or
+% epslatex.pdf at: http://www.ctan.org/tex-archive/info/
+%
+% latex, and pdflatex in dvi mode, support graphics in encapsulated
+% postscript (.eps) format. pdflatex in pdf mode supports graphics
+% in .pdf, .jpeg, .png and .mps (metapost) formats. Users should ensure
+% that all non-photo figures use a vector format (.eps, .pdf, .mps) and
+% not a bitmapped formats (.jpeg, .png). IEEE frowns on bitmapped formats
+% which can result in "jaggedy"/blurry rendering of lines and letters as
+% well as large increases in file sizes.
+%
+% You can find documentation about the pdfTeX application at:
+% http://www.tug.org/applications/pdftex
+
+
+
+
+
+% *** MATH PACKAGES ***
+%
+%\usepackage[cmex10]{amsmath}
+% A popular package from the American Mathematical Society that provides
+% many useful and powerful commands for dealing with mathematics. If using
+% it, be sure to load this package with the cmex10 option to ensure that
+% only type 1 fonts will utilized at all point sizes. Without this option,
+% it is possible that some math symbols, particularly those within
+% footnotes, will be rendered in bitmap form which will result in a
+% document that can not be IEEE Xplore compliant!
+%
+% Also, note that the amsmath package sets \interdisplaylinepenalty to 10000
+% thus preventing page breaks from occurring within multiline equations. Use:
+%\interdisplaylinepenalty=2500
+% after loading amsmath to restore such page breaks as IEEEtran.cls normally
+% does. amsmath.sty is already installed on most LaTeX systems. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/required/amslatex/math/
+
+
+
+
+
+% *** SPECIALIZED LIST PACKAGES ***
+%
+%\usepackage{algorithmic}
+% algorithmic.sty was written by Peter Williams and Rogerio Brito.
+% This package provides an algorithmic environment fo describing algorithms.
+% You can use the algorithmic environment in-text or within a figure
+% environment to provide for a floating algorithm. Do NOT use the algorithm
+% floating environment provided by algorithm.sty (by the same authors) or
+% algorithm2e.sty (by Christophe Fiorio) as IEEE does not use dedicated
+% algorithm float types and packages that provide these will not provide
+% correct IEEE style captions. The latest version and documentation of
+% algorithmic.sty can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/algorithms/
+% There is also a support site at:
+% http://algorithms.berlios.de/index.html
+% Also of interest may be the (relatively newer and more customizable)
+% algorithmicx.sty package by Szasz Janos:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/algorithmicx/
+
+
+
+
+% *** ALIGNMENT PACKAGES ***
+%
+%\usepackage{array}
+% Frank Mittelbach's and David Carlisle's array.sty patches and improves
+% the standard LaTeX2e array and tabular environments to provide better
+% appearance and additional user controls. As the default LaTeX2e table
+% generation code is lacking to the point of almost being broken with
+% respect to the quality of the end results, all users are strongly
+% advised to use an enhanced (at the very least that provided by array.sty)
+% set of table tools. array.sty is already installed on most systems. The
+% latest version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/required/tools/
+
+
+%\usepackage{mdwmath}
+%\usepackage{mdwtab}
+% Also highly recommended is Mark Wooding's extremely powerful MDW tools,
+% especially mdwmath.sty and mdwtab.sty which are used to format equations
+% and tables, respectively. The MDWtools set is already installed on most
+% LaTeX systems. The lastest version and documentation is available at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/mdwtools/
+
+
+% IEEEtran contains the IEEEeqnarray family of commands that can be used to
+% generate multiline equations as well as matrices, tables, etc., of high
+% quality.
+
+
+%\usepackage{eqparbox}
+% Also of notable interest is Scott Pakin's eqparbox package for creating
+% (automatically sized) equal width boxes - aka "natural width parboxes".
+% Available at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/eqparbox/
+
+
+
+
+
+% *** SUBFIGURE PACKAGES ***
+%\usepackage[tight,footnotesize]{subfigure}
+% subfigure.sty was written by Steven Douglas Cochran. This package makes it
+% easy to put subfigures in your figures. e.g., "Figure 1a and 1b". For IEEE
+% work, it is a good idea to load it with the tight package option to reduce
+% the amount of white space around the subfigures. subfigure.sty is already
+% installed on most LaTeX systems. The latest version and documentation can
+% be obtained at:
+% http://www.ctan.org/tex-archive/obsolete/macros/latex/contrib/subfigure/
+% subfigure.sty has been superceeded by subfig.sty.
+
+
+
+%\usepackage[caption=false]{caption}
+%\usepackage[font=footnotesize]{subfig}
+% subfig.sty, also written by Steven Douglas Cochran, is the modern
+% replacement for subfigure.sty. However, subfig.sty requires and
+% automatically loads Axel Sommerfeldt's caption.sty which will override
+% IEEEtran.cls handling of captions and this will result in nonIEEE style
+% figure/table captions. To prevent this problem, be sure and preload
+% caption.sty with its "caption=false" package option. This is will preserve
+% IEEEtran.cls handing of captions. Version 1.3 (2005/06/28) and later 
+% (recommended due to many improvements over 1.2) of subfig.sty supports
+% the caption=false option directly:
+%\usepackage[caption=false,font=footnotesize]{subfig}
+%
+% The latest version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/subfig/
+% The latest version and documentation of caption.sty can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/caption/
+
+
+
+
+% *** FLOAT PACKAGES ***
+%
+%\usepackage{fixltx2e}
+% fixltx2e, the successor to the earlier fix2col.sty, was written by
+% Frank Mittelbach and David Carlisle. This package corrects a few problems
+% in the LaTeX2e kernel, the most notable of which is that in current
+% LaTeX2e releases, the ordering of single and double column floats is not
+% guaranteed to be preserved. Thus, an unpatched LaTeX2e can allow a
+% single column figure to be placed prior to an earlier double column
+% figure. The latest version and documentation can be found at:
+% http://www.ctan.org/tex-archive/macros/latex/base/
+
+
+
+%\usepackage{stfloats}
+% stfloats.sty was written by Sigitas Tolusis. This package gives LaTeX2e
+% the ability to do double column floats at the bottom of the page as well
+% as the top. (e.g., "\begin{figure*}[!b]" is not normally possible in
+% LaTeX2e). It also provides a command:
+%\fnbelowfloat
+% to enable the placement of footnotes below bottom floats (the standard
+% LaTeX2e kernel puts them above bottom floats). This is an invasive package
+% which rewrites many portions of the LaTeX2e float routines. It may not work
+% with other packages that modify the LaTeX2e float routines. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/sttools/
+% Documentation is contained in the stfloats.sty comments as well as in the
+% presfull.pdf file. Do not use the stfloats baselinefloat ability as IEEE
+% does not allow \baselineskip to stretch. Authors submitting work to the
+% IEEE should note that IEEE rarely uses double column equations and
+% that authors should try to avoid such use. Do not be tempted to use the
+% cuted.sty or midfloat.sty packages (also by Sigitas Tolusis) as IEEE does
+% not format its papers in such ways.
+
+
+
+
+
+% *** PDF, URL AND HYPERLINK PACKAGES ***
+%
+%\usepackage{url}
+% url.sty was written by Donald Arseneau. It provides better support for
+% handling and breaking URLs. url.sty is already installed on most LaTeX
+% systems. The latest version can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/misc/
+% Read the url.sty source comments for usage information. Basically,
+% \url{my_url_here}.
+
+
+
+
+
+% *** Do not adjust lengths that control margins, column widths, etc. ***
+% *** Do not use packages that alter fonts (such as pslatex).         ***
+% There should be no need to do such things with IEEEtran.cls V1.6 and later.
+% (Unless specifically asked to do so by the journal or conference you plan
+% to submit to, of course. )
+\usepackage{float}		% this is to place figures where requested!
+\usepackage{times}		% this uses fonts which will look nice in PDF
+\usepackage{graphicx}		% needed for the figures
+\usepackage{epstopdf}
+\usepackage{url}
+\usepackage{amsfonts }
+\usepackage{amssymb,amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+%\usepackage{program}
+\usepackage{amsthm }
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{relsize}
+
+\newcommand{\bmx}{\begin{bmatrix}}
+\newcommand{\emx}{\end{bmatrix}}
+\newcommand{\bsmx}{\left[\begin{smallmatrix}}
+\newcommand{\esmx}{\end{smallmatrix}\right]}
+
+% Equations:
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\beqy}{\begin{eqnarray}}
+\newcommand{\eeqy}{\end{eqnarray}}
+\newcommand{\beqynn}{\begin{eqnarray*}}
+\newcommand{\eeqynn}{\end{eqnarray*}}
+
+\newcommand{\bd}{{\bar{d}}}
+\newcommand{\bl}{{\bar{l}}}
+\newcommand{\bu}{{\bar{u}}}
+\newcommand{\br}{{\bar{r}}}
+\newcommand{\bx}{{\bar{x}}}
+\newcommand{\by}{{\bar{y}}}
+\newcommand{\bz}{{\bar{z}}}
+
+\newcommand{\dist}{\mathrm{dist}}
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+
+\begin{document}
+%
+% paper title
+% can use linebreaks \\ within to get better formatting as desired
+\title{Column Reordering for Box-Constrained Integer Least Squares Problems}
+
+
+% author names and affiliations
+% use a multiple column layout for up to three different
+% affiliations
+\author{
+\IEEEauthorblockN{Stephen Breen}
+\IEEEauthorblockA{School of Computer Science\\
+McGill University\\
+Montreal, Quebec, Canada\\
+Email: sbreen1@cs.mcgill.ca}
+\and
+\IEEEauthorblockN{Xiao-Wen Chang}
+\IEEEauthorblockA{School of Computer Science\\
+McGill University\\
+Montreal, Quebec, Canada\\
+Email: chang@cs.mcgill.ca}}
+
+
+% conference papers do not typically use \thanks and this command
+% is locked out in conference mode. If really needed, such as for
+% the acknowledgment of grants, issue a \IEEEoverridecommandlockouts
+% after \documentclass
+
+% for over three affiliations, or if they all won't fit within the width
+% of the page, use this alternative format:
+% 
+%\author{\IEEEauthorblockN{Michael Shell\IEEEauthorrefmark{1},
+%Homer Simpson\IEEEauthorrefmark{2},
+%James Kirk\IEEEauthorrefmark{3}, 
+%Montgomery Scott\IEEEauthorrefmark{3} and
+%Eldon Tyrell\IEEEauthorrefmark{4}}
+%\IEEEauthorblockA{\IEEEauthorrefmark{1}School of Electrical and Computer Engineering\\
+%Georgia Institute of Technology,
+%Atlanta, Georgia 30332--0250\\ Email: see http://www.michaelshell.org/contact.html}
+%\IEEEauthorblockA{\IEEEauthorrefmark{2}Twentieth Century Fox, Springfield, USA\\
+%Email: homer@thesimpsons.com}
+%\IEEEauthorblockA{\IEEEauthorrefmark{3}Starfleet Academy, San Francisco, California 96678-2391\\
+%Telephone: (800) 555--1212, Fax: (888) 555--1212}
+%\IEEEauthorblockA{\IEEEauthorrefmark{4}Tyrell Inc., 123 Replicant Street, Los Angeles, California 90210--4321}}
+
+
+
+
+% use for special paper notices
+%\IEEEspecialpapernotice{(Invited Paper)}
+
+
+
+\parindent 8pt
+
+% make the title area
+\maketitle
+
+
+\begin{abstract}
+%\boldmath
+The box-constrained integer least squares problem (BILS) arises in MIMO wireless
+communications applications. Typically a sphere decoding algorithm (a tree search algorithm)
+is used to solve the problem. In order to make the search algorithm
+ more efficient, the columns of the channel matrix in the BILS problem have to
+be reordered.  
+There are currently two algorithms for column reordering that provide the best known results. 
+Both use all available information, but they look different. 
+In this paper we prove that these two algorithms actually give the same column reordering
+in theory.
+We highlight the pros and cons of the two algorithms and propose a new 
+theoretically equivalent algorithm, which is  more computationally efficient.
+The new algorithm is easy to understand and  numerically reliable.
+\end{abstract}
+% IEEEtran.cls defaults to using nonbold math in the Abstract.
+% This preserves the distinction between vectors and scalars. However,
+% if the conference you are submitting to favors bold math in the abstract,
+% then you can use LaTeX's standard command \boldmath at the very start
+% of the abstract to achieve this. Many IEEE journals/conferences frown on
+% math in the abstract anyway.
+
+% no keywords
+
+
+
+
+% For peer review papers, you can put extra information on the cover
+% page as needed:
+% \ifCLASSOPTIONpeerreview
+% \begin{center} \bfseries EDICS Category: 3-BBND \end{center}
+% \fi
+%
+% For peerreview papers, this IEEEtran command inserts a page break and
+% creates the second title. It will be ignored for other modes.
+\IEEEpeerreviewmaketitle
+
+
+
+\section{Introduction}
+% no \IEEEPARstart
+Given a real vector $y\in\mathbb{R}^m$ and a real matrix $H\in\mathbb{R}^{m \times n}$, 
+integer vectors $l, u \in \mathbb{Z}^n$ with $l<u$,
+the box-constrained integer least squares (BILS)
+problem is defined as:
+\be\label{eq:bils0}
+\min_{x\in {\cal B }}  \| y- Hx \|_2,  
+\ee
+where ${\cal B} = {\cal B}_1  \times \cdots \times {\cal B}_n$ with
+${\cal B}_i = \{x_i \in\mathbb{Z} : l_i \le x_i \le u_i \}$.
+This problem arises in wireless communications applications such as MIMO signal decoding. 
+In this paper, we assume $H$ has full column rank.
+
+%Suppose $P\in \mathbb{Z}^n$ is a permutation matrix.
+Let $H$ have the QR factorization
+$$
+H=[Q_1, Q_2] \bmx R \\ 0 \emx,
+$$
+where $[\underset{n}{Q_1}, \underset{m-n}{Q_2}]  \in \mathbb{R}^{m\times m}$ is orthogonal
+and $R\in \mathbb{R}^{n\times n}$ is upper triangular. 
+Then, with $\bar{y}=Q_1^Ty$ %with $z=P^Tx$, $\bar{y}=Q_1^Ty$, $\bar{l}=P^Tl$ and $\bar{u}=P^Tu$,
+the BILS problem \eqref{eq:bils0} is reduced to 
+\be \label{eq:bils}
+ \min_{x \in  {\cal B}}  \| \by- Rx \|_2.
+\ee
+%where $\bar{\cal B} = \bar{\cal B}_1  \times \cdots \times \bar{\cal B}_n$ with
+%$\bar{\cal B}_i = \{z_i \in\mathbb{Z} : \bar{l}_i \le z_i \le \bar{u}_i \}$.
+To solve this reduced problem search algorithms (see, e.g.,  \cite{DamGC03}, \cite{BouGBF03}
+and  \cite{ChaH05}) enumerate  the elements in ${\cal B}$ in some order
+to find the optimal solution. 
+%In the worst case this problem is NP hard,
+%however on average by using smart enumeration strategies, we can do much better.
+
+If we reorder the columns of $H$,  i.e., we apply a permutation matrix $P$ to $H$ from the right,
+then we will a different R-factor,  resulting in different search speed.
+A few algorithms have been proposed to
+find $P$ to minimize the complexity of the search
+algorithms. In \cite{DamGC03}, the well-known V-BLAST column reordering strategy
+originally given in \cite{FosGVW99} was proposed for this purpose.
+In \cite{ChaH05}, the SQRD column reordering strategy originally 
+presented in \cite{WubBRKK01} for the same purpose as V-BLAST,
+was proposed for this purpose.
+Both strategies use only the information of the matrix $H$.
+
+In \cite{SuW05}, Su and Wassell considered the geometry of the BILS
+problem for the case that $H$ is nonsingular and proposed a new column reordering strategy (to be called
+SW column reordering from here on for convenience) which uses all information of the BILS problem \eqref{eq:bils0}.
+Unfortunately, in our point of view, the geometric interpretation of this algorithm is hard to understand.
+Probably due to page limit, the description of the algorithm is very concise, 
+making efficient implementation difficult for ordinary users.   
+%It is also not numerically stable. The numerical stability is not
+%necessarily crucial since a wrong answer just results in a different set of
+%permutations for the columns of H where any set of permutations is allowed.
+%Until this point, other column reordering algorithms only considered the matrix $H$.
+
+Independently  Chang and Han in \cite{ChaH05} proposed
+another column reordering algorithm (which will be referred to as  CH).
+Their algorithm also uses all information of \eqref{eq:bils0} and the derivation
+is based on an algebraic point of view. It is  easy to see from the equations in
+the search process exactly what the CH column reordering is doing and why we
+should expect a reduced complexity in the search process. The detailed
+description of the CH column reordering is given in \cite{ChaH05} and it is easy
+for others to implement the algorithm.
+But our numerical tests indicated CH has a  higher complexity than SW, when SW
+is implemented efficiently.
+Our numerical tests also showed that CH and SW {\em almost} always   
+produced the same permutation matrix $P$.
+
+In this paper, we will show that the CH and SW algorithms give the same
+permutation matrix $P$ in theory. 
+This is interesting because both algorithms were derived through different motivations
+and we now have both a geometric justification and an algebraic justification 
+for why the column reordering strategy should reduce the complexity of the search.
+Furthermore, using the knowledge that certain steps in each algorithm are equivalent,
+we can combine the best parts from each into a new algorithm. The new algorithm
+has a lower flop count than either of the originals.
+% provides runtime very near SW when implemented in MatLab, 
+This is important to the successive interference cancellation decoder, 
+which computes a suboptimal solution to \eqref{eq:bils0}.
+The new algorithm can be interpreted in the same way as CH,
+so it is easy to understand.
+
+
+\section{Search Process}
+\label{sec:Search}
+Both CH and SW column reordering algorithms use ideas that arise from the search
+process. 
+Before the column reorderings is introduced, it is
+important to have an understanding of the sphere decoding search process. 
+
+Consider the ILS problem \eqref{eq:bils}. We would like to enumerate the
+elements in ${\cal B}$ in an efficient manner in order to find the solution $x$.
+One such enumeration strategy is described in \cite{ChaH05}. We will now
+describe it briefly.
+
+Suppose that the solution satisfies the following bound, 
+\begin{equation}
+\left \| \bar{y} - Rx \right \|_2^2 < \beta.
+\label{eq:searchIneq}
+\end{equation}
+There are a few ways to choose a valid initial value for $\beta$, see, e.g.,
+\cite{ChaH05}. The inequality (\ref{eq:searchIneq}) defines an ellipsoid in terms of $x$ 
+or a hyper-sphere in terms of $Rx$ with radius $\beta$. 
+%The points $w$ form the lattice generated by $R$. 
+Define
+\begin{equation}
+c_n = \bar{y}_n/r_{nn}, \quad c_k = (\bar{y}_k - \sum_{j=k+1}^nr_{kj}x_j)/r_{kk}
+\label{eq:searchC}
+\end{equation}
+It is easy to show that \eqref{eq:searchIneq} is equivalent to the following
+set of inequalities,
+\begin{align}
+&\text{level } n: \ \ r_{nn}^2(x_n-c_n)^2 < \beta \label{eq:searchLevelN}\\
+&\text{level } k: \ \ r_{kk}^2(x_k-c_k)^2 < \beta -
+\sum_{i=k+1}^nr_{ii}^2(x_i-c_i)^2 \label{eq:searchLevelK}\\
+&\text{level } 1: \ \  r_{11}^2(x_1-c_1)^2 < \beta -
+\sum_{i=2}^nr_{ii}^2(x_i-c_i)^2
+\end{align}
+
+We now begin the search process
+at level $n$. Choose $x_n = \lfloor c_n \rceil_{{\cal B}_n}$, the nearest
+integer in ${\cal B}_n$ to $c_n$. If the inequality (\ref{eq:searchLevelN})
+is not satisfied, it will not be satisfied for any integer, this means $\beta$
+was chosen to be too small, it must be enlarged. With $x_n$ fixed, we can move
+to level $n-1$ and choose $x_{n-1} = \lfloor c_{n-1} \rceil_{{\cal B}_{n-1}}$ with $c_{n-1}$ calculated as in (\ref{eq:searchC}). At this point it
+is possible that the inequality (\ref{eq:searchLevelK}) is no longer satisfied.
+If this is the case, we must move back to level $n$ and choose $x_n$ to be the
+second nearest integer to $c_n$. We will continue this procedure until we reach
+level 1, moving back a level if ever the inequality for the current level is no
+longer satisfied.
+
+When we reach level $1$, we will have found an integer point $\hat{x}$. We then
+update $\beta = \left \| \bar{y} - R\hat{x} \right \|_2^2$ and try
+to find a better integer point which satisfies the box-constraint in the new
+ellipsoid. Finally in the search process, when we can no longer find any $x_n$
+to satisfy (\ref{eq:searchLevelN}), the search is complete and the last integer
+point $\hat{x}$ found is the solution. %If we initially set $\beta = \infty$ the
+%first point $\hat{x}$ that we found is known as the Babai point.
+
+The above search process is actually a depth-first tree search, see Fig.\ \ref{fig:treeSearch}.
+
+\begin{figure}
+\ifx\du\undefined
+  \newlength{\du}
+\fi
+\setlength{\du}{11\unitlength}
+\begin{tikzpicture}
+\pgftransformxscale{1.000000}
+\pgftransformyscale{-1.000000}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+\pgfsetfillcolor{dialinecolor}
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{}{0pt}
+\pgfsetdash{}{0pt}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetlinewidth{0.100000\du}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+\pgfsetfillcolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{7.737500\du}{1.737500\du}}{\pgfpoint{0.737500\du}{0\du
+}}{\pgfpoint{0\du}{0.737500\du}}
+\pgfusepath{fill}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{7.737500\du}{1.737500\du}}{\pgfpoint{0.737500\du}{0\du
+}}{\pgfpoint{0\du}{0.737500\du}}
+\pgfusepath{stroke}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{7.737500\du}{1.737500\du}}{\pgfpoint{0.737500\du}{0\du
+}}{\pgfpoint{0\du}{0.737500\du}}
+\pgfusepath{stroke}
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{}{0pt}
+\pgfsetdash{}{0pt}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetlinewidth{0.100000\du}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+\pgfsetfillcolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{2.737500\du}{3.737500\du}}{\pgfpoint{0.737500\du}{0\du
+}}{\pgfpoint{0\du}{0.737500\du}}
+\pgfusepath{fill}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{2.737500\du}{3.737500\du}}{\pgfpoint{0.737500\du}{0\du
+}}{\pgfpoint{0\du}{0.737500\du}}
+\pgfusepath{stroke}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{2.737500\du}{3.737500\du}}{\pgfpoint{0.737500\du}{0\du
+}}{\pgfpoint{0\du}{0.737500\du}}
+\pgfusepath{stroke}
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{}{0pt}
+\pgfsetdash{}{0pt}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetlinewidth{0.100000\du}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+\pgfsetfillcolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{12.737500\du}{3.737500\du}}{\pgfpoint{0.737500\du}{
+0\du}}{\pgfpoint{0\du}{0.737500\du}}
+\pgfusepath{fill}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{12.737500\du}{3.737500\du}}{\pgfpoint{0.737500\du}{
+0\du}}{\pgfpoint{0\du}{0.737500\du}}
+\pgfusepath{stroke}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{12.737500\du}{3.737500\du}}{\pgfpoint{0.737500\du}{
+0\du}}{\pgfpoint{0\du}{0.737500\du}}
+\pgfusepath{stroke}
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{}{0pt}
+\pgfsetdash{}{0pt}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetlinewidth{0.100000\du}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+\pgfsetfillcolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{0.987500\du}{6.537500\du}}{\pgfpoint{0.737500\du}{0\du
+}}{\pgfpoint{0\du}{0.737500\du}}
+\pgfusepath{fill}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{0.987500\du}{6.537500\du}}{\pgfpoint{0.737500\du}{0\du
+}}{\pgfpoint{0\du}{0.737500\du}}
+\pgfusepath{stroke}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{0.987500\du}{6.537500\du}}{\pgfpoint{0.737500\du}{0\du
+}}{\pgfpoint{0\du}{0.737500\du}}
+\pgfusepath{stroke}
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{}{0pt}
+\pgfsetdash{}{0pt}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetlinewidth{0.100000\du}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{0.498039, 0.498039, 0.498039}
+\pgfsetfillcolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{6.637500\du}{9.787500\du}}{\pgfpoint{0.737500\du}{0\du
+}}{\pgfpoint{0\du}{0.737500\du}}
+\pgfusepath{fill}
+\definecolor{dialinecolor}{rgb}{0.498039, 0.498039, 0.498039}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{6.637500\du}{9.787500\du}}{\pgfpoint{0.737500\du}{0\du
+}}{\pgfpoint{0\du}{0.737500\du}}
+\pgfusepath{stroke}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{0.498039, 0.498039, 0.498039}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{6.637500\du}{9.787500\du}}{\pgfpoint{0.737500\du}{0\du
+}}{\pgfpoint{0\du}{0.737500\du}}
+\pgfusepath{stroke}
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{}{0pt}
+\pgfsetdash{}{0pt}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetlinewidth{0.100000\du}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+\pgfsetfillcolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{0.937500\du}{9.787500\du}}{\pgfpoint{0.737500\du}{0\du
+}}{\pgfpoint{0\du}{0.737500\du}}
+\pgfusepath{fill}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{0.937500\du}{9.787500\du}}{\pgfpoint{0.737500\du}{0\du
+}}{\pgfpoint{0\du}{0.737500\du}}
+\pgfusepath{stroke}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{0.937500\du}{9.787500\du}}{\pgfpoint{0.737500\du}{0\du
+}}{\pgfpoint{0\du}{0.737500\du}}
+\pgfusepath{stroke}
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{}{0pt}
+\pgfsetdash{}{0pt}
+\pgfsetbuttcap
+{
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetfillcolor{dialinecolor}
+% was here!!!
+\pgfsetarrowsend{stealth}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\draw (7.006909\du,2.029736\du)--(3.468091\du,3.445264\du);
+}
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{}{0pt}
+\pgfsetdash{}{0pt}
+\pgfsetbuttcap
+{
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetfillcolor{dialinecolor}
+% was here!!!
+\pgfsetarrowsend{stealth}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\draw (8.468091\du,2.029736\du)--(12.006909\du,3.445264\du);
+}
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{}{0pt}
+\pgfsetdash{}{0pt}
+\pgfsetbuttcap
+{
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetfillcolor{dialinecolor}
+% was here!!!
+\pgfsetarrowsend{stealth}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\draw (2.320081\du,4.405371\du)--(1.404919\du,5.869629\du);
+}
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{}{0pt}
+\pgfsetdash{}{0pt}
+\pgfsetbuttcap
+{
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetfillcolor{dialinecolor}
+% was here!!!
+\pgfsetarrowsend{stealth}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\draw (0.975385\du,7.325006\du)--(0.949615\du,8.999994\du);
+}
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{}{0pt}
+\pgfsetdash{}{0pt}
+\pgfsetbuttcap
+{
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetfillcolor{dialinecolor}
+% was here!!!
+\pgfsetarrowsend{stealth}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\draw (6.584128\du,7.259974\du)--(6.620872\du,9.000026\du);
+}
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (3.600000\du,4.000000\du){$x_3 = 1$};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (9.250000\du,4.050000\du){$x_3 = ?$};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (1.800000\du,6.800000\du){$x_{2}=2$};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (1.800000\du,10.100000\du){$x_{1}=1$};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (7.530000\du,9.935000\du){$x_{1}=-1$};
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{{\pgflinewidth}{0.200000\du}}{0cm}
+\pgfsetdash{{\pgflinewidth}{0.200000\du}}{0cm}
+\pgfsetbuttcap
+{
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetfillcolor{dialinecolor}
+% was here!!!
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\draw (13.499316\du,3.729004\du)--(16.100000\du,3.700000\du);
+}
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{{\pgflinewidth}{0.200000\du}}{0cm}
+\pgfsetdash{{\pgflinewidth}{0.200000\du}}{0cm}
+\pgfsetbuttcap
+{
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetfillcolor{dialinecolor}
+% was here!!!
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\draw (11.474979\du,6.575259\du)--(13.100000\du,6.550000\du);
+}
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{{\pgflinewidth}{0.200000\du}}{0cm}
+\pgfsetdash{{\pgflinewidth}{0.200000\du}}{0cm}
+\pgfsetbuttcap
+{
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetfillcolor{dialinecolor}
+% was here!!!
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\draw (11.902902\du,9.713884\du)--(13.300000\du,9.787500\du);
+}
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{}{0pt}
+\pgfsetdash{}{0pt}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetlinewidth{0.100000\du}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+\pgfsetfillcolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{6.567500\du}{6.472500\du}}{\pgfpoint{0.737500\du}{0\du
+}}{\pgfpoint{0\du}{0.737500\du}}
+\pgfusepath{fill}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{6.567500\du}{6.472500\du}}{\pgfpoint{0.737500\du}{0\du
+}}{\pgfpoint{0\du}{0.737500\du}}
+\pgfusepath{stroke}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{6.567500\du}{6.472500\du}}{\pgfpoint{0.737500\du}{0\du
+}}{\pgfpoint{0\du}{0.737500\du}}
+\pgfusepath{stroke}
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{}{0pt}
+\pgfsetdash{}{0pt}
+\pgfsetbuttcap
+{
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetfillcolor{dialinecolor}
+% was here!!!
+\pgfsetarrowsend{stealth}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\draw (3.378015\du,4.194891\du)--(5.926985\du,6.015109\du);
+}
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (7.430000\du,6.617500\du){$x_2=3$};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (2.400000\du,3.837500\du){1};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (0.600000\du,6.550000\du){2};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (0.437500\du,9.787500\du){3};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (6.100000\du,6.487500\du){4};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (12.250000\du,3.787500\du){6};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (6.250000\du,9.787500\du){5};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (16.150000\du,3.800000\du){Level 3};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (13.400000\du,6.550000\du){Level 2};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (13.550000\du,9.850000\du){Level 1};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (17.100000\du,3.650000\du){};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (18.600000\du,6.537500\du){};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (7.600000\du,8.050000\du){};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (9.100000\du,7.850000\du){};
+\end{tikzpicture}
+
+\caption{An example of the search process with solution $x = [-1,3,1]^T$.}
+\label{fig:treeSearch}
+\end{figure}
+
+%For more detail on the search and an alternate description see the
+%semi-tutorial paper \cite{AgrEVZ02}.
+
+\section{Column Reordering}
+In this section we briefly introduce the two orginal column reordering algorithms, CH and
+SW and explain their motivations.
+We also give a complexity analysis for both algorithms.
+
+\subsection{Chang and Han's Algorithm}
+The CH algorithm first computes the QR factorization $H$,
+then  tries to reorder the columns of $R$.
+The motivation for this algorithm comes from observing equation (\ref{eq:searchLevelK}).
+If the inequality is false we know that the current choice for the value of
+$x_i$ given $x_{i+1:n}$ are fixed is incorrect and we prune the search. We
+would like to choose the column permutations so that it is likely that the
+inequality will be false at higher levels in the search. The CH column reordering strategy
+does this by trying to maximize the LHS of  (\ref{eq:searchLevelK}) with large values of $\left | r_{kk}
+\right |$ and minimize the RHS by making $\left | r_{kk}(x_k-c_k) \right |$
+large for values of $k = n,n-1, \dots, 1$.
+
+Here we describe   step 1 of the CH algorithm, which determines the last column of the final $R$ 
+(or equivalently the last column of the final $H$).
+Subsequent steps are the same but are applied to a subproblem that is one dimension smaller. 
+In step 1, for $i = 1,\dots,n$ we interchange
+columns $i$ and $n$ of  $R$ (thus entries of $i$ and $n$ in $x$ are also swapped), then return $R$ to upper-triangular
+by a series of Givens rotations applied to $R$ from the left, which  are also applied to $\bar{y}$.
+To avoid confusion, we denote the new $R$ by $\hat{R}$ and the new $\bar{y}$ by $\hat{y}$.
+We then compute
+$$
+x_i^c=\arg\min_{x_i\in {\cal B}_i}\left | \hat{r}_{n,n}x_i - \hat{y}_n
+\right | = \left \lfloor\hat{y}_n/\hat{r}_{n,n}\right \rceil_{{\cal B}_i}
+$$
+where the superscript $c$ denotes the CH algorithm. 
+Let $\bar{x}_i^c$ be the second closest integer in ${{\cal B}_i}$ to $\hat{y}_n/\hat{r}_{n,n}$.
+So $\bar{x}_i^c = x_i^c \pm 1$.
+Finally, we compute $\dist_i^c = \left | \hat{r}_{n,n}\bar{x}_i^c - \hat{y}_n \right |$, which represents
+the partial residual given when $x_i$ is taken to be $\bar{x}_i^c$.
+Let $k = {\arg\max}_i \dist_i^c$.
+Then  column $k$ of $R$ is chosen to be the $n^{th}$ column of the final $R$.
+%The algorithm then applies the Givens rotations that were used to restore $R$ to
+%upper triangular to $\bar{y}$ and 
+With the corresponding updated upper triangular $R$ and $\bar{y}$,
+the algorithm then updates  $\bar{y}_{1:n-1}$ 
+by setting $\bar{y}_{1:n-1}: = \bar{y}_{1:n-1} - r_{1:n-1,n}x_k$ where $x_k=x_k^c$. 
+%Note that we use $z$ to denote the permuted $x$.
+Choosing  $x_k$ to be  $x_k^c$ here is exactly the same as what the search process does.
+We then continue to work on the subproblem 
+$\min_{\tilde{x}_{1:n-1}} \left \| R_{1:n-1,1:n-1}\tilde{x}_{1:n-1} -\bar{y}_{1:n-1}\right \|_2$,
+where $\tilde{x}_{1:n-1}=[x_1,\ldots, x_{k-1}, x_n, x_{k+1}, \ldots x_{n-1}]^T$ satisfies the corresponding box constraint.
+
+In the first step CH finds the permutation to 
+maximize $\left |r_{nn}(\bar{x}_i^c-c_n) \right |$. Using $\bar{x}_i^c$ instead of $x_i^c$
+ensures that $\left | \bar{x}_i^c-c_n \right |$ is never less than $0.5$ but
+also not very large. This means that usually if $\left | r_{nn}(\bar{x}_i^c-c_n)
+\right |$ is large, $\left | r_{nn} \right |$ is large as well and the
+requirement to have large $|r_{nn}|$ %in order from $m,\dots,1$  
+is met.
+Using $x_i^c$ would not be a good choice because $\left | x_i^c - c_n \right |$ might be 
+very small or even $0$, then column $i$ would not be chosen to be column $n$
+even if the corresponding $|r_{nn}|$ is large and on the contrary a column with small $|r_{nn}|$
+but large $|x_i^c-c_n|$ may be chosen. 
+
+
+Now we will consider the complexity of the CH algorithm. The 
+significant cost comes from applying Givens rotations to $R$ after each column
+permutation to restore it to upper-triangular. The pseudocode in Algorithm
+ \ref{alg:CH}  demonstrates this part.
+\begin{algorithm}
+\caption{CH Algorithm - Returns $p$, the column permutation vector}
+\label{alg:CH}
+\begin{algorithmic}[1]
+\STATE $p := 1:n$
+\STATE $p' := 1:n$
+\STATE Let R be given by the QR factorization of H
+  \FOR{$k=n$ to $2$}
+  	\STATE $maxDist := -1$
+    \FOR{$i=1$ to $k$}
+    	\STATE $\hat{y} := \bar{y}_{1:k}$
+    	\STATE $\hat{R} := R_{1:k,1:k}$
+        \STATE swap columns $i$ and $k$ of $\hat{R}$, return it  to upper
+triangular with Givens rotations, also apply the Givens rotations to $\hat{y}$
+\hfill ($6(k-j)^2$ flops)
+        \STATE $x_i^c := \left \lfloor\hat{y}_k/\hat{r}_{k,k}\right
+\rceil_{{\cal B}_i}$
+        \STATE $\bar{x}_i^c := \left \lfloor\hat{y}_k/\hat{r}_{k,k}\right
+\rceil_{{\cal B}_i\backslash x_i^c}$
+        \STATE $dist_i^c := \left | \hat{r}_{k,k}\bar{x}_i^c - \hat{y}_k
+\right | $
+        \IF{$dist_i^c > maxDist$}
+        	\STATE $maxDist := dist_i^c$
+        	\STATE $j := i$
+        	\STATE $R' := \hat{R}$
+        	\STATE $y' := \hat{y}$
+        \ENDIF
+    \ENDFOR
+    \STATE $p_k := p'_j$
+    \STATE Intechange entries k and j in $p'$
+    \STATE $\bar{y}_{1:k} := y'$
+    \STATE $R_{1:k,1:k} := R'$
+  \ENDFOR
+  \STATE $p_1 := p'_1$
+\end{algorithmic}
+\end{algorithm}
+
+If we sum this cost over all loop iterations, we will get a total complexity of
+$0.5n^4$ flops.
+
+\subsection{Su and Wassell's Algorithm}
+The motivation for the SW algorithm comes from examining the geometry of the search process.
+
+% Graphic for TeX using PGF
+% Title: /home/2009/sbreen1/Desktop/sumotivation.dia
+% Creator: Dia v0.97.1
+% CreationDate: Thu Feb  3 10:29:25 2011
+% For: sbreen1
+% The following commands are not supported in PSTricks at present
+% We define them conditionally, so when they are implemented,
+% this pgf file will use them.
+\ifx\du\undefined
+  \newlength{\du}
+\fi
+\begin{figure}
+\setlength{\du}{8.5\unitlength}
+\begin{tikzpicture}
+\pgftransformxscale{1.000000}
+\pgftransformyscale{-1.000000}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+\pgfsetfillcolor{dialinecolor}
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{}{0pt}
+\pgfsetdash{}{0pt}
+\pgfsetmiterjoin
+\pgfsetbuttcap
+\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+\pgfsetfillcolor{dialinecolor}
+\fill
+(6.000000\du,5.000000\du)--(10.972140\du,3.581250\du)--(8.972140\du,
+9.768750\du)--(4.000000\du,11.000000\du)--cycle;
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\draw
+(6.000000\du,5.000000\du)--(10.972140\du,3.581250\du)--(8.972140\du,
+9.768750\du)--(4.000000\du,11.000000\du)--cycle;
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{{\pgflinewidth}{0.200000\du}}{0cm}
+\pgfsetdash{{\pgflinewidth}{0.200000\du}}{0cm}
+\pgfsetbuttcap
+{
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetfillcolor{dialinecolor}
+% was here!!!
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\draw (7.000000\du,2.000000\du)--(2.150000\du,16.550000\du);
+}
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{{\pgflinewidth}{0.200000\du}}{0cm}
+\pgfsetdash{{\pgflinewidth}{0.200000\du}}{0cm}
+\pgfsetbuttcap
+{
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetfillcolor{dialinecolor}
+% was here!!!
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\draw (11.847140\du,0.865625\du)--(6.547140\du,17.212500\du);
+}
+\pgfsetlinewidth{0.050000\du}
+\pgfsetdash{}{0pt}
+\pgfsetdash{}{0pt}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetlinewidth{0.050000\du}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetfillcolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{6.411748\du}{10.802248\du}}{\pgfpoint{0.111748\du}{
+0\du}}{\pgfpoint{0\du}{0.111748\du}}
+\pgfusepath{fill}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{6.411748\du}{10.802248\du}}{\pgfpoint{0.111748\du}{
+0\du}}{\pgfpoint{0\du}{0.111748\du}}
+\pgfusepath{stroke}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{6.411748\du}{10.802248\du}}{\pgfpoint{0.111748\du}{
+0\du}}{\pgfpoint{0\du}{0.111748\du}}
+\pgfusepath{stroke}
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{}{0pt}
+\pgfsetdash{}{0pt}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetlinewidth{0.100000\du}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+\pgfsetfillcolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{3.982410\du}{10.972410\du}}{\pgfpoint{0.127410\du}{
+0\du}}{\pgfpoint{0\du}{0.127410\du}}
+\pgfusepath{fill}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{3.982410\du}{10.972410\du}}{\pgfpoint{0.127410\du}{
+0\du}}{\pgfpoint{0\du}{0.127410\du}}
+\pgfusepath{stroke}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{3.982410\du}{10.972410\du}}{\pgfpoint{0.127410\du}{
+0\du}}{\pgfpoint{0\du}{0.127410\du}}
+\pgfusepath{stroke}
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (3.537500\du,2.450000\du){$\mathsmaller{F_2(1)}$};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (8.340000\du,1.745000\du){$\mathsmaller{F_2(-1)}$};
+\pgfsetlinewidth{0.050000\du}
+\pgfsetdash{}{0pt}
+\pgfsetdash{}{0pt}
+\pgfsetbuttcap
+{
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetfillcolor{dialinecolor}
+% was here!!!
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\draw (9.687500\du,11.775000\du)--(3.287500\du,9.825000\du);
+}
+\definecolor{dialinecolor}{rgb}{0.498039, 0.498039, 0.498039}
+\pgfsetfillcolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{4.322140\du}{10.121875\du}}{\pgfpoint{0.150000\du}{
+0\du}}{\pgfpoint{0\du}{0.150000\du}}
+\pgfusepath{fill}
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{}{0pt}
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{0.498039, 0.498039, 0.498039}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{4.322140\du}{10.121875\du}}{\pgfpoint{0.150000\du}{
+0\du}}{\pgfpoint{0\du}{0.150000\du}}
+\pgfusepath{stroke}
+\definecolor{dialinecolor}{rgb}{0.498039, 0.498039, 0.498039}
+\pgfsetfillcolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{8.434640\du}{11.396875\du}}{\pgfpoint{0.150000\du}{
+0\du}}{\pgfpoint{0\du}{0.150000\du}}
+\pgfusepath{fill}
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{}{0pt}
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{0.498039, 0.498039, 0.498039}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{8.434640\du}{11.396875\du}}{\pgfpoint{0.150000\du}{
+0\du}}{\pgfpoint{0\du}{0.150000\du}}
+\pgfusepath{stroke}
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at
+(7.297140\du,12.046875\du){$\mathsmaller{\mbox{\smaller{proj}}_{F_2(-1)}(y)}$};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at
+(3.509640\du,9.684375\du){$\mathsmaller{\mbox{\smaller{proj}}_{F_2(1)}(y)}$};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (5.806250\du,11.443800\du){$\mathsmaller{y}$};
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{}{0pt}
+\pgfsetdash{}{0pt}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetlinewidth{0.100000\du}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+\pgfsetfillcolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{8.930800\du}{9.758660\du}}{\pgfpoint{0.127410\du}{0\du
+}}{\pgfpoint{0\du}{0.127410\du}}
+\pgfusepath{fill}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{8.930800\du}{9.758660\du}}{\pgfpoint{0.127410\du}{0\du
+}}{\pgfpoint{0\du}{0.127410\du}}
+\pgfusepath{stroke}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{8.930800\du}{9.758660\du}}{\pgfpoint{0.127410\du}{0\du
+}}{\pgfpoint{0\du}{0.127410\du}}
+\pgfusepath{stroke}
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{}{0pt}
+\pgfsetdash{}{0pt}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetlinewidth{0.100000\du}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+\pgfsetfillcolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{5.999550\du}{4.996160\du}}{\pgfpoint{0.127410\du}{0\du
+}}{\pgfpoint{0\du}{0.127410\du}}
+\pgfusepath{fill}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{5.999550\du}{4.996160\du}}{\pgfpoint{0.127410\du}{0\du
+}}{\pgfpoint{0\du}{0.127410\du}}
+\pgfusepath{stroke}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{5.999550\du}{4.996160\du}}{\pgfpoint{0.127410\du}{0\du
+}}{\pgfpoint{0\du}{0.127410\du}}
+\pgfusepath{stroke}
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{}{0pt}
+\pgfsetdash{}{0pt}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetlinewidth{0.100000\du}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+\pgfsetfillcolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{10.968300\du}{3.564910\du}}{\pgfpoint{0.127410\du}{
+0\du}}{\pgfpoint{0\du}{0.127410\du}}
+\pgfusepath{fill}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{10.968300\du}{3.564910\du}}{\pgfpoint{0.127410\du}{
+0\du}}{\pgfpoint{0\du}{0.127410\du}}
+\pgfusepath{stroke}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{10.968300\du}{3.564910\du}}{\pgfpoint{0.127410\du}{
+0\du}}{\pgfpoint{0\du}{0.127410\du}}
+\pgfusepath{stroke}
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{}{0pt}
+\pgfsetdash{}{0pt}
+\pgfsetmiterjoin
+\pgfsetbuttcap
+\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+\pgfsetfillcolor{dialinecolor}
+\fill
+(20.172886\du,4.978608\du)--(25.145026\du,3.559858\du)--(23.145026\du,
+9.747358\du)--(18.172886\du,10.978608\du)--cycle;
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\draw
+(20.172886\du,4.978608\du)--(25.145026\du,3.559858\du)--(23.145026\du,
+9.747358\du)--(18.172886\du,10.978608\du)--cycle;
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{{\pgflinewidth}{0.200000\du}}{0cm}
+\pgfsetdash{{\pgflinewidth}{0.200000\du}}{0cm}
+\pgfsetbuttcap
+{
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetfillcolor{dialinecolor}
+% was here!!!
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\draw (25.557626\du,9.159375\du)--(17.082626\du,11.259375\du);
+}
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{{\pgflinewidth}{0.200000\du}}{0cm}
+\pgfsetdash{{\pgflinewidth}{0.200000\du}}{0cm}
+\pgfsetbuttcap
+{
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetfillcolor{dialinecolor}
+% was here!!!
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\draw (26.607626\du,3.150000\du)--(18.432626\du,5.437500\du);
+}
+\pgfsetlinewidth{0.050000\du}
+\pgfsetdash{}{0pt}
+\pgfsetdash{}{0pt}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetlinewidth{0.050000\du}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetfillcolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{20.584633\du}{10.780856\du}}{\pgfpoint{0.111748\du}{
+0\du}}{\pgfpoint{0\du}{0.111748\du}}
+\pgfusepath{fill}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{20.584633\du}{10.780856\du}}{\pgfpoint{0.111748\du}{
+0\du}}{\pgfpoint{0\du}{0.111748\du}}
+\pgfusepath{stroke}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{20.584633\du}{10.780856\du}}{\pgfpoint{0.111748\du}{
+0\du}}{\pgfpoint{0\du}{0.111748\du}}
+\pgfusepath{stroke}
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{}{0pt}
+\pgfsetdash{}{0pt}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetlinewidth{0.100000\du}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+\pgfsetfillcolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{18.155296\du}{10.951018\du}}{\pgfpoint{0.127410\du}{
+0\du}}{\pgfpoint{0\du}{0.127410\du}}
+\pgfusepath{fill}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{18.155296\du}{10.951018\du}}{\pgfpoint{0.127410\du}{
+0\du}}{\pgfpoint{0\du}{0.127410\du}}
+\pgfusepath{stroke}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{18.155296\du}{10.951018\du}}{\pgfpoint{0.127410\du}{
+0\du}}{\pgfpoint{0\du}{0.127410\du}}
+\pgfusepath{stroke}
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (25.897886\du,2.991108\du){$\mathsmaller{F_1(1)}$};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (24.887886\du,9.136108\du){$\mathsmaller{F_1(-1)}$};
+\pgfsetlinewidth{0.050000\du}
+\pgfsetdash{}{0pt}
+\pgfsetdash{}{0pt}
+\pgfsetbuttcap
+{
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetfillcolor{dialinecolor}
+% was here!!!
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\draw (20.650378\du,11.040625\du)--(18.787878\du,3.890625\du);
+}
+\definecolor{dialinecolor}{rgb}{0.498039, 0.498039, 0.498039}
+\pgfsetfillcolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{19.107526\du}{5.225483\du}}{\pgfpoint{0.150000\du}{
+0\du}}{\pgfpoint{0\du}{0.150000\du}}
+\pgfusepath{fill}
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{}{0pt}
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{0.498039, 0.498039, 0.498039}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{19.107526\du}{5.225483\du}}{\pgfpoint{0.150000\du}{
+0\du}}{\pgfpoint{0\du}{0.150000\du}}
+\pgfusepath{stroke}
+\definecolor{dialinecolor}{rgb}{0.498039, 0.498039, 0.498039}
+\pgfsetfillcolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{20.500378\du}{10.403125\du}}{\pgfpoint{0.150000\du}{
+0\du}}{\pgfpoint{0\du}{0.150000\du}}
+\pgfusepath{fill}
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{}{0pt}
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{0.498039, 0.498039, 0.498039}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{20.500378\du}{10.403125\du}}{\pgfpoint{0.150000\du}{
+0\du}}{\pgfpoint{0\du}{0.150000\du}}
+\pgfusepath{stroke}
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at
+(20.500378\du,10.703125\du){$\mathsmaller{\mbox{\smaller{proj}}_{F_1(-1)}(y)}$};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at
+(19.107526\du,5.625483\du){$\mathsmaller{\mbox{\smaller{proj}}_{F_1(1)}(y)}$};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (19.979136\du,11.422408\du){$\mathsmaller{y}$};
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{}{0pt}
+\pgfsetdash{}{0pt}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetlinewidth{0.100000\du}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+\pgfsetfillcolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{23.103686\du}{9.737268\du}}{\pgfpoint{0.127410\du}{
+0\du}}{\pgfpoint{0\du}{0.127410\du}}
+\pgfusepath{fill}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{23.103686\du}{9.737268\du}}{\pgfpoint{0.127410\du}{
+0\du}}{\pgfpoint{0\du}{0.127410\du}}
+\pgfusepath{stroke}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{23.103686\du}{9.737268\du}}{\pgfpoint{0.127410\du}{
+0\du}}{\pgfpoint{0\du}{0.127410\du}}
+\pgfusepath{stroke}
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{}{0pt}
+\pgfsetdash{}{0pt}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetlinewidth{0.100000\du}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+\pgfsetfillcolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{20.172436\du}{4.974768\du}}{\pgfpoint{0.127410\du}{
+0\du}}{\pgfpoint{0\du}{0.127410\du}}
+\pgfusepath{fill}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{20.172436\du}{4.974768\du}}{\pgfpoint{0.127410\du}{
+0\du}}{\pgfpoint{0\du}{0.127410\du}}
+\pgfusepath{stroke}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{20.172436\du}{4.974768\du}}{\pgfpoint{0.127410\du}{
+0\du}}{\pgfpoint{0\du}{0.127410\du}}
+\pgfusepath{stroke}
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{}{0pt}
+\pgfsetdash{}{0pt}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetlinewidth{0.100000\du}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+\pgfsetfillcolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{25.141186\du}{3.543518\du}}{\pgfpoint{0.127410\du}{
+0\du}}{\pgfpoint{0\du}{0.127410\du}}
+\pgfusepath{fill}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{25.141186\du}{3.543518\du}}{\pgfpoint{0.127410\du}{
+0\du}}{\pgfpoint{0\du}{0.127410\du}}
+\pgfusepath{stroke}
+\pgfsetbuttcap
+\pgfsetmiterjoin
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{25.141186\du}{3.543518\du}}{\pgfpoint{0.127410\du}{
+0\du}}{\pgfpoint{0\du}{0.127410\du}}
+\pgfusepath{stroke}
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (22.007626\du,3.225000\du){};
+\pgfsetlinewidth{0.070000\du}
+\pgfsetdash{{\pgflinewidth}{0.200000\du}}{0cm}
+\pgfsetdash{{\pgflinewidth}{0.200000\du}}{0cm}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{6.384640\du}{10.778130\du}}{\pgfpoint{2.437500\du}{
+0\du}}{\pgfpoint{0\du}{2.437500\du}}
+\pgfusepath{stroke}
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (2.084640\du,18.907800\du){\smaller{(a) H - original
+column ordering}};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (16.234600\du,18.907800\du){\smaller{(b) H - columns
+swapped}};
+\pgfsetlinewidth{0.070000\du}
+\pgfsetdash{{\pgflinewidth}{0.200000\du}}{0cm}
+\pgfsetdash{{\pgflinewidth}{0.200000\du}}{0cm}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\pgfpathellipse{\pgfpoint{20.604128\du}{10.800625\du}}{\pgfpoint{2.437500\du}{
+0\du}}{\pgfpoint{0\du}{2.437500\du}}
+\pgfusepath{stroke}
+\end{tikzpicture}
+
+\caption{Geometry of the search  with two different column ordering.}
+\label{SEGeometry}
+\end{figure}
+
+
+Fig.\ \ref{SEGeometry} shows a 2-D BILS problem;
+\ref{SEGeometry}(a) represents the original column ordering and 
+\ref{SEGeometry}(b) is after the columns have been swapped.
+
+
+In the SW algorithm $H=[h_1,\ldots, h_n]$ is assumed to be square and non-singular.
+Let $G =[g_1,\ldots, g_n]= H^{-T}$. 
+For any  integer $\alpha$,   \cite{SuW05} defines the
+affine sets, $F_i(\alpha) = \{w \ | \ g_i^T(w-h_i\alpha) = 0\}$.
+%which can also be thought of as $h_i$ shifted by the integer $\alpha$.
+The lattice points generated by $H$ occur at the intersections of these affine sets. 
+Let the orthogonal projection of a vector $s$ onto a vector $t$ be denoted as
+$\mbox{proj}_t(s)$, then %\cite{SuW05} claims that 
+the orthogonal projection of some vector $s$ onto $F_i(\alpha)$ is 
+$\mbox{proj}_{F_i(\alpha)}(s) = s -\mbox{proj}_{g_i}(s-h_i\alpha).$ 
+Therefore the orthogonal distance between $s$ and
+$F_i(\alpha)$ is $\dist(s,F_i(\alpha)) =  \| s - \mbox{proj}_{F_i(\alpha)}(s) \|_2$. 
+%%%%%%%%%%%%
+%\footnote{XW: Why don't they simply say the distance is just $\|\mbox{proj}_{g_i}(s-h_i\alpha)\|$?
+%It's quite weird. SB: I'm not sure, it seems like that projection is equivalent
+%and much simpler and we could avoid using the affine sets $F_i(s)$}
+%%%%%%%%%%%%%%%%
+In \cite{SuW05}, the points labeled $\mbox{proj}_{F_2(1)}(y)$ and
+$\mbox{proj}_{F_2(-1)}(y)$ in Fig.\  \ref{SEGeometry}
+are called residual targets  and ``represent the
+components [of $y$] that remain after an orthoganol part has been projected
+away.''  
+
+Note that $F_2(\alpha)$ is a sublattice of dimension $1$.  
+Algebraically it is the lattice generated by $H$ with column
+$2$ removed. It can also be thought of as a subtree of the search tree where
+$x_2 = \alpha$ has been fixed. 
+In the first step of the search,   $x_n$ is chosen such that 
+ $x_n=\arg\min_{\alpha\in {\cal B}_n}\dist(y,F_n(\alpha))$;
+ thus $F_n(x_n)$ is the nearest affine set to $y$. 
+%In Section ~\ref{sec:equivalence} we will prove that $w$ here is the
+%same as $z_n$ from the search process in section ~\ref{sec:Search}. 
+Actually the value of $x_n$ is identical to $\lfloor c_n \rceil_{{\cal B}_n}$ given in Section ~\ref{sec:Search}.
+Then   $y$ is updated  as $y := \mbox{proj}_{F_n(x_n)}(y) - h_nx_n$. If we look
+at Fig.\ \ref{SEGeometry}, we see that this projection moves $y$ onto $F_n(x_n)$.
+We now apply the same process to the new $n-1$ dimensional search space
+$F_n(x_n)$. If at some level $i$, $\min_{w}\dist(y,F_i(x_i))$ exceeds the current
+search radius, we must move back to level $i+1$.% and choose $x_i = x_i \pm 1$.
+When the algorithm reaches level $1$ and fixes $x_1$, it updates the radius to the residual
+$\dist(y,F_1(x_1))$ and moves back up to level $2$.
+
+Note that this search process is equivalent to the one described in section
+\ref{sec:Search} and the difference is that it is necessary to do projections and
+compute the partial residuals in this way because we do not assume the generator
+matrix is upper-triangular. It is wasteful to implement a search process in this
+manner, since the computations are more expensive and the cost of QR
+factorization is negligable when compared to the potentially exponential cost of
+the search, this description is just for understanding.
+
+To see the authors motivation for choosing a particular column ordering,
+consider Fig. \ \ref{SEGeometry}. Suppose our search algorithm has knowledge of
+the residual for the optimum solution (the radius of the circle in the diagram).
+With the column ordering chosen in (a), there are two possible choices for $x_2$
+which result in partial residuals less than the optimum residual. This means
+that we will need to compute $x_1$ and its residual for both of these choices
+before we can determine which one leads to the optimum solution. In (b), there
+is only one possible choice for $x_2$ which gives a residual within the radius
+we have drawn, meaning we only need to compute $x_1$ and it's residual once.
+Since the projection resulting from the correct choice of $x_2$ will always be
+within the sphere, it makes sense to choose the ordering which maximizes the
+distance to the second best choice for $x_2$ in hopes that the second nearest
+choice will result in a partial residual outside the sphere and the
+dimensionality can be reduced by one. 
+
+For more detail on the geometry, see Su and Wassell's paper \cite{SuW05}.
+
+The following will give an overview of the SW algorithm as given in
+\cite{SuW05} but described in a framework similar to what was used to describe
+CH. In the first step to determine the last column, for each $i = 1, \dots, n$,
+we compute 
+$$
+x_i^s = \arg\min_{\alpha\in {\cal B}_i}\dist(y,F_i(\alpha)) 
+=  \arg\min _{\alpha\in {\cal B}_i}| y^Tg_i - \alpha | = \left \lfloor y^Tg_i \right \rceil_{{\cal B}_i}.
+$$
+Let $\bar{x}_i^s$ be the second closest integer in ${{\cal B}_i }$ to $y^Tg_i$; 
+so $\bar{x}_i^s = x_i^s \pm 1$.
+Let $k = \textrm{arg}\max_i  \dist_i^s$. 
+Then SW chooses column $k$ as the last column of the final reordered $H$.
+We then update $y$ by setting $y:=\mbox{proj}_{F_k(x_k^s)}(y) -h_kx_k^s$, and 
+update $G$ by setting $ g_j = \mbox{proj}_{F_k(0)}(g_j)$ for all $j\neq k$. 
+After $G$ and $y$ have been updated, the algorithm continues to try and find column $n-1$ in the
+same way.
+
+We now summarize  the SW algorithm. The pseudo-code in Algorithm \ref{alg:SWOrig} 
+shows the parts with significant cost.
+\begin{algorithm}
+\caption{SW Algorithm - Returns $p$, the column permutation vector}
+\label{alg:SWOrig}
+\begin{algorithmic}[1]
+\STATE $Index := 1:n$
+\STATE $p := 1:n$
+\STATE $G := H^{-T}$ \hfill ($2n^3$ flops)
+\FOR{$k=1$ to $n$}
+	\STATE $maxDist := -1$
+	\FOR{$i \in Index$}
+		\STATE $x_i^s := \left \lfloor  y^Tg_i \right
+\rceil_{{\cal B }_i}$ \hfill ($2n$ flops)
+		\STATE $\bar{x}_i^s := \left \lfloor y^Tg_i \right
+\rceil_{{{\cal B }_i}{\backslash x_i^s}}$
+		\STATE $\dist_i^s := \dist(y,F_i(\bar{x}_i^s))$ \hfill
+($3n^2$ flops)
+		\IF{$dist_i^s > maxDist$}
+			\STATE $maxDist := dist_i^s$
+			\STATE $j := i$
+		\ENDIF
+	\ENDFOR
+	\STATE $p(n-k+1) := j$
+	\STATE $Index := Index \backslash j$
+	\STATE $y := \mbox{proj}_{F_j(x_j^s)}(y) -h_jx_j^s$
+	\FOR{$i \in Index$}
+		\STATE $g_i := \mbox{proj}_{F_j(0)}(g_i) $ \hfill ($2n^2$
+flops)
+	\ENDFOR
+\ENDFOR
+\end{algorithmic}
+\end{algorithm}
+
+\footnote{XW: Explain the costs in steps 1, 6 and 11 SB: Added explanation,
+could also add equations but didn't to save space.}
+The parts of the cost we must consider for this implementation occur in
+steps $6$ and $11$. Summing these costs over all loop iterations we get a total
+complexity of
+$2.5n^4$ flops.
+
+\subsection{Interpretation and Improvements of SW}
+\label{sec:improvedSW}
+In this section we will present a more algebraic interpretation for the SW
+algorithm and also present improvements to drastically lower its complexity.
+
+At each step, we must compute $x_i^s = \left \lfloor
+y^Tg_i \right \rceil_{{\cal B}_i }$ and $\dist_i^s$. The most expensive
+part of the algorithm is in computing $\dist_i^s$, we must compute a projection
+matrix and apply it to a vector. However, if we expand the definition for
+$\dist_i^s$ and observe that $g_i^Th_i = 1$ we can obtain a simplified
+expression which is 
+\begin{equation}
+\label{eq:newDist}
+\dist_i^s = \left \|
+\frac{g_ig_i^T}{g_i^Tg_i}(y-h_i\bar{x}_i^s) \right \|_2 \ = \frac{\left | y^Tg_i
+-
+\bar{x}_i^s \right |}{\left \| g_i \right \|_2}.
+\end{equation} 
+%%%%%%%%%
+\footnote{XW: Give more details. SB: Added another equation}
+%%%%%%%%%%%
+Computing $\dist_i^s$ in this way will only
+cost $2n$ flops compared to $3n^2$ (we assume $y^Tg_i$ is known, since it was
+computed to find $\bar{x}_i^s$). This expression is, in our opinion, also
+much easier to interpret than the projection from the original SW algorithm.
+
+Similarly, if we expand and manipulate the projection $y=\mbox{proj}_{F_k(z_k^s)}(y) -
+h_kx_n = (y - \frac{g_kg_k^T}{g_k^Tg_k}(y-h_kx_n)) - h_kx_n$ with  $x_n =
+z_k^s$, we can obtain $y = (I - \frac{g_kg_k^T}{g_k^Tg_k})(y-h_kx_n)$. 
+%%%%%%%%%
+\footnote{XW: Give more details SB: Added another equation}
+%%%%%%%%%%%%%%
+An algebraic interpretation of this expression is that we first impose the
+constraint $x_n = z_k^s$ with the subtraction $y-h_kx_n$. Then we project this
+new vector back into the range of the remaining columns of $H$ with the
+projection $(I - \frac{g_kg_k^T}{g_k^Tg_k})$. 
+%%%%%%%%%%%%%
+\footnote{XW: It's not clear. SB: Changed the wording and added equations...
+hopefully it's better.}
+%%%%%%%%%%%%%
+To see this, remember that $g_k$ is orthogonal to every  $h_i, i \neq k$. We are projecting the
+vector $y-h_kx_n$ onto the orthogonal complement of $g_k$, which is simply
+the space spanned by the remaining columns of $H$.
+%%%%%%%%%%%%%%
+\footnote{XW: Why? An explanation is needed SB: Actually we don't HAVE to project y, I don't have a proof yet though... maybe I would add it here if I did. Maybe I should remove this entire paragraph for now?}
+
+Finally, the projections $g_i = \mbox{proj}_{F_k(0)}(g_i)$ can be written as, $g_i =
+(I - \frac{g_kg_k^T}{g_k^Tg_k})g_i$. A very natural way to interpret this is
+that we are simply updating $G$ to be the Moore-Penrose generalized inverse of
+$H$ after we remove the $k^{th}$ column. For proof of this, see
+\cite{Cli64}. Also, there is no need to compute the projection matrix
+$\frac{g_kg_k^T}{g_k^Tg_k}$, if we re-arrange the order of the multiplication
+and make use of terms that we've already computed, the updated columns $g_i$
+can be computed in only $4n$ flops each.
+
+In \cite{SuW05},  $H$ is assumed to be square and non-singular. This condition is not necessary since in every step of the algorithm other than the first, $H$ is essentially non square. To modify the SW algorithm so that it will work for non-square, full column rank $H$, the only change we need to make is to replace $G = H^{-T}$ with $G = (H^{\dagger})^T$.
+
+Here we will give an updated complexity analysis for the SW algorithm when the order of the multiplication for the projections is done as described above, and $dist_i^s$ calculated using \eqref{eq:newDist}. 
+%%%%%%%%%%%%
+\footnote{XW: You didn't say how to do the implementation. SB: Added detail on what I meant}
+%%%%%%%%%
+We consider the pseudocode in Algorithm \ref{alg:SWOrig} but update the flop count for the computation of $dist_i^s$ to $2n$ flops and for computing the updated columns of $G$ to $4n$ flops. Summing over all loop
+iterations, we get a total complexity of $6n^3$ flops, a significant improvement
+from $2.5n^4$.
+%%%%%%%%%
+\footnote{XW: More details are needed. SB: Added specifics on what flop counts change}
+%%%%%%%%%
+
+\section{Equivalence of CH and SW}\label{sec:equivalence}
+In this section we prove that  CH and SW produces the same set of permutations.
+To prove this it will suffice to prove that $x_i^s = x_i^c$, $\bar{x}_i^s =\bar{x}_i^c$,
+$\dist_i^s = \dist_i^c$ in the first step which determines the last column of the final re-ordered $H$
+and that the subproblems produced for the second step of
+each algorithm are equivalent. 
+
+Proving $x_i^s = x_i^c$ is not difficult.
+%Let $V$ be the product of the Givens rotations used to return $R$ to upper
+%triangular after a permutation $P$ is applied in the CH algorithm. Since $\left\| VRPx - VQ^Ty
+%\right \|_2 = \left \| RPx - Q^Ty \right \|_2$, we
+%know that 
+The only effect the interchange of columns $i$  and $n$ of $R$ in the CH algorithm  
+has on the real LS solution is that elements $i$ and $n$ of the solution are swapped.
+Therefore $x_i^c$ is just the $i^{th}$ element of the real LS
+solution rounded to the nearest integer in ${{\cal B}_i }$. 
+Thus 
+$$
+x_i^c=   \lfloor (H^{\dagger}y)_i  \rceil_{{\cal B}_i }
+=  \lfloor e_i^T H^{\dagger}y   \rceil_{{\cal B}_i }
+=  \lfloor g_i^T  y \rceil_{{\cal B}_i } =x_i^s,
+$$
+where   $e_i$ is the $i^{th}$ column of $I_n$.
+
+%Once $x_i^c$ is known $\bar{x}_i^c$ can be easily found. To compute
+%$\dist_i^c$ directly, we can use the formula from section \ref{sec:improvedSW},
+%$\dist_i^s = \frac{\left | y^Tg_i - \bar{x}_i^s \right|}{\left \| g_i \right \|_2}$. The
+%ollowing proof shows that this is equivalent to the method CH uses to compute the residual.
+
+Let $\hat{R} = VRP$ denote R after applying permutation matrix $P$ to swap
+columns $i$ and $n$, and the product of Givens rotations $V$ to restore $R$ to
+upper triangular. Let $\hat{y} = V\bar{y}$. Then we have,
+\begin{align*}
+\dist_i^s&=\frac{\left | y^Tg_i - \bar{x}_i^s \right |}{\left \| g_i
+\right \|_2}\\
+&= \frac{\left | \hat{y}/\hat{r}_{nn} - \bar{x}_i^s \right|}{\left \| g_i \right
+\|_2} \\
+&=\frac{\hat{y} - \hat{r}_{nn}\bar{x}_i^s}{\left \| g_i \right \|_2\hat{r}_{nn}}
+\end{align*}
+Now we must show $\frac{1}{\left \|g_i \right \|_2} = \left | \hat{r}_{n,n}
+\right |$. It is easy to see from our definition of $G = (H^\dagger)^T$ that:
+\begin{align*}
+\left \| g_i \right \|_2 &= \left \| (H(H^TH)^{-1})_i \right \|_2\\
+&=\left \| \left ( \begin{bmatrix}R\\0\end{bmatrix} \left(\begin{bmatrix}R^T &
+0\end{bmatrix}\begin{bmatrix}R\\0\end{bmatrix}\right)^{-1} \right )_i \right \|
+\\
+&= \left \| (R^{-T})_i \right \|_2 \\
+&= \left \| V(R^{-T})_i \right \|_2 \\
+&= \left \| (\hat{R}^{-T})_n \right \|_2
+\end{align*}
+Since $\hat{R}^{-1}\hat{R} = I$ and $\hat{R}$ is upper-triangular, it must be
+true that,
+\begin{align*}
+\left \| (\hat{R}^{-T})_n \right \|_2 &= \left | \frac{1}{\hat{r}_{n,n}} \right
+| \\
+&=\left \| g_i \right \|_2
+\end{align*}
+Therefore, $\dist_i^s =\left | \hat{y}_n-\hat{r}_{n,n}\bar{z}_i \right |$.
+
+Next we must prove that the subproblems in the second step of each algorithm
+are equivalent. Originally we have $\bar{y} =Q^Ty$. Let $\bar{y}^{(2)}
+\in\mathbb{R}^{n-1}$ denote $\bar{y}$ in the second step of the CH
+algorithm and $y^{(2)} \in\mathbb{R}^n$ denote $y$ in the second step
+of SW. We must show that $\bar{y}^{(2)} = (Q^Ty^{(2)})_{1:n-1}$ and
+$(Q^Ty^{(2)})_n = 0$.
+\begin{align*}
+(Q^Ty^{(2)})_i &= q_i^T(I-\frac{g_ng_n^T}{g_n^Tg_n})(y-h_nz_n) \\
+&= (q_i^T - q_i^T\frac{g_ng_n^T}{g_n^Tg_n})(y-h_nz_n)
+\end{align*}
+This can be simplified by observing that $Q^TG$ is lower triangular.
+\begin{align*}
+Q^TG &= Q^T(QR)^{-T} \\
+&=R^{-T}
+\end{align*}
+So $q_i^Tg_n = 0$ for $i=1,\dots,n-1$. When $i=n$, we have $g_n =
+q_nR^{-T}_{n,n}$.
+Because $Q$ is orthogonal, this
+means $q_n=\frac{g_n}{\left \| g_n \right \|}$ which implies $(q_n^T -
+q_n^T\frac{g_ng_n^T}{g_n^Tg_n}) = 0$. So now for $i \ne n$ we have $(q_i^T -
+q_i^T\frac{g_ng_n^T}{g_n^Tg_n})(y-h_nz_n) = q_i^Ty_n - q_i^Th_nz_n$. And since
+$R = Q^TH$ implies $r_{i,j} = q_i^Th_j$, we have 
+\begin{align*}
+q_i^Ty - q_i^Th_nz_n &= q_i^Ty - r_{i,n}z_n \\
+&= \bar{y}^{(2)} 
+\end{align*}
+Now we know $\bar{y}^{(2)} = (Q^Ty^{(2)})_{1:n-1}$, and from \cite{Cli64} we
+know that the updated $G$ for the second step of the algorithm is the
+pseudoinverse of $H$ with the column that we swapped for the $n^{th}$ removed
+(this can also be easily verified). This implies that
+the subproblems in the second step of each algorithm are equivalent.
+
+\section{New Algorithm}
+Now that we know the two algorithms are equivalent, we can take the best
+parts from both and combine them to form a new algorithm. The main cost in
+the CH algorithm is to interchange the columns of $R$ and return it to
+upper-triangular form using Givens rotations. At the $k^{th}$ step of the
+algorithm we must do this $k$ times. We can avoid all but one of these column
+interchanges by computing $x_i^c$, $\bar{x}_i^c$ and $\dist_i^c$ directly. Let $L
+=
+R^{-T}$. Then we know from the previous proof and the lower triangular structure
+of $L$ we can compute $z_i = \left \lfloor \bar{y}_{i:n}^Tl_{i:n,i} \right
+\rceil_{\cal B }$ and $\bar{z}_i$ to be the second closest integer to
+$\bar{y}^Tl_{i:n,i}$.
+Similarly, we can compute $\dist_i = \frac{\left | y_{i:n}'l_{i:n,i} -
+\bar{z}_i\right
+|}{\left \| l_{i:n,i} \right \|}$.
+
+After the column that maximizes $\dist_i$ is found, like in the CH
+algorithm, we swap that column with the $n^{th}$ and use Givens rotations to
+restore the upper-triangular structure of $R$. We also apply the same Givens
+rotations to the target vector $y$. To impose the constraint $z_n = z_i$ we
+set $\bar{y}_{1:n-1} = \bar{y}_{1:n-1} - r_{1:n-1,n}z_i$. In addition, we must
+also update the inverse matrix L, this is very easy. Suppose $P$ was the
+permutation matrix applied to $R$ and $V$ denotes the product of Givens
+rotations to restore it to upper triangular. Let $\hat{R} = VRP$ denote R for
+the second step of the algorithm, and set $\hat{L} = \hat{R}^{-T} = (VRP)^{-T} =
+VLP$. After this, as in the CH algorithm, we continue to work on the subproblem
+of size $n-1$. The advantage of using the ideas from CH
+for this second part of the algorithm is that the lower triangular structure of
+L and numerical stability are retained, allowing us to reduce the
+dimension of the problem at each step. We also do not need to consider
+the geometry of the projections of the columns of $G$ or the
+projecting and shifting of $y$.
+
+\subsubsection{New Algorithm Complexity Analysis}
+Here we give a complexity analysis of our proposed algorithm. The pseudocode
+in algorithm (\ref{alg:NEW}) demonstrates the parts of the algorithm with
+significant cost.
+\begin{algorithm}
+\caption{New algorithm}
+\label{alg:NEW}
+\begin{algorithmic}
+\STATE $[Q R] \gets qr(H)$ \hfill ($\frac{2n^3}{3}$ flops)
+\STATE $L \gets R^{-T}$ \hfill ($\frac{n^3}{3}$ flops)
+\FOR{$j=n$ to $2$}
+	\FOR{$i=1$ to $j$}
+		\STATE $\bar{z}_i \gets \left \lfloor y_{i:j}^Tl_{i:j,i} \right
+\rceil_{\cal B }$ \hfill ($2(j-i)$ flops)
+		\STATE $norm = \left \| l_i:j,i \right \|$ \hfill ($2(j-i)$
+flops)
+	\ENDFOR
+	\STATE $k \gets \textrm{arg}\max_{i \in 1..j} \dist_i$
+	\STATE \COMMENT{$permu(R,y,L,k)$ swaps columns $k$ and $n$ in $R$ and
+$L$, and returns $R$ and $L$ to upper and lower triangular with Givens
+rotations. The same givens rotations are applied to $y$}
+	\STATE $[R_{1:j,1:j},y_{1:j},L_{1:j,1:j}] \gets
+permu(R_{1:j,1:j},y_{1:j},L_{1:j,1:j},k)$ \hfill ($12(j-k)^2$ flops)
+\ENDFOR
+\end{algorithmic}
+\end{algorithm}
+
+If we sum this over all loop iterations, we get a total of $\frac{17n^3}{3} =
+5.7n^3$ flops in the worst case which is very unlikely to occur (the worst case
+arises when $k=1$ each iteration of the outer loop). In the average case
+however, $k=j/2$ and we get an average case complexity of $\frac{8n^3}{3} =
+2.7n^3$ flops.
+
+\section{Summary}
+We have shown that two algorithms for the column reordering phase of the
+box-constrained ILS problem are equivalent and proposed a new algorithm which
+combines the best ideas from both of the originals. Our new algorithm is more
+efficient than either of the originals and is numerically stable. Since the
+three algorithms are theoretically equivalent and were derived through different
+motivations, we now have both geometrical and algebraic motivations for the
+algorithm. Also we believe the algorithms are much easier to implement and
+understand without having to consider the geometry of the ILS problem, this will
+encourage wider adoption of these column reordering strategies. 
+% An example of a floating figure using the graphicx package.
+% Note that \label must occur AFTER (or within) \caption.
+% For figures, \caption should occur after the \includegraphics.
+% Note that IEEEtran v1.7 and later has special internal code that
+% is designed to preserve the operation of \label within \caption
+% even when the captionsoff option is in effect. However, because
+% of issues like this, it may be the safest practice to put all your
+% \label just after \caption rather than within \caption{}.
+%
+% Reminder: the "draftcls" or "draftclsnofoot", not "draft", class
+% option should be used if it is desired that the figures are to be
+% displayed while in draft mode.
+%
+%\begin{figure}[!t]
+%\centering
+%\includegraphics[width=2.5in]{myfigure}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+%\caption{Simulation Results}
+%\label{fig_sim}
+%\end{figure}
+
+% Note that IEEE typically puts floats only at the top, even when this
+% results in a large percentage of a column being occupied by floats.
+
+
+% An example of a double column floating figure using two subfigures.
+% (The subfig.sty package must be loaded for this to work.)
+% The subfigure \label commands are set within each subfloat command, the
+% \label for the overall figure must come after \caption.
+% \hfil must be used as a separator to get equal spacing.
+% The subfigure.sty package works much the same way, except \subfigure is
+% used instead of \subfloat.
+%
+%\begin{figure*}[!t]
+%\centerline{\subfloat[Case I]\includegraphics[width=2.5in]{subfigcase1}%
+%\label{fig_first_case}}
+%\hfil
+%\subfloat[Case II]{\includegraphics[width=2.5in]{subfigcase2}%
+%\label{fig_second_case}}}
+%\caption{Simulation results}
+%\label{fig_sim}
+%\end{figure*}
+%
+% Note that often IEEE papers with subfigures do not employ subfigure
+% captions (using the optional argument to \subfloat), but instead will
+% reference/describe all of them (a), (b), etc., within the main caption.
+
+
+% An example of a floating table. Note that, for IEEE style tables, the 
+% \caption command should come BEFORE the table. Table text will default to
+% \footnotesize as IEEE normally uses this smaller font for tables.
+% The \label must come after \caption as always.
+%
+%\begin{table}[!t]
+%% increase table row spacing, adjust to taste
+%\renewcommand{\arraystretch}{1.3}
+% if using array.sty, it might be a good idea to tweak the value of
+% \extrarowheight as needed to properly center the text within the cells
+%\caption{An Example of a Table}
+%\label{table_example}
+%\centering
+%% Some packages, such as MDW tools, offer better commands for making tables
+%% than the plain LaTeX2e tabular which is used here.
+%\begin{tabular}{|c||c|}
+%\hline
+%One & Two\\
+%\hline
+%Three & Four\\
+%\hline
+%\end{tabular}
+%\end{table}
+
+
+% Note that IEEE does not put floats in the very first column - or typically
+% anywhere on the first page for that matter. Also, in-text middle ("here")
+% positioning is not used. Most IEEE journals/conferences use top floats
+% exclusively. Note that, LaTeX2e, unlike IEEE journals/conferences, places
+% footnotes above bottom floats. This can be corrected via the \fnbelowfloat
+% command of the stfloats package.
+
+
+
+% trigger a \newpage just before the given reference
+% number - used to balance the columns on the last page
+% adjust value as needed - may need to be readjusted if
+% the document is modified later
+%\IEEEtriggeratref{8}
+% The "triggered" command can be changed if desired:
+%\IEEEtriggercmd{\enlargethispage{-5in}}
+
+% references section
+
+% can use a bibliography generated by BibTeX as a .bbl file
+% BibTeX documentation can be easily obtained at:
+% http://www.ctan.org/tex-archive/biblio/bibtex/contrib/doc/
+% The IEEEtran BibTeX style support page is at:
+% http://www.michaelshell.org/tex/ieeetran/bibtex/
+\bibliographystyle{IEEEtran}
+% argument is your BibTeX string definitions and bibliography database(s)
+\bibliography{IEEEabrv,./ILS}
+
+
+
+%
+% <OR> manually copy in the resultant .bbl file
+% set second argument of \begin to the number of references
+% (used to reserve space for the reference number labels box)
+
+%\begin{thebibliography}{1}
+%\bibitem{ChangHanReduction:chang}
+%X.~Chang and Q.~Han. ``Solving Box-Constrained Integer Least Squares
+%Problems,'' in IEEE Trans. on Wireless Communications, Jan. 2008, pp.
+%277-287.
+%\bibitem{SuWassellReduction:su}
+%K.~Su and I.~Wassell. ``A New Ordering for Efficient Sphere Decoding,'' in IEEE
+%Trans. Wireless Communications, Jan. 2008, pp. 277-287.
+%\end{thebibliography}
+
+
+
+
+% that's all folks
+\end{document}
+
+

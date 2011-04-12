@@ -1,0 +1,47 @@
+This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
+The top-level auxiliary file: sbreenThesis.aux
+The style file: plain.bst
+Database file #1: ../ILS.bib
+Warning--can't use both volume and number fields in HasV05
+You've used 1 entry,
+            2118 wiz_defined-function locations,
+            505 strings with 4145 characters,
+and the built_in function-call counts, 310 in all, are:
+= -- 24
+> -- 13
+< -- 1
++ -- 5
+- -- 4
+* -- 23
+:= -- 55
+add.period$ -- 3
+call.type$ -- 1
+change.case$ -- 5
+chr.to.int$ -- 0
+cite$ -- 2
+duplicate$ -- 14
+empty$ -- 29
+format.name$ -- 4
+if$ -- 62
+int.to.chr$ -- 0
+int.to.str$ -- 1
+missing$ -- 1
+newline$ -- 8
+num.names$ -- 2
+pop$ -- 7
+preamble$ -- 1
+purify$ -- 4
+quote$ -- 0
+skip$ -- 9
+stack$ -- 0
+substring$ -- 5
+swap$ -- 4
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 4
+warning$ -- 1
+while$ -- 2
+width$ -- 2
+write$ -- 13
+(There was 1 warning)
