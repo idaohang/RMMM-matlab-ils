@@ -67,10 +67,10 @@ while 1
     if newprsd < beta
         if k ~= 1 % move to level k-1
             numExpanded=numExpanded+1;
-    k
-    z(k:n)
-    newprsd
-    beta
+%             k
+%             z(k:n)
+%             newprsd
+%             beta
             S(1:k,k) = R(1:k,k)*z(k) + S(1:k,k+1);
             k = k - 1;
             prsd(k) = newprsd;
@@ -84,10 +84,10 @@ while 1
             end
         else % a new point is found, update the set of candidate solutions
             numExpanded=numExpanded+1;
-    k
-    z(k:n)
-    newprsd
-    beta
+%             k
+%             z(k:n)
+%             newprsd
+%             beta
             if ncand < p   % add the new point
                 ncand = ncand + 1;
                 Zhat(:,ncand) = z;

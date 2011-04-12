@@ -64,7 +64,7 @@ for i = 1:runs
     expand1(i) = numExpanded;
     expand2(i) = numExpanded2;
     
-    if(numExpanded > numExpanded2 + 2 && numExpanded2 > 3)
+    if(numExpanded > numExpanded2 + 3 && numExpanded2 > 3)
         error('test');
     end
 
