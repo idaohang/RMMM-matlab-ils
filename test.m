@@ -11,8 +11,8 @@ rowSum = zeros(1,runs);
 babai1 = zeros(1,runs);
 babai2 = zeros(1,runs);
 
-sz = 3;
-qam = 64;
+sz = 40;
+qam = 8;
 for i = 1:runs
     i
     %
@@ -23,13 +23,13 @@ for i = 1:runs
     n = m; 
     lower = -10;
     upper = 10;
-    %B = randn(m,n);
-    B = randILS(m,n,6);
+    B = randn(m,n);
+    %B = randILS(m,n,6);
     %B = randILS(m,n,12);
     z_true = (-1*ones(m,1)).^(mod(round(rand(m,1)*10),2)+1).*ceil(rand(m,1)*sqrt(qam));
     %y = (-1*ones(m,1)).^(mod(round(rand(m,1)*10),2)+1).*round(rand(m,1)*upper);
-    %y = B*z_true + 0.5*randn(m,1);
-    y = randn(m,1)*20;
+    y = B*z_true + 0.4*randn(m,1);
+    %y = randn(m,1)*20;
     p = 1;
     
     l = -inf*(ones(1,n));
@@ -52,7 +52,7 @@ for i = 1:runs
     [checkSum(i),rowSum(i),offDiagSum(i)] = checkLLL(R3);
 
     [sorted,idx] = sort(P);
-    
+     
     if(norm(zhat-zhat2(idx)) ~= 0)
         error('Wrong answer!');
     end
@@ -64,8 +64,8 @@ for i = 1:runs
     expand1(i) = numExpanded;
     expand2(i) = numExpanded2;
     
-    if(numExpanded > numExpanded2 + 3 && numExpanded2 > 3)
-        error('test');
-    end
+%     if(numExpanded > numExpanded2 + 3 && numExpanded2 > 3)
+%         error('test');
+%     end
 
 end
