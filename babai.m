@@ -1,6 +1,6 @@
 function [z] = babai(R,y)
 n = length(R);
-% Initializes
+% Initialize
 z = zeros(n,1); % the current point
 z(n) = round(y(n)/R(n,n));
 
