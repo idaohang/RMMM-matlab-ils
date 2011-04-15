@@ -30,8 +30,8 @@ for i = 1:runs
     n = m;
     lower = -10;
     upper = 10;
-    %B = randn(m,n);
-    B = randILS(m,n,6);
+    B = randn(m,n);
+    %B = randILS(m,n,6);
     %B = randILS(m,n,12);
     z_true = (-1*ones(m,1)).^(mod(round(rand(m,1)*10),2)+1).*ceil(rand(m,1)*sqrt(qam));
     %y = (-1*ones(m,1)).^(mod(round(rand(m,1)*10),2)+1).*round(rand(m,1)*upper);
@@ -76,11 +76,9 @@ for i = 1:runs
         babaiCorrect2(i) = 1;
     end
     
-    expand1(i) = numExpanded;
-    expand2(i) = numExpanded2;
+%     expand1(i) = numExpanded;
+%     expand2(i) = numExpanded2;
     
-%     if(numExpanded > numExpanded2 + 3 && numExpanded2 > 3)
-%         error('test');
-%     end
+    end
 
-end
+
