@@ -9,7 +9,7 @@ time2 = zeros(9,7,runs);
 expand2 = zeros(9,7,runs);
 
 timePermute = zeros(9,7,runs);
-
+qam=64;
 for i = 1:size(sizes,2)
     for j = 1:size(noises,1)
         for p = 1:runs
@@ -19,7 +19,7 @@ for i = 1:size(sizes,2)
             n = sizes(i);
             %B = randn(m,n)./100 + eye(m,n);
             B = randn(m,n);
-            z_true = (-1*ones(m,1)).^(mod(round(rand(m,1)*10),2)+1).*round(rand(m,1)*10000);
+            z_true = (-1*ones(m,1)).^(mod(round(rand(m,1)*10),2)+1).*ceil(rand(m,1)*sqrt(qam));
             y = B*z_true + noises(j)*randn(m,1);
             l = -inf*(ones(1,n));
             u = inf*(ones(1,n));
