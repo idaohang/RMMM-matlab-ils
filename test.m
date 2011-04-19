@@ -13,6 +13,8 @@ babai2 = zeros(1,runs);
 babai3 = zeros(1,runs);
 babaiCorrect1 = zeros(1,runs);
 babaiCorrect2 = zeros(1,runs);
+ilsCorrect1 = zeros(1,runs);
+ilsCorrect2 = zeros(1,runs);
 successRate1 = zeros(1,runs);
 successRate2 = zeros(1,runs);
 
@@ -53,9 +55,9 @@ for i = 1:runs
     [P z] = otherConstrainedReduction(R2,y2,l,u);
     [Q R3] = qr(R2(:,P));
     y3 = Q'*y2;
-%     tic;
-%     [zhat2,numExpanded2] = search(R3,y3,1);
-%     time2(i) = toc;
+    tic;
+    [zhat2,numExpanded2] = search(R3,y3,1);
+    time2(i) = toc;
     successRate2(i) = successRate(R3,sigma);
     
     [checkSum(i),rowSum(i),offDiagSum(i)] = checkLLL(R3);
@@ -70,12 +72,18 @@ for i = 1:runs
     if(norm(Z*babai(R2,y2) - z_true) == 0)
         babaiCorrect1(i) = 1;
     end
+    
     babai2temp = babai(R3,y3);
     babai2(i) = norm(B*Z*babai2temp(idx)-y);
     if(norm(Z*babai2temp(idx) - z_true) == 0)
         babaiCorrect2(i) = 1;
     end
-    
+    if(zhat2 == babai2temp)
+        ilsCorrect2(i) = 1;
+    end
+    if(zhat2(idx) == babai(R2,y2))
+        ilsCorrect1(i) = 1;
+    end
 %     expand1(i) = numExpanded;
 %     expand2(i) = numExpanded2;
     
