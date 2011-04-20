@@ -22,17 +22,17 @@ successRate2 = zeros(1,runs);
 sz = 40;
 qam = 8;
 sigma = 0.5;
+m = sz;
+n = m;
+B = randn(m,n);
 for i = 1:runs
     i
     %
     % A small example to run function ils.m
     %
     % Construct data
-    m = sz;
-    n = m;
     lower = -10;
     upper = 10;
-    B = randn(m,n);
     %B = randILS(m,n,6);
     %B = randILS(m,n,12);
     z_true = (-1*ones(m,1)).^(mod(round(rand(m,1)*10),2)+1).*ceil(rand(m,1)*sqrt(qam));
@@ -44,8 +44,8 @@ for i = 1:runs
     l = -inf*(ones(1,n));
     u = inf*(ones(1,n));
 
-    
     [R2 Z y2] = reduction(B,y);
+    
     
 %     tic;
 %     [zhat,numExpanded] = search(R2,y2,1);
@@ -77,12 +77,6 @@ for i = 1:runs
     babai2(i) = norm(B*Z*babai2temp(idx)-y);
     if(norm(Z*babai2temp(idx) - z_true) == 0)
         babaiCorrect2(i) = 1;
-    end
-    if(zhat2 == babai2temp)
-        ilsCorrect2(i) = 1;
-    end
-    if(zhat2(idx) == babai(R2,y2))
-        ilsCorrect1(i) = 1;
     end
 %     expand1(i) = numExpanded;
 %     expand2(i) = numExpanded2;
