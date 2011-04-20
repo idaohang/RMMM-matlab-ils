@@ -60,13 +60,18 @@ for matrixCase = matrixCases
             tic;
             [P z] = otherConstrainedReduction(R1,y1,l,u);
             [Q2 R2] = qr(R1(:,P));
-            y2 = Q'*y1;
+            y2 = Q2'*y1;
             permuTime(matrixCase,n,i) = toc;
             
             tic;
             [zhat2,numExpanded2] = search(R2,y2,1);
             time2(matrixCase,n,i) = toc;
-            expand2(matrixCase,n,i) = numExpanded2;       
+            expand2(matrixCase,n,i) = numExpanded2;   
+            
+            [sorted idx] = sort(P);
+            if(norm(zhat1 - zhat2(idx)) ~= 0)
+                error('Wrong answer!');
+            end
         end
     end
 end
