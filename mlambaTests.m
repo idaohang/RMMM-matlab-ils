@@ -1,14 +1,16 @@
 runs = 100;
 sz = 5:5:40;
-time1 = zeros(matrixCase,size(sz,2),runs);
-time2 = zeros(matrixCase,size(sz,2),runs);
-permuTime = zeros(matrixCase,size(sz,2),runs);
-expand1 = zeros(matrixCase,size(sz,2),runs);
-expand2 = zeros(matrixCase,size(sz,2),runs);
+matrixCases = 1:7;
+time1 = zeros(size(matrixCases,2),size(sz,2),runs);
+time2 = zeros(size(matrixCases,2),size(sz,2),runs);
+permuTime = zeros(size(matrixCases,2),size(sz,2),runs);
+expand1 = zeros(size(matrixCases,2),size(sz,2),runs);
+expand2 = zeros(size(matrixCases,2),size(sz,2),runs);
 
-for matrixCase = 1:7
+for matrixCase = matrixCases
     for n=sz;
         for i = 1:runs
+            fprintf('%i %i %i\n',matrixCase,n,i);
             switch (matrixCase)
                 case (1)
                     L = tril(randn(n,n));
@@ -23,8 +25,7 @@ for matrixCase = 1:7
                     D = diag((1:n).^(-1));
                     Q = L'*D*L;
                 case (4)
-                    L = tril            
-            tic;(randn(n,n));
+                    L = tril(randn(n,n));
                     D = 0.1*ones(1,n);
                     D(1) = 200;
                     D(2) = 200;
@@ -65,8 +66,7 @@ for matrixCase = 1:7
             tic;
             [zhat2,numExpanded2] = search(R2,y2,1);
             time2(matrixCase,n,i) = toc;
-            expand2(matrixCase,n,i) = numExpanded2
-            
+            expand2(matrixCase,n,i) = numExpanded2;       
         end
     end
 end
