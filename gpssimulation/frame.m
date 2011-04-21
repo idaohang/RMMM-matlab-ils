@@ -40,7 +40,7 @@ p_speed=100;
 min_elev 	= 5*RAD_P_DEG; % 5 degrees, minimum elevation for visibility 
 t_epoch 	= 1;		   % in seconds 
 n_vis_sat_max	= sat_number;     % must be:  n_vis_sat_max >= 7 
-ilsTime = zeros(1,epoches);
+ilsTime = 0;
 n_raim=7;                  % must be:  5 <= n_raim <= n_vis_sat_max 
 k_epochs=4;                % the number of accumulated epochs for the lin. model 
  
@@ -222,12 +222,11 @@ while p_break==0,
             end
            
      
-           if(result > 0.9) %1e-8)
-               
+           if(result > 0.9) %1e-8)   
                 disp('FIXED');
                 tic;
                 INT = ils(S_j_1,w_cap_j_1,1,newILS);
-                ilsTime(epoch) = toc;
+                ilsTime = toc;
                 d_j_1 = INT;
                 intflag = 1;
                 fix_epoch = epoch

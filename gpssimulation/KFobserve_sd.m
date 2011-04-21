@@ -28,7 +28,7 @@ end;
 for i=1:n_sat,
   if(viss(i) > min_elev), break; end;
 end;
-visible = index(n_sat:-1:i);
+visible = index(n_sat:-1:1);
 n_vis_sat = length(visible);
 % sort the non-reference satellites according to satellite number (see below)
 visible = [visible(1) visible(2) sort(visible(3:n_vis_sat))];
