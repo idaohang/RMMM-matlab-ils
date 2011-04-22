@@ -31,6 +31,7 @@ for matrixCase = matrixCases
                     D(2) = 200;
                     D(3) = 200;
                     D = diag(D);
+                    Q = L'*D*L;
                 case (5)
                     A = randn(n,n);
                     [U ~] = qr(A);
@@ -42,6 +43,7 @@ for matrixCase = matrixCases
                     D = diag(rand(n,1));
                     D(1,1) = 2^(-n/4);
                     D(n,n) = 2^(n/4);
+                    Q = U*D*U';
                 case (7)
                     A = randn(n,n);
                     Q = A'*A;
