@@ -21,10 +21,9 @@ successRate2 = zeros(1,runs);
 
 sz = 40;
 qam = 8;
-sigma = 0.5;
+sigma = 0.9;
 m = sz;
 n = m;
-B = randn(m,n);
 for i = 1:runs
     i
     %
@@ -33,6 +32,7 @@ for i = 1:runs
     % Construct data
     lower = -10;
     upper = 10;
+    B = randn(m,n);
     %B = randILS(m,n,6);
     %B = randILS(m,n,12);
     z_true = (-1*ones(m,1)).^(mod(round(rand(m,1)*10),2)+1).*ceil(rand(m,1)*sqrt(qam));
@@ -45,7 +45,6 @@ for i = 1:runs
     u = inf*(ones(1,n));
 
     [R2 Z y2] = reduction(B,y);
-
     
     
 %     tic;
@@ -72,15 +71,12 @@ for i = 1:runs
     babai1(i) = norm(B*Z*babai(R2,y2) - y);
     if(norm(Z*babai(R2,y2) - z_true) == 0)
         babaiCorrect1(i) = 1;
-        error('test');
     end
     
     babai2temp = babai(R3,y3);
     babai2(i) = norm(B*Z*babai2temp(idx)-y);
     if(norm(Z*babai2temp(idx) - z_true) == 0)
         babaiCorrect2(i) = 1;
-                error('test');
-
     end
 %     expand1(i) = numExpanded;
 %     expand2(i) = numExpanded2;

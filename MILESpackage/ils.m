@@ -1,4 +1,4 @@
-function Zhat = ils(B,y,p,new)
+function [Zhat numExpanded] = ils(B,y,p,new)
 %
 % Zhat = ils(B,y,p) produces p optimal solutions to the integer least 
 %        squares problem min_{z}||y-Bz||
@@ -49,11 +49,11 @@ if(new == 1)
     P = otherConstrainedReduction(R,y,l,u);
     [Q R2] = qr(R(:,P));
     y2 = Q'*y;
-    Zhat = search(R2,y2(1:n),p);
+    [Zhat numExpanded] = search(R2,y2(1:n),p);
     [~,idx] = sort(P);
     Zhat = Zhat(idx);
 else
-    Zhat = search(R,y(1:n),p); 
+    [Zhat numExpanded] = search(R,y(1:n),p); 
 end
 
 % Perform the unimodual transformation to obtain the optimal solutions

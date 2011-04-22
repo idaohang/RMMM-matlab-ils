@@ -1,4 +1,4 @@
-function [ilsTime] = frame(sat_number, epoches, newILS)
+function [ilsTime ilsExpand] = frame(sat_number, epoches, newILS)
 
 %function [] = raim1acsd1(p_runs,test) 
 % DESCRIPTION: RAIM with the sd accumulated linear model. 
@@ -41,6 +41,7 @@ min_elev 	= 5*RAD_P_DEG; % 5 degrees, minimum elevation for visibility
 t_epoch 	= 1;		   % in seconds 
 n_vis_sat_max	= sat_number;     % must be:  n_vis_sat_max >= 7 
 ilsTime = 0;
+ilsExpand = 0;
 n_raim=7;                  % must be:  5 <= n_raim <= n_vis_sat_max 
 k_epochs=4;                % the number of accumulated epochs for the lin. model 
  
@@ -80,7 +81,7 @@ p_ephd=yuma2mat;    % load and convert GPS data
  % ------------------------------------------------------------------------------ 
  % find inital the visible satellites to 2 receivers, the single difference, and the integer ambiguity at the start epoch
  [visible sd iNs] = KFobserve_sd_InterAmbiguity(x_rcvr1,x_rcvr2,dx_rcvr2_est,noise_sigma,t_init*t_epoch,min_elev,p_ephd,n_vis_sat_max); 
- n_vis_sat=length(visible); 
+ n_vis_sat=length(visible);
  
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
  %CC_alg Initial y1 
@@ -223,17 +224,19 @@ while p_break==0,
            
      
            if(result > 0.9) %1e-8)   
-                disp('FIXED');
+                %disp('FIXED');
+                size(S_j_1)
                 tic;
-                INT = ils(S_j_1,w_cap_j_1,1,newILS);
+                [INT,ilsExpand] = ils(S_j_1,w_cap_j_1,1,newILS);
                 ilsTime = toc;
+                return;
                 d_j_1 = INT;
                 intflag = 1;
-                fix_epoch = epoch
+                fix_epoch = epoch;
                 % fix_result = res(epoch);
-                REAL = S_j_1\w_cap_j_1
-                ESTDDIA = d_j_1
-                TrueDDIA = [J*iNs']
+                REAL = S_j_1\w_cap_j_1;
+                ESTDDIA = d_j_1;
+                TrueDDIA = [J*iNs'];
                 
             else
                 d_j_1 = S_j_1\w_cap_j_1;
@@ -276,35 +279,35 @@ while p_break==0,
 end; %epochs 
 
 
-%plot the figures
-x = 0:.1:10;
-semilogy(x,10.^x,'w');
-xlabel('epoch (s)');
-ylabel('error in position estimate(m)');
-grid;
-title(['satellite number is ',int2str(n_vis_sat_max)])
-hold on
-plot(1,error_vector(1),'r');
-for i=2:epoch_max
-   x = (i-1):0.001:i;
-   y = (error_vector(i) - error_vector(i-1))*(x-i+1)+error_vector(i-1);
-   plot(x,y,'r');
-end
-hold off
-
-figure;
-x = 0:.1:10;
-semilogy(x,10.^x,'w');
-xlabel('epoch (s)');
-ylabel('covariance of the error in position estimates (m)');
-grid;
-title(['satellite number is ',int2str(n_vis_sat_max)])
-hold on
-plot(start_epoch,cov_x_vector(2),'r');
-for i=start_epoch+1:epoch_max
-   x = (i-1):0.001:i;
-   y = (cov_x_vector(i) - cov_x_vector(i-1))*(x-i+1)+cov_x_vector(i-1);
-   plot(x,y,'r');
-end
-hold off
+% %plot the figures
+% x = 0:.1:10;
+% semilogy(x,10.^x,'w');
+% xlabel('epoch (s)');
+% ylabel('error in position estimate(m)');
+% grid;
+% title(['satellite number is ',int2str(n_vis_sat_max)])
+% hold on
+% plot(1,error_vector(1),'r');
+% for i=2:epoch_max
+%    x = (i-1):0.001:i;
+%    y = (error_vector(i) - error_vector(i-1))*(x-i+1)+error_vector(i-1);
+%    plot(x,y,'r');
+% end
+% hold off
+% 
+% figure;
+% x = 0:.1:10;
+% semilogy(x,10.^x,'w');
+% xlabel('epoch (s)');
+% ylabel('covariance of the error in position estimates (m)');
+% grid;
+% title(['satellite number is ',int2str(n_vis_sat_max)])
+% hold on
+% plot(start_epoch,cov_x_vector(2),'r');
+% for i=start_epoch+1:epoch_max
+%    x = (i-1):0.001:i;
+%    y = (cov_x_vector(i) - cov_x_vector(i-1))*(x-i+1)+cov_x_vector(i-1);
+%    plot(x,y,'r');
+% end
+% hold off
 

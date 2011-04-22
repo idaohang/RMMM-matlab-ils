@@ -19,12 +19,11 @@ successRate1 = zeros(1,runs);
 successRate2 = zeros(1,runs);
 
 
-sz = 40;
+sz = 30;
 qam = 8;
-sigma = 0.5;
+sigma = 0.9;
 m = sz;
 n = m;
-B = randn(m,n);
 for i = 1:runs
     i
     %
@@ -33,6 +32,7 @@ for i = 1:runs
     % Construct data
     lower = -10;
     upper = 10;
+    B = randn(m,n);
     %B = randILS(m,n,6);
     %B = randILS(m,n,12);
     z_true = (-1*ones(m,1)).^(mod(round(rand(m,1)*10),2)+1).*ceil(rand(m,1)*sqrt(qam));
@@ -47,17 +47,19 @@ for i = 1:runs
     [R2 Z y2] = reduction(B,y);
     
     
-%     tic;
-%     [zhat,numExpanded] = search(R2,y2,1);
-%     time1(i) = toc;
+    tic;
+    %[zhat,numExpanded] = search(R2,y2,1);
+    time1(i) = toc;
+    expand1(i) = numExpanded;
     successRate1(i) = successRate(R2,sigma);
     
     [P z] = otherConstrainedReduction(R2,y2,l,u);
     [Q R3] = qr(R2(:,P));
     y3 = Q'*y2;
     tic;
-    [zhat2,numExpanded2] = search(R3,y3,1);
+    %[zhat2,numExpanded2] = search(R3,y3,1);
     time2(i) = toc;
+    expand2(i) = numExpanded2;
     successRate2(i) = successRate(R3,sigma);
     
     [checkSum(i),rowSum(i),offDiagSum(i)] = checkLLL(R3);
