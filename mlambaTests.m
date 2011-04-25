@@ -9,21 +9,26 @@ expand2 = zeros(size(matrixCases,2),size(sz,2),runs);
 
 for matrixCase = matrixCases
     for n=sz;
-        for i = 1:runs
+        i = 0;
+        while i<=runs
+            i=i+1;
             fprintf('%i %i %i\n',matrixCase,n,i);
             switch (matrixCase)
                 case (1)
                     L = tril(randn(n,n));
-                    D = diag(rand(n,1));
+                    D = abs(diag(rand(n,1)));
                     Q = L'*D*L;
+                    A = D^(1/2)*L';
                 case (2)
                     L = tril(randn(n,n));
                     D = diag((n:-1:1).^(-1));
                     Q = L'*D*L;
+                    A = D^(1/2)*L';
                 case (3)
                     L = tril(randn(n,n));
                     D = diag((1:n).^(-1));
                     Q = L'*D*L;
+                    A = D^(1/2)*L';
                 case (4)
                     L = tril(randn(n,n));
                     D = 0.1*ones(1,n);
@@ -32,27 +37,31 @@ for matrixCase = matrixCases
                     D(3) = 200;
                     D = diag(D);
                     Q = L'*D*L;
+                    A = D^(1/2)*L';
                 case (5)
                     A = randn(n,n);
                     [U ~] = qr(A);
-                    D = diag(rand(n,1));
+                    D = abs(diag(rand(n,1)));
                     Q = U*D*U';
+                    A = U'*D^(1/2);
                 case (6)
                     A = randn(n,n);
                     [U ~] = qr(A);
-                    D = diag(rand(n,1));
+                    D = abs(diag(rand(n,1)));
                     D(1,1) = 2^(-n/4);
                     D(n,n) = 2^(n/4);
                     Q = U*D*U';
+                    A = U'*D^(1/2);
                 case (7)
                     A = randn(n,n);
                     Q = A'*A;
             end
             ahat = 100*randn(n,1);
-            y = Q*ahat;
+
+            y = A*ahat;
             l = -inf*(ones(1,n));
             u = inf*(ones(1,n));
-            [R1 Z1 y1] = reduction(Q,y);
+            [R1 Z1 y1] = reduction(A,y);
             
             tic;
             [zhat1, numExpanded1] = search(R1,y1,1);
