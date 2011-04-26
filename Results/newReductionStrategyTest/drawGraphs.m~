@@ -1,0 +1,4 @@
+for i = 1:length(noises)
+    subplot(4,2,i);
+    plot();
+end

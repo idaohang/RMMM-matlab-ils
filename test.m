@@ -19,9 +19,9 @@ successRate1 = zeros(1,runs);
 successRate2 = zeros(1,runs);
 
 
-sz = 30;
+sz = 35;
 qam = 8;
-sigma = 0.9;
+sigma = 0.8;
 m = sz;
 n = m;
 for i = 1:runs
@@ -48,7 +48,7 @@ for i = 1:runs
     
     
     tic;
-    %[zhat,numExpanded] = search(R2,y2,1);
+    [zhat,numExpanded] = search(R2,y2,1);
     time1(i) = toc;
     expand1(i) = numExpanded;
     successRate1(i) = successRate(R2,sigma);
@@ -57,7 +57,7 @@ for i = 1:runs
     [Q R3] = qr(R2(:,P));
     y3 = Q'*y2;
     tic;
-    %[zhat2,numExpanded2] = search(R3,y3,1);
+    [zhat2,numExpanded2] = search(R3,y3,1);
     time2(i) = toc;
     expand2(i) = numExpanded2;
     successRate2(i) = successRate(R3,sigma);
