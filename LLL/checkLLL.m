@@ -21,8 +21,8 @@ function [check,row,offdiag,avgAngle] = checkLLL(R)
     end
     
     %Compute the average angle between columns... is invariant under
-    %permutations and works out to a pretty consistent average for a given
-    %problem size.
+    %permutations and works out to a pretty consistent average for all
+    %problem sizes surprisingly
     sum=0;
     count=0;
     for i = 1:n
