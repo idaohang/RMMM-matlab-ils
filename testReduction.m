@@ -1,6 +1,6 @@
 function [R Z y] = testReduction(A,y,alpha)
-%Perform LLL, then a variant of CH where lower alpha keeps more LLL
-%properties (alpha = 0 and no CH is done, alpha=inf equivalent to LLL+CH)
+%Perform LLL, then a variant of CH where alpha gives a tradeoff between LLL
+%and CH
     [m n] = size(A);
     if(checkLLL(A) == 1)
         [Q R] = qr(A);
@@ -10,6 +10,7 @@ function [R Z y] = testReduction(A,y,alpha)
         [R Z y] = reduction(A,y);
     end
     [~, ~, offDiagSum,~] = checkLLL(R);
+    offDiagSumOrig = offDiagSum;
     k=n;
     
     yhat = y;
@@ -48,23 +49,25 @@ function [R Z y] = testReduction(A,y,alpha)
                     p = i;
                     R2 = Rp;
                     y2=yTemp;
+                    Z2 = Z;
                     Z2(:,[k,p])=Z(:,[p,k]); %record the column swap in Z
                     yhat2 = yp;
                     ck2 = ckp;
                 end
             end
             [~, ~, offDiagSum2,~] = checkLLL(R2);
-            if(p~=k && (offDiagSum == 0 || alpha*bestDist/offDiagSum2 - curDist/offDiagSum > 0) )
+            measure = offDiagSum2;
+            if(p~=k && (offDiagSum == 0 || measure <= alpha) )
                 R = R2;
                 y = y2;
                 Z = Z2;
                 yhat = yhat2;
                 ck = ck2;
                 offDiagSum = offDiagSum2;
-                fprintf('Swapped: %i %i\n',k,i);
+                fprintf('Swapped: %i %i %f\n',k,i,measure);
             else
                 if (p~=k)
-                    fprintf('Skipped swap: %i %i\n',k,i);
+                    fprintf('Skipped swap: %i %i %f\n',k,i,measure);
                 end
             end
 
