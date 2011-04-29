@@ -64,10 +64,10 @@ function [R Z y] = testReduction(A,y,alpha)
                 yhat = yhat2;
                 ck = ck2;
                 offDiagSum = offDiagSum2;
-                fprintf('Swapped: %i %i %f\n',k,i,measure);
+                %fprintf('Swapped: %i %i %f\n',k,i,measure);
             else
                 if (p~=k)
-                    fprintf('Skipped swap: %i %i %f\n',k,i,measure);
+                    %fprintf('Skipped swap: %i %i %f\n',k,i,measure);
                 end
             end
 
