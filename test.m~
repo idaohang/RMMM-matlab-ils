@@ -25,7 +25,7 @@ successRate3 = zeros(1,runs);
 
 sz = 35;
 qam = 8;
-sigma = 0.5;
+sigma = 0.4;
 m = sz;
 n = m;
 for i = 1:runs
@@ -72,7 +72,7 @@ for i = 1:runs
         error('Wrong answer!');
     end
     
-    [R4 Z4 y4] = testReduction(B,y,);
+    [R4 Z4 y4] = testReduction(B,y,(1/sigma)*12);
     tic;
     [zhat3,numExpanded3] = search(R4,y4,1);
     time3(i) = toc;
