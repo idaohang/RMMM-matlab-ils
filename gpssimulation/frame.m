@@ -1,4 +1,4 @@
-function [ilsTime ilsExpand] = frame(sat_number, epoches, newILS)
+function [ilsTime ilsExpand,babaiTrue] = frame(sat_number, epoches, newILS,noiseParam)
 
 %function [] = raim1acsd1(p_runs,test) 
 % DESCRIPTION: RAIM with the sd accumulated linear model. 
@@ -33,7 +33,7 @@ pout=0; %print plots (the last p_runs)
 %t_init=rand(1)*5000+26000; 
 t_init =30000;     %initial time (offset for epoch),26000<= t_init <=31000,from Hunzinger thesis  
 epoch_max= epoches;     %maximum run time  
-noise_sigma=0.001; 
+noise_sigma=noiseParam; 
 p_base=100; 
 p_unc=1000; 
 p_speed=100;
@@ -224,11 +224,16 @@ while p_break==0,
            
      
            if(result > 0.9) %1e-8)   
-                %disp('FIXED');
+                disp('FIXED');
                 size(S_j_1)
                 tic;
-                [INT,ilsExpand] = ils(S_j_1,w_cap_j_1,1,newILS);
+                [INT,ilsExpand,babaiPt] = ils(S_j_1,w_cap_j_1,1,newILS);
                 ilsTime = toc;
+                if(norm(babaiPt - INT) == 0)
+                    babaiTrue = 1;
+                else
+                    babaiTrue = 0;
+                end
                 return;
                 d_j_1 = INT;
                 intflag = 1;

@@ -1,4 +1,4 @@
-function [Zhat numExpanded] = ils(B,y,p,new)
+function [Zhat numExpanded,babaiPt] = ils(B,y,p,new)
 %
 % Zhat = ils(B,y,p) produces p optimal solutions to the integer least 
 %        squares problem min_{z}||y-Bz||
@@ -50,12 +50,16 @@ if(new == 1)
     [Q R2] = qr(R(:,P));
     y2 = Q'*y;
     [Zhat numExpanded] = search(R2,y2(1:n),p);
+    babaiPt = babai(R2,y2);
     [~,idx] = sort(P);
     Zhat = Zhat(idx);
+    babaiPt = babaiPt(idx);
 else
     [Zhat numExpanded] = search(R,y(1:n),p); 
+    babaiPt = babai(R,y); 
 end
-
 % Perform the unimodual transformation to obtain the optimal solutions
+babaiPt = Z*babaiPt;
 Zhat = Z*Zhat;
+
 
