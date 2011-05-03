@@ -57,7 +57,7 @@ for i = 1:size(sizes,2)
                 error('Wrong answer!');
             end
             
-            [R3 Z3 y3] = testReduction(B,y,(1/noises(j))*12);
+            [R3 Z3 y3] = testReduction(B,y,(1/noises(j))^3*3);
             tic;
             [zhat3,numExpanded3] = search(R3,y3,1);
             time3(i,j,p) = toc;
