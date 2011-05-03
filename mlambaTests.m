@@ -1,11 +1,13 @@
 runs = 200;
-sz = 5:5:40;
+sz = 35:5:40;
 matrixCases = 1:7;
 time1 = zeros(size(matrixCases,2),size(sz,2),runs);
 time2 = zeros(size(matrixCases,2),size(sz,2),runs);
+time3 = zeros(size(matrixCases,2),size(sz,2),runs);
 permuTime = zeros(size(matrixCases,2),size(sz,2),runs);
 expand1 = zeros(size(matrixCases,2),size(sz,2),runs);
 expand2 = zeros(size(matrixCases,2),size(sz,2),runs);
+expand3 = zeros(size(matrixCases,2),size(sz,2),runs);
 
 for matrixCase = matrixCases
     for n=sz;
@@ -68,6 +70,15 @@ for matrixCase = matrixCases
             time1(matrixCase,n,i) = toc;
             expand1(matrixCase,n,i) = numExpanded1;
 
+            [R3 Z3 y3] = testReduction(A,y,7);
+            tic;
+            [zhat3,numExpanded3] = search(R3,y3,1);
+            time3(matrixCase,n,i) = toc;
+            expand3(matrixCase,n,i) = numExpanded3;
+            if(norm(Z3*zhat3 - Z1*zhat1)/norm(Z3*zhat3) > 10^-10)
+                error('Wrong Answer!');
+            end
+            
             tic;
             [P z] = otherConstrainedReduction(R1,y1,l,u);
             [Q2 R2] = qr(R1(:,P));

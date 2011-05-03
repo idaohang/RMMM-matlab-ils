@@ -2,15 +2,20 @@ runs = 10000;
 time3 = zeros(1,runs);
 time1 = zeros(1,runs);
 time2 = zeros(1,runs);
+time4 = zeros(1,runs);
 expand1 = zeros(1,runs);
 expand2 = zeros(1,runs);
 expand3 = zeros(1,runs);
+expand4 = zeros(1,runs);
 checkSum = zeros(1,runs);
 offDiagSum = zeros(1,runs);
 rowSum = zeros(1,runs);
 checkSum2 = zeros(1,runs);
 offDiagSum2 = zeros(1,runs);
 rowSum2 = zeros(1,runs);
+checkSum3 = zeros(1,runs);
+offDiagSum3 = zeros(1,runs);
+rowSum3 = zeros(1,runs);
 babai1 = zeros(1,runs);
 babai2 = zeros(1,runs);
 babai3 = zeros(1,runs);
@@ -21,11 +26,12 @@ ilsCorrect2 = zeros(1,runs);
 successRate1 = zeros(1,runs);
 successRate2 = zeros(1,runs);
 successRate3 = zeros(1,runs);
+successRate4 = zeros(1,runs);
 
 
-sz = 40;
+sz = 30;
 qam = 8;
-sigma = 0.6;
+sigma = 0.9;
 m = sz;
 n = m;
 for i = 1:runs
@@ -72,7 +78,7 @@ for i = 1:runs
         error('Wrong answer!');
     end
     
-    [R4 Z4 y4] = testReduction(B,y,(1/sigma)^3*3);
+    [R4 Z4 y4] = testReduction(B,y,4);
     tic;
     [zhat3,numExpanded3] = search(R4,y4,1);
     time3(i) = toc;
@@ -82,6 +88,18 @@ for i = 1:runs
     
     if(norm(Z*zhat-Z4*zhat3) ~= 0)
         error('Test Reduction Wrong Answer!');
+    end
+    
+    [R5 Z5 y5] = testReduction2(B,y,4);
+    tic;
+    [zhat4,numExpanded4] = search(R5,y5,1);
+    time4(i) = toc;
+    expand4(i) = numExpanded4;
+    successRate4(i) = successRate(R5,sigma);
+    [checkSum3(i),rowSum3(i),offDiagSum3(i)] = checkLLL(R5);
+    
+    if(norm(Z*zhat-Z5*zhat4) ~= 0)
+        error('Test Reduction2 Wrong Answer!');
     end
     
     babai1(i) = norm(B*Z*babai(R2,y2) - y);
