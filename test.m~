@@ -26,11 +26,13 @@ ilsCorrect2 = zeros(1,runs);
 successRate1 = zeros(1,runs);
 successRate2 = zeros(1,runs);
 successRate3 = zeros(1,runs);
+successRate4 = zeros(1,runs);
+numSwaps = zeros(1,runs);
 
 
 sz = 40;
 qam = 8;
-sigma = 0.6;
+sigma = 0.4;
 m = sz;
 n = m;
 for i = 1:runs
@@ -77,40 +79,41 @@ for i = 1:runs
         error('Wrong answer!');
     end
     
-    [R4 Z4 y4] = testReduction(B,y,(1/sigma)^3*3);
-    tic;
-    [zhat3,numExpanded3] = search(R4,y4,1);
-    time3(i) = toc;
-    expand3(i) = numExpanded3;
-    successRate3(i) = successRate(R4,sigma);
-    [checkSum2(i),rowSum2(i),offDiagSum2(i)] = checkLLL(R4);
-    
-    if(norm(Z*zhat-Z4*zhat3) ~= 0)
-        error('Test Reduction Wrong Answer!');
-    end
-    
-    [R5 Z5 y5] = testReduction(B,y,(1/sigma)^3*3);
-    tic;
-    [zhat4,numExpanded4] = search(R5,y5,1);
-    time4(i) = toc;
-    expand4(i) = numExpanded4;
-    successRate4(i) = successRate(R5,sigma);
-    [checkSum3(i),rowSum3(i),offDiagSum3(i)] = checkLLL(R5);
-    
-    if(norm(Z*zhat-Z5*zhat4) ~= 0)
-        error('Test Reduction2 Wrong Answer!');
-    end
-    
-    babai1(i) = norm(B*Z*babai(R2,y2) - y);
-    if(norm(Z*babai(R2,y2) - z_true) == 0)
-        babaiCorrect1(i) = 1;
-    end
-    
-    babai2temp = babai(R3,y3);
-    babai2(i) = norm(B*Z*babai2temp(idx)-y);
-    if(norm(Z*babai2temp(idx) - z_true) == 0)
-        babaiCorrect2(i) = 1;
-    end
+    numSwaps(i) = sum(P~=1:n);
+%     [R4 Z4 y4] = testReduction(B,y,4);
+%     tic;
+%     [zhat3,numExpanded3] = search(R4,y4,1);
+%     time3(i) = toc;
+%     expand3(i) = numExpanded3;
+%     successRate3(i) = successRate(R4,sigma);
+%     [checkSum2(i),rowSum2(i),offDiagSum2(i)] = checkLLL(R4);
+%     
+%     if(norm(Z*zhat-Z4*zhat3) ~= 0)
+%         error('Test Reduction Wrong Answer!');
+%     end
+%     
+%     [R5 Z5 y5] = testReduction2(B,y,4);
+%     tic;
+%     [zhat4,numExpanded4] = search(R5,y5,1);
+%     time4(i) = toc;
+%     expand4(i) = numExpanded4;
+%     successRate4(i) = successRate(R5,sigma);
+%     [checkSum3(i),rowSum3(i),offDiagSum3(i)] = checkLLL(R5);
+%     
+%     if(norm(Z*zhat-Z5*zhat4) ~= 0)
+%         error('Test Reduction2 Wrong Answer!');
+%     end
+%     
+%     babai1(i) = norm(B*Z*babai(R2,y2) - y);
+%     if(norm(Z*babai(R2,y2) - z_true) == 0)
+%         babaiCorrect1(i) = 1;
+%     end
+%     
+%     babai2temp = babai(R3,y3);
+%     babai2(i) = norm(B*Z*babai2temp(idx)-y);
+%     if(norm(Z*babai2temp(idx) - z_true) == 0)
+%         babaiCorrect2(i) = 1;
+%     end
 %     expand1(i) = numExpanded;
 %     expand2(i) = numExpanded2;
     
