@@ -29,9 +29,9 @@ sz = 40;
 qam = 8;
 m = sz;
 n = m;
-B = randn(m,n)/10;
+B = randn(m,n);
 z_true = (-1*ones(m,1)).^(mod(round(rand(m,1)*10),2)+1).*ceil(rand(m,1)*sqrt(qam));
-tempSNR = [5,8,10];
+tempMeasure = [0.5,0.3,0.5];
 for k=1:3
 for i = 1:runs
     i
@@ -42,9 +42,9 @@ for i = 1:runs
     lower = -10;
     upper = 10;
     
-    sigma2 = sqrt((norm(B*z_true)^2)/tempSNR(k))/n
+    tempMeasure(k)
+    sigma2 = mean(mean(abs(B)))*tempMeasure(k)
     sdevs(i) = sigma2;
-    tempSNR(k)
     %snrs(i) = norm(B*z_true)^2/(n*sigma2)^2;
     y = B*z_true + sigma2*randn(m,1);
     
