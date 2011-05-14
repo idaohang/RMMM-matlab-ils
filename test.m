@@ -1,4 +1,4 @@
-runs = 25;
+runs = 30;
 time3 = zeros(3,runs);
 time1 = zeros(3,runs);
 time2 = zeros(3,runs);
