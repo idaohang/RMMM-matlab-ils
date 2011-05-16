@@ -1,4 +1,4 @@
-runs = 10000;
+runs = 100;
 time3 = zeros(1,runs);
 time1 = zeros(1,runs);
 time2 = zeros(1,runs);
@@ -31,7 +31,6 @@ m = sz;
 n = m;
 B = randn(m,n);
 z_true = (-1*ones(m,1)).^(mod(round(rand(m,1)*10),2)+1).*ceil(rand(m,1)*sqrt(qam));
-for tempSNR = [2,5,10]
 for i = 1:runs
     i
     %
@@ -40,11 +39,9 @@ for i = 1:runs
     % Construct data
     lower = -10;
     upper = 10;
-    
-    sigma2 = sqrt((norm(B*z_true)^2)/tempSNR)/n
+    sigma2 = 0.;
     sdevs(i) = sigma2;
     %snrs(i) = norm(B*z_true)^2/(n*sigma2)^2;
-    tempSNR
     y = B*z_true + sigma2*randn(m,1);
     
     l = -inf*(ones(1,n));
@@ -75,10 +72,11 @@ for i = 1:runs
         error('Wrong answer!');
     end
     
-    [R4 Z4 y4] = testReduction(B,y,(1/sigma2)^3*3);
+    [R4 Z4 y4] = testReduction(B,y,0.2,sigma2);
     tic;
     [zhat3,numExpanded3] = search(R4,y4,1);
     time3(i) = toc;
+    numExpanded3
     expand3(i) = numExpanded3;
     successRate3(i) = successRate(R4,sigma2);
     [checkSum2(i),rowSum2(i),offDiagSum2(i)] = checkLLL(R4);
@@ -98,6 +96,5 @@ for i = 1:runs
         babaiCorrect2(i) = 1;
     end
     
-end
 end
 

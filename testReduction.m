@@ -1,4 +1,4 @@
-function [R Z y] = testReduction(A,y,alpha)
+function [R Z y] = testReduction(A,y,alpha,sigma)
 %Perform LLL, then a variant of CH where alpha gives a tradeoff between LLL
 %and CH
     [m n] = size(A);
@@ -56,7 +56,8 @@ function [R Z y] = testReduction(A,y,alpha)
                 end
             end
             [~, ~, offDiagSum2,~] = checkLLL(R2);
-            measure = offDiagSum2;
+            %measure = offDiagSum2;
+            measure = (sigma^2)./R2(k,k);
             if(p~=k && (offDiagSum == 0 || measure <= alpha) )
                 R = R2;
                 y = y2;
