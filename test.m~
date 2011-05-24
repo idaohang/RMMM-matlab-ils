@@ -1,4 +1,4 @@
-runs = 100;
+runs = 400;
 time3 = zeros(1,runs);
 time1 = zeros(1,runs);
 time2 = zeros(1,runs);
@@ -29,20 +29,20 @@ sz = 40;
 qam = 8;
 m = sz;
 n = m;
-B = randn(m,n);
-z_true = (-1*ones(m,1)).^(mod(round(rand(m,1)*10),2)+1).*ceil(rand(m,1)*sqrt(qam));
 for i = 1:runs
     i
     %
     % A small example to run function ils.m
     %
     % Construct data
+    B = randn(m,n);
+    z_true = (-1*ones(m,1)).^(mod(round(rand(m,1)*10),2)+1).*ceil(rand(m,1)*sqrt(qam));
     lower = -10;
     upper = 10;
-    sigma2 = 0.;
+    sigma2 = 0.7;
     sdevs(i) = sigma2;
     %snrs(i) = norm(B*z_true)^2/(n*sigma2)^2;
-    y = B*z_true + sigma2*randn(m,1);
+    y = B*z_true + sigma2*(0+randn(m,1));
     
     l = -inf*(ones(1,n));
     u = inf*(ones(1,n));
@@ -72,7 +72,7 @@ for i = 1:runs
         error('Wrong answer!');
     end
     
-    [R4 Z4 y4] = testReduction(B,y,0.2,sigma2);
+    [R4 Z4 y4] = testReduction(B,y,0,sigma2);
     tic;
     [zhat3,numExpanded3] = search(R4,y4,1);
     time3(i) = toc;

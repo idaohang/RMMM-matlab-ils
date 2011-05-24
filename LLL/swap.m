@@ -1,4 +1,4 @@
-function [R,Z,y]=swap(R,k,Z,y)
+function [R,Z,y,y2]=swap(R,k,Z,y,y2)
 
 [m,n]=size(R);
 Rk=R(:,k);
@@ -18,3 +18,4 @@ R(k+1,k)=0;
 R([k,k+1],k+1:n)=G*R([k,k+1],k+1:n);
 
 y([k,k+1]) = G*y([k,k+1]);
+y2([k,k+1]) = G*y2([k,k+1]);

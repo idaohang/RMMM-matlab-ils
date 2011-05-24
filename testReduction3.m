@@ -1,4 +1,4 @@
-function [R Z y] = testReduction(A,y,alpha,sigma)
+function [R Z y] = testReduction3(A,y,alpha,sigma)
 %Perform LLL, then a variant of CH where alpha gives a tradeoff between LLL
 %and CH
     [m n] = size(A);
@@ -10,6 +10,7 @@ function [R Z y] = testReduction(A,y,alpha,sigma)
         [R Z y] = reduction(A,y);
     end
     [~, ~, offDiagSum,~] = checkLLL(R);
+    offDiagSumOrig = offDiagSum;
     k=n;
     
     yhat = y;
@@ -31,6 +32,7 @@ function [R Z y] = testReduction(A,y,alpha,sigma)
             zk = round(ck);
             zk = zk + sign(ck-zk);
             bestDist = abs(R(k,k)*(ck-zk));
+            curDist = bestDist;
             p=k;
             R2=R;
             for i = 1:k-1
@@ -53,16 +55,32 @@ function [R Z y] = testReduction(A,y,alpha,sigma)
                     ck2 = ckp;
                 end
             end
-            [~, ~, offDiagSum2,~] = checkLLL(R2);
-            measure = offDiagSum2;
-            %measure = abs((2*sigma)/R2(k,k));
-            if(p~=k && (offDiagSum == 0 || (measure <= alpha) || offDiagSum2 <= offDiagSum))
+            %measure = offDiagSum2;
+            measure = abs((2*sigma)./R2(k,k));
+            if(p~=k && (offDiagSum == 0 || measure <= alpha) )
+                j=k-1;
+                while j>=2
+                    if j>=k-1
+                        j = k-1;
+                    end
+                    % Size reduction
+                    [R2,Z2] = IGT(R2,Z2,j);
+                    % Column swap
+                    gamma = R2(j,j)^2 + R2(j-1,j)^2;
+                    if gamma < R2(j-1,j-1)^2
+                        [R2,Z2,yhat2,y2] = swap(R2,j-1,Z2,yhat2,y2);
+                        j = j + 1;
+                    else    
+                        j = j - 1;
+                    end 
+                end
                 R = R2;
                 y = y2;
                 Z = Z2;
                 yhat = yhat2;
                 ck = ck2;
-                offDiagSum = offDiagSum2;
+                [~, ~, offDiagSum,~] = checkLLL(R2(1:k-1,1:k-1));
+              
                 %fprintf('Swapped: %i %i %f\n',k,i,measure);
             else
                 if (p~=k)

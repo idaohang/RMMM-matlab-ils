@@ -48,7 +48,7 @@ function [R Z y] = testReduction2(A,y,alpha)
                 [~, ~, offDiagSum2,~] = checkLLL(Rp);
                 measure = offDiagSum2;
                 
-                if(testDist > bestDist && (offDiagSum == 0 || measure <= alpha) )
+                if(testDist > bestDist && (offDiagSum == 0 || measure <= alpha || offDiagSum2 <= offDiagSum) )
                     bestDist = testDist;
                     p = i;
                     R = Rp;

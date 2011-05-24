@@ -1,6 +1,5 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.2.11)  20 MAR 2011 22:28
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.14)  19 MAY 2011 10:22
 entering extended mode
- restricted \write18 enabled.
  %&-line parsing enabled.
 **bare_conf.tex
 (./bare_conf.tex
@@ -174,11 +173,13 @@ Package pdftexcmds Info: LuaTeX not detected.
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 )
+
+Package epstopdf Warning: Shell escape feature is not enabled.
+
 Package grfext Info: Graphics extension search list:
 (grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 433.
-
 (/usr/share/texmf-texlive/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2009/10/26 v1.1 Configuration of epstopdf for TeX Live
 )))
@@ -624,10 +625,10 @@ Before submitting the final camera ready copy, remember to:
 
 [6] (./bare_conf.aux) ) 
 Here is how much of TeX's memory you used:
- 9785 strings out of 495061
- 164506 string characters out of 1182621
- 241339 words of memory out of 3000000
- 12724 multiletter control sequences out of 15000+50000
+ 9788 strings out of 495061
+ 164559 string characters out of 1182621
+ 241608 words of memory out of 3000000
+ 12727 multiletter control sequences out of 15000+50000
  41127 words of font info for 85 fonts, out of 3000000 for 9000
  31 hyphenation exceptions out of 8191
  47i,10n,49p,338b,785s stack positions out of 5000i,500n,10000p,200000b,50000s

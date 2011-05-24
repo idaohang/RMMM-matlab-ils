@@ -8,4 +8,5 @@
 \contentsline {section}{\numberline {1.1}Least Squares Problem}{1}
 \contentsline {section}{\numberline {1.2}Integer Least Squares Problems}{2}
 \contentsline {chapter}{\numberline {2}Search Algorithms}{4}
+\contentsline {section}{\numberline {2.1}Schnorr-Euchner Enumeration}{4}
 \contentsline {extrachapter}{References}{5}
