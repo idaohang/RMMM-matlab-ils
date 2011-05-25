@@ -41,8 +41,10 @@ for i = 1:runs
     lower = -10;
     upper = 10;
     sdevs(i) = sigma2;
-    %snrs(i) = norm(B*z_true)^2/(n*sigma2)^2;
-    y = B*z_true + sigma2*(0+randn(m,1));
+    noiseVec = sigma2*(0 + randn(m,1));
+    snrs(i) = norm(B*z_true)^2/(n*sigma2^2);
+    snrs(i)
+    y = B*z_true + noiseVec;
     
     l = -inf*(ones(1,n));
     u = inf*(ones(1,n));
@@ -72,7 +74,7 @@ for i = 1:runs
         error('Wrong answer!');
     end
     
-    [R4 Z4 y4] = testReduction(B,y,15,sigma2);
+    [R4 Z4 y4] = testReduction(B,y,snrs(i)^(0.52),sigma2);
     tic;
     [zhat3,numExpanded3] = search(R4,y4,1);
     time3(i) = toc;
