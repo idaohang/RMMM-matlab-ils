@@ -1,0 +1,27 @@
+Abstract
+Introduction
+	Least Squares Introduction
+	Integer Least Squares/Box Constrained Integer Least Sqaures Introduction
+
+Search Process
+	Schnorr-Euchner Unconstrained and Constrained Algorithms
+		Modifications - Chang/Han constrained, Lower Bound, Initial Radius (review literature for more notable modifications)
+	Best First Search/Best First Search Constrained
+	Combined Best First/Depth First Search
+
+Reduction
+	Box Constrained Problems
+		Previous Work (VBLAST/Sorted QR)
+		New algorithms (CH/SW)
+		Proof of equivalence of CH/SW
+		New Algorithm
+	Unconstrained Problems
+		Introduction to LLL
+		LLL + Permutations
+
+Experiments
+	Search Comparisons (CPU Time and Nodes Explored)
+		Constrained   - Compare DFS before/after reductions
+			        Compare Combined Search with DFS after reduction
+		Unconstrained - Compare DFS before/after reductions
+				Compare Combined Search with DFS after reduction

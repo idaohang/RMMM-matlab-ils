@@ -74,7 +74,7 @@ for i = 1:runs
         error('Wrong answer!');
     end
     
-    [R4 Z4 y4] = testReduction(B,y,snrs(i)^(0.52),sigma2);
+    [R4 Z4 y4] = testReduction(B,y,snrs(i)^(0.5),sigma2);
     tic;
     [zhat3,numExpanded3] = search(R4,y4,1);
     time3(i) = toc;
