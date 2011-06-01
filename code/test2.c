@@ -11,68 +11,79 @@
 #include <time.h>
 #include <stdlib.h>
 #include "randn.h"
+#include "meschach/matlab.h"
 #include "permutationreduction.h"
 
 int main()
 {
-      MAT *A;
-		VEC *z,*y,*v,*l,*u;
-		time_t t,start,stop;
-		double diff;
-		int m,n,i;
-		double sigma = 0.5;
-		m=5;
-		n=3;
+	MAT *A;
+	VEC *z,*y,*v,*l,*u;
+	time_t t,start,stop;
+	double diff;
+	int m,n,i;
+	double sigma = 0.5;
+	m=5;
+	n=3;
 
-		srand(time(NULL));
-		start = time(NULL);
-		A=m_get(m,n);
-		y=v_get(m);
-		z=v_get(n);
-		v=v_get(m);
-		l=v_get(n);
-		u=v_get(n);
-		
-		smrand((unsigned)time(&t));
-
-		m_rand(A);
-		v_rand(z);
-		for(i=0;i<n;i++)
-		{
-			z->ve[i]=round(10*z->ve[i]);
-			l->ve[i] = -10;
-			u->ve[i] = 10;
-		}
+	//srand(time(NULL));
+	start = time(NULL);
+	y=v_get(m);
+	z=v_get(n);
+	v=v_get(m);
+	l=v_get(n);
+	u=v_get(n);
 	
-		for(i=0;i<m;i++)
-		{
-			v->ve[i]=randn()*sigma;
-		}
+	//smrand((time(NULL));
+
+	FILE *fp;
+	char *name = "A";
+	if((fp=fopen("A.mat","r")) != NULL)
+	{
+		A = m_load(fp,&name);
+	}
+	else
+	{
+		A = m_get(m,n);
+		m_rand(A);
+	}
+
+	v_rand(z);
+	for(i=0;i<n;i++)
+	{
+		z->ve[i]=round(10*z->ve[i]);
+		l->ve[i] = -10;
+		u->ve[i] = 10;
+	}
+
+	for(i=0;i<m;i++)
+	{
+		v->ve[i]=randn()*sigma;
+	}
 
 
-		v_add(mv_mlt(A,z,VNULL), v, y);
+	v_add(mv_mlt(A,z,VNULL), v, y);
 
 /*		printf("A is:\n");
-		m_output(A);
-		printf("y is:\n");
-		v_output(y);
-		printf("z used for test is:\n");
-		v_output(z);
-		printf("noise is:\n");
-		v_output(v);
+	m_output(A);
+	printf("y is:\n");
+	v_output(y);
+	printf("z used for test is:\n");
+	v_output(z);
+	printf("noise is:\n");
+	v_output(v);
 */
-		VEC *P = permutationreduction(A,y,l,u);
-		v_output(P);
+	VEC *P = permutationreduction(A,y,l,u);
+	v_output(P);
 
-		V_FREE(P);
-		M_FREE(A);
-		V_FREE(z);
-		V_FREE(v);
-		V_FREE(y);
+	V_FREE(P);
+	M_FREE(A);
+	V_FREE(z);
+	V_FREE(v);
+	V_FREE(y);
 
-		stop=time(NULL);
-		diff=difftime(stop,start);
-		printf("Computation time is %e\n",diff);
+	stop=time(NULL);
+	diff=difftime(stop,start);
+	printf("Computation time is %e\n",diff);
 
-		return 0;
+	return 0;
 }
