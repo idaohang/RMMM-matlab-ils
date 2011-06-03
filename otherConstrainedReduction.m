@@ -34,7 +34,6 @@ function [P,s0] = otherConstrainedReduction(A,y,l,u)
             colNorm = norm(G(:,i));
             %addflops(flops_mul(G(:,i)',G(:,i)));
             sigp = 1/colNorm*abs(temp-Bp);
-            fprintf('%i, %i, %f, %f, %i\n',L,i,sigp,temp,Bp);
             
             if(sigp > sig)
                 a = ap;
@@ -57,11 +56,10 @@ function [P,s0] = otherConstrainedReduction(A,y,l,u)
         %addflops(2*n + flops_mul(G(:,best)',shiftY))
         
         for i = Index
-            i
+            
             G(:,i) = G(:,i) - divCol*(G(:,best)'*G(:,i));
             %addflops(2*n + flops_mul(G(:,best)',G(:,i)));
         end
-        G
-        y
+
     end
 end
