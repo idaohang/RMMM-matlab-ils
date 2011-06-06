@@ -15,17 +15,17 @@
 * and boundary information defined in vectors l and u (lower and upper
 * bound respectively)
 */
-VEC * permutationreduction(MAT *A, VEC *y, VEC *l, VEC *u)
+PERM * permutationreduction(MAT *A, VEC *y, VEC *l, VEC *u)
 {
 	//In my matlab code, A is nxm, the library gives A mxn, so I'm switching it here
 	int n = A->m;
 	int m = A->n;
 	int i,j,L;
-	VEC *P = v_get(m);
+	PERM *P = px_get(m);
+	px_ident(P);
 	int Index[m];
 	for (i =0;i<m;i++)
 	{
-		P->ve[i] = i;
 		Index[i] = i;
 	}
 	//Compute G, the moore-penrose generalized inverse of A
@@ -98,7 +98,7 @@ VEC * permutationreduction(MAT *A, VEC *y, VEC *l, VEC *u)
 				bestColNorm = colNorm*colNorm;
 			}
 		}
-		P->ve[L] = Index[best];
+		px_transp(P,L,best);
 		tempInt = Index[L];
 		Index[L] = Index[best];
 		Index[best] = tempInt;

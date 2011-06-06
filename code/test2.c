@@ -13,6 +13,10 @@
 #include "randn.h"
 #include "meschach/matlab.h"
 #include "permutationreduction.h"
+#include <limits.h>
+#include "qrmcp.h"
+#include "reduction.h"
+#include "search.h"
 
 int main()
 {
@@ -22,7 +26,7 @@ int main()
 	double diff;
 	int m,n,i;
 	double sigma = 0.5;
-	m=10;
+	m= 10;
 	n=7;
 
 	srand(time(NULL));
@@ -84,10 +88,38 @@ int main()
 
 	m_output(A);
 	v_output(y);
+	MAT *Z, *R;
+	VEC *z_tilt,*x;
+	x = v_get(n);
+	z_tilt=v_get(n);
+	Z = m_get(n, n);
+	R = m_get(m,n+1);
+	
+	_m_copy(A,R,0,0);
+	set_col(R,n,y);
+	x =v_get(n);
+	
 	start = time(NULL);
-	VEC *P = permutationreduction(A,y,l,u);
+	/*	 Apply QR factorization with minimum column pivoting on A and y to get R.
+	 R=[R,y]=[Q^T*A,Q^T*y]*/
+	qrmcp(R,Z,n);
+	m_resize(R,n,n+1);
+    reduction(R, Z, 1, n);
+ 
+    VEC *yp = v_get(m);
+	yp = get_col(R,n,VNULL);
+	m_resize(R,n,n);
+	//Find the permutations, permute R, restore to upper-triangular
+	PERM *P = permutationreduction(R,yp,l,u);
+	R = px_cols(P,R,MNULL);
+	
+	m_resize(R,n,n+1);
+	set_col(R,n,yp);
+	
+	search(R,n,z_tilt);
+	mv_mlt(Z,z_tilt,x);
 	stop=time(NULL);
-	v_output(P);
+	px_output(P);
 
 	diff=difftime(stop,start);
 	printf("Computation time is %e\n",diff);
@@ -97,6 +129,10 @@ int main()
 	V_FREE(z);
 	V_FREE(v);
 	V_FREE(y);
-	
+	M_FREE(R);
+	M_FREE(Z);
+	V_FREE(z_tilt);
+	V_FREE(x);
+	V_FREE(yp);
 	return 0;
 }

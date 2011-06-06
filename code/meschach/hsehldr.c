@@ -178,7 +178,7 @@ MAT	*hhtrcols(MAT *M, unsigned int i0, unsigned int j0,
 {
   STATIC VEC	*w = VNULL;
 
-  if ( M == MNULL || hh == VNULL || w == VNULL )
+  if ( M == MNULL || hh == VNULL)// This shouldn't be here! || w == VNULL )
     error(E_NULL,"hhtrcols");
   if ( M->m != hh->dim )
     error(E_SIZES,"hhtrcols");
