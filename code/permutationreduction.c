@@ -17,7 +17,7 @@
 */
 PERM * permutationreduction(MAT *A, VEC *y, VEC *l, VEC *u)
 {
-	//In my matlab code, A is nxm, the library gives A mxn, so I'm switching it here
+	/*In my matlab code, A is nxm, the library gives A mxn, so I'm switching it here*/
 	int n = A->m;
 	int m = A->n;
 	int i,j,L;
@@ -28,7 +28,7 @@ PERM * permutationreduction(MAT *A, VEC *y, VEC *l, VEC *u)
 	{
 		Index[i] = i;
 	}
-	//Compute G, the moore-penrose generalized inverse of A
+	/*Compute G, the moore-penrose generalized inverse of A*/
 	MAT *G = m_get(m,n);
 	m_zero(G);
 	MAT *tempA;
@@ -41,7 +41,7 @@ PERM * permutationreduction(MAT *A, VEC *y, VEC *l, VEC *u)
 	MAT *tempG = m_get(m,n);
 	_m_copy(A,tempA,0,0);
 	svd(tempA,U,V,diag);
-	//Compute V*D*U'
+	/*Compute V*D*U'*/
 	for (i=0;i<m;i++)
 	{
 		set_col(tempG,i,sv_mlt(1/diag->ve[i],get_row(V,i,VNULL),VNULL));
@@ -49,7 +49,7 @@ PERM * permutationreduction(MAT *A, VEC *y, VEC *l, VEC *u)
 	m_mlt(tempG,U,G);
 	G = m_transp(G,MNULL);
 
-	//Start the SW Algorithm
+	/*Start the SW Algorithm*/
 	VEC *tempVec = v_get(n);
 	int best,besti,count,tempInt,a,ap,bp;
 	double tempDbl,colNorm,sigp,sig,bestColNorm;
@@ -113,6 +113,7 @@ PERM * permutationreduction(MAT *A, VEC *y, VEC *l, VEC *u)
 		}
 	}
 	
+	P = px_inv(P,PNULL);
 	V_FREE(tempVec);
 	M_FREE(tempA);
 	M_FREE(tempG);
