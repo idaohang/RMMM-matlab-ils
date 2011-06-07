@@ -131,6 +131,7 @@ PERM * permutationreduction(MAT *A, VEC *y, VEC *l, VEC *u)
 	}
 	
 	px_inv(P,Pinv);
+	PX_FREE(P);
 	V_FREE(tempVecN);
 	M_FREE(tempA);
 	M_FREE(tempG);

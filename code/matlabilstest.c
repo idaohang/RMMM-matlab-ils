@@ -97,7 +97,7 @@ VEC * mxArray2VEC(const mxArray *in)
 void mexFunction(int nlhs, mxArray *plhs[ ],int nrhs, const mxArray *prhs[ ])
 {
 	MAT *A;
-	VEC *z,*y,*v,*low,*up;
+	VEC *y,*low,*up;
 	clock_t start,stop;
 	double ratio,diff;
 	ratio = 1.0/CLOCKS_PER_SEC;
@@ -179,10 +179,8 @@ void mexFunction(int nlhs, mxArray *plhs[ ],int nrhs, const mxArray *prhs[ ])
 	M_FREE(Rp);
 	V_FREE(low);
 	V_FREE(up);
-	V_FREE(z);
 	V_FREE(diag);
 	V_FREE(z_ils);
-	V_FREE(v);
 	V_FREE(y);
 	M_FREE(R);
 	M_FREE(Z);
