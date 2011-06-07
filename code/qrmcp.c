@@ -38,6 +38,7 @@ void pivot(MAT * A, int i, int j, int type) {
 		set_row(A,j,get_row(A,i,VNULL));
 		set_row(A,i,tmp);
 	}
+	V_FREE(tmp);
 }
 /*Apply Householder factorization with minimum column pivoting on
 matrix A,and y, Z is the permutation matrix. Return A=[R,y]=[Q^T*A,Q^T*y];

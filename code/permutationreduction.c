@@ -22,6 +22,7 @@ PERM * permutationreduction(MAT *A, VEC *y, VEC *l, VEC *u)
 	int m = A->n;
 	int i,j,L;
 	PERM *P = px_get(m);
+	PERM *Pinv = px_get(m);
 	px_ident(P);
 	int Index[m];
 	for (i =0;i<m;i++)
@@ -30,7 +31,6 @@ PERM * permutationreduction(MAT *A, VEC *y, VEC *l, VEC *u)
 	}
 	/*Compute G, the moore-penrose generalized inverse of A*/
 	MAT *G = m_get(m,n);
-	m_zero(G);
 	MAT *tempA;
 	VEC *diag;
 	MAT *U,*V;
@@ -39,18 +39,24 @@ PERM * permutationreduction(MAT *A, VEC *y, VEC *l, VEC *u)
 	diag = v_get(n);
 	tempA = m_get(n,m);
 	MAT *tempG = m_get(m,n);
-	_m_copy(A,tempA,0,0);
+	VEC *tempVecN = v_get(n);
+	VEC *tempVecN2 = v_get(n);
+	VEC *tempVecM = v_get(m);
+	VEC *tempVecN3 = v_get(n);
+
+	m_copy(A,tempA);
 	svd(tempA,U,V,diag);
 	/*Compute V*D*U'*/
 	for (i=0;i<m;i++)
 	{
-		set_col(tempG,i,sv_mlt(1/diag->ve[i],get_row(V,i,VNULL),VNULL));
+		get_row(V,i,tempVecM);
+		sv_mlt(1/diag->ve[i],tempVecM,tempVecM);
+		set_col(tempG,i,tempVecM);
 	}
 	m_mlt(tempG,U,G);
-	G = m_transp(G,MNULL);
+	m_transp(G,tempG);
 
 	/*Start the SW Algorithm*/
-	VEC *tempVec = v_get(n);
 	int best,besti,count,tempInt,a,ap,bp;
 	double tempDbl,colNorm,sigp,sig,bestColNorm;
 	for (L=m-1;L>=0;L--)
@@ -64,7 +70,8 @@ PERM * permutationreduction(MAT *A, VEC *y, VEC *l, VEC *u)
 		{
 			i = Index[j];
 			count=count+1;
-			tempDbl = in_prod(y,get_col(G,i,VNULL));
+			get_col(G,i,tempVecM);
+			tempDbl = in_prod(y,tempVecM);
 			ap = max(min((int)round(tempDbl),(int)u->ve[i]),(int)l->ve[i]);
 		
 			if(ap == l->ve[i])
@@ -87,7 +94,8 @@ PERM * permutationreduction(MAT *A, VEC *y, VEC *l, VEC *u)
 				}
 				bp = ap + tempInt;
 			}
-			colNorm = v_norm2(get_col(G,i,VNULL));
+			get_col(tempG,i,tempVecM);
+			colNorm = v_norm2(tempVecM);
 			sigp = (1/colNorm)*(fabs(tempDbl-(double)bp));
 			if(sigp >= sig)
 			{
@@ -102,24 +110,37 @@ PERM * permutationreduction(MAT *A, VEC *y, VEC *l, VEC *u)
 		tempInt = Index[L];
 		Index[L] = Index[best];
 		Index[best] = tempInt;
-		sv_mlt(a,get_col(A,besti,VNULL),tempVec);
-		y = v_sub(y,tempVec,VNULL);
-		tempVec = sv_mlt(1/bestColNorm,get_col(G,besti,VNULL),VNULL);
+		get_col(A,besti,tempVecN);
+		sv_mlt(a,tempVecN,tempVecN);
+		v_sub(y,tempVecN,tempVecN2);
+		v_copy(y,tempVecN2);
+		get_col(tempG,besti,tempVecN);
+		sv_mlt(1/bestColNorm,tempVecN,tempVecN);
 		for (j=0;j<L;j++)
 		{
 			i = Index[j];
-			tempDbl = in_prod(get_col(G,besti,VNULL),get_col(G,i,VNULL));
-			set_col(G,i,v_sub(get_col(G,i,VNULL),sv_mlt(tempDbl,tempVec,VNULL),VNULL));
+			get_col(tempG,besti,tempVecN);
+			get_col(tempG,i,tempVecN2);
+			tempDbl = in_prod(tempVecN,tempVecN2);
+			
+			sv_mlt(tempDbl,tempVecN,tempVecN);
+			get_col(tempG,i,tempVecN2);
+			v_sub(tempVecN2,tempVecN,tempVecN3);
+			set_col(tempG,i,tempVecN3);
 		}
 	}
 	
-	P = px_inv(P,PNULL);
-	V_FREE(tempVec);
+	px_inv(P,Pinv);
+	V_FREE(tempVecN);
 	M_FREE(tempA);
 	M_FREE(tempG);
 	V_FREE(diag);
 	M_FREE(U);
-	M_FREE(V);	
+	M_FREE(V);
+	M_FREE(G);	
+	V_FREE(tempVecM);
+	V_FREE(tempVecN2);
+	V_FREE(tempVecN3);
 
-	return P;
+	return Pinv;
 }
