@@ -119,7 +119,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
 	set_col(R,n,y);
 	x =v_get(n);
 	
-	start = time(NULL);
+	start = clock();
 	/*	Apply QR factorization with minimum column pivoting on A and y to get R.
 	 R=[R,y]=[Q^T*A,Q^T*y]*/
 	qrmcp(R,Z,n);
@@ -127,7 +127,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
     reduction(R, Z, 1, n);
 	search(R,n,z_tilt);
 	mv_mlt(Z,z_tilt,x);
-	stop=time(NULL);
+	stop= clock();
 	diff=ratio*(long)stop - ratio*(long)start;
 
 	plhs[0] = mxCreateDoubleScalar(diff);	
@@ -145,6 +145,8 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
 	M_FREE(Z);
 	V_FREE(z_tilt);
 	V_FREE(x);
+	V_FREE(low);
+	V_FREE(up);
 
 
 }

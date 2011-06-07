@@ -28,17 +28,20 @@ u_int findmin(VEC* a, u_int k) {
 /* If type ==1,interchange the ith and jth column of Matrix A;*/
 /*If type ==0,interchange the ith and jth row of Matrix A;*/
 void pivot(MAT * A, int i, int j, int type) {
-	VEC *tmp;
+	VEC *tmp1,*tmp2;
 	if (type == 1) {
-		tmp = get_col(A, j, VNULL);
-		set_col(A,j,get_col(A,i,VNULL));
-		set_col(A,i,tmp);
+		tmp1 = get_col(A, j, VNULL);
+		tmp2 = get_col(A,i,VNULL);
+		set_col(A,j,tmp2);
+		set_col(A,i,tmp1);
 	} else if (type == 0) {
-		tmp = get_row(A, j, VNULL);
-		set_row(A,j,get_row(A,i,VNULL));
-		set_row(A,i,tmp);
+		tmp1 = get_row(A, j, VNULL);
+		tmp2 = get_row(A,i,VNULL);
+		set_row(A,j,tmp2);
+		set_row(A,i,tmp1);
 	}
-	V_FREE(tmp);
+	V_FREE(tmp1);
+	V_FREE(tmp2);
 }
 /*Apply Householder factorization with minimum column pivoting on
 matrix A,and y, Z is the permutation matrix. Return A=[R,y]=[Q^T*A,Q^T*y];
@@ -51,10 +54,11 @@ MAT* qrmcp(MAT *A_y, MAT *Z,int n) {
 	u_int k;
 	u_int mincol;
 	Real tao = 0;
-	VEC *a_norm, *u;
+	VEC *a_norm, *u,*tmp1;
 	int* p = malloc(sizeof(int) * n);
 	double tmp;
-
+	
+	tmp1 = v_get(A_y->m);
 	u = v_get(A_y->m);
 	a_norm = v_get(n);
 
@@ -63,7 +67,8 @@ MAT* qrmcp(MAT *A_y, MAT *Z,int n) {
 
 	/* compute the two norm of each column of A;*/
 	for (i = 0; i < n; i++) {
-		a_norm->ve[i] = v_norm2(get_col(A_y,i,VNULL))*v_norm2(get_col(A_y,i,VNULL));
+		get_col(A_y,i,tmp1);
+		a_norm->ve[i] = v_norm2(tmp1)*v_norm2(tmp1);
 
 	}
 
@@ -83,7 +88,8 @@ MAT* qrmcp(MAT *A_y, MAT *Z,int n) {
 		}
 
 		/*Compute the Householder vector u for the ith column of A;*/
-		hhvec(get_col(A_y, i, VNULL), i, &tao, u, &A_y->me[i][i]);
+		get_col(A_y, i, tmp1);
+		hhvec(tmp1, i, &tao, u, &A_y->me[i][i]);
 		/*Apply Householder on A_y;*/
 		hhtrcols(A_y, i, i + 1, u, tao);
 		/* Zero the entities below diagonal;*/
@@ -106,6 +112,7 @@ MAT* qrmcp(MAT *A_y, MAT *Z,int n) {
 	free(p);
 	V_FREE(u);
 	V_FREE(a_norm);
+	V_FREE(tmp1);
 	return (A_y);
 }
 
