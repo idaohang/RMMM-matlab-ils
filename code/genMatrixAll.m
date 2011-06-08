@@ -57,4 +57,14 @@ switch (matrixCase)
 
             end
         end
+    case (10)
+        Tmp = randn(n,n);
+        [U R] = qr(Tmp);
+        Tmp = randn(n,n);
+        [V R] = qr(Tmp);
+        D = eye(n);
+        for i = 1:n
+            D(i,i) = 10^-(((i-1)*4)/(n-1));
+        end
+        A = U*D*V';
 end

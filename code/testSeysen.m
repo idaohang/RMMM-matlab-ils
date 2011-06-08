@@ -1,7 +1,7 @@
 
 clear; clc;
 
-n = 35;
+n = 15;
 maxIter = 100;
 time = zeros(maxIter,3);
 condNum = zeros(maxIter,3);
@@ -10,9 +10,9 @@ ub = inf(n,1);
 
 for count = 1:maxIter
 count
-H = genMatrixAll(n,8);
+H = genMatrixAll(n,10);
 x = round(rand(n,1)*10);
-y = H*x + 0.7*randn(n,1);
+y = H*x + 0.01*randn(n,1);
 
 [t_z1,z_ils] = matlabilstest(H,y);
 [t_z2,z_ils2] = meschachmatlab(H,y);
@@ -28,5 +28,5 @@ condNum(count,1) = condH;
 end
 
 figure;
-plot(1:maxIter,time(1:maxIter,1), ':.r',1:maxIter,time(1:maxIter,2), 'xg-');
+plot(1:maxIter,time(1:maxIter,1), '--.r',1:maxIter,time(1:maxIter,2), 'xb-');
 
