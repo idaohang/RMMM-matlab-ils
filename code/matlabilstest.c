@@ -6,11 +6,8 @@
 #include "meschach/matrix.h"
 #include "meschach/matrix2.h"
 #include "math.h"
-#include "ils.h"
-#include "mils.h"
 #include <time.h>
 #include <stdlib.h>
-#include "randn.h"
 #include "meschach/matlab.h"
 #include "permutationreduction.h"
 #include <limits.h>

@@ -44,7 +44,7 @@ switch (matrixCase)
         A = randn(n,n);
         Q = A'*A;
     case (8)
-        A = randn(n,n)*10;
+        A = randn(n,n);
         [U,S,V] = svd(A);
         S(1,1) = S(1,1)*10^(2);
         S(n,n) = S(n,n)*10^(-2);
@@ -67,4 +67,6 @@ switch (matrixCase)
             D(i,i) = 10^-(((i-1)*4)/(n-1));
         end
         A = U*D*V';
+    case(11)
+        A = randn(n,n);
 end

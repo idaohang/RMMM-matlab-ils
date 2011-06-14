@@ -38,11 +38,11 @@ for i = 1:runs
     % Construct data
     B = randn(m,n);
     z_true = (-1*ones(m,1)).^(mod(round(rand(m,1)*10),2)+1).*ceil(rand(m,1)*sqrt(qam));
-    lower = -10;
-    upper = 10;
     sdevs(i) = sigma2;
-    snrs(i) = norm(B*z_true)^2/(n*sigma2)^2;
-    y = B*z_true + sigma2*(0+randn(m,1));
+    noiseVec = sigma2*(0 + randn(m,1));
+    snrs(i) = norm(B*z_true)^2/(n*sigma2^2);
+    snrs(i)
+    y = B*z_true + noiseVec;
     
     l = -inf*(ones(1,n));
     u = inf*(ones(1,n));
@@ -71,19 +71,7 @@ for i = 1:runs
     if(norm(zhat-zhat2(idx)) ~= 0)
         error('Wrong answer!');
     end
-    
-    [R4 Z4 y4] = testReduction(B,y,15,sigma2);
-    tic;
-    [zhat3,numExpanded3] = search(R4,y4,1);
-    time3(i) = toc;
-    numExpanded3
-    expand3(i) = numExpanded3;
-    successRate3(i) = successRate(R4,sigma2);
-    [checkSum2(i),rowSum2(i),offDiagSum2(i)] = checkLLL(R4);
-    
-    if(norm(Z*zhat-Z4*zhat3) ~= 0)
-        error('Test Reduction Wrong Answer!');
-    end
+
     
     babai1(i) = norm(B*Z*babai(R2,y2) - y);
     if(norm(Z*babai(R2,y2) - z_true) == 0)
