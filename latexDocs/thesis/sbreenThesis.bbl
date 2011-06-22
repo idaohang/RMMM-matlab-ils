@@ -1,9 +1,91 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
+
+\bibitem{SchFL09}
+Lutz~Lampe Andreas~Schenk, Robert~Fischer.
+\newblock A stopping radius for the sphere decoder and its application to msdd
+  of dpsk.
+\newblock {\em IEEE Communications Letters}, 13:465--467, 2009.
+
+\bibitem{ChaH05}
+X.-W. Chang and Q.~Han.
+\newblock Solving box-constrained integer least-squares problems.
+\newblock {\em IEEE Transactions on Wireless Communications}, 7(1):277--287,
+  2008.
+
+\bibitem{StuBF07}
+Wolfgang~Fichtner Christoph~Studer, Andreas~Burg.
+\newblock A unification of ml-optimal tree-search decoders.
+\newblock In {\em In Proceedings of IEEE Signals, Systems and Computers}, 2007.
+
+\bibitem{Cli64}
+Randall~E. Cline.
+\newblock Representations for the generalized inverse of a partitioned matrix.
+\newblock {\em Journal of the Society for Industrial and Applied Mathematics},
+  12(3):588--600, September 1964.
+
+\bibitem{FosGVW99}
+G.~J. Foscini, G.~D. Golden, R.~A. Valenzuela, and P.~W. Wolniansky.
+\newblock Simplified processing for high spectral efficiency wireless
+  communication employing multi-element arrays.
+\newblock {\em IEEE Journal on Selected Areas in Communications},
+  17(11):1841--1852, November 1999.
+
+\bibitem{FukMU04}
+T.~Fukatani, R.~Matsumoto, and T.~Uyematsu.
+\newblock Two methods for decreasing the computational complexity of the {MIMO}
+  {ML} decoder.
+\newblock In {\em Proceedings of International Symposium on Information Theory
+  and its Applications}, pages 34--38, Parma, Italy, October 2004.
 
 \bibitem{HasV05}
 Babak Hassibi and Haris Vikalo.
 \newblock On the sphere-decoding algorithm i. expected complexity.
 \newblock In {\em IEEE Transactions on Signal Processing}, volume~53, August
   2005.
+
+\bibitem{LenLL82}
+A.K. Lenstra, J.H.W. Lenstra, and L.~Lovasz.
+\newblock Factoring polynomials with rational coefficients.
+\newblock {\em Mathematische Annalen}, 261:515--534, 1982.
+
+\bibitem{StoVH08}
+Babak~Hassibi Mihailo~Stojnic, Haris~Vikalo.
+\newblock Speeding up the sphere decoder with h-infinity and sdp inspired lower
+  bounds.
+\newblock {\em IEEE Transactions On Signam Processing}, 56:712--726, 2008.
+
+\bibitem{MurGDC06}
+A.D. Murugan, H.~El Gamal, M.~O. Damen, and G.~Caire.
+\newblock A unified framework for tree search decoding: rediscovering the
+  sequential decoder.
+\newblock {\em IEEE Transactions on Information Theory}, 52(3):933--953, 2006.
+
+\bibitem{SchE94}
+C.P. Schnorr and M.~Euchner.
+\newblock Lattice basis reduction: improved practical algorithms and solving
+  subset sum problems.
+\newblock {\em Mathematical Programming}, 66:181--199, 1994.
+
+\bibitem{SuW05}
+Karen Su and Ian~J. Wassell.
+\newblock A new ordering for efficient sphere decoding.
+\newblock In {\em IEEE International Conference on Communications}, volume~3,
+  pages 1906--1910, 2005.
+
+\bibitem{XuWZW04}
+Zucheng Zhou Jing~Wang Weiyu~Xu, Youzheng~Wang.
+\newblock A computationally efficient exact ml sphere decoder.
+\newblock In {\em Proceedings of IEEE Globecom 2004}, 2004.
+
+\bibitem{WubBRKK01}
+D.~Wubben, R.~Bohnke, J.~Rinas, V.~Kuhn, and K.D. Kammeyer.
+\newblock Efficient algorithm for decoding layered space-time codes.
+\newblock {\em IEEE Electronics Letters}, 37(22):1348--1350, October 2001.
+
+\bibitem{DaiY08}
+Zhiyuan~Yan Yongmei~Dai.
+\newblock Memory-constrained ml-optimal tree search detection.
+\newblock In {\em In Proceedings of IEEE Information Sciences and Systems},
+  2008.
 
 \end{thebibliography}

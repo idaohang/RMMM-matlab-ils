@@ -2,11 +2,26 @@
 \contentsline {extrachapter}{\MakeUppercase {Acknowledgements}}{iii}
 \contentsline {extrachapter}{\MakeUppercase {Abstract}}{iv}
 \contentsline {extrachapter}{\MakeUppercase {ABR\'{E}G\'{E}}}{v}
-\contentsline {extrachapter}{\MakeUppercase {List of Tables}}{vii}
-\contentsline {extrachapter}{\MakeUppercase {List of Figures}}{viii}
+\contentsline {extrachapter}{\MakeUppercase {List of Tables}}{viii}
+\contentsline {extrachapter}{\MakeUppercase {List of Figures}}{ix}
 \contentsline {chapter}{\numberline {1}Introduction}{1}
 \contentsline {section}{\numberline {1.1}Least Squares Problem}{1}
 \contentsline {section}{\numberline {1.2}Integer Least Squares Problems}{2}
-\contentsline {chapter}{\numberline {2}Search Algorithms}{4}
-\contentsline {section}{\numberline {2.1}Schnorr-Euchner Enumeration}{4}
-\contentsline {extrachapter}{References}{5}
+\contentsline {section}{\numberline {1.3}Applications}{3}
+\contentsline {section}{\numberline {1.4}Previous Work}{4}
+\contentsline {section}{\numberline {1.5}Objectives and Contribution}{6}
+\contentsline {section}{\numberline {1.6}Outline}{7}
+\contentsline {chapter}{\numberline {2}Schnorr-Euchner Enumeration}{9}
+\contentsline {chapter}{\numberline {3}Reduction Strategies}{13}
+\contentsline {section}{\numberline {3.1}BILS Reduction Algorithms}{15}
+\contentsline {subsection}{\numberline {3.1.1}Previous Work}{15}
+\contentsline {subsection}{\numberline {3.1.2}CH Algorithm}{18}
+\contentsline {subsection}{\numberline {3.1.3}SW Original Algorithm}{21}
+\contentsline {subsection}{\numberline {3.1.4}SW Algorithm Interpretation and Improvements}{25}
+\contentsline {subsection}{\numberline {3.1.5}Proof of Equivalence of SW and CH}{27}
+\contentsline {subsection}{\numberline {3.1.6}New Algorithm}{29}
+\contentsline {section}{\numberline {3.2}ILS Reduction Algorithms}{30}
+\contentsline {chapter}{\numberline {4}Alternate Search Strategies}{33}
+\contentsline {chapter}{\numberline {5}Results}{34}
+\contentsline {chapter}{\numberline {6}Conclusions}{35}
+\contentsline {extrachapter}{References}{36}

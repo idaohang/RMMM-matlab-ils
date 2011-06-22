@@ -9,14 +9,19 @@
 \usepackage{amsfonts }
 \usepackage{amssymb,amsmath}
 \usepackage{algorithm}
+\usepackage{verbatim}
 \usepackage{algorithmic}
 %\usepackage{program}
-\usepackage{amsthm }
+\usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage{tikz}
+\usepackage{relsize}
+
 
 \newcommand{\bmx}{\begin{bmatrix}}
 \newcommand{\emx}{\end{bmatrix}}
+\newcommand{\bsmx}{\left[\begin{smallmatrix}}
+\newcommand{\esmx}{\end{smallmatrix}\right]}
 
 % Equations:
 \newcommand{\be}{\begin{equation}}
@@ -26,6 +31,15 @@
 \newcommand{\beqynn}{\begin{eqnarray*}}
 \newcommand{\eeqynn}{\end{eqnarray*}}
 \newcommand{\boxcon}{{\cal B}}
+\newcommand{\bd}{{\bar{d}}}
+\newcommand{\bl}{{\bar{l}}}
+\newcommand{\bu}{{\bar{u}}}
+\newcommand{\br}{{\bar{r}}}
+\newcommand{\bx}{{\bar{x}}}
+\newcommand{\by}{{\bar{y}}}
+\newcommand{\bz}{{\bar{z}}}
+\newcommand{\dist}{\mathrm{dist}}
+
 %\usepackage{tex4ht}
 %\usepackage{amsmath}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -86,14 +100,14 @@ ILS problem, the reduction and the search. Obviously we would like to solve
 instances of the ILS problem as quickly as possible, however most of the
 literature does not compare the run-time or FLOP counts of the algorithms,
 instead they use a more abstract metric (the number of nodes explored during the
-search). This metric does not always co-incide with the algorithms run-time.
+search). This metric does not always coincide with the algorithms run-time.
 This thesis will review some of the most effective reduction and search
 strategies for both the ILS and BILS problems. By comparing the run-time
 performance of some search algorithms, we are able to see the advantages of
-each, which allows us to propose a new, more efficent search strategy that is a
+each, which allows us to propose a new, more efficient search strategy that is a
 combination of two others. We also prove that two very effective BILS reduction
 strategies are theoretically equivalent and propose a new BILS reduction that
-is equivalent to the others but more efficeint.}
+is equivalent to the others but more efficient.}
 \AbstractEn%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -119,45 +133,60 @@ is equivalent to the others but more efficeint.}
 Consider the following linear model for some observation vector $y$,
 \begin{equation}
 \label{eq:realLSModel}
-y = Ax+v.
+y = Hx+v.
 \end{equation}
 
-Where $y\in\mathbb{R}^m$, $A\in\mathbb{R}^{m \times n}$ is called the
+Where $y\in\mathbb{R}^m$, $H\in\mathbb{R}^{m \times n}$ is called the
 ``design matrix'' and has full column rank, and $v\in\mathbb{R}^m$ is a
 noise vector which we assume is normally distributed with mean $0$ and
 covariance matrix $\sigma^2I$. We would like to find the unique solution
 $x\in\mathbb{R}^m$ which minimizes the least squares residual,
 \be
 \label{eq:realLSResidual}
- \left \| Ax - y \right \|^2_2.
+ \left \| Hx - y \right \|^2_2.
 \ee
 
 This is called the least squares (LS) problem. If we expand
 \eqref{eq:realLSResidual} and set its gradient to $0$, we will arrive at the
 well known ``normal equations'' which can be written in matrix form as,
 \begin{align}
-&A^TAx = A^Ty \\
+&H^THx = H^Ty \\
 \label{eq:normalEquations}
-&x = (A^TA)^{-1}A^Ty.
+&x = (H^TH)^{-1}H^Ty.
 \end{align}
 
-The solution of the least squares problem has numerous applications in almost
-every field of science and engineering.
+The solution of the least squares problem has numerous applications in many fields of science and engineering.
 
 \section{Integer Least Squares Problems}
-The integer least squres (ILS) problem is a modification of the LS problem
+The integer least squares (ILS) problem is a modification of the LS problem
 where the solution vector $x\in\mathbb{Z}^m$ is an unknown integer vector. We
 no longer have a closed-form solution for $x$ in this case, in fact, the
-problem is provably NP-Hard in the worst case.
+problem is provably NP-Hard in the worst case. The ILS problem can be expressed as:
+\be
+\label{eq:ils0}
+\min_{x\in {\mathbb{Z} }}  \| y- Hx \|_2. 
+\ee
 
 A modification to the ILS problem is the box-constrained integer least squares
 problem (BILS). Here we have the following constraint on the solution
 vector, 
-\begin{align}
+\begin{align} \label{eq:boxCon}
 &x\in \boxcon\\
-&\boxcon = \{x\in\mathbb{Z}^n : l\le x \le u, l\in \mathbb{Z}^n,
-u\in\mathbb{Z}^n \}.
+&{\cal B} = {\cal B}_1  \times \cdots \times {\cal B}_n\\
+&\boxcon_i = \{x_i\in\mathbb{Z} : l_i\le x_i \le u_i, l_i\in \mathbb{Z},
+u_i\in\mathbb{Z} \}.
 \end{align}
+
+Even though the problem is NP-Hard, we still have some hope to get solutions
+quickly. In \cite{HasV05} the authors prove that under reasonable assumptions
+on the variance in the noise, the ILS problem will have an expected polynomial complexity using standard search algorithms.
+
+The usual approach to solving an ILS or BILS problem consists of two phases,
+reduction and search. In the reduction phase, we transform the problem into an
+equivalent, but easier one. This typically involves manipulations on the design matrix $A$ such as column permutations
+or integer gauss transformations to try and achieve certain properties. After reduction, we proceed to the search phase where we try to enumerate the possible solutions in an efficient manner.
+
+\section{Applications}
 
 Some important applications such as MIMO wireless signal decoding depend on the
 solution of the BILS problem. MIMO stands for ``multiple-input
@@ -168,37 +197,711 @@ antennas. The signal received is our input vector $y$ from
 ``channel matrix'' $A$ (design matrix) and some noise has been introduced during
 the transmission. Originally, we know that each element of $x$ came from some
 finite set of symbols that we may want to transmit or receive (we model
-this property with \boxcon). The purpose of such a system is to maximize
+this property with $\boxcon$). The purpose of such a system is to maximize
 throughput, however, the overall throughput of the system will depend on how
 quickly we can solve the BILS problem. Of course we need not solve the BILS
-problem exactly, but under the assumption that the noise has $0$ mean and is
+problem exactly, however under the assumption that the noise has $0$ mean and is
 normally distributed, the BILS solution is more likely than any other possible
-solution to be the true solution $x$.
+solution to be the true solution $x$. For this reason, we say that a receiver which is decoding transmissions using a BILS algorithm achieves ``optimal performance'', where performance refers to the likelihood that the vector found by the decoder is equal to the transmitted vector $x$.
 
-Other applications of BILS and ILS include global positioning systems,
-cryptography, lattice design, etc... Any application where the elements of $x$
-are known to be integer, we should use ILS. If the elements of $x$ are drawn
-from some finite set, BILS is appropriate.
+Another application of the ILS problem arises in global positioning systems where carrier phase measurements are used. In GPS, there are two types of measurements that can be used to determine the position of a receiver, code phase and carrier phase. Code phase measurements can give accuracy to a few meters, while carrier phase are accurate to centimeters. To make use of the more accurate carrier phase measurements, we must know how many cycles the carrier wave has gone through between the satellite and the receiver. The number of cycles will be an integer, we can form a linear model for this system and obtain it by solving an ILS problem. 
 
-Even though the problem is NP-Hard, we still have some hope to get solutions
-quickly. In \cite{HasV05} the authors prove that under reasonable assumptions
-on the variance in the noise, the ILS problem can be solved in polynomial time
-using standard search algorithms.
+Other applications of BILS and ILS include cryptography and lattice design. For any application where the elements of $x$
+are known to be integer, we should use ILS. If the elements of $x$ are drawn from some finite set, BILS is appropriate.
 
-The usual approach to solving an ILS or BILS problem consists of two phases,
-reduction and search. In the reduction phase, we transform the problem into an
-equivalent, but easier one. This involves manipulations such as permutations
-and possibly integer gauss transformations on the design matrix $A$. After
-reduction, we proceed to the search phase where we try to enumerate the possible
-solutions in an efficient manner.
+\section{Previous Work} \label{sec:prevWork}
+Due to the important applications of the BILS and ILS problems, much work has gone into solving them efficiently. There have been many algorithms proposed that yield a fast, approximate solution to the problem, some giving statistical bounds on the likelihood of error. This thesis however will only deal with finding the optimal solution to the problem.  Even for finding the optimal solution to the ILS problem, there are a few different approaches that are quite different from each other. This thesis will further be restricted to considering only what are known as 'enumeration based' approaches which are most often used in practice because of their efficiency and simplicity. The enumeration based approaches, as the name implies, try to find the optimal solution by enumerating vectors in the search space until all possible solutions but one are eliminated.
 
-\chapter{Search Algorithms}
-There are many search algorithms that have been proposed to solve the ILS
-problem. This chapter will review some of the most effective search algorithms
-in the literature for both the ILS and BILS problems.
+\subsection{Search Strategies}
+In chapter \ref{chap:SESearch}, it will be shown that the enumeration process can be reduced to a tree search problem. The most widely used algorithm, the Schnorr Euchner (SE) enumeration \cite{SchE94} can be thought of as a fairly straight forward depth first search in such a tree. Other tree search algorithms may also be used to solve the problem.
 
-\section{Schnorr-Euchner Enumeration}
-The Schnorr-Euchner (SE) enumeration strategy is the 
+In the literature, some modifications to the best first tree search strategy have also been proposed, a few such proposals are given in \cite{MurGDC06}, \cite{XuWZW04}, \cite{FukMU04}, \cite{StuBF07} and \cite{DaiY08}. When doing a tree search, the disadvantage of the best first approach is that the memory requirements can be exponential in the worst case and there is a significant overhead to visit each tree node. Compared to the depth first search where the memory requirements are linear and there is very little cost to visit a node in the tree. The advantage of the best first approach is that it can guarantee to explore the least number of nodes in the tree. Some of the papers listed above propose a pure best first search, while others try to make some sort of trade off to achieve lower memory usage.
+
+There have been some attempts to compare different enumeration algorithms for the ILS search process. One such paper is \cite{MurGDC06}. The authors here devise a common framework (based on a tree search) that many search algorithms can be described within and from there they can do a comparison on the estimated computational complexity of each. Unfortunately through this theoretical comparison, we can only relate the number of nodes in the search tree that will be explored by various algorithms, this does not consider the amount of time processing each node which is often a computational bottleneck.
+
+In \cite{StoVH08}, it is proposed that by using lower bounds on the residual from the optimal solution, we can shrink the search space (equivalently, prune the search tree). A few such lower bounds are given for special cases of the ILS problem and one for the general ILS and BILS problem. Unfortunately, the computational complexity of computing these bounds can be prohibitive, this will be discussed later in the thesis.
+
+There have been other suggestions to improve the enumeration based search algorithms as well. One such method \cite{SchFL09} proposes a simple stopping criteria for the search process that in theory should allow it to terminate earlier. Unfortunately, the bound derived here is not tight enough to be useful in practice and is rarely or never satisfied.
+
+\subsection{Reduction Strategies}
+
+The standard reduction algorithm used in practice for the unconstrained ILS problems is the LLL reduction \cite{LenLL82}. In \cite{Bor10}, it was found that many of the operations used in the original LLL algorithm are not always required as they do not affect the search process when the SE algorithm is used. The new reduction that results from applying only a subset of the operations is called the partial LLL reduction.
+
+Unfortunately, the LLL reduction is not applicable to the BILS problem. For the BILS problem, there are other reduction strategies that focus only on permuting the columns of the matrix $H$. We can separate algorithms that try and find these permutations into two categories, those that only use the information contained in the matrix $H$, and algorithms that use both the information in $H$ and the vector $y$.
+
+\section{Objectives and Contribution}
+With many different algorithms for both the reduction and search process, it is not always clear how they relate. In \cite{MurGDC06} the authors propose a tree search framework to compare various search algorithms. This is an interesting idea, but results from such a comparison may not relate to real world run time since they do not consider the time spent at each step of each algorithm, only how many steps are taken to solve the problem. This thesis will consider some of the various search strategies and do a more realistic comparison of actual run time performance. Using the results from such a comparison, we can see the advantages of the different approaches and use them to devise a new hybrid search algorithm.
+
+For the reduction step, the LLL reduction \cite{LenLL82} is the strategy most used in practice for the ILS problem. How the LLL reduction relates to the ILS problem has been studied in detail, and it also yields excellent results in practice. Unfortunately, for the BILS problem, the LLL reduction should not be used, the reason for this will be described in chapter \ref{chap:Reduction}. For the BILS problem, we are limited to performing only column permutations on the matrix $H$. There are a few algorithms which calculate how we should permute the columns of $H$, some of which were briefly described in section \ref{sec:prevWork}. Two more recent developments, \cite{ChaH05} and \cite{SuW05}, use both the matrix $H$ and the vector $y$ to calculate the permutations. These algorithms have shown excellent results. In this thesis it will be proven that these two algorithms are theoretically equivalent. Knowing that they are equivalent, we can use the best ideas from both to create a new reduction strategy that is faster than either of the originals and is numerically stable. Another advantage of these algorithms being equivalent is that since one had a geometric motivation and the other was derived algebraically, we now how both geometric and algebraic justification for why the column orderings given by these algorithms should help speed up the search process. Also, the SW algorithm was derived through a geometric motivation and as such is described in terms of geometry in the original paper. This thesis will provide an algebraic explanation for the SW algorithm and offer some improvements to the original.
+
+The motivation for the permutation based reduction strategies is not specific to the BILS problem, in theory these reduction strategies should reduce the run time for ILS problems as well. However, the LLL reduction provides better results than using permutations alone. One way to think about what each type of algorithm is doing is, the LLL reduction finds a new set of shorter and more orthogonal basis vectors, while the permutation based reductions are just finding an ordering for these vectors that performs well in the search process. By first performing LLL reduction to get a good set of basis vectors, and then applying a permutation based reduction to re-order them, we can sometimes greatly improve the performance of the search process. In this thesis, the strategy of first applying a LLL reduction, and then column permutations will be explored.
+
+\section{Outline}
+The rest of the thesis will be organized as follows;
+
+In chapter \ref{chap:SESearch}, the Schnorr-Euchner (SE) enumeration algorithm \cite{SchE94} will be presented in detail, much of the remainder of the thesis will use ideas and notation which comes from this algorithm. Also, since the reduction processes are trying to optimize the search process, it is critical to first understand the search process before considering the reduction.
+
+In chapter \ref{chap:Reduction}, an explanation will be given for why we need different reduction strategies for BILS and ILS problems. Then, strategies for reducing BILS and ILS problems will be presented separately.
+
+In chapter \ref{chap:Searches}, some other notable search algorithms and modifications to the basic SE enumeration will be given. Also, a new hybrid search algorithm is proposed which combines two of the basic algorithms in order to take advantage of the positive features of each.
+
+In chapter \ref{chap:Results}, experimental results will be presented for some of the reduction and search strategies that were considered in the previous chapters.
+
+Finally, chapter \ref{chap:Conclusion} will give a summary and highlight areas where some future work could be done.
+
+\chapter{Schnorr-Euchner Enumeration} \label{chap:SESearch}
+
+There are many search algorithms that have been proposed to solve the unconstrained ILS problem. One of the most effective algorithms in terms of both overall runtime and memory consumption is the Schnorr-Euchner enumeration \cite{SchE94}. In this section, the SE algorithm will be presented in detail, since concepts from it will be used throughout the remainder of the thesis.
+
+Let $H$ have the QR factorization
+$$
+H=[Q_1, Q_2] \bmx R \\ 0 \emx,
+$$
+where $[\underset{n}{Q_1}, \underset{m-n}{Q_2}]  \in \mathbb{R}^{m\times m}$ is orthogonal
+and $R\in \mathbb{R}^{n\times n}$ is upper triangular. 
+Then, with $\bar{y}=Q_1^Ty$ the ILS problem \eqref{eq:ils0} is reduced to 
+\be 
+\label{eq:ils}
+\min_{x \in  {\mathbb{Z}}}  \| \by- Rx \|_2.
+\ee
+
+We would like to enumerate as few elements as possible, $ x \in \mathbb{Z}^n$ while still guaranteeing the optimal solution. Suppose we start with some initial bound on the error,
+\be 
+\label{eq:searchIneq0}
+\min_{x \in  {\mathbb{Z}}}  \| \by- Rx \|_2 \le \beta. 
+\ee
+We will discuss some better ideas for choosing an initial $\beta$ in later chapters, however one simple method is to choose $x$ to be the real LS solution with each element rounded to the nearest integer, and then calculate the residual. The inequality \eqref{eq:searchIneq0} defines an ellipsoid in terms of $x$ or a hyper-sphere in terms of the lattice points $w=Rx$ with radius $\beta$. For this reason, the problem is sometimes referred to as ``Sphere Decoding''.
+
+Define
+\begin{equation}
+ c_k = (\bar{y}_k - \sum_{j=k+1}^nr_{kj}x_j)/r_{kk}, \; k=n, n-1,\ldots, 1,
+\label{eq:searchC}
+\end{equation}
+where when $k=n$ the sum in the right hand side does not exist.
+Then \eqref{eq:searchIneq0} can be rewritten as
+$$
+\sum_{k=1}^n r_{kk}^2(x_k-c_k)^2 < \beta,
+$$
+which  is equivalent to the following
+set of inequalities:
+\begin{align}
+&\text{level } k: \ \ r_{kk}^2(x_k-c_k)^2 < \beta -\sum_{i=k+1}^nr_{ii}^2(x_i-c_i)^2, \label{eq:searchLevelK}
+\end{align}
+
+Define
+for $k=n,n-1,\ldots, 1$.
+
+We begin the search process
+at level $n$. Choose $x_n = \lfloor c_n \rceil$, the nearest
+integer to $c_n$. If the inequality \eqref{eq:searchLevelK} with $k=n$
+is not satisfied, it will not be satisfied for any integer, this means $\beta$
+was chosen to be too small, it must be enlarged. With $x_n$ fixed, we can move
+to level $n-1$ and choose $x_{n-1} = \lfloor c_{n-1} \rceil$ with $c_{n-1}$ calculated as in \eqref{eq:searchC}. At this point it is possible that the inequality \eqref{eq:searchLevelK} is no longer satisfied. If this is the case, we must move back to level $n$ and choose $x_n$ to be the second nearest integer to $c_n$.  We will continue this procedure until we reach
+level 1, moving back a level if ever the inequality for the current level is no longer satisfied. When we reach level $1$, we will have found an integer point $\hat{x}$. We then update $\beta = \left \| \bar{y} - R\hat{x} \right \|_2^2$ and try to find a better integer point which lies in the new, smaller ellipsoid. Finally in the search process, when we can no longer find any $x_n$ to satisfy \eqref{eq:searchLevelK} with $k=n$, the search process is complete and the last integer point $\hat{x}$ found is the solution. If we initially set $\beta = \infty$ the first point $\hat{x}$ that we find is known as the Babai point.
+
+\begin{figure}
+
+\label{fig:treeSearch}
+\end{figure}
+
+The above search process is actually a depth-first tree search in a tree of height $m$, see Fig.\ \ref{fig:treeSearch},
+where the number  in a node  denotes the step number at which the node is encountered. Each edge going from level $i$ to $i-1$ represents fixing $x_{i-1}$ to some value, and each edge will have a weight which is given by $r_{ii}^2(z_i -
+c_i)^2$. Notice that if we take the sum of these weights from $m..i$ we simply get the partial
+residual for fixing $x_{i:m}$, which is defined as $\left \| R_{i:m,i:m}x_{i:m} -
+\bar{y}_{i:m} \right \|_2^2$. This implies that each leaf in the tree
+represents an integer vector $x \in \mathbb{R}^m$ and its weight is the residual $\left \|
+Rx - \bar{y} \right \|_2^2$. This means that the ILS problem is equivalent to
+finding the lowest-weight leaf in the tree. The SE enumeration takes advantage
+of the fact that we can easily calculate the lowest cost child of any given
+node to make the depth first search more efficient. In fact we can easily visit
+the children of a node in order of increasing weight or cost, that is what we are doing when we initially choose $x_k = \lfloor c_k \rceil$, and next choose it to be the second and third nearest integer to $c_k$.
+
+A modification of the SE enumeration can be used to solve the BILS problem. To ensure that we remain within the box constraint, instead of choosing $x_k = \lfloor c_k \rceil$ at step $k$, we choose $x_{k} = \lfloor c_{k} \rceil_{{\cal B}_{k}}$, where ${\cal B}_{k}$ comes from \eqref{eq:boxCon}. Suppose $x_{k-1}:x_n$ are fixed, then we must also ensure that as we explore the node corresponding to the second nearest integer (and all subsequent integers) for $x_k$ that we remain within the box constraint. This is trivial to accomplish, we simply stop incrementing $x_k$ if we hit the upper bound, and stop decrementing it if we hit the lower bound. If all values for $x_k$ that are within the box constraint have been used up but we are still within the area defined by the ellipsoid, we move back to level $k-1$. Following this process will yield the optimal BILS solution.
+
+\chapter{Reduction Strategies} \label{chap:Reduction}
+
+Consider the ILS problem \eqref{eq:ils0}. The goal of the reduction is to modify the matrix $H$ in such a way that we still obtain the same solution $x$, but in fewer steps. With this goal, it is essential to know what types of operations we are allowed to perform on the matrix $H$ so that the solution $x$ is not modified. The first type of operation to consider is the orthogonal transformation. Suppose we apply some orthogonal matrix $Q$ from the left, then it is easy to see that \eqref{eq:ils0} becomes: 
+\begin{align}
+&\min_{x\in {\mathbb{Z} }}  \| QHx - y \|_2\\
+=&\min_{x\in {\mathbb{Z} }}  \| Q^T(QHx - y) \|_2\\
+=&\min_{x\in {\mathbb{Z} }}  \| Hx - \bar{y} \|_2
+\end{align}
+
+The second type of transformation that we may apply to the matrix $H$ is any unimodular matrix. Unimodular matrices are square, integer matrices with determinant $+/-1$. Let $Z$ be some unimodular matrix. Another property of unimodular matrices is that the equation $Zx=b$ always has an integer solution $x$ if $b$ is integer. This property is very useful for our application. Consider applying such a unimodular matrix $Z$ to $H$ from the right, \eqref{eq:ils0} becomes: 
+\begin{align}
+&\min_{x\in {\mathbb{Z} }}  \| HZx - y \|_2\\
+=&\min_{\hat{x}\in {\mathbb{Z} }}  \| H\hat{x} - y \|_2\\
+\end{align}
+When we solve this new ILS problem, we will obtain some solution $\hat{x}$. If $Z$ is a known unimodular matrix, we can solve the system $Zx = \hat{x}$ to find $x$, the ILS solution to the original problem. Note that if Z were not unimodular, we would have no guarantee that the solution $x$ would be integer.
+
+Finally, it is worth mentioning that we may apply permutation matrices to $H$ as well, although they are just a special case of unimodular matrices. It is obvious that the effect on the solution from applying a permutation matrix is only to re-order the elements of the solution vector $x$.
+
+When reducing the BILS problem we must be more careful. Consider the constraints on the solution $x$, \eqref{eq:boxCon}. Applying orthogonal matrices to $H$ from the left has no effect on $x$, so the constraints are also unaffected. Applying permutation matrices to H from the right will re-order the elements of the solution $x$, so we must re-order the elements in the constraint vectors as well, which is a trivial operation. However if we apply a general unimodular matrix $Z$ to $H$ from the right, we can no longer easily enforce the constraints on the solution, the simple box constraints become complicated. To see why this is the case, recall the SE search process. Suppose the search is currently at some level $k$ and we would like to know to which value we should fix $\hat{x}_{k-1}$ (note that $\hat{x}$ denotes $Zx$). We know that $l_{k-1} \le x_{k-1} \le u_{k-1}$, but to determine such a bound for $\hat{x}_{k-1}$, we would need to know the entire vector $\hat{x}$ in order to compute $Z^{-1}_{k-1,:}\hat{x}$. At this point in the search, we only know the last $k$ elements of it. The only way to complete the search process is to ignore the bounds on $\hat{x}$, find a potential solution, compute $x = Z^{-1}\hat{x}$, and then check if each element of $x$ is within the bounds. This is extremely inefficient since many potential solutions could be eliminated very early on in the search if we were able to enforce the constraints during the search process. It is for this reason that when reducing BILS problems, we only consider orthogonal transformations and column permutations.
+
+\section{BILS Reduction Algorithms}
+
+The algorithms in this section will focus on finding some permutation of the columns of the matrix $H$ in order to optimize the search process.
+
+\subsection{Previous Reductions}
+The V-BLAST algorithm \cite{FosGVW99} mentioned in \ref{sec:prevWork} is a commonly used strategy to calculate the column permutations for $H$. Suppose we are working with $R$, which comes from the QR factorization of $H$. Recall that the product of the diagonal elements of an upper triangular matrix is equal to the matrices determinant, and this value is invariant under permutation. This means that any time we swap two columns in the matrix $H$ and re-calculate the QR factorization, one diagonal element of $R$ will always increase and the other will decrease.
+
+The goal of the V-BLAST algorithm is to proceed from $k=n \dots 1$ and find the column $h_p$ from the set of columns $h_1 \dots h_k$ such that when $h_p$ and $h_k$ are swapped, the diagonal element $r_{kk}$ is maximal There are efficient algorithms to compute such a column ordering, one such algorithm will become obvious later in this section.
+
+In \cite{ChaH05}, the SQRD column reordering strategy originally presented in \cite{WubBRKK01} for the same purpose as V-BLAST, was proposed for this purpose. In the SQRD algorithm, we perform the QR decomposition from columns $k = 1 \dots n$, at each step choosing as the $k^{th}$ column the column from the set $k \dots n$ which gives the smallest diagonal element $r_{kk}$. This should yield large $r_{kk}$ toward the end of the matrix since the product of the diagonal elements is a constant. Note that both SQRD and V-BLAST only use the information in the matrix $H$.
+
+In \cite{SuW05}, Su and Wassell considered the geometry of the BILS
+problem for the case that $H$ is nonsingular and proposed a new column reordering algorithm (to be called
+the SW algorithm from here on for convenience) which uses all information of the BILS problem.
+Unfortunately, the geometric interpretation of this algorithm is hard to understand.
+Probably due to page limit, the description of the algorithm is very concise, 
+making efficient implementation difficult for ordinary users.
+
+This thesis will give some new insight of the SW algorithm from an algebraic point of view.
+Some modifications will be made so that the algorithm becomes more efficient
+and easier to understand and furthermore it can handle a general full column rank $H$.
+It is worth mentioning that the SW algorithm is not numerically stable. The numerical stability is not
+necessarily crucial since a wrong answer just results in a different set of
+permutations for the columns of H where any set of permutations is allowed.
+Until this point, other column reordering algorithms only considered the matrix $H$.
+
+Independently  Chang and Han in \cite{ChaH05} proposed
+another column reordering algorithm (which will be referred to as  CH).
+Their algorithm also uses all information of the BILS problem and the derivation
+is based on an algebraic point of view. It is  easy to see from the equations in
+the search process exactly what the CH column reordering is doing and why we
+should expect a reduced complexity in the search process. The detailed
+description of the CH column reordering is given in \cite{ChaH05} and it is easy
+for others to implement the algorithm.
+But our numerical tests indicated CH has a  higher complexity than SW, when SW
+is implemented efficiently.
+Our numerical tests also showed that CH and SW {\em almost} always   
+produced the same permutation matrix $P$.
+
+In this section it will be shown that the CH algorithm and the  (modified)  SW algorithm give the same
+column reordering in theory. This is interesting because both algorithms were derived through different motivations
+and we now have both a geometric justification and an algebraic justification 
+for why the column reordering strategy should reduce the complexity of the search.
+Furthermore, using the knowledge that certain steps in each algorithm are equivalent,
+we can combine the best parts from each into a new algorithm. The new algorithm
+has a lower flop count than either of the originals.
+This is important to the successive interference cancellation decoder, 
+which computes a suboptimal solution to the BILS problem.
+The new algorithm can be interpreted in the same way as CH,
+so it is easy to understand. 
+
+In the following subsections, the CH and SW algorithms will be described in detail. This is necessary to understanding the proof of their equivalence and to see the motivation for the new algorithm. Also, a new algebraic interpretation and some improvements will be given for the SW algorithm. Finally the proof of equivalence of CH and SW will be given, and the new algorithm will be presented.
+
+\subsection{CH Algorithm}
+The CH algorithm first computes the QR factorization of $H$,
+then  tries to reorder the columns of $R$.
+The motivation for this algorithm comes from observing equation \eqref{eq:searchLevelK}.
+If the inequality is false we know that the current choice for the value of
+$x_k$ given $x_{k+1:n}$ are fixed is incorrect and we prune the search tree. We
+would like to choose the column permutations so that it is likely that the
+inequality will be false at higher levels in the search tree. The CH column reordering strategy
+does this by trying to maximize the left hand side of  \eqref{eq:searchLevelK} with large values of $\left | r_{kk}
+\right |$ and minimize the right hand side by making $\left | r_{kk}(x_k-c_k) \right |$
+large for values of $k = n,n-1, \dots, 1$.
+
+Here we describe  step 1 of the CH algorithm, which determines the last column of the final $R$ 
+(or equivalently the last column of the final $H$).
+Subsequent steps are the same but are applied to a subproblem that is one dimension smaller. 
+In step 1, for $i = 1,\dots,n$ we interchange
+columns $i$ and $n$ of  $R$ (thus entries of $i$ and $n$ in $x$ are also swapped), then return $R$ to upper-triangular
+by a series of Givens rotations applied to $R$ from the left, which  are also applied to $\bar{y}$.
+To avoid confusion, we denote the new $R$ by $\hat{R}$ and the new $\bar{y}$ by $\hat{y}$.
+We then compute  $c_n=\hat{y}_n/\hat{r}_{n,n}$ and 
+\be
+x_i^c=\arg\min_{x_i\in {\cal B}_i}\left |\hat{r}_{nn}(x_i- c_n) \right | = \left \lfloor c_n \right \rceil_{{\cal B}_i},
+\label{eq:xic}
+\ee
+where the superscript $c$ denotes the CH algorithm. 
+Let $\bar{x}_i^c$ be the second closest integer in ${{\cal B}_i}$ to $c_n$,
+i.e.,  
+$\bar{x}_i^c= \left \lfloor c_n \right \rceil_{{\cal B}_i\backslash x_i^c}.$
+%So $\bar{x}_i^c = x_i^c \pm 1$.
+Define
+\be
+\dist_i^c = |\hat{r}_{nn}( \bar{x}_i^c -c_n) |, 
+\label{eq:dic}
+\ee
+which represents the partial residual given when $x_i$ is taken to be $\bar{x}_i^c$.
+Let $j = {\arg\max}_i \dist_i^c$.
+Then  column $j$ of the original $R$ is chosen to be the $n^{th}$ column of the final $R$.
+%The algorithm then applies the Givens rotations that were used to restore $R$ to
+%upper triangular to $\bar{y}$ and 
+With the corresponding updated upper triangular $R$ and $\bar{y}$
+(here for convenience we have removed hats),
+the algorithm then updates  $\bar{y}_{1:n-1}$ again
+by setting $\bar{y}_{1:n-1}: = \bar{y}_{1:n-1} - r_{1:n-1,n}x_j$ where $x_j=x_j^c$. 
+%Note that we use $z$ to denote the permuted $x$.
+Choosing  $x_j$ to be  $x_j^c$ here is exactly the same as what the search process does.
+We then continue to work on the subproblem 
+\be
+\min_{\tilde{x}\in \mathbb{Z}^{n-1}} \left \| \bar{y}_{1:n-1}-R_{1:n-1,1:n-1}\tilde{x} \right \|_2,
+\label{eq:subc}
+\ee
+where $\tilde{x}=[x_1,\ldots, x_{j-1}, x_n, x_{j+1}, \ldots x_{n-1}]^T$ satisfies the corresponding box constraint.
+The pseudocode of the CH algorithm is given in Algorithm \ref{alg:CH}.
+
+To determine the last column, CH finds the permutation to 
+maximize $\left |r_{nn}(\bar{x}_i^c-c_n) \right |$. Using $\bar{x}_i^c$ instead of $x_i^c$
+ensures that $\left | \bar{x}_i^c-c_n \right |$ is never less than $0.5$ but
+also not very large. This means that usually if $\left | r_{nn}(\bar{x}_i^c-c_n)
+\right |$ is large, $\left | r_{nn} \right |$ is large as well and the
+requirement to have large $|r_{nn}|$ %in order from $m,\dots,1$  
+is met.
+Using $x_i^c$ would not be a good choice because $\left | x_i^c - c_n \right |$ might be 
+very small or even $0$, then column $i$ would not be chosen to be column $n$
+even if the corresponding $|r_{nn}|$ is large and on the contrary a column with small $|r_{nn}|$
+but large $|x_i^c-c_n|$ may be chosen. 
+
+Now we will consider the complexity of CH. The 
+significant cost comes from line \ref{l:chg} in Algorithm \ref{alg:CH},
+which requires $6(k-i)^2$ flops.
+If we sum this cost over all loop iterations and add the cost of the QR factorization by Householder transformations, 
+we  get a total complexity of $0.5n^4+2mn^2$ flops.
+
+\begin{algorithm}
+\caption{CH Algorithm - Returns $p$, the column permutation vector}
+\label{alg:CH}
+\begin{algorithmic}[1]
+\STATE $p := 1:n$
+\STATE $p' := 1:n$
+\STATE Compute the QR factorization of $H$: $\bsmx Q_1^T \\ Q_2^T \esmx H= \bsmx R\\ 0 \esmx$
+             and compute  $\bar{y} : = Q_1^Ty$
+  \FOR{$k=n$ to $2$}
+  	\STATE $maxDist := -1$
+    \FOR{$i=1$ to $k$}
+    	\STATE $\hat{y} := \bar{y}_{1:k}$
+    	\STATE $\hat{R} := R_{1:k,1:k}$
+        \STATE  \label{l:chg} swap columns $i$ and $k$ of $\hat{R}$, return it  to upper
+triangular with Givens rotations, also apply the Givens rotations to $\hat{y}$ %\hfill ($6(k-j)^2$ flops)  
+        \STATE $x_i^c := \left \lfloor\hat{y}_k/\hat{r}_{k,k}\right
+\rceil_{{\cal B}_i}$
+        \STATE $\bar{x}_i^c := \left \lfloor\hat{y}_k/\hat{r}_{k,k}\right
+\rceil_{{\cal B}_i\backslash x_i^c}$
+        \STATE $dist_i^c := \left | \hat{r}_{k,k}\bar{x}_i^c - \hat{y}_k
+\right | $
+        \IF{$dist_i^c > maxDist$}
+        	\STATE $maxDist := dist_i^c$
+        	\STATE $j := i$
+        	\STATE $R' := \hat{R}$
+        	\STATE $y' := \hat{y}$
+        \ENDIF
+    \ENDFOR
+    \STATE $p_k := p'_j$
+    \STATE Interchange the intervals ${{\cal B}_k}$ and ${{\cal B}_{j}}$
+    \STATE Intechange entries $k$ and $j$ in $p'$
+    \STATE $R_{1:k,1:k} := R'$
+    \STATE $\bar{y}_{1:k} := y' - R'_{1:k,k}x_j^c$
+  \ENDFOR
+  \STATE $p_1 := p'_1$
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{SW Original Algorithm}
+The motivation for the SW algorithm comes from examining the geometry of the search process.
+
+\ifx\du\undefined
+  \newlength{\du}
+\fi
+\begin{figure}
+\caption{Geometry of the search  with two different column ordering.}
+\label{SEGeometry}
+\end{figure}
+
+Fig.\ \ref{SEGeometry} shows a 2-D BILS problem;
+\ref{SEGeometry}(a) represents the original column ordering and 
+\ref{SEGeometry}(b) is after the columns have been swapped.
+
+In the SW algorithm $H=[h_1,\ldots, h_n]$ is assumed to be square and non-singular.
+Let 
+$$
+G =[g_1,\ldots, g_n]= H^{-T}.
+$$ 
+For any  integer $\alpha$,   \cite{SuW05} defines the
+affine sets, $F_i(\alpha) = \{w \ | \ g_i^T(w-h_i\alpha) = 0\}$.
+%which can also be thought of as $h_i$ shifted by the integer $\alpha$.
+The lattice points generated by $H$ occur at the intersections of these affine sets. 
+Let the orthogonal projection of a vector $s$ onto a vector $t$ be denoted as
+$\mbox{proj}_t(s)$, then %\cite{SuW05} claims that 
+the orthogonal projection of some vector $s$ onto $F_i(\alpha)$ is 
+$\mbox{proj}_{F_i(\alpha)}(s) = s -\mbox{proj}_{g_i}(s-h_i\alpha).$ 
+Therefore the orthogonal distance between $s$ and
+$F_i(\alpha)$ is $\dist(s,F_i(\alpha)) =  \| s - \mbox{proj}_{F_i(\alpha)}(s) \|_2$. 
+%%%%%%%%%%%%
+%\footnote{XW: Why don't they simply say the distance is just $\|\mbox{proj}_{g_i}(s-h_i\alpha)\|$?
+%It's quite weird. SB: I'm not sure, it seems like that projection is equivalent
+%and much simpler and we could avoid using the affine sets $F_i(s)$}
+%%%%%%%%%%%%%%%%
+In \cite{SuW05}, the points labeled $\mbox{proj}_{F_2(1)}(y)$ and
+$\mbox{proj}_{F_2(-1)}(y)$ in Fig.\  \ref{SEGeometry}
+are called residual targets  and ``represent the
+components [of $y$] that remain after an orthogonal part has been projected
+away.''  
+
+Note that $F_2(\alpha)$ in Fig.\ \ref{SEGeometry} is a sublattice of dimension $1$.  
+Algebraically it is the lattice generated by $H$ with column
+$2$ removed. It can also be thought of as a subtree of the search tree where
+$x_2 = \alpha$ has been fixed. 
+In the first step of the search process for a general case,   $x_n$ is chosen to be
+ $x_n=\arg\min_{\alpha\in {\cal B}_n}\dist(y,F_n(\alpha))$; thus $F_n(x_n)$ is the nearest affine set to $y$. 
+Actually the value of $x_n$ is identical to $\lfloor c_n \rceil_{{\cal B}_n}$ given in Chapter ~\ref{chap:SESearch},
+which will be proven later.
+Then   $y$ is updated  as $y := \mbox{proj}_{F_n(x_n)}(y) - h_nx_n$. If we look
+at Fig.\ \ref{SEGeometry}, we see that the projection $\mbox{proj}_{F_n(x_n)}(y)$ moves $y$ onto $F_n(x_n)$, while the subtraction of $h_nx_n$ algebraically fixes the value of $x_n$. This is necessary because in subsequent steps we will not consider the column $h_n$.
+
+We now apply the same process to the new $n-1$ dimensional search space
+$F_n(x_n)$. If at some level $i$, $\min_{\alpha\in {\cal B}_i}\dist(y,F_i(\alpha))$ exceeds the current
+search radius, we must move back to level $i+1$. % and choose $x_i = x_i \pm 1$.
+When the search process reaches level $1$ and fixes $x_1$, it updates the radius to  
+$\dist(y,F_1(x_1))$ and moves back up to level $2$.
+
+Note that this search process is mathematically equivalent to the one described in Chapter
+\ref{chap:SESearch}; the difference is that it  does projections
+because  the generator matrix is not assumed to be upper-triangular. 
+Computationally the former is more expensive than the latter.
+
+To see the motivation of the SW algorithm for choosing a particular column ordering,
+consider Fig.\ \ref{SEGeometry}. Suppose the search algorithm has knowledge of
+the residual for the optimal solution (the radius of the circle in the diagram).
+With the column ordering chosen in (a), there are two possible choices for $x_2$,
+leading to the two dashed lines $F_2(-1)$ and $F_2(1)$ which cross the circle. This means
+that we will need to find $x_1$ for both of these choices
+before we can determine which one leads to the optimum solution. In (b), there
+is only one possible choice for $x_1$,  leading to the only dashed line $F_1(-1)$
+which crosses the circle, meaning we only need to find $x_2$ to find the optimum solution.
+Since the projection resulting from the correct choice of $x_2$ will always be
+within the sphere, it makes sense to choose the ordering which maximizes the
+distance to the second best choice for $x_2$ in hopes that the second nearest
+choice will result in a value for $\min_{\alpha\in {\cal B}_2}\dist(y,F_2(\alpha))$ outside the sphere and the
+dimensionality can be reduced by one. 
+For more detail on the geometry, see  \cite{SuW05}.
+
+The following will give an overview of the SW algorithm as given in
+\cite{SuW05} but described in a framework similar to what was used to describe
+CH. In the first step to determine the last column, for each $i = 1, \dots, n$,
+we compute 
+\be
+x_i^s \!=\! \arg\min_{\alpha\in {\cal B}_i}\dist(y,F_i(\alpha)) 
+\!=\!  \arg\min _{\alpha\in {\cal B}_i}| y^Tg_i - \alpha | \!=\! \left \lfloor y^Tg_i \right \rceil_{{\cal B}_i},
+\label{eq:xis}
+\ee
+where the superscript $s$  stands for the SW algorithm.
+Let $\bar{x}_i^s$ be the second closest integer in ${{\cal B}_i }$ to $y^Tg_i$, i.e.,
+$\bar{x}_i^s = \left \lfloor y^Tg_i \right \rceil_{{\cal B}_i\backslash x_i^s}.$
+Let $j = \arg\max_i  \dist (y,F_i(\bar{x}_i^s))$. 
+Then SW chooses column $j$ as the last column of the final reordered $H$,
+ updates $y$ by setting 
+$y:=\mbox{proj}_{F_j(x_j^s)}(y) -h_jx_j^s$  and 
+updates $G$ by setting $ g_i: = \mbox{proj}_{F_j(0)}(g_i)$ for all $i\neq j$. 
+After $G$ and $y$ have been updated, the algorithm continues to find column $n-1$ in the
+same way etc. The pseudo-code of the SW algorithm is given in Algorithm \ref{alg:SWOrig}.
+\begin{algorithm}
+\caption{SW Algorithm - Returns $p$, the column permutation vector}
+\label{alg:SWOrig}
+\begin{algorithmic}[1]
+\STATE $p := 1:n$
+\STATE $p' := \{1, 2, \ldots, n\}$
+\STATE \label{l:swG} $G := H^{-T}$ \hfill %($2n^3$ flops)
+\FOR{$k=n$ to $2$}
+	\STATE $maxDist := -1$
+	\FOR{$i \in p'$}
+		\STATE $x_i^s := \left \lfloor  y^Tg_i \right \rceil_{{\cal B }_i}$ \hfill% ($2n$ flops)
+		     \label{l:swx}
+		\STATE $\bar{x}_i^s := \left \lfloor y^Tg_i \right \rceil_{{{\cal B }_i}{\backslash x_i^s}}$
+		    \label{l:swbx}
+		\STATE  \label{l:swd} $\dist_i^s := \dist(y,F_i(\bar{x}_i^s))$ %\hfill ($3n^2$ flops)
+		\IF{$dist_i^s > maxDist$}
+			\STATE $maxDist := dist_i^s$
+			\STATE $j := i$
+		\ENDIF
+	\ENDFOR
+	\STATE $p_k := j$
+	\STATE $p' := p' \backslash j$
+	\STATE $y := \mbox{proj}_{F_j(x_j^s)}(y) -h_jx_j^s$  \label{l:swy}
+	\FOR{$i \in p'$}
+		\STATE \label{l:swg} $g_i := \mbox{proj}_{F_j(0)}(g_i) $ %\hfill ($2n^2$ flops) 
+	\ENDFOR
+\ENDFOR
+\STATE $p_1 := p'$
+\end{algorithmic}
+\end{algorithm}
+
+%Now we look at the complexity of Algorithm \ref{alg:SWOrig}.
+Su and Wassell did not say how to implement the algorithm and did not give a complexity analysis.
+The parts of the cost we must consider for implementation occur in
+lines \ref{l:swd} and \ref{l:swg}.
+Note that $ \dist(y,F_i(\bar{x}_i^s))=\|\mbox{proj}_{g_i}(y-h_i\bar{x}_i^s)\|_2$
+and $\mbox{proj}_{F_j(0)}(g_i)= g_i -\mbox{proj}_{g_i} g_i$,
+where $\mbox{proj}_{g_i}=g_ig_i^\dag = g_ig_i^T/\|g_i\|^2$. 
+A naive implementation would first compute $\mbox{proj}_{g_i}$, requiring $n^2$ flops, then compute 
+$\|\mbox{proj}_{g_i}(y-h_i\bar{x}_i^s)\|_2$ and $g_i -\mbox{proj}_{g_i} g_i$, each requiring $2n^2$ flops.
+Summing these costs over all loop iterations we get a total complexity of $2.5n^4$ flops.
+In the next subsection we will simplify some steps in Algorithm \ref{alg:SWOrig}
+and show how to  implement them efficiently.
+
+\subsection{SW Algorithm Interpretation and Improvements}
+\label{sec:improvedSW}
+In this section we give new algebraic interpretation of some steps in Algorithm 2,
+simplify some key steps to improve the efficiency,
+and  extend the algorithm to handle a more general case.
+All line numbers refer to Algorithm \ref{alg:SWOrig}.
+
+%At each step, we must compute  $x_i^s = \left \lfloor y^Tg_i \right \rceil_{{\cal B}_i }$ and $\dist_i^s$. 
+First we show  how to efficiently compute $\dist_i^s$ in line \ref{l:swd}. 
+Observing that $g_i^Th_i = 1$, we have
+\begin{equation}
+\label{eq:newDist}
+\dist_i^s =   \|  g_ig_i^\dag (y-h_i\bar{x}_i^s)  \|_2 
+=    | y^Tg_i -\bar{x}_i^s |/\| g_i  \|_2.
+\end{equation} 
+Note that $y^Tg_i$ and $\bar{x}_i^s$ have been computed in lines \ref{l:swx} and \ref{l:swbx}, respectively.
+So the main cost of computing $\dist_i^s$ is the cost of computing $\|g_i\|_2$,
+requiring only $2n$ flops. 
+For $k=n$ in Algorithm 2,  $y^Tg_i=y^TH^{-T}e_i=(H^{-1}y)^Te_i$, i.e.,  $y^Tg_i$
+is the $i^{th}$ entry of the real solution for $Hx=y$. 
+The interpretation can be generalized to  a general $k$. 
+
+In line \ref{l:swg} Algorithm 2,  
+\begin{align}
+g_i^{\small \mbox{new}} & \equiv \mbox{proj}_{F_j(0)}(g_i)   \nonumber \\
+  & =(I- \mbox{proj}_{g_j})g_i=g_i- g_j(g_j^Tg_i/\|g_j\|_2^2). \label{eq:gup}
+\end{align}
+Using the last expression for computation needs only $4n$ flops
+(note that $\|g_j\|_2$ has been computed before, see \eqref{eq:newDist}).
+We can actually show that the above is performing updating of $G$, the Moore-Penrose generalized inverse of
+$H$ after we remove its $j^{th}$ column. 
+For proof of this, see \cite{Cli64}. 
+
+In line \ref{l:swy} of Algorithm 2,
+\begin{align}
+y^{\small \mbox{new}} & \!\equiv\! \mbox{proj}_{F_j(x_j^s)}(y) - h_jx_j^s 
+ \!=\! (y -  g_jg_j^\dag(y-h_jx_j^s)) - h_jx_j^s  \nonumber \\
+   &=  (I-\mbox{proj}_{g_j})(y-h_jx_j^s). \label{eq:yup}  
+\end{align}
+This means that after $x_j$ is fixed to be $x_j^s$, $h_jx_j^s$ is combined with $y$ (the same
+as CH does)  and then the vector is projected to the orthogonal complement of 
+the space spanned by $g_j$. 
+We can show that this guarantees that the updated $y$ is in the subspace spanned by
+the columns of $H$ which have not been chosen.
+This is consistent with the assumption that $H$ is nonsingular, which implies that 
+the original $y$  is in the space spanned by  the columns of $H$.
+However, it is not necessary to apply the orthogonal projector $I- \mbox{proj}_{g_j}$ to $y-h_jx_j^s$ in \eqref{eq:yup}.
+The reason is as follows. 
+In Algorithm 2, $y^{\small \mbox{new}}$ and $g_i^{\small \mbox{new}}$ will be used only for computing 
+$(y^{\small \mbox{new}})^Tg_i^{\small \mbox{new}}$ (see line \ref{l:swx}).
+But from \eqref{eq:gup} and \eqref{eq:yup}
+\begin{align*}
+(y^{\small \mbox{new}})^Tg_i^{\small \mbox{new}}
+& =(y-h_jx_j^s)^T(I-\mbox{proj}_{g_j})(I-\mbox{proj}_{g_j})g_i \\
+&=(y-h_jx_j^s)^Tg_i^{\small \mbox{new}}.
+\end{align*}
+Therefore, line \ref{l:swy} can be replaced by $y:=y-h_jx_j^s$.
+This not only simplifies the computation but also is much easier to interpret---after $x_j$ is fixed to be $x_j^s$,  
+$h_jx_j^s$ is combined into $y$ as in the CH algorithm.
+Let $H_{:,1:n-1}$ denote $H$ after its $j^{th}$ column is removed. 
+We then continue to work on the subproblem
+\be
+\min_{\check{x}\in \mathbb{Z}^{n-1}}\|y-H_{:,1:n-1}\check{x}\|_2, 
+\label{eq:subs}
+\ee
+where $\check{x}=[x_1,\ldots,x_{j-1},x_{j+1},\ldots,x_n]^T$ 
+satisfies the corresponding box constraint.
+Here $H_{:,1:n-1}$ is not square. But there is no problem to handle
+it, see the next paragraph.
+
+In \cite{SuW05},  $H$ is assumed to be square and non-singular. 
+In our opinion, this condition may cause confusion,
+since for each $k$ except $k=n$ in Algorithm 2, 
+the remaining columns of $H$ which have not been chosen do not form a square matrix.
+Also the condition restricts the application of the algorithm to a general full column rank matrix $H$,
+unless we transform $H$ to a nonsingular matrix $R$ by the QR factorization.
+To extend the algorithm to a general full column rank matrix $H$, we need only 
+replace line \ref{l:swG} by $G:=(H^{\dagger})^T$.
+This extension has another benefit. 
+We mentioned before that the updating of $G$ in line \ref{l:swg}
+is actually the updating of the Moore-Pernrose generalized inverse 
+of the matrix formed by the columns of $H$ which have not been chosen. 
+So the extension makes all steps consistent.
+
+To reliably compute $G$ for a general full column rank $H$,
+we can compute the  QR factorization $H=Q_1R$ by the Householder transformations
+and then solve the triangular system  $RG^T=Q_1^T$ to obtain $G$.
+This requires $(5m-4n/3)n^2$ flops. 
+Another less reliable but more efficient way to do this is to compute $G=H(H^TH)^{-1}$. 
+To do this efficiently we would compute the Cholesky factorization  $H^TH = R^TR$ and solve 
+$R^TRG^T = H^T$ for $G$ by using the triangular structure of $R$. 
+The total cost for computing $G$ by this method can be shown to be $3mn^2+\frac{n^3}{3}$.
+If $H$ is square and nonsingular, we would use the LU factorization with partial pivoting to compute $H^{-1}$
+and the cost is $2n^3$ flops.
+
+For the rest of the algorithm if we use the simplification and efficient implementations
+mentioned above, we can show that it needs $4mn^2$ flops. 
+
+We see the modified SW algorithm is much more efficient than both the CH algorithm
+and the SW algorithm implemented in a naive way we mentioned in the previous subsection.
+
+\subsection{Proof of Equivalence of SW and CH}
+In this subsection we prove that  CH and  the modified  SW produce the same set of permutations
+for a general full column rank $H$.
+To prove this it will suffice to prove that $x_i^s = x_i^c$, $\bar{x}_i^s =\bar{x}_i^c$,
+$\dist_i^s = \dist_i^c$ for $i=1, \ldots, n$ in the first step which determines the last column of the final reordered $H$
+and that the subproblems produced for the second step of
+each algorithm are equivalent. 
+
+Proving $x_i^s = x_i^c$ is not difficult.
+The only effect the interchange of columns $i$  and $n$ of $R$ in CH  
+has on the real LS solution is that elements $i$ and $n$ of the solution are swapped.
+Therefore $x_i^c$ is just the $i^{th}$ element of the real LS
+solution rounded to the nearest integer in ${{\cal B}_i }$. 
+Thus, with \eqref{eq:xic} and \eqref{eq:xis},
+\be
+x_i^c=   \lfloor (H^{\dagger}y)_i  \rceil_{{\cal B}_i }
+=  \lfloor e_i^T H^{\dagger}y   \rceil_{{\cal B}_i }
+=  \lfloor g_i^T  y \rceil_{{\cal B}_i } =x_i^s.
+\label{eq:xics}
+\ee
+Therefore we also have $\bar{x}_i^c=\bar{x}_i^s$.
+
+In CH, after applying a permutation $P$ to swap columns $i$ and $n$ of $R$,  
+we apply $V^T$, a product of the Givens rotations, to bring $R$ back to a new upper triangular
+matrix, denoted by $\hat{R}$, and also apply $V$ to $\bar{y}$, 
+leading to  $\hat{y} = V^T\bar{y}$. 
+Thus  $\hat{R}=V^T RP$ and $\hat{y} = V^T\bar{y}=V^TQ_1^Ty$. 
+Then $H=Q_1R= Q_1V\hat{R}P^T$, $H^\dag= P\hat{R}^{-1}V^TQ_1^T$, 
+$g_i=(H^\dag)^Te_i=Q_1V\hat{R}^{-T}P^Te_i=Q_1V\hat{R}^{-T}e_n$,
+and $\|g_i\|_2=\|\hat{R}^{-T}e_n\|_2=1/|\hat{r}_{nn}|$.
+Therefore, with \eqref{eq:newDist} and \eqref{eq:dic}
+\begin{align}
+\dist_i^s
+&=\frac{ | y^Tg_i - \bar{x}_i^s   |}{  \| g_i   \|_2} 
+=|\hat{r}_{nn}||y^TQ_1V\hat{R}^{-T}e_n- \bar{x}_i^s  |  \label{eq:disc} \\
+& = |\hat{r}_{nn}|| \hat{y}_n/\hat{r}_{nn} - \bar{x}_i^s | 
+ = |\hat{r}_{nn}(c_n-\bar{x}_i^c)| =\dist_i^c.  \nonumber
+\end{align}
+
+Now we consider  the subproblem \eqref{eq:subc} in CH and the subproblem \eqref{eq:subs} in SW.
+We can easily show that $R_{1:n-1,1:n-1}$ in  \eqref{eq:subc} is the $R$-factor of the QR factorization
+of $H_{:,1:n-1}P$, where $H_{:,1:n-1}$ is the matrix given in \eqref{eq:subs}
+and $P$ is a permutation matrix such that $\check{x}=P\tilde{x}$,
+and that $\bar{y}_{1:n-1}$ in  \eqref{eq:subc} is the multiplication of the transpose of 
+the $Q_1$-factor of the QR factorization of $H_{:,1:n-1}P$ and $y$ in \eqref{eq:subs}.
+Thus the two subproblems are equivalent. 
+
+\subsection{New Algorithm}
+Now that we know the two algorithms are equivalent, we can take the best
+parts from both and combine them to form a new algorithm. 
+The main cost in CH is to interchange the columns of $R$ and return it to
+upper-triangular form using Givens rotations. 
+When we determine the $k^{th}$ column,  we must do this $k$ times. 
+We can avoid all but one of these column interchanges by computing $x_i^c$, 
+$\bar{x}_i^c$ and $\dist_i^c$ directly. 
+
+After the QR factorization of $H$, we  solve the reduced ILS problem \eqref{eq:ils}.
+We need only consider how to determine the last column of the final $R$.
+Other columns can be determined similarly. 
+Here we use the ideas from SW.
+Let $G=R^{-T}$, which is lower triangular.
+By \eqref{eq:xics}, we compute for $i=1,\ldots, n$
+\begin{align*}
+& x_i = \left \lfloor \bar{y}^TG_{:,i} \right \rceil_{{\cal B}_i} 
+=\left \lfloor \bar{y}_{i:n}^T G_{i:n,i} \right \rceil_{{\cal B}_i}, \;
+\bar{x}_i=\left \lfloor \bar{y}_{i:n}^T G_{i:n,i} \right \rceil_{{\cal B}_i\backslash x_i}, \\
+& \dist_i = |\bar{y}_{i:n}^T G_{i:n,i}-\bar{x}_i|/\|G_{i:n,i}\|_2.
+\end{align*}
+
+Let $j=\arg\max_{i} \dist_i$. We  take a slightly different approach to
+permuting the columns than was used in CH. Once $j$ is determined, we  
+set $\bar{y}_{1:n-1} := \bar{y}_{1:n-1} - r_{1:n-1,j}x_j$. Then we simply remove
+the $j^{th}$ column from $R$, and restore it to upper triangular using
+Givens rotations. We then apply the same Givens rotations to the new
+$\bar{y}$. In addition, we must also update the inverse matrix $G$. This is
+very easy, we can just remove the $j^{th}$ column of $G$ and apply the same
+Givens rotations that were used to restore the upper triangular structure of
+$R$. To see this is true notice that removing column $j$ of $R$ is
+mathematically equivalent to rotating $j$ to the last column and shifting
+columns $j, j+1, \ldots, n$ to the left one position, since we will only consider columns
+$1, 2, \ldots, n-1$ in subsequent steps. Suppose $P$ is the permutation matrix which
+will permute the columns as described, and $V^T$ is the product of Givens
+rotations to restore $R$ to upper-triangular. Let $\hat{R} = V^TRP$ and set
+$\hat{G} = \hat{R}^{-T}$. Then
+$$
+\hat{G} = (V^TRP)^{-T} = V^TR^{-T}P = V^TGP.
+$$
+This indicates that  the same $V$ and $P$, which are used to transform $R$ to  $\hat{R}$, 
+also transform $G$ to $\hat{G}$.
+Since $\hat{G}$ is lower triangular, it is easy to verify that
+$\hat{G}_{1:n-1,1:n-1} = \hat{R}^{-T}_{1:n-1,1:n-1}$.
+Both $\hat{R}_{1:n-1,1:n-1}$ and $\hat{G}_{1:n-1,1:n-1}$ will be used in the next step.
+
+After this, as in the CH algorithm, we continue to work on the subproblem of size $n-1$. 
+The advantages of using the ideas from CH are that we always have a lower triangular $G$
+whose dimension is reduced by one at each step
+and the updating of $G$ is numerically stable as we use orthogonal transformations.
+We give the pseudocode of the new algorithm in Algorithm  \ref{alg:NEW}.
+
+\begin{algorithm}
+\caption{New algorithm}
+\label{alg:NEW}
+\begin{algorithmic}[1]
+\STATE  Compute the QR factorization of $H$ by Householder transformations: 
+$\bsmx Q_1^T \\ Q_2^T \esmx H= \bsmx R\\ 0 \esmx$  \\
+             and compute  $\bar{y} : = Q_1^Ty$ \hfill ($2(m-n/3)n^2$ flops)
+\STATE $G := R^{-T}$ \hfill ($\frac{n^3}{3}$ flops)
+\STATE $p := 1:n$
+\STATE $p' := 1:n$
+\FOR{$k=n$ to $2$}
+	\STATE $maxDist := -1$
+	\FOR{$i=1$ to $k$}
+	         \STATE $\alpha=y_{i:k}^TG_{i:k,i}$
+	         \STATE $x_i := \left \lfloor \alpha \right \rceil_{{\cal B}_i}$ \hfill ($2(k-i)$ flops)
+	         \STATE $\bar{x}_i := \left \lfloor \alpha \right \rceil_{{{\cal B}_i}\backslash x_i}$
+	         \STATE $\dist_i =|\alpha-\bar{x}_i|/ \| G_{i:k,i} \|_2$ \hfill ($2(k-i)$ flops)
+			 \IF{$dist_i > maxDist$}
+			 	\STATE $maxDist : = dist_i$
+			 	\STATE $j:=i$
+			 \ENDIF	
+	\ENDFOR
+	\STATE $p_k := p'_j$
+	\STATE Interchange the intervals ${{\cal B}_k}$ and ${{\cal B}_j}$
+	\STATE Interchange entries $k$ and $j$ in $p'$
+	\STATE Set $\bar{y}:=\bar{y}_{1:k-1} - R_{1:k-1,j}x_j$	
+	\STATE Remove column $j$ of $R$ and $G$, and return $R$ and $G$ to upper and lower triangular by Givens rotations, respectively, and then remove the last row of $R$ and $G$. The same Givens rotations are applied to $\bar{y}$. \\ \hfill ($6k(k-j)$ flops)
+\ENDFOR
+\STATE $p_1 = p'_1$
+\end{algorithmic}
+\end{algorithm}
+
+Here we consider the complexity analysis of our new algorithm. 
+If we sum the costs in algorithm \ref{alg:NEW} over all loop iterations,
+we get a total of $\frac{7n^3}{3} + 2mn^2$ flops in the worst case. 
+The worst case is very unlikely to occur, it arises when $j=1$ each iteration of the outer loop. In the average case
+however, $j$ is around $k/2$ and we get an average case complexity of $\frac{4n^3}{3} + 2mn^2$ flops.
+In both cases, the complexity is less than the complexity of the modified SW algorithm.
+
+\section{ILS Reduction Algorithms}
+For the unconstrained ILS problem, the most common reduction strategy is to apply the LLL reduction \cite{LenLL82} to the matrix $H$. There are a few ways to describe the LLL reduction process and what it means for a matrix $H$ to be LLL reduced. In this thesis, we will look at the LLL algorithm as a matrix factorization, $H = QRZ$, where $Q$ is orthogonal, $R$ is upper triangular, and $Z$ is unimodular. After this $QRZ$ factorization, the matrix $R$ will be LLL reduced. We can say an upper triangular matrix is LLL reduced if it satisfies the following properties:
+
+\begin{align} \label{eq:LLLConditions}
+&\left | r_{k-1,j} \right | \le \frac{1}{2}r_{k-1,k-1} \\
+&\sigma r_{k-1,k-1}^2 \le r_{k-1,k}^2 + r_{k,k}^2 \\
+&j = k:n, k=2:n
+\end{align}
+
+From \eqref{eq:LLLConditions} we can easily obtain the following inequality:
+\begin{equation} \label{eq:LLLdiagonal}
+\left | r_{k-1,k-1} \right | \le \frac{2}{\sqrt{4\sigma -1}}\left | r_{k,k} \right |
+\end{equation}
+
+Looking at \eqref{eq:LLLdiagonal}, we can obtain some sense of why using a LLL reduced matrix $R$ in the search process should yield a performance improvement.
+
+\chapter{Alternate Search Strategies} \label{chap:Searches}
+
+\chapter{Results} \label{chap:Results}
+
+\chapter{Conclusions} \label{chap:Conclusion}
 
 \bibHeading{References}
 \bibliography{../ILS}
@@ -207,6 +910,8 @@ The Schnorr-Euchner (SE) enumeration strategy is the
 \index[abbr]{LS@LS: Least Squares}
 \index[abbr]{ILS@ILS: Integer Least Squares}
 \index[abbr]{BILS@BILS: Box-constrained Integer Least Squares}
+\index[abbr]{SE@SE: Schnorr-Euchner enumeration algorithm}
+
 
 \printindex[keylist]{Index}{Index}{}
 \printindex[abbr]{KEY TO ABBREVIATIONS}{KEY TO ABBREVIATIONS}{}

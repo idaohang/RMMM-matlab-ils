@@ -1,806 +1,922 @@
-@Article{AgrEVZ02,
-	author = {Agrell, E. and Eriksson, T. and Vardy, A. and Zeger, K.},
-	title = {{Closest point search in lattices}},
-	journal = {{IEEE Transactions on Information Theory}},
-	volume = {{48}},
-	number = {{8}},
-	pages = {2201-2214},
-	year = {{2002}},
-}
-
-@Book{AhoHU83,
-	Publisher = {{Addison-Wesley}},
-	author = {Aho, A. V. and Hopcroft, J. E. and Ullman, J. D.},
-	title = {{Data Structures and Algorithms}},
-	year = {{1983}},
-}
-
-@InProceedings{Ajt98,
-	Address = {{Dallas, TX}},
-	BookTitle = {{Proc. 30th Annu. ACM Symp. Theory of Computing}},
-	Month = {{May}},
-	author = {Ajtai, M.},
-	title = {{The shortest vector problem in $L_2$ is NP-hard for randomized reductions}},
-	year = {{1998}},
-}
-
-@Article{Bab86,
-	author = {Babai, L.},
-	title = {{On Lovasz{'}s lattice reduction and the nearest lattice point problem}},
-	journal = {{Combinatorica}},
-	volume = {{6}},
-	number = {{1}},
-	pages = {1-13},
-	year = {{1986}},
-}
-
-@Book{BigCCGPP07,
-	Publisher = {{Cambridge University Press}},
-	author = {Biglieri, E. and Calderbank, R. and Constantinides, A. and Goldsmith, A. and Paulraj, A. and Poor, H. V.},
-	title = {{MIMO Wireless Communications}},
-	year = {{2007}},
-}
-
-@Article{BilE07,
-	author = {Billionnet, A. and Elloumi, S.},
-	title = {{Using a mixed integer quadratic programming solver for the unconstrained quadratic 0-1 problem}},
-	journal = {{Math. Program.}},
-	volume = {{109}},
-	number = {{A}},
-	pages = {55-68},
-	year = {{2007}},
-}
-
-@Book{Bjo96,
-	Publisher = {{Philadelphia: SIAM}},
-	author = {Bj{\"{o}}rck, {\u{A}}.},
-	title = {{Numerical Methods for Least Squares Problem}},
-	year = {{1996}},
-}
-
-@TechReport{Boa81,
-	Address = {{Amsterdam, The Netherlands}},
-	Publisher = {{Mathematisch Institute}},
-	author = {Boas, P. van Emde},
-	title = {{Another NP-complete partition problem and the complexity of computing short vectors in a lattice}},
-	number = {{81-04}},
-	year = {{1981}},
-}
-
-@InProceedings{BouGBF03,
-	Address = {{San Francisco, U.S.A.}},
-	BookTitle = {{Proceedings of IEEE 2003 Global Communications Conference}},
-	Month = {{dec}},
-	author = {Boutros, J. and Gresset, N. and Brunel, L. and Fossorier, M.},
-	title = {{Soft-input soft-output lattice sphere decoder for linear channels}},
-	pages = {213-217},
-	year = {{2003}},
-}
-
-@Article{BruB03,
-	Month = {{Apr.}},
-	author = {Brunel, L. and Boutros, J. J.},
-	title = {{Lattice decoding for joint detection in direct-sequence CDMA systems}},
-	journal = {{IEEE Transactions on Information Theory}},
-	volume = {{49}},
-	number = {{4}},
-	pages = {1030-1037},
-	year = {{2003}},
-}
-
-@Article{Cha05,
-	author = {Chang, X. W.},
-	title = {{Integer Least Squares Estimation}},
-	journal = {{Lecture Notes}},
-	year = {{School of Computer Science, McGill University, 2005}},
-}
-
-@Article{ChaH05,
-	author = {Chang, X. W. and Han, Q.},
-	title = {{Solving box-constrained integer least-squares problems}},
-	journal = {{IEEE Transactions on Wireless Communications}},
-	volume = {{7}},
-	number = {{1}},
-	pages = {277-287},
-	year = {{2008}},
-}
-
-@InProceedings{ChaY07a,
-	Address = {{Honolulu, Hawaii, USA}},
-	BookTitle = {{Proceedings of the 2007 International Wireless Communications and Mobile Computing Conference}},
-	Month = {{August 12-16}},
-	author = {Chang, X. W. and Yang, X.},
-	title = {{An efficient regularization approach for underdetermined MIMO system decoding}},
-	pages = {349-353},
-	year = {{2007}},
-}
-
-@InProceedings{ChaY07b,
-	Address = {{Washington, DC, USA}},
-	BookTitle = {{Proceedings of IEEE GlobeCOM 2007}},
-	Month = {{Nov. 26-30}},
-	author = {Chang, X. W. and Yang, X.},
-	title = {{An efficient tree search decoder with columnreordering for underdetermined MIMO systems}},
-	pages = {4375-4379},
-	year = {{2007}},
-}
-
-@InProceedings{ChaY06,
-	Address = {{Kingston, Ontario, Canada}},
-	BookTitle = {{Proceedings of 23rd Queen{'}s Biennial Symposium on Communications}},
-	Month = {{May 30th - June 1st}},
-	author = {Chang, X. W. and Yang, X.},
-	title = {{A new fast generalized sphere decoding algorithm for under-determined MIMO systems}},
-	pages = {18-21},
-	year = {{2006}},
-}
-
-@Article{ChaYZ05,
-	__markedentry = {{[sbreen1]}},
-	author = {Chang, X. W. and Yang, X. and Zhou, T.},
-	title = {{MLAMBDA: a modified LAMBDA method for integer least-squares estimation}},
-	journal = {{Journal of Geodesy}},
-	volume = {{79}},
-	pages = {552-565},
-	year = {{2005}},
-}
-
-@Book{Coh93,
-	Publisher = {{Springer-Verlag, Germany}},
-	author = {Cohen, H.},
-	title = {{A Course in Computational Algebraic Number Theory}},
-	year = {{1993}},
-}
-
-@Book{CorLR01,
-	Publisher = {{MIT Press}},
-	author = {Cormen, T. H. and Leiserson, C. E. and Rivest, C.},
-	title = {{Introduction to Algorithms}},
-	year = {{2001}},
-}
-
-@Article{CuiT05,
-	author = {Cui, T. and Tellambura, C.},
-	title = {{An efficient generalized sphere decoder for rank-deficient MIMO systems}},
-	journal = {{IEEE Communications Letters}},
-	volume = {{9}},
-	number = {{5}},
-	pages = {423-425},
-	year = {{2005}},
-}
-
-@Article{DamAB00,
-	author = {Damen, M. O. and Abed-Meraim, K. and Belfiore, J. C.},
-	title = {{Generalized sphere decoder for asymmetrical space-time communication architecture}},
-	journal = {{IEEE Electronics Letters}},
-	volume = {{36}},
-	pages = {166-167},
-	year = {{2000}},
-}
-
-@Article{DamCB00,
-	Month = {{may}},
-	author = {Damen, M. O. and Chkeif, A. and Belfiore, J. C.},
-	title = {{Lattice code decoder for space-time codes}},
-	journal = {{IEEE Communications Letters}},
-	volume = {{4}},
-	number = {{5}},
-	pages = {161-163},
-	year = {{2000}},
-}
-
-@Article{DamGC03,
-	__markedentry = {{[sbreen1]}},
-	Month = {{oct}},
-	author = {Damen, M. O. and Gamal, H. El and Caire, G.},
-	title = {{On maximum-likelihood detection and the search for the closest lattice point}},
-	journal = {{IEEE Transactions on Information Theory}},
-	volume = {{49}},
-	number = {{10}},
-	pages = {2389-2402},
-	year = {{2003}},
-}
-
-@InProceedings{DamGC04,
-	Address = {{Chicago, USA}},
-	BookTitle = {{Proceedings of IEEE International Symposium on Information Theory}},
-	Month = {{June-July}},
-	author = {Damen, M. O. and Gamel, H. El and Caire, G.},
-	title = {{MMSE-GDFE lattice decoding for solving under-determined linear systems with integer unknowns}},
-	pages = {539-539},
-	year = {{2004}},
-}
-
-@InProceedings{DayV03,
-	Address = {{Monticello, IL}},
-	BookTitle = {{Proceedings of 41st Annu. Allerton Conf. Communication, Control, and Computing}},
-	Month = {{oct}},
-	author = {Dayal, P. and Varanasi, M. K.},
-	title = {{A fast generalized sphere decoder for optimum decoding of under-determined MIMO systems}},
-	pages = {1216-1225},
-	year = {{2003}},
-}
-
-@InProceedings{JonT96,
-	BookTitle = {{Delft Geodetic Computing Center LGR-Series, No.12}},
-	author = {Jonge, P. J. De and Tiberius, C. C. J. M.},
-	title = {{LAMBDA method for integer ambiguity estimation: implementation aspects}},
-	year = {{1996}},
-}
-
-@Article{FinP85,
-	Month = {{apr}},
-	author = {Fincke, U. and Pohst, M.},
-	title = {{Improved methods for calculating vectors of short length in a lattice, including a complexity analysis}},
-	journal = {{Mathematics of Computation}},
-	volume = {{44}},
-	pages = {463-471},
-	year = {{1985}},
-}
-
-@Book{Fle87,
-	Publisher = {{2nd Edition, Wiley, Chichester}},
-	author = {Fletcher, R.},
-	title = {{Practical Methods of Optimization}},
-	year = {{1987}},
-}
-
-@Article{FleL98,
-	author = {Fletcher, R. and Leyffer, S.},
-	title = {{Numerical experience with lower bounds for MIQP branch-and-bound}},
-	journal = {{SIAM Journal on Optimization}},
-	volume = {{8}},
-	number = {{2}},
-	pages = {604-616},
-	year = {{1998}},
-}
-
-@Article{FosGVW99,
-	Month = {{nov}},
-	author = {Foscini, G. J. and Golden, G. D. and Valenzuela, R. A. and Wolniansky, P. W.},
-	title = {{Simplified processing for high spectral efficiency wireless communication employing multi-element arrays}},
-	journal = {{IEEE Journal on Selected Areas in Communications}},
-	volume = {{17}},
-	number = {{11}},
-	pages = {1841-1852},
-	year = {{1999}},
-}
-
-@InProceedings{FukMU04,
-	Address = {{Parma, Italy}},
-	BookTitle = {{Proceedings of International Symposium on Information Theory and its Applications}},
-	__markedentry = {{[sbreen1]}},
-	Month = {{oct}},
-	author = {Fukatani, T. and Matsumoto, R. and Uyematsu, T.},
-	title = {{Two methods for decreasing the computational complexity of the MIMO ML decoder}},
-	pages = {34-38},
-	year = {{2004}},
-}
-
-@Book{GarN72,
-	Publisher = {{John Wiley, New York}},
-	author = {Garfinkel, R. S. and Nemhauser, G. L.},
-	title = {{Integer Programming}},
-	year = {{1972}},
-}
-
-@Book{GolV96,
-	Publisher = {{The Johns Hopkins University Press, Baltimore, Maryland, 3rd edition}},
-	author = {Golub, G. H. and Loan, C. F. Van},
-	title = {{Matrix Computations}},
-	year = {{1996}},
-}
-
-@Book{GroLS88,
-	Publisher = {{Springer-Verlag, New York}},
-	author = {Grotschel, M. and Lovasz, L. and Schrijver, A.},
-	title = {{Geometric Algorithms and Combinatorial Optimization}},
-	year = {{1988}},
-}
-
-@Article{GupR85,
-	author = {Gupta, O. K. and Ravindran, A.},
-	title = {{Branch and bound experiments in convex nonlinear integer programming}},
-	journal = {{Management Science}},
-	volume = {{31}},
-	pages = {1533-1546},
-	year = {{1985}},
-}
-
-@Article{HasB98,
-	author = {Hassibi, A. and Boyd, S.},
-	title = {{Integer parameter estimation in linear models with applications to GPS}},
-	journal = {{IEEE Transactions on Signal Processing}},
-	volume = {{46}},
-	number = {{11}},
-	pages = {2938-2952},
-	year = {{1998}},
-}
-
-@InProceedings{Has00,
-	Address = {{Istanbul, Turkey}},
-	BookTitle = {{Proceedings of IEEE International Conference on Acoustics, Speech and Signal Processing}},
-	Month = {{jun}},
-	author = {Hassibi, B.},
-	title = {{An efficient square-root algorithm for BLAST}},
-	year = {{2000}},
-}
-
-@InCollection{HasV03,
-	BookTitle = {{Multiantenna Channels: Capacity, Coding and Signal Processing}},
-	Publisher = {{American Mathematical Society and DIMACS }},
-	author = {Hassibi, B. and Vikalo, H.},
-	title = {{Maximum-likelihood decoding and integer least-squares: the expected complexity}},
-	volume = {{62}},
-	pages = {161-192},
-	year = {{2003}},
-}
-
-@InProceedings{HasV01,
-	BookTitle = {{Proceedings of Asilomar Conference on Signals, Systems and Computers}},
-	Month = {{nov}},
-	author = {Hassibi, B. and Vikalo, H.},
-	title = {{On the expected complexity of sphere decoding}},
-	volume = {{2}},
-	pages = {1051-1055},
-	year = {{2001}},
-}
-
-@Article{JooT02,
-	author = {Joosten, P. and Tiberius, C. C. J. M.},
-	title = {{LAMBDA: FAQs}},
-	journal = {{GPS Solutions}},
-	volume = {{6}},
-	number = {{1-2}},
-	pages = {109-114},
-	year = {{2002}},
-}
-
-@Article{Kan87,
-	author = {Kannan, R.},
-	title = {{Minkowski{'}s convex body theorem and integer programming}},
-	journal = {{Mathematics of Operations Research}},
-	volume = {{12}},
-	pages = {415-550},
-	year = {{1987}},
-}
-
-@InProceedings{Kan83,
-	BookTitle = {{Proceedings of ACM Symposium on Theory of Computing}},
-	Month = {{apr}},
-	author = {Kannan, R.},
-	title = {{Improved algorithms for integer programming and related lattice problems}},
-	pages = {193-206},
-	year = {{1983}},
-}
-
-@InProceedings{KinG03,
-	BookTitle = {{Proc. 4th Australian Communication Theory Workshop}},
-	author = {Kind, A. P. and Grant, A. J.},
-	title = {{Efficient list decoding for lattices}},
-	pages = {124-128},
-	year = {{2003}},
-}
-
-@Article{KorZ73,
-	author = {Korkine, A. and Zolotareff, G.},
-	title = {{Sur les formes quadratiques}},
-	journal = {{Mathematische Annalen}},
-	volume = {{6}},
-	pages = {366-389},
-	year = {{1873}},
-}
-
-@InProceedings{KoyS01,
-	BookTitle = {{Proc. CaLC 2001, LNCS 2146}},
-	Publisher = {{Springer-Verlag}},
-	author = {Koy, H. and Schnorr, C. P.},
-	title = {{Segment LLL-reduction of lattice bases}},
-	pages = {67-80},
-	year = {{2001}},
-}
-
-@Article{KozTK79,
-	author = {Kozlov, M. K. and Tarasov, S. P. and Khachiyan, L. G.},
-	title = {{Polynomial solvability of convex quadratic programming}},
-	journal = {{Doklady Akademii Nauk SSSR}},
-	volume = {{248}},
-	number = {{5}},
-	pages = {1049-1051},
-	year = {{1979}},
-}
-
-@Article{LanD60,
-	author = {Land, A. H. and Doig, A. G.},
-	title = {{An automatic method of solving discrete programming problems}},
-	journal = {{Econometrica}},
-	volume = {{28}},
-	number = {{3}},
-	pages = {497-520},
-	year = {{1960}},
-}
-
-@Article{LenLL82,
-	author = {Lenstra, A. K. and Lenstra, J. H. W. and Lovasz, L.},
-	title = {{Factoring polynomials with rational coefficients}},
-	journal = {{Mathematische Annalen}},
-	volume = {{261}},
-	pages = {515-534},
-	year = {{1982}},
-}
-
-@Article{Len83,
-	author = {Lenstra, J. H. W.},
-	title = {{Integer programming with a fixed number of variables}},
-	journal = {{Mathematics of Operations Research}},
-	volume = {{8}},
-	pages = {538-548},
-	year = {{1983}},
-}
-
-@TechReport{Len81,
-	Publisher = {{University of Amsterdam, Dept. Of Mathematics}},
-	author = {Lenstra, J. H. W.},
-	title = {{Integer programming with a fixed number of variables}},
-	number = {{TR 81-03}},
-	year = {{1981}},
-}
-
-@InProceedings{LuoPWB03,
-	Address = {{Anchorage, U.S.A.}},
-	BookTitle = {{Proceedings of IEEE International Conference on Communications}},
-	Month = {{may}},
-	author = {Luo, J. and Pattipati, K. and Willett, P. and Brunel, L.},
-	title = {{Branch-and-bound-based fast optimal algorithm for multiuser detection in synchronous CDMA}},
-	pages = {223-227},
-	year = {{2003}},
-}
-
-@InProceedings{LuoLK03,
-	BookTitle = {{Proceedings of IEEE International Conference on ASSP}},
-	Month = {{Apr}},
-	author = {Luo, Z. Q. and Luo, X. and Kisialiou, M.},
-	title = {{An efficient quasi-maximum likelihood decoder for PSK signals}},
-	volume = {{6}},
-	pages = {561-564},
-	year = {{2003}},
-}
-
-@Article{Mic01,
-	author = {Micciancio, D.},
-	title = {{The hardness of the closest vector problem with preprocessing}},
-	journal = {{IEEE Transactions on Information Theory}},
-	volume = {{47}},
-	pages = {1212-1215},
-	year = {{2001}},
-}
-
-@InProceedings{Mic98,
-	Address = {{Palo Alto, CA}},
-	BookTitle = {{Proceedings of 39th Annu. Symp. Found. Computer Science}},
-	Month = {{Nov}},
-	author = {Micciancio, D.},
-	title = {{The shortest vector in a lattice is hard to approximate to within some constant}},
-	year = {{1998}},
-}
-
-@Article{MobK07,
-	author = {Mobasher, A. and Khandani, A. K.},
-	title = {{Matrix-Lifting semi-definite programming for decoding in multiple antenna systems}},
-	journal = {{Submitted to IEEE Transaction on Information Theory}},
-	year = {{2007}},
-}
-
-@InProceedings{MobTSK05,
-	Address = {{The Johns Hopkins University}},
-	BookTitle = {{Proceedings of Information Sciences and Systems Conference}},
-	Month = {{Mar}},
-	author = {Mobasher, A. and Taherzadeh, M. and Sotirov, R. and Khandani, A. K.},
-	title = {{An efficient quasi-maximum likelihood decoding for finite constellations}},
-	year = {{2005}},
-}
-
-@Article{Mow03,
-	author = {Mow, W. H.},
-	title = {{Universal lattice decoding: principle and recent advances}},
-	journal = {{Wireless Communications and Mobile Computing}},
-	volume = {{3}},
-	number = {{5}},
-	pages = {553-569},
-	year = {{2003}},
-}
-
-@Article{Mow94,
-	author = {Mow, W. H.},
-	title = {{Maximum likelihood sequence estimation from the lattice viewpoint}},
-	journal = {{IEEE Transactions on Information Theory}},
-	volume = {{40-5}},
-	pages = {1591-1600},
-	year = {{1994}},
-}
-
-@Article{MurGDC06,
-	author = {Murugan, A. D. and Gamal, H. El and Damen, M. O. and Caire, G.},
-	title = {{A unified framework for tree search decoding: rediscovering the sequential decoder}},
-	journal = {{IEEE Transactions on Information Theory}},
-	volume = {{52}},
-	number = {{3}},
-	pages = {933-953},
-	year = {{2006}},
-}
-
-@Book{NemW88,
-	Publisher = {{Wiley, New York}},
-	author = {Nemhauser, G. L. and Wolsey, L. A.},
-	title = {{Integer and Combinatorial Optimization}},
-	year = {{1988}},
-}
-
-@Book{NocW99,
-	Publisher = {{Springer-Verlag, New York}},
-	author = {Nocedal, J. and Wright, S. J.},
-	title = {{Numerical Optimization}},
-	year = {{1999}},
-}
-
-@Book{ParkR88,
-	Publisher = {{Academic Press, New York}},
-	author = {Parker, R. and Rardin, R.},
-	title = {{Discrete Optimization}},
-	year = {{1988}},
-}
-
-@Article{Pho81,
-	Month = {{feb}},
-	author = {Pohst, M.},
-	title = {{On the computation of lattice vectors of minimal length, successive minima and reduced bases with applications}},
-	journal = {{ACM SIGSAM Bulletin}},
-	volume = {{15}},
-	pages = {37-44},
-	year = {{1981}},
-}
-
-@Article{Sch87,
-	author = {Schnorr, C. P.},
-	title = {{A hierarchy of polynomial time lattice basis reduction algorithms}},
-	journal = {{Theoretical Computer Science}},
-	volume = {{53}},
-	pages = {201-224},
-	year = {{1987}},
-}
-
-@Article{SchE94,
-	author = {Schnorr, C. P. and Euchner, M.},
-	title = {{Lattice basis reduction: improved practical algorithms and solving subset sum problems}},
-	journal = {{Mathematical Programming}},
-	volume = {{66}},
-	pages = {181-199},
-	year = {{1994}},
-}
-
-@InProceedings{StoVH06,
-	BookTitle = {{Proceedings of the 2006 IEEE International Conference on Acoustics, Speech and Signal Processing}},
-	__markedentry = {{[sbreen1]}},
-	author = {Stojnic, M. and Vikalo, H. and Hassibi, B.},
-	title = {{Futher results on speeding up the sphere decoder}},
-	pages = {314-318},
-	year = {{2006}},
-}
-
-@InProceedings{StoVH05a,
-	BookTitle = {{Proceedings of the 2005 IEEE International Conference on Wireless Networks, Communications and Mobile Computing}},
-	author = {Stojnic, M. and Vikalo, H. and Hassibi, B.},
-	title = {{An efficient H-infinity estimation approach to speed up the sphere decoder}},
-	pages = {241-244},
-	year = {{2005}},
-}
-
-@InProceedings{StoVH05b,
-	BookTitle = {{Proceedings of the 2005 IEEE International Conference on Acoustics, Speech and Signal Processing}},
-	__markedentry = {{[sbreen1]}},
-	author = {Stojnic, M. and Vikalo, H. and Hassibi, B.},
-	title = {{A branch and bound approach to speed up the sphere decoder}},
-	pages = {429-432},
-	year = {{2005}},
-}
-
-@Article{TanR01,
-	Month = {{Aug}},
-	author = {Tan, P. and Rasmussen, L. K.},
-	title = {{The application of semidefinite programming for detection in CDMA}},
-	journal = {{IEEE Journal on Selected Areas in Communications}},
-	volume = {{19}},
-	number = {{8}},
-	year = {{2001}},
-}
-
-@InCollection{Teu98,
-	Address = {{New York}},
-	BookTitle = {{GPS for Geodesy}},
-	Edition = {{2nd}},
-	Editor = {Teunissen, P. J. G. and Kleusberg, A.},
-	Publisher = {{Springer-Verlag}},
-	author = {Teunissen, P. J. G.},
-	title = {{GPS carrier phase ambiguity fixing concepts}},
-	pages = {317-388},
-	year = {{1998}},
-}
-
-@Article{Teu99,
-	author = {Teunissen, P. J. G.},
-	title = {{An optimality property of the integer least-squares estimator}},
-	journal = {{J. of Geodesy}},
-	volume = {{73}},
-	number = {{11}},
-	pages = {587-593},
-	year = {{1999}},
-}
-
-@Article{Teu95a,
-	author = {Teunissen, P. J. G.},
-	title = {{The least-squares ambiguity decorrelation adjustment: a method for fast GPS ambiguity estitmation}},
-	journal = {{Journal of Geodesy}},
-	volume = {{70}},
-	number = {{1-2}},
-	pages = {65-82},
-	year = {{1995}},
-}
-
-@Article{Teu95b,
-	author = {Teunissen, P. J. G.},
-	title = {{The invertibe GPS ambiguity transformation}},
-	journal = {{Manuscripta Geodatetica}},
-	volume = {{20}},
-	number = {{6}},
-	pages = {489-497},
-	year = {{1995}},
-}
-
-@InProceedings{Teu94a,
-	BookTitle = {{Proceedings of IAG Symposium No.114, Geodetic Theory Today, Springer Verlag, III Hotine-Marussi Symposium on Mathematical Geodesy, L{'}Aquila, Italy, May 29-June 3}},
-	author = {Teunissen, P. J. G.},
-	title = {{On the GPS double difference ambiguities and their partial search spaces}},
-	pages = {39-48},
-	year = {{1994}},
-}
-
-@InProceedings{Teu93,
-	BookTitle = {{Proceedings of Section IV Thery and Methodology, IAG General Meeting, Beijing, China, August}},
-	author = {Teunissen, P. J. G.},
-	title = {{Least-squares estimation of the integer GPS ambiguities}},
-	pages = {561-571},
-	year = {{1993}},
-}
-
-@InProceedings{TeuJT94,
-	BookTitle = {{Proceedings of ION GPS-94, 7th International Technical Meeting of the Satellite Division of the Institute of Navigation, Salt Lake City, UT ,Sep.20-23}},
-	author = {Teunissen, P. J. G. and Jonge, P. J. de and Tiberius, C. C. J. M.},
-	title = {{On the spectrum of the GPS DD-Ambiguities}},
-	pages = {115-124},
-	year = {{1994}},
-}
-
-@InProceedings{TeuT94b,
-	BookTitle = {{Proceedings of International Symposium on Kinematic Systems in Geodesy, Geomatics and Navigation KIS, Banff, Canada, August 30-September 2}},
-	author = {Teunissen, P. J. G. and Tiberius, C. C. J. M.},
-	title = {{Integer least-squares estimation of the GPS phase ambiguities}},
-	pages = {221-231},
-	year = {{1994}},
-}
-
-@InProceedings{VitB93,
-	Address = {{Juan-Les-Pins, France}},
-	BookTitle = {{14-eme Colloque GRETSI}},
-	Month = {{sep}},
-	author = {Viterbo, E. and Biglieri, E.},
-	title = {{A universal lattice decoder}},
-	year = {{1993}},
-}
-
-@Article{VitB99,
-	Month = {{jul}},
-	author = {Viterbo, E. and Boutros, J.},
-	title = {{A universal lattice code decoder for fading channels}},
-	journal = {{IEEE Transactions on Information Theory}},
-	volume = {{45}},
-	number = {{5}},
-	pages = {1639-1642},
-	year = {{1999}},
-}
-
-@Article{VolRS88,
-	author = {Volkovich, O. V. and Roshchin, V. A. and Sergienko, I. V.},
-	title = {{Models and methods of solution of quadratic integer programming problems}},
-	journal = {{Cybernetics and Systems Analysis}},
-	volume = {{23}},
-	number = {{3}},
-	pages = {289-305},
-	year = {{1988}},
-}
-
-@InProceedings{WanT06,
-	Address = {{Istanbul, Turkey}},
-	BookTitle = {{Proceedings of IEEE International Conference on Communications}},
-	Month = {{jue}},
-	author = {Wang, P. and Le-Ngoc, T.},
-	title = {{A low complexity generalized sphere decoding approach for underdetermined MIMO systems}},
-	pages = {4266-4271},
-	year = {{2006}},
-}
-
-@InProceedings{WeiS95,
-	Address = {{Palm Springs, California}},
-	BookTitle = {{Proc. ION GPS95}},
-	Month = {{sep}},
-	author = {Wei, M. and Schwarz, K.},
-	title = {{Fast ambiguity resolution using an integer nonlinear programming method}},
-	year = {{1995}},
-}
-
-@InProceedings{WieMPF03,
-	Address = {{Rome, Italy}},
-	BookTitle = {{IEEE Workshop on Signal Processing Advances in Wireless Communications}},
-	Month = {{jue}},
-	author = {Wiesel, A. and Mestre, X. and Pages, A. and Fonollosa, J. R.},
-	title = {{Efficient implementation of sphere demodulation}},
-	year = {{2003}},
-}
-
-@Article{WonP07,
-	author = {Wong, K. K. and Paulraj, A.},
-	title = {{Efficient near maximum-likelihood detection for underdetermined MIMO antenna systems using a geometrical approach}},
-	journal = {{EURASIP Journal on Wireless Communications and Networking}},
-	pages = {1241-1255},
-	year = {{2007}},
-}
-
-@Article{WubBRKK01,
-	Month = {{oct}},
-	author = {Wubben, D. and Bohnke, R. and Rinas, J. and Kuhn, V. and Kammeyer, K. D.},
-	title = {{Efficient algorithm for decoding layered space-time codes}},
-	journal = {{IEEE Electronics Letters}},
-	volume = {{37}},
-	number = {{22}},
-	pages = {1348-1350},
-	year = {{2001}},
-}
-
-@TechReport{XuCL00,
-	Publisher = {{Department of Geoedsy and Geoinformatics, University Stuttgart}},
-	author = {Xu, P. and Cannon, E. and Lachapelle, G.},
-	title = {{GPS ambiguity resolution by integer quadratic programming}},
-	number = {{2000-2}},
-	year = {{2000}},
-}
-
-@Article{YanLH05,
-	Month = {{jan}},
-	author = {Yang, Z. and Liu, C. and He, J.},
-	title = {{A new approach for fast generalized sphere decoding in MIMO systems}},
-	journal = {{IEEE Signal Processing Letters}},
-	volume = {{12}},
-	number = {{1}},
-	pages = {41-44},
-	year = {{2005}},
-}
-
-@InProceedings{SuW05,
-	BookTitle = {{IEEE International Conference on Communications}},
-	author = {Su, Karen and Wassell, Ian J.},
-	title = {{A New Ordering for Efficient Sphere Decoding}},
-	volume = {{3}},
-	pages = {1906-1910},
-	year = {{2005}},
-}
-
-@Article{Cli64,
-	Month = {{sep}},
-	author = {Cline, Randall E.},
-	title = {{Representations for the Generalized Inverse of a Partitioned Matrix}},
-	journal = {{Journal of the Society for Industrial and Applied Mathematics}},
-	volume = {{12}},
-	number = {{3}},
-	pages = {588-600},
-	year = {{1964}},
+% This file was created with JabRef 2.6.
+% Encoding: UTF-8
+
+@ARTICLE{AgrEVZ02,
+  author = {E. Agrell and T. Eriksson and A. Vardy and K. Zeger},
+  title = {Closest point search in lattices},
+  journal = {IEEE Transactions on Information Theory},
+  year = {2002},
+  volume = {48},
+  pages = {2201--2214},
+  number = {8}
+}
+
+@BOOK{AhoHU83,
+  title = {Data Structures and Algorithms},
+  publisher = {Addison-Wesley},
+  year = {1983},
+  author = {A.V. Aho and J.E. Hopcroft and J.D. Ullman}
+}
+
+@INPROCEEDINGS{Ajt98,
+  author = {M. Ajtai},
+  title = {The shortest vector problem in {$L\_2$} is {NP}-hard for randomized
+	reductions},
+  booktitle = {Proc. 30th Annu. ACM Symp. Theory of Computing},
+  year = {1998},
+  address = {Dallas, TX},
+  month = May
+}
+
+@ARTICLE{SchFL09,
+  author = {Andreas Schenk, Robert Fischer, Lutz Lampe},
+  title = {A Stopping Radius for the Sphere Decoder and its Application to MSDD
+	of DPSK},
+  journal = {IEEE Communications Letters},
+  year = {2009},
+  volume = {13},
+  pages = {465-467},
+  owner = {steve},
+  timestamp = {2011.06.21}
+}
+
+@ARTICLE{Bab86,
+  author = {L. Babai},
+  title = {On Lovasz's lattice reduction and the nearest lattice point problem},
+  journal = {Combinatorica},
+  year = {1986},
+  volume = {6},
+  pages = {1--13},
+  number = {1}
+}
+
+@BOOK{BigCCGPP07,
+  title = {{MIMO} Wireless Communications},
+  publisher = {Cambridge University Press},
+  year = {2007},
+  author = {E. Biglieri and R. Calderbank and A. Constantinides and A. Goldsmith
+	and A. Paulraj and H.V. Poor}
+}
+
+@ARTICLE{BilE07,
+  author = {A. Billionnet and S. Elloumi},
+  title = {Using a mixed integer quadratic programming solver for the unconstrained
+	quadratic 0-1 problem},
+  journal = {Math. Program.},
+  year = {2007},
+  volume = {109},
+  pages = {55--68},
+  number = {A}
+}
+
+@BOOK{Bjo96,
+  title = {Numerical Methods for Least Squares Problem},
+  publisher = {Philadelphia: SIAM},
+  year = {1996},
+  author = {{\AA}. Bj{\"o}rck}
+}
+
+@TECHREPORT{Boa81,
+  author = {P. {van Emde} Boas},
+  title = {Another {NP}-complete partition problem and the complexity of computing
+	short vectors in a lattice},
+  institution = {Mathematisch Institute},
+  year = {1981},
+  number = {81-04},
+  address = {Amsterdam, The Netherlands}
+}
+
+@MASTERSTHESIS{Bor10,
+  author = {Mazen Al Borno},
+  title = {Reduction in Solving Some Integer Least Squares Problems},
+  school = {McGill University},
+  year = {2010},
+  owner = {steve},
+  timestamp = {2011.06.22}
+}
+
+@INPROCEEDINGS{BouGBF03,
+  author = {J. Boutros and N. Gresset and L. Brunel and M. Fossorier},
+  title = {Soft-input soft-output lattice sphere decoder for linear channels},
+  booktitle = {Proceedings of IEEE 2003 Global Communications Conference},
+  year = {2003},
+  pages = {213--217},
+  address = {San Francisco, U.S.A.},
+  month = dec
+}
+
+@ARTICLE{BruB03,
+  author = {L. Brunel and J. J. Boutros},
+  title = {Lattice decoding for joint detection in direct-sequence {CDMA} systems},
+  journal = {IEEE Transactions on Information Theory},
+  year = {2003},
+  volume = {49},
+  pages = {1030--1037},
+  number = {4},
+  month = Apr.
+}
+
+@ARTICLE{Cha05,
+  author = {X.-W. Chang},
+  title = {Integer Least Squares Estimation},
+  journal = {Lecture Notes},
+  year = {School of Computer Science, McGill University, 2005}
+}
+
+@ARTICLE{ChaH05,
+  author = {X.-W. Chang and Q. Han},
+  title = {Solving box-constrained integer least-squares problems},
+  journal = {IEEE Transactions on Wireless Communications},
+  year = {2008},
+  volume = {7},
+  pages = {277--287},
+  number = {1}
+}
+
+@INPROCEEDINGS{ChaY07a,
+  author = {X.-W. Chang and X. Yang},
+  title = {An efficient regularization approach for underdetermined {MIMO} system
+	decoding},
+  booktitle = {Proceedings of the 2007 International Wireless Communications and
+	Mobile Computing Conference},
+  year = {2007},
+  pages = {349--353},
+  address = {Honolulu, Hawaii, USA},
+  month = {August 12-16}
+}
+
+@INPROCEEDINGS{ChaY07b,
+  author = {X.-W. Chang and X. Yang},
+  title = {An efficient tree search decoder with columnreordering for underdetermined
+	{MIMO} systems},
+  booktitle = {Proceedings of IEEE GlobeCOM 2007},
+  year = {2007},
+  pages = {4375--4379},
+  address = {Washington, DC, USA},
+  month = {Nov. 26-30}
+}
+
+@INPROCEEDINGS{ChaY06,
+  author = {X.-W. Chang and X. Yang},
+  title = {A new fast generalized sphere decoding algorithm for under-determined
+	{MIMO} systems},
+  booktitle = {Proceedings of 23rd Queen's Biennial Symposium on Communications},
+  year = {2006},
+  pages = {18--21},
+  address = {Kingston, Ontario, Canada},
+  month = {May 30th - June 1st}
+}
+
+@ARTICLE{ChaYZ05,
+  author = {X.-W. Chang and X. Yang and T. Zhou},
+  title = {{MLAMBDA}: a modified {LAMBDA} method for integer least-squares estimation},
+  journal = {Journal of Geodesy},
+  year = {2005},
+  volume = {79},
+  pages = {552--565},
+  __markedentry = {[sbreen1]}
+}
+
+@INPROCEEDINGS{StuBF07,
+  author = {Christoph Studer, Andreas Burg, Wolfgang Fichtner},
+  title = {A Unification of ML-Optimal Tree-Search Decoders},
+  booktitle = {In Proceedings of IEEE Signals, Systems and Computers},
+  year = {2007},
+  owner = {steve},
+  timestamp = {2011.06.21}
+}
+
+@ARTICLE{Cli64,
+  author = {Randall E. Cline},
+  title = {Representations for the Generalized Inverse of a Partitioned Matrix},
+  journal = {Journal of the Society for Industrial and Applied Mathematics},
+  year = {1964},
+  volume = {12},
+  pages = {588--600},
+  number = {3},
+  month = sep
+}
+
+@BOOK{Coh93,
+  title = {A Course in Computational Algebraic Number Theory},
+  publisher = {Springer-Verlag, Germany},
+  year = {1993},
+  author = {H. Cohen}
+}
+
+@BOOK{CorLR01,
+  title = {Introduction to Algorithms},
+  publisher = {MIT Press},
+  year = {2001},
+  author = {T. H. Cormen and C. E. Leiserson and C. Rivest}
+}
+
+@ARTICLE{CuiT05,
+  author = {T. Cui and C. Tellambura},
+  title = {An efficient generalized sphere decoder for rank-deficient MIMO systems},
+  journal = {IEEE Communications Letters},
+  year = {2005},
+  volume = {9},
+  pages = {423--425},
+  number = {5}
+}
+
+@ARTICLE{DamAB00,
+  author = {M.O. Damen and K. Abed-Meraim and J.C. Belfiore},
+  title = {Generalized sphere decoder for asymmetrical space-time communication
+	architecture},
+  journal = {IEEE Electronics Letters},
+  year = {2000},
+  volume = {36},
+  pages = {166--167}
+}
+
+@ARTICLE{DamCB00,
+  author = {M.O. Damen and A. Chkeif and J.C. Belfiore},
+  title = {Lattice code decoder for space-time codes},
+  journal = {IEEE Communications Letters},
+  year = {2000},
+  volume = {4},
+  pages = {161--163},
+  number = {5},
+  month = may
+}
+
+@ARTICLE{DamGC03,
+  author = {M.O. Damen and H. {El Gamal} and G. Caire},
+  title = {On maximum-likelihood detection and the search for the closest lattice
+	point},
+  journal = {IEEE Transactions on Information Theory},
+  year = {2003},
+  volume = {49},
+  pages = {2389--2402},
+  number = {10},
+  month = oct,
+  __markedentry = {[sbreen1]}
+}
+
+@INPROCEEDINGS{DamGC04,
+  author = {M. O. Damen and H. El Gamel and G. Caire},
+  title = {{MMSE-GDFE} lattice decoding for solving under-determined linear
+	systems with integer unknowns},
+  booktitle = {Proceedings of IEEE International Symposium on Information Theory},
+  year = {2004},
+  pages = {539--539},
+  address = {Chicago, USA},
+  month = {June-July}
+}
+
+@INPROCEEDINGS{DayV03,
+  author = {P. Dayal and M.K. Varanasi},
+  title = {A fast generalized sphere decoder for optimum decoding of under-determined
+	{MIMO} systems},
+  booktitle = {Proceedings of 41st Annu. Allerton Conf. Communication, Control,
+	and Computing},
+  year = {2003},
+  pages = {1216--1225},
+  address = {Monticello, IL},
+  month = oct
+}
+
+@INPROCEEDINGS{JonT96,
+  author = {P.J. {De Jonge} and C.C.J.M. Tiberius},
+  title = {{LAMBDA} method for integer ambiguity estimation: implementation
+	aspects},
+  booktitle = {Delft Geodetic Computing Center LGR-Series, No.12},
+  year = {1996}
+}
+
+@ARTICLE{FinP85,
+  author = {U. Fincke and M. Pohst},
+  title = {Improved methods for calculating vectors of short length in a lattice,
+	including a complexity analysis},
+  journal = {Mathematics of Computation},
+  year = {1985},
+  volume = {44},
+  pages = {463--471},
+  month = apr
+}
+
+@BOOK{Fle87,
+  title = {Practical Methods of Optimization},
+  publisher = {2nd Edition, Wiley, Chichester},
+  year = {1987},
+  author = {R. Fletcher}
+}
+
+@ARTICLE{FleL98,
+  author = {R. Fletcher and S. Leyffer},
+  title = {Numerical experience with lower bounds for {MIQP} branch-and-bound},
+  journal = {SIAM Journal on Optimization},
+  year = {1998},
+  volume = {8},
+  pages = {604--616},
+  number = {2}
+}
+
+@ARTICLE{FosGVW99,
+  author = {G. J. Foscini and G. D. Golden and R. A. Valenzuela and P. W. Wolniansky},
+  title = {Simplified processing for high spectral efficiency wireless communication
+	employing multi-element arrays},
+  journal = {IEEE Journal on Selected Areas in Communications},
+  year = {1999},
+  volume = {17},
+  pages = {1841--1852},
+  number = {11},
+  month = nov
+}
+
+@INPROCEEDINGS{FukMU04,
+  author = {T. Fukatani and R. Matsumoto and T. Uyematsu},
+  title = {Two methods for decreasing the computational complexity of the {MIMO}
+	{ML} decoder},
+  booktitle = {Proceedings of International Symposium on Information Theory and
+	its Applications},
+  year = {2004},
+  pages = {34--38},
+  address = {Parma, Italy},
+  month = oct,
+  __markedentry = {[sbreen1]}
+}
+
+@BOOK{GarN72,
+  title = {Integer Programming},
+  publisher = {John Wiley, New York},
+  year = {1972},
+  author = {R. S. Garfinkel and G. L. Nemhauser}
+}
+
+@BOOK{GolV96,
+  title = {Matrix Computations},
+  publisher = {The Johns Hopkins University Press, Baltimore, Maryland, 3rd edition},
+  year = {1996},
+  author = {G.H. Golub and C.F. {Van Loan}}
+}
+
+@BOOK{GroLS88,
+  title = {Geometric Algorithms and Combinatorial Optimization},
+  publisher = {Springer-Verlag, New York},
+  year = {1988},
+  author = {M. Grotschel and L. Lovasz and A. Schrijver}
+}
+
+@ARTICLE{GupR85,
+  author = {O. K. Gupta and A. Ravindran},
+  title = {Branch and bound experiments in convex nonlinear integer programming},
+  journal = {Management Science},
+  year = {1985},
+  volume = {31},
+  pages = {1533--1546}
+}
+
+@ARTICLE{HasB98,
+  author = {A. Hassibi and S. Boyd},
+  title = {Integer parameter estimation in linear models with applications to
+	{GPS}},
+  journal = {IEEE Transactions on Signal Processing},
+  year = {1998},
+  volume = {46},
+  pages = {2938--2952},
+  number = {11}
+}
+
+@INPROCEEDINGS{Has00,
+  author = {B. Hassibi},
+  title = {An efficient square-root algorithm for {BLAST}},
+  booktitle = {Proceedings of IEEE International Conference on Acoustics, Speech
+	and Signal Processing},
+  year = {2000},
+  address = {Istanbul, Turkey},
+  month = jun
+}
+
+@INPROCEEDINGS{HasV05,
+  author = {Babak Hassibi and Haris Vikalo},
+  title = {On The Sphere-Decoding Algorithm I. Expected Complexity},
+  booktitle = {IEEE Transactions on Signal Processing},
+  year = {2005},
+  volume = {53},
+  number = {8},
+  month = aug
+}
+
+@INCOLLECTION{HasV03,
+  author = {B. Hassibi and H. Vikalo},
+  title = {Maximum-likelihood decoding and integer least-squares: the expected
+	complexity},
+  booktitle = {Multiantenna Channels: Capacity, Coding and Signal Processing},
+  publisher = {American Mathematical Society and DIMACS },
+  year = {2003},
+  volume = {62},
+  pages = {161--192}
+}
+
+@INPROCEEDINGS{HasV01,
+  author = {B. Hassibi and H. Vikalo},
+  title = {On the expected complexity of sphere decoding},
+  booktitle = {Proceedings of Asilomar Conference on Signals, Systems and Computers},
+  year = {2001},
+  volume = {2},
+  pages = {1051--1055},
+  month = nov
+}
+
+@ARTICLE{JooT02,
+  author = {P. Joosten and C.C.J.M. Tiberius},
+  title = {LAMBDA: FAQs},
+  journal = {GPS Solutions},
+  year = {2002},
+  volume = {6},
+  pages = {109--114},
+  number = {1-2}
+}
+
+@ARTICLE{Kan87,
+  author = {R. Kannan},
+  title = {Minkowski's convex body theorem and integer programming},
+  journal = {Mathematics of Operations Research},
+  year = {1987},
+  volume = {12},
+  pages = {415--550}
+}
+
+@INPROCEEDINGS{Kan83,
+  author = {R. Kannan},
+  title = {Improved algorithms for integer programming and related lattice problems},
+  booktitle = {Proceedings of ACM Symposium on Theory of Computing},
+  year = {1983},
+  pages = {193--206},
+  month = apr
+}
+
+@INPROCEEDINGS{KinG03,
+  author = {A.P. Kind and A.J. Grant},
+  title = {Efficient list decoding for lattices},
+  booktitle = {Proc. 4th Australian Communication Theory Workshop},
+  year = {2003},
+  pages = {124--128}
+}
+
+@ARTICLE{KorZ73,
+  author = {A. Korkine and G. Zolotareff},
+  title = {Sur les formes quadratiques},
+  journal = {Mathematische Annalen},
+  year = {1873},
+  volume = {6},
+  pages = {366--389}
+}
+
+@INPROCEEDINGS{KoyS01,
+  author = {H. Koy and C.P. Schnorr},
+  title = {Segment {LLL}-reduction of lattice bases},
+  booktitle = {Proc. CaLC 2001, LNCS 2146},
+  year = {2001},
+  pages = {67--80},
+  publisher = {Springer-Verlag}
+}
+
+@ARTICLE{KozTK79,
+  author = {M. K. Kozlov and S. P. Tarasov and L. G. Khachiyan},
+  title = {Polynomial solvability of convex quadratic programming},
+  journal = {Doklady Akademii Nauk SSSR},
+  year = {1979},
+  volume = {248},
+  pages = {1049--1051},
+  number = {5}
+}
+
+@ARTICLE{LanD60,
+  author = {A. H. Land and A. G. Doig},
+  title = {An automatic method of solving discrete programming problems},
+  journal = {Econometrica},
+  year = {1960},
+  volume = {28},
+  pages = {497--520},
+  number = {3}
+}
+
+@ARTICLE{LenLL82,
+  author = {A.K. Lenstra and J.H.W. Lenstra and L. Lovasz},
+  title = {Factoring polynomials with rational coefficients},
+  journal = {Mathematische Annalen},
+  year = {1982},
+  volume = {261},
+  pages = {515--534}
+}
+
+@ARTICLE{Len83,
+  author = {J.H.W. Lenstra},
+  title = {Integer programming with a fixed number of variables},
+  journal = {Mathematics of Operations Research},
+  year = {1983},
+  volume = {8},
+  pages = {538--548}
+}
+
+@TECHREPORT{Len81,
+  author = {J.H.W. Lenstra},
+  title = {Integer programming with a fixed number of variables},
+  institution = {University of Amsterdam, Dept. Of Mathematics},
+  year = {1981},
+  number = {TR 81-03}
+}
+
+@INPROCEEDINGS{LuoPWB03,
+  author = {J. Luo and K. Pattipati and P. Willett and L. Brunel},
+  title = {Branch-and-bound-based fast optimal algorithm for multiuser detection
+	in synchronous CDMA},
+  booktitle = {Proceedings of IEEE International Conference on Communications},
+  year = {2003},
+  pages = {223--227},
+  address = {Anchorage, U.S.A.},
+  month = may
+}
+
+@INPROCEEDINGS{LuoLK03,
+  author = {Z.-Q. Luo and X. Luo and M. Kisialiou},
+  title = {An efficient quasi-maximum likelihood decoder for {PSK} signals},
+  booktitle = {Proceedings of IEEE International Conference on ASSP},
+  year = {2003},
+  volume = {6},
+  pages = {561--564},
+  month = Apr
+}
+
+@ARTICLE{Mic01,
+  author = {D. Micciancio},
+  title = {The hardness of the closest vector problem with preprocessing},
+  journal = {IEEE Transactions on Information Theory},
+  year = {2001},
+  volume = {47},
+  pages = {1212--1215}
+}
+
+@INPROCEEDINGS{Mic98,
+  author = {D. Micciancio},
+  title = {The shortest vector in a lattice is hard to approximate to within
+	some constant},
+  booktitle = {Proceedings of 39th Annu. Symp. Found. Computer Science},
+  year = {1998},
+  address = {Palo Alto, CA},
+  month = Nov
+}
+
+@ARTICLE{StoVH08,
+  author = {Mihailo Stojnic, Haris Vikalo, Babak Hassibi},
+  title = {Speeding up the Sphere Decoder With H-Infinity and SDP Inspired Lower
+	Bounds},
+  journal = {IEEE Transactions On Signam Processing},
+  year = {2008},
+  volume = {56},
+  pages = {712-726},
+  owner = {steve},
+  timestamp = {2011.06.21}
+}
+
+@ARTICLE{MobK07,
+  author = {A. Mobasher and A. K. Khandani},
+  title = {Matrix-Lifting semi-definite programming for decoding in multiple
+	antenna systems},
+  journal = {Submitted to IEEE Transaction on Information Theory},
+  year = {2007}
+}
+
+@INPROCEEDINGS{MobTSK05,
+  author = {A. Mobasher and M. Taherzadeh and R. Sotirov and A. K. Khandani},
+  title = {An efficient quasi-maximum likelihood decoding for finite constellations},
+  booktitle = {Proceedings of Information Sciences and Systems Conference},
+  year = {2005},
+  address = {The Johns Hopkins University},
+  month = Mar
+}
+
+@ARTICLE{Mow03,
+  author = {W.H. Mow},
+  title = {Universal lattice decoding: principle and recent advances},
+  journal = {Wireless Communications and Mobile Computing},
+  year = {2003},
+  volume = {3},
+  pages = {553--569},
+  number = {5}
+}
+
+@ARTICLE{Mow94,
+  author = {W.H. Mow},
+  title = {Maximum likelihood sequence estimation from the lattice viewpoint},
+  journal = {IEEE Transactions on Information Theory},
+  year = {1994},
+  volume = {40-5},
+  pages = {1591--1600}
+}
+
+@ARTICLE{MurGDC06,
+  author = {A.D. Murugan and H. El Gamal and M. O. Damen and G. Caire},
+  title = {A unified framework for tree search decoding: rediscovering the sequential
+	decoder},
+  journal = {IEEE Transactions on Information Theory},
+  year = {2006},
+  volume = {52},
+  pages = {933--953},
+  number = {3}
+}
+
+@BOOK{NemW88,
+  title = {Integer and Combinatorial Optimization},
+  publisher = {Wiley, New York},
+  year = {1988},
+  author = {G. L. Nemhauser and L. A. Wolsey}
+}
+
+@BOOK{NocW99,
+  title = {Numerical Optimization},
+  publisher = {Springer-Verlag, New York},
+  year = {1999},
+  author = {J. Nocedal and S. J. Wright}
+}
+
+@BOOK{ParkR88,
+  title = {Discrete Optimization},
+  publisher = {Academic Press, New York},
+  year = {1988},
+  author = {R. Parker and R. Rardin}
+}
+
+@ARTICLE{Pho81,
+  author = {M. Pohst},
+  title = {On the computation of lattice vectors of minimal length, successive
+	minima and reduced bases with applications},
+  journal = {ACM SIGSAM Bulletin},
+  year = {1981},
+  volume = {15},
+  pages = {37--44},
+  month = feb
+}
+
+@ARTICLE{Sch87,
+  author = {C.P. Schnorr},
+  title = {A hierarchy of polynomial time lattice basis reduction algorithms},
+  journal = {Theoretical Computer Science},
+  year = {1987},
+  volume = {53},
+  pages = {201--224}
+}
+
+@ARTICLE{SchE94,
+  author = {C.P. Schnorr and M. Euchner},
+  title = {Lattice basis reduction: improved practical algorithms and solving
+	subset sum problems},
+  journal = {Mathematical Programming},
+  year = {1994},
+  volume = {66},
+  pages = {181--199}
+}
+
+@INPROCEEDINGS{StoVH06,
+  author = {M. Stojnic and H. Vikalo and B. Hassibi},
+  title = {Futher results on speeding up the sphere decoder},
+  booktitle = {Proceedings of the 2006 IEEE International Conference on Acoustics,
+	Speech and Signal Processing},
+  year = {2006},
+  pages = {314--318},
+  __markedentry = {[sbreen1]}
+}
+
+@INPROCEEDINGS{StoVH05a,
+  author = {M. Stojnic and H. Vikalo and B. Hassibi},
+  title = {An efficient H-infinity estimation approach to speed up the sphere
+	decoder},
+  booktitle = {Proceedings of the 2005 IEEE International Conference on Wireless
+	Networks, Communications and Mobile Computing},
+  year = {2005},
+  pages = {241--244}
+}
+
+@INPROCEEDINGS{StoVH05b,
+  author = {M. Stojnic and H. Vikalo and B. Hassibi},
+  title = {A branch and bound approach to speed up the sphere decoder},
+  booktitle = {Proceedings of the 2005 IEEE International Conference on Acoustics,
+	Speech and Signal Processing},
+  year = {2005},
+  pages = {429--432},
+  __markedentry = {[sbreen1]}
+}
+
+@INPROCEEDINGS{SuW05,
+  author = {Karen Su and Ian J. Wassell},
+  title = {A New Ordering for Efficient Sphere Decoding},
+  booktitle = {IEEE International Conference on Communications},
+  year = {2005},
+  volume = {3},
+  pages = {1906--1910}
+}
+
+@ARTICLE{TanR01,
+  author = {P. Tan and L.K. Rasmussen},
+  title = {The application of semidefinite programming for detection in CDMA},
+  journal = {IEEE Journal on Selected Areas in Communications},
+  year = {2001},
+  volume = {19},
+  number = {8},
+  month = Aug
+}
+
+@INCOLLECTION{Teu98,
+  author = {P.J.G. Teunissen},
+  title = {{GPS} carrier phase ambiguity fixing concepts},
+  booktitle = {GPS for Geodesy},
+  publisher = {Springer-Verlag},
+  year = {1998},
+  editor = {P.J.G. Teunissen and A. Kleusberg},
+  pages = {317--388},
+  address = {New York},
+  edition = {2nd}
+}
+
+@ARTICLE{Teu99,
+  author = {P.J.G. Teunissen},
+  title = {An optimality property of the integer least-squares estimator},
+  journal = {J. of Geodesy},
+  year = {1999},
+  volume = {73},
+  pages = {587--593},
+  number = {11}
+}
+
+@ARTICLE{Teu95a,
+  author = {P.J.G. Teunissen},
+  title = {The least-squares ambiguity decorrelation adjustment: a method for
+	fast {GPS} ambiguity estitmation},
+  journal = {Journal of Geodesy},
+  year = {1995},
+  volume = {70},
+  pages = {65--82},
+  number = {1-2}
+}
+
+@ARTICLE{Teu95b,
+  author = {P.J.G. Teunissen},
+  title = {The invertibe {GPS} ambiguity transformation},
+  journal = {Manuscripta Geodatetica},
+  year = {1995},
+  volume = {20},
+  pages = {489--497},
+  number = {6}
+}
+
+@INPROCEEDINGS{Teu94a,
+  author = {P.J.G. Teunissen},
+  title = {On the {GPS} double difference ambiguities and their partial search
+	spaces},
+  booktitle = {Proceedings of IAG Symposium No.114, Geodetic Theory Today, Springer
+	Verlag, III Hotine-Marussi Symposium on Mathematical Geodesy, L'Aquila,
+	Italy, May 29-June 3},
+  year = {1994},
+  pages = {39--48}
+}
+
+@INPROCEEDINGS{Teu93,
+  author = {P.J.G. Teunissen},
+  title = {Least-squares estimation of the integer {GPS} ambiguities},
+  booktitle = {Proceedings of Section IV Thery and Methodology, IAG General Meeting,
+	{Beijing, China, August}},
+  year = {1993},
+  pages = {561--571}
+}
+
+@INPROCEEDINGS{TeuJT94,
+  author = {P.J.G. Teunissen and P.J. de Jonge and C.C.J.M. Tiberius},
+  title = {On the spectrum of the {GPS DD}-Ambiguities},
+  booktitle = {Proceedings of ION GPS-94, 7th International Technical Meeting of
+	the Satellite Division of the Institute of Navigation, {Salt Lake
+	City, UT ,Sep.20-23}},
+  year = {1994},
+  pages = {115--124}
+}
+
+@INPROCEEDINGS{TeuT94b,
+  author = {P.J.G. Teunissen and C.C.J.M. Tiberius},
+  title = {Integer least-squares estimation of the {GPS} phase ambiguities},
+  booktitle = {Proceedings of International Symposium on Kinematic Systems in Geodesy,
+	Geomatics and Navigation KIS, {Banff, Canada, August 30-September
+	2}},
+  year = {1994},
+  pages = {221--231}
+}
+
+@INPROCEEDINGS{VitB93,
+  author = {E. Viterbo and E. Biglieri},
+  title = {A universal lattice decoder},
+  booktitle = {14-eme Colloque GRETSI},
+  year = {1993},
+  address = {Juan-Les-Pins, France},
+  month = sep
+}
+
+@ARTICLE{VitB99,
+  author = {E. Viterbo and J. Boutros},
+  title = {A universal lattice code decoder for fading channels},
+  journal = {IEEE Transactions on Information Theory},
+  year = {1999},
+  volume = {45},
+  pages = {1639--1642},
+  number = {5},
+  month = jul
+}
+
+@ARTICLE{VolRS88,
+  author = {O. V. Volkovich and V. A. Roshchin and I. V. Sergienko},
+  title = {Models and methods of solution of quadratic integer programming problems},
+  journal = {Cybernetics and Systems Analysis},
+  year = {1988},
+  volume = {23},
+  pages = {289--305},
+  number = {3}
+}
+
+@INPROCEEDINGS{WanT06,
+  author = {P. Wang and T. Le-Ngoc},
+  title = {A low complexity generalized sphere decoding approach for underdetermined
+	{MIMO} systems},
+  booktitle = {Proceedings of IEEE International Conference on Communications},
+  year = {2006},
+  pages = {4266--4271},
+  address = {Istanbul, Turkey},
+  month = jue
+}
+
+@INPROCEEDINGS{WeiS95,
+  author = {M. Wei and K. Schwarz},
+  title = {Fast ambiguity resolution using an integer nonlinear programming
+	method},
+  booktitle = {Proc. ION GPS95},
+  year = {1995},
+  address = {Palm Springs, California},
+  month = sep
+}
+
+@INPROCEEDINGS{XuWZW04,
+  author = {Weiyu Xu, Youzheng Wang, Zucheng Zhou, Jing Wang},
+  title = {A Computationally Efficient Exact ML Sphere Decoder},
+  booktitle = {Proceedings of IEEE Globecom 2004},
+  year = {2004},
+  owner = {steve},
+  timestamp = {2011.06.21}
+}
+
+@INPROCEEDINGS{WieMPF03,
+  author = {A. Wiesel and X. Mestre and A. Pages and J.R. Fonollosa},
+  title = {Efficient implementation of sphere demodulation},
+  booktitle = {IEEE Workshop on Signal Processing Advances in Wireless Communications},
+  year = {2003},
+  address = {Rome, Italy},
+  month = jue
+}
+
+@ARTICLE{WonP07,
+  author = {K.-K. Wong and A. Paulraj},
+  title = {Efficient near maximum-likelihood detection for underdetermined {MIMO}
+	antenna systems using a geometrical approach},
+  journal = {EURASIP Journal on Wireless Communications and Networking},
+  year = {2007},
+  pages = {1241--1255}
+}
+
+@ARTICLE{WubBRKK01,
+  author = {D. Wubben and R. Bohnke and J. Rinas and V. Kuhn and K.D. Kammeyer},
+  title = {Efficient algorithm for decoding layered space-time codes},
+  journal = {IEEE Electronics Letters},
+  year = {2001},
+  volume = {37},
+  pages = {1348--1350},
+  number = {22},
+  month = oct
+}
+
+@TECHREPORT{XuCL00,
+  author = {P. Xu and E. Cannon and G. Lachapelle},
+  title = {{GPS} ambiguity resolution by integer quadratic programming},
+  institution = {Department of Geoedsy and Geoinformatics, University Stuttgart},
+  year = {2000},
+  number = {2000-2}
+}
+
+@ARTICLE{YanLH05,
+  author = {Z. Yang and C. Liu and J. He},
+  title = {A new approach for fast generalized sphere decoding in {MIMO} systems},
+  journal = {IEEE Signal Processing Letters},
+  year = {2005},
+  volume = {12},
+  pages = {41--44},
+  number = {1},
+  month = jan
+}
+
+@INPROCEEDINGS{DaiY08,
+  author = {Yongmei Dai, Zhiyuan Yan},
+  title = {Memory-Constrained ML-Optimal Tree Search Detection},
+  booktitle = {In Proceedings of IEEE Information Sciences and Systems},
+  year = {2008},
+  owner = {steve},
+  timestamp = {2011.06.21}
 }
 

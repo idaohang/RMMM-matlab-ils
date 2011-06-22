@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.14)  19 MAY 2011 10:22
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.14)  22 JUN 2011 12:01
 entering extended mode
  %&-line parsing enabled.
 **bare_conf.tex
@@ -514,7 +514,11 @@ File: tikzlibrarytopaths.code.tex 2008/01/09 v2.00 (rcs-revision 1.1)
 ))) (/usr/share/texmf-texlive/tex/latex/ltxmisc/relsize.sty
 Package: relsize 2003/07/04 ver 3.1
 )
-(./bare_conf.aux)
+(./bare_conf.aux
+
+LaTeX Warning: Label `eq:searchIneq' multiply defined.
+
+)
 \openout1 = `bare_conf.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 284.
@@ -556,62 +560,65 @@ File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 ]
 \du=\skip52
  [2] [3]
-Underfull \hbox (badness 1389) in paragraph at lines 1635--1640
+Underfull \hbox (badness 1389) in paragraph at lines 1649--1654
 []\OT1/ptm/m/n/10 We now ap-ply the same pro-cess to the new $\OML/cmm/m/it/10 
 n \OMS/cmsy/m/n/10 ^^@ \OT1/cmr/m/n/10 1$
  []
 
 
-Underfull \hbox (badness 2285) in paragraph at lines 1635--1640
+Underfull \hbox (badness 2285) in paragraph at lines 1649--1654
 \OT1/ptm/m/n/10 di-men-sional search space $\OML/cmm/m/it/10 F[]\OT1/cmr/m/n/10
  (\OML/cmm/m/it/10 x[]\OT1/cmr/m/n/10 )$\OT1/ptm/m/n/10 . If at some level $\OM
 L/cmm/m/it/10 i$\OT1/ptm/m/n/10 ,
  []
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 1755.
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [4]
+
+LaTeX Font Warning: Command \small invalid in math mode on input line 1769.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 1755.
-
-[4]
-
-LaTeX Font Warning: Command \small invalid in math mode on input line 1768.
+LaTeX Font Warning: Command \small invalid in math mode on input line 1769.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 1768.
+LaTeX Font Warning: Command \small invalid in math mode on input line 1782.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 1778.
+LaTeX Font Warning: Command \small invalid in math mode on input line 1782.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 1778.
+LaTeX Font Warning: Command \small invalid in math mode on input line 1792.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 1779.
+LaTeX Font Warning: Command \small invalid in math mode on input line 1792.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 1779.
+LaTeX Font Warning: Command \small invalid in math mode on input line 1793.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 1785.
+LaTeX Font Warning: Command \small invalid in math mode on input line 1793.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 1785.
+LaTeX Font Warning: Command \small invalid in math mode on input line 1799.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 1785.
+LaTeX Font Warning: Command \small invalid in math mode on input line 1799.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 1785.
+LaTeX Font Warning: Command \small invalid in math mode on input line 1799.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 1785.
+LaTeX Font Warning: Command \small invalid in math mode on input line 1799.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 1785.
+LaTeX Font Warning: Command \small invalid in math mode on input line 1799.
 
-[5] (./bare_conf.bbl)
+
+LaTeX Font Warning: Command \small invalid in math mode on input line 1799.
+
+[5] [6] (./bare_conf.bbl)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -623,36 +630,42 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[6] (./bare_conf.aux) ) 
+[7
+
+] (./bare_conf.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
  9788 strings out of 495061
  164559 string characters out of 1182621
- 241608 words of memory out of 3000000
+ 243042 words of memory out of 3000000
  12727 multiletter control sequences out of 15000+50000
  41127 words of font info for 85 fonts, out of 3000000 for 9000
  31 hyphenation exceptions out of 8191
  47i,10n,49p,338b,785s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</
-usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/t
-exmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texliv
-e/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texmf-texlive/fonts/type
-1/public/amsfonts/cm/cmmi6.pfb></usr/share/texmf-texlive/fonts/type1/public/ams
-fonts/cm/cmmi7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmm
-i8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr
-/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texmf-
-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts
-/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/public
-/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/c
-m/cmsy5.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/
-texmf-texlive/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-
-texlive/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/share/texmf-texlive
-/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/tim
-es/utmbi8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr
-/share/texmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
-Output written on bare_conf.pdf (6 pages, 249316 bytes).
+{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-texli
+ve/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-texlive/fonts/ty
+pe1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/public/
+amsfonts/cm/cmmi5.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/
+cmmi6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi7.pfb></
+usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/te
+xmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/
+fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texmf-texlive/fonts/type1/p
+ublic/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfont
+s/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.p
+fb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/sha
+re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-tex
+live/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-texlive/fonts/t
+ype1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-texlive/fonts/type1/p
+ublic/amsfonts/symbols/msbm7.pfb></usr/share/texmf-texlive/fonts/type1/urw/time
+s/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmbi8a.pfb></usr/
+share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/
+fonts/type1/urw/times/utmri8a.pfb>
+Output written on bare_conf.pdf (7 pages, 250145 bytes).
 PDF statistics:
- 105 PDF objects out of 1000 (max. 8388607)
+ 110 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
