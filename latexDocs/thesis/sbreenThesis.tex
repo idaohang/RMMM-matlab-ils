@@ -229,6 +229,10 @@ The standard reduction algorithm used in practice for the unconstrained ILS prob
 
 Unfortunately, the LLL reduction is not applicable to the BILS problem. For the BILS problem, there are other reduction strategies that focus only on permuting the columns of the matrix $H$. We can separate algorithms that try and find these permutations into two categories, those that only use the information contained in the matrix $H$, and algorithms that use both the information in $H$ and the vector $y$.
 
+Two algorithms that only use the information in $H$ are VBLAST \cite{FosGVW99} and SQRD \cite{WubBRKK01}. An examination of these two algorithms reveals very similar motivations behind each.
+
+Algorithms that use the information in both $H$ and $y$ are a fairly new development. The first was \cite{SuW05} in 2005, and then \cite{ChaH05} in 2008. Numerical results show that these algorithms can offer great improvements over the previous reductions that use only the information contained in $H$.
+
 \section{Objectives and Contribution}
 With many different algorithms for both the reduction and search process, it is not always clear how they relate. In \cite{MurGDC06} the authors propose a tree search framework to compare various search algorithms. This is an interesting idea, but results from such a comparison may not relate to real world run time since they do not consider the time spent at each step of each algorithm, only how many steps are taken to solve the problem. This thesis will consider some of the various search strategies and do a more realistic comparison of actual run time performance. Using the results from such a comparison, we can see the advantages of the different approaches and use them to devise a new hybrid search algorithm.
 
@@ -895,7 +899,10 @@ From \eqref{eq:LLLConditions} we can easily obtain the following inequality:
 \left | r_{k-1,k-1} \right | \le \frac{2}{\sqrt{4\sigma -1}}\left | r_{k,k} \right |
 \end{equation}
 
-Looking at \eqref{eq:LLLdiagonal}, we can obtain some sense of why using a LLL reduced matrix $R$ in the search process should yield a performance improvement.
+Looking at \eqref{eq:LLLdiagonal}, we can obtain some sense of why using a LLL reduced matrix $R$ in the search process should yield a performance improvement. Usually in practice, we use $\sigma=1$. We know from previous discussion that it is desirable to have large diagonal elements, with the largest possible diagonal elements toward the end. The equation \eqref{eq:LLLdiagonal} gives us a guarantee about the relative sizes of the diagonal elements. In practice, the diagonal will usually end up being mostly increasing.
+
+\subsection{Computing the LLL Reduction}
+
 
 \chapter{Alternate Search Strategies} \label{chap:Searches}
 
