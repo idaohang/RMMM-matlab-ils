@@ -342,7 +342,7 @@ Finally, it is worth mentioning that we may apply permutation matrices to $H$ as
 
 When reducing the BILS problem we must be more careful. Consider the constraints on the solution $x$, \eqref{eq:boxCon}. Applying orthogonal matrices to $H$ from the left has no effect on $x$, so the constraints are also unaffected. Applying permutation matrices to H from the right will re-order the elements of the solution $x$, so we must re-order the elements in the constraint vectors as well, which is a trivial operation. However if we apply a general unimodular matrix $Z$ to $H$ from the right, we can no longer easily enforce the constraints on the solution, the simple box constraints become complicated. To see why this is the case, recall the SE search process. Suppose the search is currently at some level $k$ and we would like to know to which value we should fix $\hat{x}_{k-1}$ (note that $\hat{x}$ denotes $Zx$). We know that $l_{k-1} \le x_{k-1} \le u_{k-1}$, but to determine such a bound for $\hat{x}_{k-1}$, we would need to know the entire vector $\hat{x}$ in order to compute $Z^{-1}_{k-1,:}\hat{x}$. At this point in the search, we only know the last $k$ elements of it. The only way to complete the search process is to ignore the bounds on $\hat{x}$, find a potential solution, compute $x = Z^{-1}\hat{x}$, and then check if each element of $x$ is within the bounds. This is extremely inefficient since many potential solutions could be eliminated very early on in the search if we were able to enforce the constraints during the search process. It is for this reason that when reducing BILS problems, we only consider orthogonal transformations and column permutations.
 
-\section{BILS Reduction Algorithms}
+\section{BILS Reduction Algorithms} \label{sec:BILSReduction}
 
 The algorithms in this section will focus on finding some permutation of the columns of the matrix $H$ in order to optimize the search process.
 
@@ -899,9 +899,37 @@ From \eqref{eq:LLLConditions} we can easily obtain the following inequality:
 \left | r_{k-1,k-1} \right | \le \frac{2}{\sqrt{4\sigma -1}}\left | r_{k,k} \right |
 \end{equation}
 
-Looking at \eqref{eq:LLLdiagonal}, we can obtain some sense of why using a LLL reduced matrix $R$ in the search process should yield a performance improvement. Usually in practice, we use $\sigma=1$. We know from previous discussion that it is desirable to have large diagonal elements, with the largest possible diagonal elements toward the end. The equation \eqref{eq:LLLdiagonal} gives us a guarantee about the relative sizes of the diagonal elements. In practice, the diagonal will usually end up being mostly increasing.
+Looking at \eqref{eq:LLLdiagonal}, we can obtain some sense of why using a LLL reduced matrix $R$ in the search process should yield a performance improvement. Usually in practice, we use $\sigma=1$. We know from previous discussion that it is desirable to have large diagonal elements, with the largest possible diagonal elements toward the end, $r_{11} < \dots < r_{nn}$. The equation \eqref{eq:LLLdiagonal} gives us a guarantee about the relative sizes of the diagonal elements. In practice, the diagonal will usually end up being mostly increasing.
 
 \subsection{Computing the LLL Reduction}
+This section will give details on how the LLL reduction, or $QRZ$ factorization described above can be computed. It is interesting to note that this factorization is not unique.
+
+\subsubsection{Integer Gauss Transformations} \label{subsec:IGT}
+
+One special type of unimodular matrix is an integer Gauss transformation (IGT), which can be defined as follows:
+\begin{equation}
+Z_{ij} = I-\mu e_ie_j^T, \quad \mu \in \mathbb{Z}
+\end{equation}
+
+We would like to know how these transformations affect an upper triangular matrix $R$. Suppose we apply such an IGT to $R$ from the right, this will give:
+\begin{equation}
+\bar{R} = RZ_{ij} = R - \mu Re_ie_j^T
+\end{equation}
+The overall effect of this transformation on the matrix R is that the $j^{th}$ column has some integer multiple of the $i^{th}$ column subtracted from it, therefore:
+\begin{equation}
+\bar{r}_{kj} = r_{kj} - \mu r_{ki}, \quad k=1 \dots i
+\end{equation}
+If we take $\mu = \lfloor /frac{r_{ij}}{r_{ii}} \rceil$, it should be clear that $|\bar{r}_{ij}| \le \frac{1}{2}r_{ii}$, so given a particular colum, we should be able to use IGTs to satisfy the first condition in equation \eqref{eq:LLLConditions}.
+
+\subsubsection{Permutations} \label{subsec:Perm}
+After doing IGTs, there is no guarantee that the second condition in \eqref{eq:LLLConditions} will be satisfied, often it is not. In this case, we must permute the columns of $R$ in order for the conidtion to hold. If $r_{k-1,k-1} > \sqrt{r^2_{k-1,k} + r^2_{k,k}}$, then we will permute columns $k$ and $k-1$. After performing the column permutation, $R$ will no longer be upper triangular. To restore the upper triangular structure of $R$, we can apply Givens rotations as we did in section \ref{sec:BILSReduction}. In this case however, only one Givens rotation will be required.
+%Give the equations for a Givens rotation
+After the permutation, the second condition in \eqref{eq:LLLConditions} will hold. After performing this permutation, we also have the guarantee that element $r_{kk}$ will increase and $r_{k-1,k-1}$ will decrease, therefore the resulting matrix will have something closer to an increasing diagonal.
+
+\subsubsection{LLL Reduction}
+By putting subsections \ref{subsec:IGT} and \ref{subsec:Perm} together, we can devise an algorithm to satisfy the LLL conditions \eqref{eq:LLLConditions}. We will start by letting $H = QR$ denote the $QR$ factorization of the matrix $H$. We will work with the columns of $R$ from right to left, starting with column $k=n$. The idea is to move to the left so that at any step $k$, the columns $k+1:n$ satisfy the LLL conditions. In the $k^{th}$ step, we start by using IGTs to make sure column $k$ satisfies the first LLL condition, $|r_{ik}| < \frac{1}{2}r_{ii}, \quad i = k-1:-1:1$. If the second inequality in \ref{eq:LLLConditions} holds, we move to column $k-1$, otherwise column $k-1$ and $k$ are swapped with a column permutation and $R$ is brought back to upper triangular as described in \ref{subsec:Perm}. After applying a column permutation, we must move back to column $k+1$ since it is possible that the permutation will cause the conditions on the previous column to no longer be satisfied. When we reach column $1$, we know the matrix $R$ must be LLL reduced.
+
+\subsection{New Unconstrained ILS Reduction}
 
 
 \chapter{Alternate Search Strategies} \label{chap:Searches}

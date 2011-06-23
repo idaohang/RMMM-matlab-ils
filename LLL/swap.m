@@ -17,5 +17,7 @@ R(k,k)=r;
 R(k+1,k)=0;
 R([k,k+1],k+1:n)=G*R([k,k+1],k+1:n);
 
+if(nargin == 4)
 y([k,k+1]) = G*y([k,k+1]);
 y2([k,k+1]) = G*y2([k,k+1]);
+end

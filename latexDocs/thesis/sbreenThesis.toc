@@ -24,7 +24,11 @@
 \contentsline {subsection}{\numberline {3.1.6}New Algorithm}{30}
 \contentsline {section}{\numberline {3.2}ILS Reduction Algorithms}{31}
 \contentsline {subsection}{\numberline {3.2.1}Computing the LLL Reduction}{33}
-\contentsline {chapter}{\numberline {4}Alternate Search Strategies}{34}
-\contentsline {chapter}{\numberline {5}Results}{35}
-\contentsline {chapter}{\numberline {6}Conclusions}{36}
-\contentsline {extrachapter}{References}{37}
+\contentsline {subsubsection}{Integer Gauss Transformations}{34}
+\contentsline {subsubsection}{Permutations}{34}
+\contentsline {subsubsection}{LLL Reduction}{35}
+\contentsline {subsection}{\numberline {3.2.2}New Unconstrained ILS Reduction}{35}
+\contentsline {chapter}{\numberline {4}Alternate Search Strategies}{36}
+\contentsline {chapter}{\numberline {5}Results}{37}
+\contentsline {chapter}{\numberline {6}Conclusions}{38}
+\contentsline {extrachapter}{References}{39}
