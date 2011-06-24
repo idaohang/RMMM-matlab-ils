@@ -19,16 +19,16 @@
 \contentsline {subsection}{\numberline {3.1.1}Previous Reductions}{16}
 \contentsline {subsection}{\numberline {3.1.2}CH Algorithm}{19}
 \contentsline {subsection}{\numberline {3.1.3}SW Original Algorithm}{22}
-\contentsline {subsection}{\numberline {3.1.4}SW Algorithm Interpretation and Improvements}{26}
-\contentsline {subsection}{\numberline {3.1.5}Proof of Equivalence of SW and CH}{28}
-\contentsline {subsection}{\numberline {3.1.6}New Algorithm}{30}
-\contentsline {section}{\numberline {3.2}ILS Reduction Algorithms}{31}
-\contentsline {subsection}{\numberline {3.2.1}Computing the LLL Reduction}{33}
-\contentsline {subsubsection}{Integer Gauss Transformations}{34}
-\contentsline {subsubsection}{Permutations}{34}
-\contentsline {subsubsection}{LLL Reduction}{35}
-\contentsline {subsection}{\numberline {3.2.2}New Unconstrained ILS Reduction}{35}
-\contentsline {chapter}{\numberline {4}Alternate Search Strategies}{36}
-\contentsline {chapter}{\numberline {5}Results}{37}
-\contentsline {chapter}{\numberline {6}Conclusions}{38}
-\contentsline {extrachapter}{References}{39}
+\contentsline {subsection}{\numberline {3.1.4}SW Algorithm Interpretation and Improvements}{27}
+\contentsline {subsection}{\numberline {3.1.5}Proof of Equivalence of SW and CH}{30}
+\contentsline {subsection}{\numberline {3.1.6}New Algorithm}{31}
+\contentsline {section}{\numberline {3.2}ILS Reduction Algorithms}{34}
+\contentsline {subsection}{\numberline {3.2.1}Computing the LLL Reduction}{35}
+\contentsline {subsubsection}{Integer Gauss Transformations}{35}
+\contentsline {subsubsection}{Permutations}{36}
+\contentsline {subsubsection}{LLL Reduction}{36}
+\contentsline {subsection}{\numberline {3.2.2}New Unconstrained ILS Reduction}{37}
+\contentsline {chapter}{\numberline {4}Alternate Search Strategies}{38}
+\contentsline {chapter}{\numberline {5}Results}{39}
+\contentsline {chapter}{\numberline {6}Conclusions}{40}
+\contentsline {extrachapter}{References}{41}

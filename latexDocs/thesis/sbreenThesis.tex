@@ -412,8 +412,45 @@ Here we describe  step 1 of the CH algorithm, which determines the last column o
 Subsequent steps are the same but are applied to a subproblem that is one dimension smaller. 
 In step 1, for $i = 1,\dots,n$ we interchange
 columns $i$ and $n$ of  $R$ (thus entries of $i$ and $n$ in $x$ are also swapped), then return $R$ to upper-triangular
-by a series of Givens rotations applied to $R$ from the left, which  are also applied to $\bar{y}$.
-To avoid confusion, we denote the new $R$ by $\hat{R}$ and the new $\bar{y}$ by $\hat{y}$.
+by a series of Givens rotations applied to $R$ from the left, which  are also applied to $\bar{y}$. The following example demonstrates the process of returning the matrix $R$ to upper triangular after column $n$ is swapped with column $2$ in a $5 \times 5$ matrix.
+
+\begin{equation} \label{eq:swappedCols}
+\begin{bmatrix}
+x & x & x & x & x\\ 
+  & x & x & x & x\\ 
+  & x & x & x &  \\ 
+  & x &  &  x &  \\ 
+  & x &  &    & 
+\end{bmatrix}
+\end{equation}
+
+Equation \ref{eq:swappedCols} shows the matrix directly after the column swap. We want to restore it to upper triangular. To do so, we start by using $n-i$ Givens rotations to zero the subdiagonal elements in column $i$, in this case $i = 2$. Each Givens rotation is an orthogonal matrix which adds multiples of two rows to eachother, for our purposes, we would like to add only multiples of adjacent rows. A Givens rotation that uses row $k$ to zero element $j$ in row $k+1$ is defined in equation \eqref{eq:givensRotation}, denote such a Givens rotation as $G_{k,k+1}$:
+
+\begin{equation} \label{eq:givensRotation}
+\begin{bmatrix}
+I_{k-1} &  &  & \\ 
+ & c & -s & \\ 
+ & -s & c & \\ 
+ &  &  & I_{n-k-1}
+\end{bmatrix} ,\quad c^2+s^2=1
+\end{equation}
+Where $c=\frac{R_{k,j}}{\sqrt{R_{k,j}^2+R_{k+1,j}^2}}$ and $s=\frac{R_{k+1,j}}{\sqrt{R_{k,j}^2+R_{k+1,j}^2}}$.
+
+We can use rotations $G_{n-1,n}, G_{n-2,n-1} \dots G_{i,i+1}$ to zero the subdiagonal elements in the $i^{th}$ column, however this will create subdiagonal elements in columns $i+1 \dots n$. Equation \eqref{eq:subDiagEntries} shows the matrix after applying this first round of Givens rotatations.
+
+\begin{equation} \label{eq:subDiagEntries}
+\begin{bmatrix}
+x & x & x & x & x \\ 
+  & x & x & x & x \\ 
+  &   & x & x & x \\ 
+  &   & x & x &   \\ 
+  &   &  &  x & 
+\end{bmatrix}
+\end{equation}
+
+We can now use a second round of Givens rotation to eliminate the new subdiagonal entries and restore the matrix to upper triangular. We use the rotations in the following order, $G_{i+1,i+2}, G_{i+2,i+3} \dots G_{n-1,n}$ where each rotation should zero the subdiagonal element in the corresponding column.
+
+To avoid confusion, we denote the new $R$ after restoring the upper triangular structure by $\hat{R}$ and the new $\bar{y}$ by $\hat{y}$.
 We then compute  $c_n=\hat{y}_n/\hat{r}_{n,n}$ and 
 \be
 x_i^c=\arg\min_{x_i\in {\cal B}_i}\left |\hat{r}_{nn}(x_i- c_n) \right | = \left \lfloor c_n \right \rceil_{{\cal B}_i},
@@ -504,7 +541,7 @@ triangular with Givens rotations, also apply the Givens rotations to $\hat{y}$ %
 \end{algorithmic}
 \end{algorithm}
 
-\subsection{SW Original Algorithm}
+\subsection{SW Original Algorithm} \label{subsec:SW}
 The motivation for the SW algorithm comes from examining the geometry of the search process.
 
 \ifx\du\undefined
@@ -794,7 +831,7 @@ and that $\bar{y}_{1:n-1}$ in  \eqref{eq:subc} is the multiplication of the tran
 the $Q_1$-factor of the QR factorization of $H_{:,1:n-1}P$ and $y$ in \eqref{eq:subs}.
 Thus the two subproblems are equivalent. 
 
-\subsection{New Algorithm}
+\subsection{New Algorithm} \label{subsec:newReduction}
 Now that we know the two algorithms are equivalent, we can take the best
 parts from both and combine them to form a new algorithm. 
 The main cost in CH is to interchange the columns of $R$ and return it to
@@ -930,7 +967,9 @@ After the permutation, the second condition in \eqref{eq:LLLConditions} will hol
 By putting subsections \ref{subsec:IGT} and \ref{subsec:Perm} together, we can devise an algorithm to satisfy the LLL conditions \eqref{eq:LLLConditions}. We will start by letting $H = QR$ denote the $QR$ factorization of the matrix $H$. We will work with the columns of $R$ from right to left, starting with column $k=n$. The idea is to move to the left so that at any step $k$, the columns $k+1:n$ satisfy the LLL conditions. In the $k^{th}$ step, we start by using IGTs to make sure column $k$ satisfies the first LLL condition, $|r_{ik}| < \frac{1}{2}r_{ii}, \quad i = k-1:-1:1$. If the second inequality in \ref{eq:LLLConditions} holds, we move to column $k-1$, otherwise column $k-1$ and $k$ are swapped with a column permutation and $R$ is brought back to upper triangular as described in \ref{subsec:Perm}. After applying a column permutation, we must move back to column $k+1$ since it is possible that the permutation will cause the conditions on the previous column to no longer be satisfied. When we reach column $1$, we know the matrix $R$ must be LLL reduced.
 
 \subsection{New Unconstrained ILS Reduction}
+In subsection \ref{subsec:SW}, the motivation for the SW algorithm was given. While the SW algorithm does make use of the box constraint, the original motivation for their algorithm applies to the unconstrained ILS problem as well. Applying the SW algorithm directly to the matrix $H$ however may yield results that are much worse than those given by LLL on average. The reason for this is that the SW algorithm only reorders a given set of basis vectors in an attempt to optimize the ordering for the search. The LLL algorithm actually finds a new, better set of basis vectors (shorter and more orthogonal) and a reasonably good ordering for those vectors. The LLL algorithm however has no knowledge of the input vector $y$, since we have seen that the optimal ordering for the columns of $R$ depends on $y$, it is reasonable to assume that we should be able to find better column orderings for the search process than the one which LLL gives.
 
+The proposed solution is simple, apply the LLL reduction to find a new set of basis vectors, then apply the new reduction strategy given in subsection \ref{subsec:newReduction} to re-order the basis vectors.
 
 \chapter{Alternate Search Strategies} \label{chap:Searches}
 

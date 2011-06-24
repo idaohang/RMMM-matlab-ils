@@ -22,7 +22,8 @@ for i=n-1:-1:j
 
     R(i,j)=r;
     R(i+1,j)=0;
-       
+    
+    R
     y([i,i+1]) = G*y([i,i+1]);
     %addflops(flops_mul(G,y([i,i+1])));
     

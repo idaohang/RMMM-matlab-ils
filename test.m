@@ -1,4 +1,4 @@
-runs = 100;
+runs = 500;
 time3 = zeros(1,runs);
 time1 = zeros(1,runs);
 time2 = zeros(1,runs);
@@ -23,20 +23,22 @@ successRate2 = zeros(1,runs);
 successRate3 = zeros(1,runs);
 sdevs = zeros(1,runs);
 snrs = zeros(1,runs);
+babaiBetter = zeros(1,runs);
+spikes = zeros(1,runs);
 
 
 sz = 40;
 qam = 8;
 m = sz;
 n = m;
-sigma2 = 0.9;
+sigma2 = 0.5;
 for i = 1:runs
     i
     %
     % A small example to run function ils.m
     %
     % Construct data
-    B = randn(m,n);
+    B = genMatrixAll(sz,8);
     z_true = (-1*ones(m,1)).^(mod(round(rand(m,1)*10),2)+1).*ceil(rand(m,1)*sqrt(qam));
     lower = -10;
     upper = 10;
@@ -54,7 +56,7 @@ for i = 1:runs
     tic;
     [zhat,numExpanded] = search(R2,y2,1);
     time1(i) = toc;
-    numExpanded
+    %numExpanded
     expand1(i) = numExpanded;
     successRate1(i) = successRate(R2,sigma2);
     
@@ -64,7 +66,7 @@ for i = 1:runs
     tic;
     [zhat2,numExpanded2] = search(R3,y3,1);
     time2(i) = toc;
-    numExpanded2
+    %numExpanded2
     expand2(i) = numExpanded2;
     successRate2(i) = successRate(R3,sigma2);
     [checkSum(i),rowSum(i),offDiagSum(i)] = checkLLL(R3);
@@ -74,19 +76,19 @@ for i = 1:runs
         error('Wrong answer!');
     end
     
-    [R4 Z4 y4] = testReduction(B,y,snrs(i)^(0.5),sigma2);
-    tic;
-    [zhat3,numExpanded3] = search(R4,y4,1);
-    time3(i) = toc;
-    numExpanded3
-    expand3(i) = numExpanded3;
-    successRate3(i) = successRate(R4,sigma2);
-    [checkSum2(i),rowSum2(i),offDiagSum2(i)] = checkLLL(R4);
-    
-    if(norm(Z*zhat-Z4*zhat3) ~= 0)
-        error('Test Reduction Wrong Answer!');
-    end
-    
+%     [R4 Z4 y4] = testReduction(B,y,snrs(i)^(0.5),sigma2);
+%     tic;
+%     [zhat3,numExpanded3] = search(R4,y4,1);
+%     time3(i) = toc;
+%     numExpanded3
+%     expand3(i) = numExpanded3;
+%     successRate3(i) = successRate(R4,sigma2);
+%     [checkSum2(i),rowSum2(i),offDiagSum2(i)] = checkLLL(R4);
+%     
+%     if(norm(Z*zhat-Z4*zhat3) ~= 0)
+%         error('Test Reduction Wrong Answer!');
+%     end
+%     
     babai1(i) = norm(B*Z*babai(R2,y2) - y);
     if(norm(Z*babai(R2,y2) - z_true) == 0)
         babaiCorrect1(i) = 1;
@@ -97,6 +99,9 @@ for i = 1:runs
     if(norm(Z*babai2temp(idx) - z_true) == 0)
         babaiCorrect2(i) = 1;
     end
+    babai1(i)
+    babai2(i)
+
     
 end
 

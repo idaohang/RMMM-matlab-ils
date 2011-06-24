@@ -1,5 +1,5 @@
-n = 70;
-sigma = 0.5;
+n = 40;
+sigma = 0.4;
 
 maxIter = 100;
 time1 = zeros(1,maxIter);
@@ -10,7 +10,7 @@ ub = inf(n,1);
 
 for count = 1:maxIter
 count
-H = genMatrixAll(n,11);
+H = genMatrixAll(n,8);
 x = (-1*ones(n,1)).^(mod(round(rand(n,1)*10),2)+1).*round(rand(n,1)*10);
 snr = norm(H*x)^2/(n*sigma^2);
 v = sigma*randn(n,1);
