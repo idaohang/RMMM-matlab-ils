@@ -28,7 +28,9 @@
 \contentsline {subsubsection}{Permutations}{36}
 \contentsline {subsubsection}{LLL Reduction}{36}
 \contentsline {subsection}{\numberline {3.2.2}New Unconstrained ILS Reduction}{37}
-\contentsline {chapter}{\numberline {4}Alternate Search Strategies}{38}
-\contentsline {chapter}{\numberline {5}Results}{39}
-\contentsline {chapter}{\numberline {6}Conclusions}{40}
-\contentsline {extrachapter}{References}{41}
+\contentsline {chapter}{\numberline {4}Alternate Search Strategies}{39}
+\contentsline {section}{\numberline {4.1}Best First Search}{41}
+\contentsline {section}{\numberline {4.2}Controlling BFS Memory Usage}{43}
+\contentsline {section}{\numberline {4.3}Combining BFS and DFS}{45}
+\contentsline {chapter}{\numberline {5}Conclusions}{46}
+\contentsline {extrachapter}{References}{47}
