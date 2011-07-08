@@ -1,5 +1,5 @@
-n = 50;
-sigma = 0.9;
+n = 70;
+sigma = 0.5;
 
 maxIter = 100;
 time1 = zeros(1,maxIter);

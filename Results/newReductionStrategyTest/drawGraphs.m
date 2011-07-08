@@ -1,9 +1,9 @@
-for i = 1:length(noises)
-    subplot(4,2,i);
-    plot(sizes,mean(squeeze(expand1(1:4,i,:))'),'--',sizes,mean(squeeze(expand2(1:4,i,:))'),'-x',sizes,mean(squeeze(expand3(1:4,i,:))'));
-    legend('LLL','LLL+Permu','TestReduction','Location','NorthWest');
-    xlabel('Problem Size');
-    ylabel('Nodes Expanded');
-    temp = strcat('Noise = ',num2str(noises(i)));
+for i = 6:length(sizes)
+    subplot(2,2,i-6+1);
+    plot(noises,mean(squeeze(time1(i,:,:))'),noises,mean(squeeze(time2(i,:,:))'));    
+    legend('LLL','LLL+Permu','Location','NorthWest');
+    xlabel('Noise Vector Sigma');
+    ylabel('Average Time (s)');
+    temp = strcat('Average Times over 200 Runs, Problem Size = ',num2str(sizes(i)));
     title(temp);
 end

@@ -105,9 +105,9 @@ This thesis will review some of the most effective reduction and search
 strategies for both the ILS and BILS problems. By comparing the run-time
 performance of some search algorithms, we are able to see the advantages of
 each, which allows us to propose a new, more efficient search strategy that is a
-combination of two others. We also prove that two very effective BILS reduction
-strategies are theoretically equivalent and propose a new BILS reduction that
-is equivalent to the others but more efficient.}
+combination of two others. It will also be proven that two very effective BILS reduction
+strategies are theoretically equivalent and a new BILS reduction that
+is equivalent to the others but more efficient will be proposed. Finally, it will be shown that the BILS reduction can be applied to the ILS problem as well to provide a significant performance improvement.}
 \AbstractEn%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -161,7 +161,7 @@ The solution of the least squares problem has numerous applications in many fiel
 The integer least squares (ILS) problem is a modification of the LS problem
 where the solution vector $x\in\mathbb{Z}^m$ is an unknown integer vector. We
 no longer have a closed-form solution for $x$ in this case, in fact, the
-problem is provably NP-Hard in the worst case. The ILS problem can be expressed as:
+problem is provably NP-Hard. The ILS problem can be expressed as:
 \be
 \label{eq:ils0}
 \min_{x\in {\mathbb{Z} }}  \| y- Hx \|_2. 
@@ -183,7 +183,7 @@ on the variance in the noise, the ILS problem will have an expected polynomial c
 
 The usual approach to solving an ILS or BILS problem consists of two phases,
 reduction and search. In the reduction phase, we transform the problem into an
-equivalent, but easier one. This typically involves manipulations on the design matrix $A$ such as column permutations
+equivalent, but easier one. This typically involves manipulations on the design matrix $H$ such as column permutations
 or integer gauss transformations to try and achieve certain properties. After reduction, we proceed to the search phase where we try to enumerate the possible solutions in an efficient manner.
 
 \section{Applications}
@@ -194,7 +194,7 @@ multiple-output'', it refers to the case where a wireless system has multiple
 input antennas transmitting a signal which is received by multiple output
 antennas. The signal received is our input vector $y$ from
 \eqref{eq:realLSModel}, it has undergone some linear transformation by the known
-``channel matrix'' $A$ (design matrix) and some noise has been introduced during
+``channel matrix'' $H$ (design matrix) and some noise has been introduced during
 the transmission. Originally, we know that each element of $x$ came from some
 finite set of symbols that we may want to transmit or receive (we model
 this property with $\boxcon$). The purpose of such a system is to maximize
@@ -202,9 +202,9 @@ throughput, however, the overall throughput of the system will depend on how
 quickly we can solve the BILS problem. Of course we need not solve the BILS
 problem exactly, however under the assumption that the noise has $0$ mean and is
 normally distributed, the BILS solution is more likely than any other possible
-solution to be the true solution $x$. For this reason, we say that a receiver which is decoding transmissions using a BILS algorithm achieves ``optimal performance'', where performance refers to the likelihood that the vector found by the decoder is equal to the transmitted vector $x$.
+solution to be the true solution $x$. For this reason, we say that a receiver which is decoding transmissions using an algorithm which solves the BILS problem exactly achieves ``optimal performance''; performance refers to the likelihood that the vector found by the decoder is equal to the transmitted vector $x$.
 
-Another application of the ILS problem arises in global positioning systems where carrier phase measurements are used. In GPS, there are two types of measurements that can be used to determine the position of a receiver, code phase and carrier phase. Code phase measurements can give accuracy to a few meters, while carrier phase are accurate to centimeters. To make use of the more accurate carrier phase measurements, we must know how many cycles the carrier wave has gone through between the satellite and the receiver. The number of cycles will be an integer, we can form a linear model for this system and obtain it by solving an ILS problem. 
+Another application of the ILS problem arises in global positioning systems where carrier phase measurements are used. In GPS, there are two types of measurements that can be used to determine the position of a receiver, code phase and carrier phase. Code phase measurements can give accuracy to a few meters, while carrier phase are accurate to centimeters. To make use of the more accurate carrier phase measurements, we must know how many cycles the carrier wave has gone through between the satellite and the receiver. The number of cycles will be an integer, we can form a linear model for this system and obtain an estimate at the number of cycles by solving an ILS problem. 
 
 Other applications of BILS and ILS include cryptography and lattice design. For any application where the elements of $x$
 are known to be integer, we should use ILS. If the elements of $x$ are drawn from some finite set, BILS is appropriate.
@@ -219,9 +219,9 @@ In the literature, some modifications to the best first tree search strategy hav
 
 There have been some attempts to compare different enumeration algorithms for the ILS search process. One such paper is \cite{MurGDC06}. The authors here devise a common framework (based on a tree search) that many search algorithms can be described within and from there they can do a comparison on the estimated computational complexity of each. Unfortunately through this theoretical comparison, we can only relate the number of nodes in the search tree that will be explored by various algorithms, this does not consider the amount of time processing each node which is often a computational bottleneck.
 
-In \cite{StoVH08}, it is proposed that by using lower bounds on the residual from the optimal solution, we can shrink the search space (equivalently, prune the search tree). A few such lower bounds are given for special cases of the ILS problem and one for the general ILS and BILS problem. Unfortunately, the computational complexity of computing these bounds can be prohibitive, this will be discussed later in the thesis.
+There have been other suggestions to improve the enumeration based search algorithms as well. In \cite{StoVH08}, it is proposed that by using lower bounds on the residual from the optimal solution, we can shrink the search space (equivalently, prune the search tree). A few such lower bounds are given for special cases of the ILS problem and one for the general ILS and BILS problem. Unfortunately, the computational complexity of computing some of these bounds can be prohibitive.
 
-There have been other suggestions to improve the enumeration based search algorithms as well. One such method \cite{SchFL09} proposes a simple stopping criteria for the search process that in theory should allow it to terminate earlier. Unfortunately, the bound derived here is not tight enough to be useful in practice and is rarely or never satisfied.
+Another method that attempts to shrink the search space is given in \cite{SchFL09}. They propose a simple stopping criteria for the search process that in theory should allow it to terminate earlier. Unfortunately, the bound derived here is not tight enough to be useful in practice and is rarely or never satisfied.
 
 \subsection{Reduction Strategies}
 
@@ -302,7 +302,8 @@ to level $n-1$ and choose $x_{n-1} = \lfloor c_{n-1} \rceil$ with $c_{n-1}$ calc
 level 1, moving back a level if ever the inequality for the current level is no longer satisfied. When we reach level $1$, we will have found an integer point $\hat{x}$. We then update $\beta = \left \| \bar{y} - R\hat{x} \right \|_2^2$ and try to find a better integer point which lies in the new, smaller ellipsoid. Finally in the search process, when we can no longer find any $x_n$ to satisfy \eqref{eq:searchLevelK} with $k=n$, the search process is complete and the last integer point $\hat{x}$ found is the solution. If we initially set $\beta = \infty$ the first point $\hat{x}$ that we find is known as the Babai point.
 
 \begin{figure}
-
+\includegraphics{searchtree.png}
+\caption{An example of the search process with solution $x = [-1,3,1]^T$.}
 \label{fig:treeSearch}
 \end{figure}
 
@@ -546,6 +547,7 @@ The motivation for the SW algorithm comes from examining the geometry of the sea
   \newlength{\du}
 \fi
 \begin{figure}
+\includegraphics{sumotivation.png}
 \caption{Geometry of the search  with two different column ordering.}
 \label{SEGeometry}
 \end{figure}
@@ -962,7 +964,31 @@ After doing IGTs, there is no guarantee that the second condition in \eqref{eq:L
 After the permutation, the second condition in \eqref{eq:LLLConditions} will hold. After performing this permutation, we also have the guarantee that element $r_{kk}$ will increase and $r_{k-1,k-1}$ will decrease, therefore the resulting matrix will have something closer to an increasing diagonal.
 
 \subsubsection{LLL Reduction}
-By putting subsections \ref{subsec:IGT} and \ref{subsec:Perm} together, we can devise an algorithm to satisfy the LLL conditions \eqref{eq:LLLConditions}. We will start by letting $H = QR$ denote the $QR$ factorization of the matrix $H$. We will work with the columns of $R$ from right to left, starting with column $k=n$. The idea is to move to the left so that at any step $k$, the columns $k+1:n$ satisfy the LLL conditions. In the $k^{th}$ step, we start by using IGTs to make sure column $k$ satisfies the first LLL condition, $|r_{ik}| < \frac{1}{2}r_{ii}, \quad i = k-1:-1:1$. If the second inequality in \ref{eq:LLLConditions} holds, we move to column $k-1$, otherwise column $k-1$ and $k$ are swapped with a column permutation and $R$ is brought back to upper triangular as described in \ref{subsec:Perm}. After applying a column permutation, we must move back to column $k+1$ since it is possible that the permutation will cause the conditions on the previous column to no longer be satisfied. When we reach column $1$, we know the matrix $R$ must be LLL reduced.
+By putting subsections \ref{subsec:IGT} and \ref{subsec:Perm} together, we can devise an algorithm to satisfy the LLL conditions \eqref{eq:LLLConditions}. We will start by letting $H = QR$ denote the $QR$ factorization of the matrix $H$. We will work with the columns of $R$ from right to left, starting with column $k=n$. The idea is to move to the left so that at any step $k$, the columns $k+1:n$ satisfy the LLL conditions. In the $k^{th}$ step, we start by using IGTs to make sure column $k$ satisfies the first LLL condition, $|r_{ik}| < \frac{1}{2}r_{ii}, \quad i = k-1:-1:1$. If the second inequality in \ref{eq:LLLConditions} holds, we move to column $k-1$, otherwise column $k-1$ and $k$ are swapped with a column permutation and $R$ is brought back to upper triangular as described in \ref{subsec:Perm}. After applying a column permutation, we must move back to column $k+1$ since it is possible that the permutation will cause the conditions on the previous column to no longer be satisfied. When we reach column $1$, we know the matrix $R$ must be LLL reduced. Algorithm \ref{alg:LLL} describes this process.
+
+\begin{algorithm}
+\caption{LLL Algorithm - Returns R the LLL reduced upper triangular matrix and Z a product of IGTs and permutations}
+\label{alg:LLL}
+\begin{algorithmic}[1]
+\STATE Compute the QR factorization of $H$: $\bsmx Q_1^T \\ Q_2^T \esmx H= \bsmx R\\ 0 \esmx$
+\STATE $Z := n \times n$ Identity matrix
+\STATE $k := n$
+\WHILE{$k \ge 2$}
+	\IF{$k > n$}
+		\STATE $k := n$	
+	\ENDIF
+	\STATE Compute IGTs so that column $k$ satisfies $|r_{ik}| < \frac{1}{2}r_{ii}, \quad i = k-1:-1:1$, apply the IGTs 		to Z and R
+	\IF{$r_{k,k}^2 + r_{k-1,k}^2 < r_{k-1,k-1}^2$}
+		\STATE $P := $ Permutation matrix to swap column $k$ and $k-1$
+		\STATE $R := RP$
+		\STATE $Z := ZP$
+		\STATE $k := k+1$
+	\ELSE
+		\STATE $k := k-1$
+	\ENDIF
+\ENDWHILE
+\end{algorithmic}
+\end{algorithm}
 
 \subsection{New Unconstrained ILS Reduction}
 In subsection \ref{subsec:SW}, the motivation for the SW algorithm was given. While the SW algorithm does make use of the box constraint, the original motivation for their algorithm applies to the unconstrained ILS problem as well. Applying the SW algorithm directly to the matrix $H$ however may yield results that are much worse than those given by LLL on average. The reason for this is that the SW algorithm only reorders a given set of basis vectors in an attempt to optimize the ordering for the search. The LLL algorithm actually finds a new, better set of basis vectors (shorter and more orthogonal) and a reasonably good ordering for those vectors. The LLL algorithm however has no knowledge of the input vector $y$, since we have seen that the optimal ordering for the columns of $R$ depends on $y$, it is reasonable to assume that we should be able to find better column orderings for the search process than the one which LLL gives.
@@ -971,9 +997,24 @@ The basic idea behind the proposed solution is simple, apply the LLL reduction t
 
 Recall the Babai point from chapter \ref{chap:SESearch}, denote the Babai point by the vector $z_0$. This is the first point found during the SE search process. The residual $\left \| Rz_0 - \bar{y} \right \|^2_2$ defines the initial radius of the search process. The number of nodes that the SE search will visit in the search tree is strongly related to the initial radius, the ordering of the columns and the shape of the lattice (the shape of the lattice defines how many integer points will be within the sphere defined by the radius). It is obvious how the initial radius and shape of the lattice relate to the search process, a smaller radius for a fixed lattice results in a smaller search space.
 
+We will usually obtain a different Babai point after applying permutations to some matrix $R$. Since we know that the search time is related to the initial radius which is defined by the Babai point, one way to estimate whether the search process will proceed faster before or after permutations is to compare the initial radius in both cases. Figure \ref{fig:LLLvsPermuBabai} shows such a comparison for $100$ matrices $H$ generated randomly with their elements picked from a standard normal distribution. The elements in the vectors $x \in \mathbb{Z}$ were picked uniformly between $-10 \dots 10$ and the vector $y$ was generated as $y = Hx + v$, where $v$ is normally distributed with mean $0$ and standard deviation $0.5$ in this case.
+
+\begin{figure}
+\includegraphics[scale=0.3]{lllvslllpermubabai.png}
+\caption{LLL Reduction vs LLL Reduction and Permutations. Residual from the Babai points.}
+\label{fig:LLLvsPermuBabai}
+\end{figure}
+
+Looking at figure \ref{fig:LLLvsPermuBabai}, we can see that after permutations, the Babai point in this case is at least as good as the one before permutation. Occasionally it is significantly better. For cases where the Babai point is better, we can choose to use the permuted $R$ for the search process. Numerical results comparing this strategy to a simple LLL reduction can be found in section \ref{sec:ILSReductionResults}.
+
+Unforunately, there are certain types of ill conditioned problems where the above strategy does not work very well. Even though the new matrix $R$ after permutations gives a better Babai point, the search process visits more nodes. Some characteristics and examples of such problems are given in section \ref{sec:ILSReductionResults}. In these cases, we may use the permutation strategy just to help set the initial search radius, then perform the search on the LLL reduced matrix $R$. Since we only apply orthogonal transformations to the matrix $R$ and vector $y$ with our permutation strategy, we can use the residual from the Babai point in the permuted problem directly in the problem before permutation. The equation $\left \| GRPz_0 - Gy \right \|_2^2 = \left \| RPz_0 - y \right \|$ shows this. Using this residual in the LLL reduced problem when it is small than the residual to the Babai point given by LLL reduction is guaranteed to result in a faster search time. Since the permutation reduction process is very fast compared to the search, usually the overall time will be faster as well. Unfortunately, while this strategy is guaranteed to be faster than LLL reduction alone for the search process, it does not always give results as good as performing the search process on the permuted $R$. Some comparisons can be found in section \ref{sec:ILSReductionResults}.
+
+\subsection{ILS Reduction Results} \label{sec:ILSReductionResults}
+In this subsection, some results will be presented to compare applying a simple LLL reduction and applying permutations to the LLL reduced matrix.
+
 \chapter{Alternate Search Strategies} \label{chap:Searches}
 
-Chapter \ref{chap:SESearch} described the most common search strategy used to solve both the ILS and BILS problems. Also, the search process was shown to a tree search problem where we must find the minimum cost leaf in a tree of height $n$ with potentially exponential width. The difference between this tree search and more general tree search problems is that we can easily visit the children of a given node in increasing order of cost (partial residual). 
+Chapter \ref{chap:SESearch} described the most common search strategy used to solve both the ILS and BILS problems. Also, the search process was shown to be equivalent to a tree search problem where we must find the minimum cost leaf in a tree of height $n$ with potentially exponential width. The difference between this tree search and more general tree search problems is that we can easily visit the children of a given node in increasing order of cost (partial residual); we can compute the next child to visit in constant time. 
 
 While the depth first search corresponding to the SE algorithm is usually very fast, it is not optimal in terms of the number of nodes visited during the search process. Let $x_{i:n}^p$ denote the node in the search tree that results from fixing $x_{i:n}$ to some particular set of values, we may call this a partial solution. Then the partial residual given by this partial solution is equivalent to its cost in the search tree and can be defined as $\left \| R_{i:n,i:n}x_{i:n}^p - \bar{y}_{i:n}\right \|_2^2$. An optimal algorithm for the ILS problem visits only nodes in the search tree with partial residuals that are less than the optimal ILS solutions residual. Therefore all nodes explored by the optimal search process will satisfy the following:
 \begin{equation}\label{eq:optimalSearchCond}
@@ -990,7 +1031,7 @@ The following sections will explain the BFS, quickly overview a couple of attemp
 
 \section{Best First Search} \label{sec:BFS}
 
-A quick review from chapter \ref{chap:SESearch}; we will explore the search tree which has depth $n$ and each edge has a cost to traverse. Define a given nodes cost as the sum of the costs of all the edges traversed to reach the node, that is the length of the path between the node and the root. This cost is equal to the partial residual for fixing $x_{i:n}$ to a set of values, e.g. $\left \| R_{i:n,i:n}x_{i:n}^p - \bar{y}_{i:n}\right \|_2^2$. We would like to find the leaf with minimal cost. For the BFS, we will define a nodes ``next best child" as the child of that node with the lowest cost that has not yet been visited.
+A quick review from chapter \ref{chap:SESearch}; we will explore the search tree which has depth $n$ and each edge has a cost to traverse. Define a given nodes cost as the sum of the costs of all the edges traversed to reach the node, that is the length of the path between the node and the root. This cost is equal to the partial residual for fixing $x_{i:n}$ to a set of values, e.g. $\left \| R_{i:n,i:n}x_{i:n}^p - \bar{y}_{i:n}\right \|_2^2$. We would like to find the leaf with minimal cost. For the BFS, we will define a nodes ``next best child" as the child of that node with the lowest cost that has not yet been visited. This is simple to compute; the first ``next best child'' for a node is just $\lfloor c_k \rceil$ as defined in chapter \ref{chap:SESearch}. The next will be $\lfloor c_k \rceil \pm 1$, such that we get the second nearest integer to $c_k$, we proceed in this way, always taking the next nearest integer to define the ``next best child''. This is the exact same strategy that the SE search uses.
 
 The core data structure used to efficiently implement a best first search is called a priority queue. The priority queue is an abstract data structure whose basic operations are $insert(element,cost)$, and $findmin()$. The $insert(element,cost)$ operation adds an element to the queue with some integer cost. The $findmin()$ operation finds and removes the element with minimum cost from the queue. The implementation details are not particularly relevant to this thesis, but it is important to note that there are various implementations used in practice. The usual cost for the $insert(element,cost)$ operation is $\theta(1)$ and for the $findmin()$ operation $\theta(log(N))$ where $N$ is the number of elements currently in the queue.
 
@@ -998,9 +1039,9 @@ As mentioned above, for the ILS application, we can quickly find a given nodes `
 
 In the first step of the BFS, we initialize an empty priority queue, $pq$ and define the root node as having a cost of $0$ and being at level $n+1$. The ``next best child" of the root node will correspond to $x_n = \lfloor \bar{y}_n/R_{n,n} \rceil$ and the cost to visit this child will be equal to the partial residual $(R_{n,n}x_n - \bar{y}_n)^2$, we will call this cost the ``next best child cost". The root node will store its current ``next best child" and ``next best child cost" and then be inserted into $pq$, elements in this priority queue will always be sorted by their ``next best child cost".
 
-In the next step, we will visit the first child of the root, $x_{n-1}$. First, we perform the $findmin()$ operation on the priority queue, since currently the root is the only element, it will be returned. We would like to visit the first child of the current node (which is now the root). To visit a node involves calculating the ``next best child" the ``next best child cost", therefore we must compute these quantities for the node corresponding to $x_{n}$ (which is the first child of the root). The ``next best child" of $x_n$ will be given by $x_{n-1} = \lfloor c_{n-1} \rceil$ and its cost  will be the partial residual $\left \| R_{n-1:n,n-1:n}x_{n-1:n}^p - \bar{y}_{n-1:n}\right \|_2^2$. Notice if we expand the cost as follows, $(R_{n,n}x_n - \bar{y}_n)^2 + (R_{n-1,n}x_n + R_{n-1,n-1}x_{n-1} - \bar{y}_{n-1})^2$ that the first term in the cost is just the cost of the parent node. We then insert $x_n$ into the priority queue with its ``next child'' and ``next child cost''.
+In the next step, we will visit the first child of the root, $x_{n-1}$. First, we perform the $findmin()$ operation on the priority queue, since currently the root is the only element, it will be returned. We would like to visit the first child of the current node (which is now the root). To visit a node involves calculating the ``next best child" and the ``next best child cost", therefore we must compute these quantities for the node corresponding to $x_{n}$ (which is the first child of the root). The ``next best child" of $x_n$ will be given by $x_{n-1} = \lfloor c_{n-1} \rceil$ and its cost  will be the partial residual $\left \| R_{n-1:n,n-1:n}x_{n-1:n}^p - \bar{y}_{n-1:n}\right \|_2^2$. Notice if we expand the cost as follows, $(R_{n,n}x_n - \bar{y}_n)^2 + (R_{n-1,n}x_n + R_{n-1,n-1}x_{n-1} - \bar{y}_{n-1})^2$ that the first term in the cost is just the cost of the parent node. We then insert $x_n$ into the priority queue with its ``next child'' and ``next child cost''.
 
-Since we are now visiting the first child of the root, we must generate the roots new ``next best child", $x_n = \lfloor c_n \rceil ^+_- 1$ and the cost for this child (also the partial residual), $(R_{n,n}x_n^2 - y_n)$. We may now insert the root back into the priority queue with the newly calculated ``next best child cost" and ``next best child''.
+Since we are now visiting the first child of the root, we must generate the roots new ``next best child", $x_n = \lfloor c_n \rceil ^+_- 1$ and the cost for this child (also the partial residual), $(R_{n,n}x_n - y_n)^2$. We may now insert the root back into the priority queue with the newly calculated ``next best child cost" and ``next best child''.
  
 At this step, the next node to be visited will be the one at the top of the priority queue with the smallest ``next best child cost". Currently there are two nodes in the priority queue, one at level $n$ and one at level $n-1$. If the former is smaller, we will visit the second best child of $x_n$, the new $x_{n-1}$ next, otherwise we will visit the best child of the node $x_{n-1}$ which is in the queue.
 
@@ -1022,13 +1063,35 @@ There are a few drawbacks to this algorithm. One is that it is not clear how to 
 
 With these problems, it is worthwhile to explore some other options to limit the memory usage of the BFS, but at the same time also try to decrease the amount of time spent processing each node in the tree.
 
-\section{Combining BFS and DFS}
+\section{Combining BFS and SE Search}
 
 Here a new method for controlling the memory usage of the BFS will be presented. Like the method in \cite{StuBF07} it is quite simple and relies on a parameter supplied by the user.
 
-One of the main problems with the SE search occurs when elements high up in the tree (e.g. $x_n, x_n-1 \dots$) are initially chosen incorrectly. We must explore the entire subtree looking for the ILS solution, visiting many nodes that may have partial residuals higher than the residual given by the ILS solution. Eventually we make our way back up the tree to correct the mistake. The BFS doesn't have this problem since it does not restrict itself to choosing children of the current node.
+One of the main problems with the SE search occurs when elements high up in the tree (e.g. $x_n, x_n-1 \dots$) are initially chosen incorrectly. We must explore the entire subtree looking for the ILS solution, visiting many nodes that may have partial residuals higher than the residual given by the ILS solution. Eventually we make our way back up the tree to correct the mistake. The BFS doesn't have this problem since it does not restrict itself to visiting only children of the current node.
 
-In order to avoid making expensive mistakes at high levels, we may consider cutting the search tree at some level $\alpha$ which will be supplied by the user. We begin with a BFS, when the BFS reaches a node at level $\alpha$, it uses a DFS to find the optimal solution in that nodes subtree. With this solution calculated, we can continue the BFS until we reach another node at level $\alpha$. We again perform a DFS to find the optimal solution in this nodes subtree, however this time we may use a sphere constraint to terminate the DFS early. Continuing this process, eventually we will reach a point where the next node to be visited in the BFS has a cost greater than the current sphere radius, at this point we may terminate with the optimal solution.
+In order to avoid making expensive mistakes at high levels, we may consider cutting the search tree at some level $\alpha$ which will be supplied by the user. We begin with a BFS, when the BFS reaches a node at level $k=\alpha$, it uses a SE search to find the optimal solution in that nodes subtree. Suppose a we are at some node in the BFS which is given by fixing $x_{k+1:n}$ to some particular values (so we are at level k), then we will solve the subproblem  given by:
+
+\begin{align} 
+&\hat{y} = y(1:k) - R_{1:k,k+1:n}x_{k+1:n} \\
+&\min_{x_{1:k} \in {\mathbb{Z} }}  \| \hat{y} - R_{1:k,1:k}x_{1:k} \|_2
+\end{align}
+
+By solving this subproblem, we can find the optimal solution assuming $x_{k+1:n}$ are fixed. With the solution calculated by the SE algorithm, we can continue the BFS until we reach another node at level $\alpha$. Next time we visit a node at level $\alpha$, we again perform an SE search to find the optimal solution in this nodes subtree, however this time we may use a sphere constraint to terminate the SE search early; if the previous SE search found a leaf with some residual $r$, then we can terminate this SE search when there are no nodes with residual less than $r$ remaining to visit, we need not find a leaf. Continuing this process, eventually we will reach a point where the next node to be visited in the BFS has a cost greater than the current sphere radius (given by the residual from the best leaf visited), at this point we may terminate with the optimal solution.
+
+With this approach and an appropriate choice of the parameter $\alpha$, we can avoid making expensive mistakes at higher levels in the search tree. We also will incur a much smaller overhead to maintain the priority queue, since it will not contain nearly as many nodes if $\alpha$ is chosen to be near $n$, and with the smaller priority queue, there will be less memory usage. 
+
+There are some useful tricks which can be used in conjunction with the combined search process to improve performance. Consider that the first SE search will very often be the one that costs the most in terms of run time. This is because we have no sphere constraint to use as a stopping condition and must solve the subproblem completely. The best case occurs when the first subproblem we solve contains the ILS solution, in this case we get the smallest possible sphere radius to use in subsequent SE searches as a stopping criteria, and will therefore prune more nodes. To make this more likely to occur, we may delay solving the first subproblem as follows. When we visit a node at level $\alpha$, we can decide not to solve the subproblem stemming from this node, instead we put the node into a list of ``unsolved subproblems'' and continue the BFS. One example of when we may not want to solve a subproblem is when the Babai point given by solving it results in a large residual. Eventually we will need to perform the SE search to find a leaf, once a suitable node is visited by the BFS (one with a relatively low residual to the Babai point is a good choice), we perform the SE search and find a leaf in the tree corresponding to a potential solution. Now we simply go back to the list of ``unsolved subproblems'' and solve them all, using the residual from the previous solution as an initial sphere radius. The unsolved problems that had Babai points yielding high residuals are now likely to terminate much more quickly because not many nodes should be within the current sphere radius if the subproblem that we chose to solve gave a good solution. 
+
+\section{Search Strategy Results} \label{sub:SearchResults}
+In this section, results will be given to compare the SE search, BFS and the combination of the two. To this point, there has not been much said about how to choose the parameter $\alpha$. This section will attempt to address this question through some numerical experiments. We need to choose $\alpha$ low enough to avoid mistakes at high levels in the tree, but high enough so that we get the advantages of the SE search being faster at processing each node. Note that when $\alpha = n$, we have a pure SE search, and when $\alpha = 1$, the combined search strategy degrades to a BFS. 
+
+For all of the results in this section, the matrices will simply be generated randomly with elements drawn from a standard normal distribution. The vectors $x$ will have elements uniformly distributed between $-10 \dots 10$ and the vectors $y$ are generated as $y = Hx+v$ where $v$ is normally distributed with some standard deviation $\sigma$.
+
+\begin{figure}
+%\includegraphics{searchresults.png}
+\caption{Run time results for the combined search process with varying parameter $\alpha$.}
+\label{fig:searchresults}
+\end{figure}
 
 
 \chapter{Conclusions} \label{chap:Conclusion}

@@ -19,18 +19,20 @@
 \contentsline {subsection}{\numberline {3.1.1}Previous Reductions}{16}
 \contentsline {subsection}{\numberline {3.1.2}CH Algorithm}{19}
 \contentsline {subsection}{\numberline {3.1.3}SW Original Algorithm}{22}
-\contentsline {subsection}{\numberline {3.1.4}SW Algorithm Interpretation and Improvements}{27}
-\contentsline {subsection}{\numberline {3.1.5}Proof of Equivalence of SW and CH}{30}
-\contentsline {subsection}{\numberline {3.1.6}New Algorithm}{31}
-\contentsline {section}{\numberline {3.2}ILS Reduction Algorithms}{34}
-\contentsline {subsection}{\numberline {3.2.1}Computing the LLL Reduction}{35}
-\contentsline {subsubsection}{Integer Gauss Transformations}{35}
-\contentsline {subsubsection}{Permutations}{36}
-\contentsline {subsubsection}{LLL Reduction}{36}
-\contentsline {subsection}{\numberline {3.2.2}New Unconstrained ILS Reduction}{37}
-\contentsline {chapter}{\numberline {4}Alternate Search Strategies}{39}
-\contentsline {section}{\numberline {4.1}Best First Search}{41}
-\contentsline {section}{\numberline {4.2}Controlling BFS Memory Usage}{43}
-\contentsline {section}{\numberline {4.3}Combining BFS and DFS}{45}
-\contentsline {chapter}{\numberline {5}Conclusions}{46}
-\contentsline {extrachapter}{References}{47}
+\contentsline {subsection}{\numberline {3.1.4}SW Algorithm Interpretation and Improvements}{28}
+\contentsline {subsection}{\numberline {3.1.5}Proof of Equivalence of SW and CH}{31}
+\contentsline {subsection}{\numberline {3.1.6}New Algorithm}{32}
+\contentsline {section}{\numberline {3.2}ILS Reduction Algorithms}{35}
+\contentsline {subsection}{\numberline {3.2.1}Computing the LLL Reduction}{36}
+\contentsline {subsubsection}{Integer Gauss Transformations}{36}
+\contentsline {subsubsection}{Permutations}{37}
+\contentsline {subsubsection}{LLL Reduction}{37}
+\contentsline {subsection}{\numberline {3.2.2}New Unconstrained ILS Reduction}{38}
+\contentsline {subsection}{\numberline {3.2.3}ILS Reduction Results}{41}
+\contentsline {chapter}{\numberline {4}Alternate Search Strategies}{42}
+\contentsline {section}{\numberline {4.1}Best First Search}{44}
+\contentsline {section}{\numberline {4.2}Controlling BFS Memory Usage}{46}
+\contentsline {section}{\numberline {4.3}Combining BFS and SE Search}{49}
+\contentsline {section}{\numberline {4.4}Search Strategy Results}{51}
+\contentsline {chapter}{\numberline {5}Conclusions}{53}
+\contentsline {extrachapter}{References}{54}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.14)  28 JUN 2011 13:38
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.14)  7 JUL 2011 16:39
 entering extended mode
  %&-line parsing enabled.
 **sbreenThesis.tex
@@ -707,76 +707,87 @@ CHAPTER 1.
 [1
 
 
-] [2] [3] [4] [5]
-
-LaTeX Warning: Citation `Bor10' on page 6 undefined on input line 228.
-
-[6] [7] [8] [9]
+] [2] [3] [4] [5] [6] [7] [8] [9]
 ***************************
 CHAPTER 2.
 ***************************
 [10
 
-] [11] [12] [13]
+] [11] <searchtree.png, id=75, 502.87875pt x 282.05376pt>
+File: searchtree.png Graphic file (type png)
+
+<use searchtree.png>
+Overfull \hbox (72.8729pt too wide) in paragraph at lines 305--306
+[][] 
+ []
+
+[12 <./searchtree.png (PNG copy)>] [13]
 ***************************
 CHAPTER 3.
 ***************************
 [14
 
 ] [15] [16] [17] [18] [19] [20] [21]
-Underfull \hbox (badness 10000) in paragraph at lines 517--519
+Underfull \hbox (badness 10000) in paragraph at lines 518--520
 [] []\OT1/ptm/m/n/12 swap columns $\OML/cmm/m/it/12 i$ \OT1/ptm/m/n/12 and $\OM
 L/cmm/m/it/12 k$ \OT1/ptm/m/n/12 of $[]$, re-turn it to up-per tri-an-gu-lar wi
 th Givens ro-ta-tions,
  []
 
 \du=\skip87
-[22] [23] [24] [25] [26]
+<sumotivation.png, id=111, 525.965pt x 268.00125pt>
+File: sumotivation.png Graphic file (type png)
+ <use sumotivation.png>
+Overfull \hbox (95.95908pt too wide) in paragraph at lines 550--551
+[][] 
+ []
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 710.
+[22] [23] [24 <./sumotivation.png (PNG copy)>] [25] [26] [27]
 
-
-LaTeX Font Warning: Command \small invalid in math mode on input line 710.
-
-[27]
-
-LaTeX Font Warning: Command \small invalid in math mode on input line 722.
-
-
-LaTeX Font Warning: Command \small invalid in math mode on input line 722.
+LaTeX Font Warning: Command \small invalid in math mode on input line 712.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 732.
+LaTeX Font Warning: Command \small invalid in math mode on input line 712.
+
+[28]
+
+LaTeX Font Warning: Command \small invalid in math mode on input line 724.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 732.
+LaTeX Font Warning: Command \small invalid in math mode on input line 724.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 733.
+LaTeX Font Warning: Command \small invalid in math mode on input line 734.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 733.
+LaTeX Font Warning: Command \small invalid in math mode on input line 734.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 739.
+LaTeX Font Warning: Command \small invalid in math mode on input line 735.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 739.
+LaTeX Font Warning: Command \small invalid in math mode on input line 735.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 739.
+LaTeX Font Warning: Command \small invalid in math mode on input line 741.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 739.
+LaTeX Font Warning: Command \small invalid in math mode on input line 741.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 739.
+LaTeX Font Warning: Command \small invalid in math mode on input line 741.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 739.
+LaTeX Font Warning: Command \small invalid in math mode on input line 741.
 
-[28] [29] [30] [31]
-Underfull \hbox (badness 10000) in paragraph at lines 910--910
+
+LaTeX Font Warning: Command \small invalid in math mode on input line 741.
+
+
+LaTeX Font Warning: Command \small invalid in math mode on input line 741.
+
+[29] [30] [31] [32]
+Underfull \hbox (badness 10000) in paragraph at lines 912--912
 [] []\OT1/ptm/m/n/12 Remove col-umn $\OML/cmm/m/it/12 j$ \OT1/ptm/m/n/12 of $\O
 ML/cmm/m/it/12 R$ \OT1/ptm/m/n/12 and $\OML/cmm/m/it/12 G$\OT1/ptm/m/n/12 , and
  re-turn $\OML/cmm/m/it/12 R$ \OT1/ptm/m/n/12 and $\OML/cmm/m/it/12 G$ \OT1/ptm
@@ -784,28 +795,43 @@ ML/cmm/m/it/12 R$ \OT1/ptm/m/n/12 and $\OML/cmm/m/it/12 G$\OT1/ptm/m/n/12 , and
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 910--910
+Underfull \hbox (badness 10000) in paragraph at lines 912--912
 \OT1/ptm/m/n/12 by Givens ro-ta-tions, re-spec-tively, and then re-move the las
 t row of $\OML/cmm/m/it/12 R$ \OT1/ptm/m/n/12 and $\OML/cmm/m/it/12 G$\OT1/ptm/
 m/n/12 . The
  []
 
-[32] [33] [34] [35] [36] [37] [38]
+[33] [34] [35] [36]
+Underfull \hbox (badness 10000) in paragraph at lines 970--970
+[]\OT1/ptm/b/n/12 Algorithm 4 \OT1/ptm/m/n/12 LLL Al-go-rithm - Re-turns R the 
+LLL re-duced up-per tri-an-gu-lar ma-trix and Z
+ []
+
+[37] [38] [39] <lllvslllpermubabai.png, id=169, 1284.8pt x 599.841pt>
+File: lllvslllpermubabai.png Graphic file (type png)
+
+<use lllvslllpermubabai.png>
+Underfull \hbox (badness 10000) in paragraph at lines 1004--1004
+[]\OT1/ptm/m/n/12 Figure 3--2: LLL Re-duc-tion vs LLL Re-duc-tion and Per-mu-ta
+-tions. Resid-ual from the
+ []
+
+[40 <./lllvslllpermubabai.png (PNG copy)>] [41]
 ***************************
 CHAPTER 4.
 ***************************
-[39
+[42
 
-] [40] [41] [42] [43] [44] [45]
+] [43] [44] [45] [46] [47] [48] [49] [50] [51] [52]
 ***************************
 CHAPTER 5.
 ***************************
-(./sbreenThesis.bbl [46
+(./sbreenThesis.bbl [53
 
-] [47
+] [54
 
 
-] [48])
+] [55])
 No file keylist.ind found.
 No file abbr.ind found.
 (./sbreenThesis.aux)
@@ -882,21 +908,21 @@ supp-pdf.mkii
   omsptm.fd    
     umsa.fd    2009/06/22 v3.00 AMS symbols A
     umsb.fd    2009/06/22 v3.00 AMS symbols B
+searchtree.png    Graphic file (type png)
+sumotivation.png    Graphic file (type png)
+lllvslllpermubabai.png    Graphic file (type png)
 sbreenThesis.bbl
  ***********
 
-
-LaTeX Warning: There were undefined references.
-
  ) 
 Here is how much of TeX's memory you used:
- 9983 strings out of 495061
- 163594 string characters out of 1182621
- 229750 words of memory out of 3000000
- 12883 multiletter control sequences out of 15000+50000
+ 10004 strings out of 495061
+ 164008 string characters out of 1182621
+ 229820 words of memory out of 3000000
+ 12900 multiletter control sequences out of 15000+50000
  19884 words of font info for 49 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 47i,10n,49p,1662b,567s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 47i,10n,49p,1679b,567s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-texli
 ve/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-texlive/fonts/ty
 pe1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-texlive/fonts/type1/public/
@@ -910,9 +936,9 @@ ts/cm/cmsy8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/symbols/m
 sbm10.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/shar
 e/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/font
 s/type1/urw/times/utmri8a.pfb>
-Output written on sbreenThesis.pdf (57 pages, 263489 bytes).
+Output written on sbreenThesis.pdf (64 pages, 338020 bytes).
 PDF statistics:
- 243 PDF objects out of 1000 (max. 8388607)
+ 268 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

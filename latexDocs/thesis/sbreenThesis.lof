@@ -1,1 +1,4 @@
-\contentsline {figure}{\numberline {{3--1}}{\ignorespaces Geometry of the search with two different column ordering.}}{22}
+\contentsline {figure}{\numberline {{2--1}}{\ignorespaces An example of the search process with solution $x = [-1,3,1]^T$.}}{12}
+\contentsline {figure}{\numberline {{3--1}}{\ignorespaces Geometry of the search with two different column ordering.}}{24}
+\contentsline {figure}{\numberline {{3--2}}{\ignorespaces LLL Reduction vs LLL Reduction and Permutations. Residual from the Babai points.}}{40}
+\contentsline {figure}{\numberline {{4--1}}{\ignorespaces Run time results for the combined search process with varying parameter $\alpha $.}}{52}
