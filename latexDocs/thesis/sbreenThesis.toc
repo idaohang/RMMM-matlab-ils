@@ -7,32 +7,32 @@
 \contentsline {chapter}{\numberline {1}Introduction}{1}
 \contentsline {section}{\numberline {1.1}Least Squares Problem}{1}
 \contentsline {section}{\numberline {1.2}Integer Least Squares Problems}{2}
-\contentsline {section}{\numberline {1.3}Applications}{3}
-\contentsline {section}{\numberline {1.4}Previous Work}{4}
-\contentsline {subsection}{\numberline {1.4.1}Search Strategies}{4}
-\contentsline {subsection}{\numberline {1.4.2}Reduction Strategies}{6}
-\contentsline {section}{\numberline {1.5}Objectives and Contribution}{7}
-\contentsline {section}{\numberline {1.6}Outline}{8}
-\contentsline {chapter}{\numberline {2}Schnorr-Euchner Enumeration}{10}
-\contentsline {chapter}{\numberline {3}Reduction Strategies}{14}
-\contentsline {section}{\numberline {3.1}BILS Reduction Algorithms}{16}
-\contentsline {subsection}{\numberline {3.1.1}Previous Reductions}{16}
-\contentsline {subsection}{\numberline {3.1.2}CH Algorithm}{19}
-\contentsline {subsection}{\numberline {3.1.3}SW Original Algorithm}{22}
-\contentsline {subsection}{\numberline {3.1.4}SW Algorithm Interpretation and Improvements}{28}
-\contentsline {subsection}{\numberline {3.1.5}Proof of Equivalence of SW and CH}{31}
-\contentsline {subsection}{\numberline {3.1.6}New Algorithm}{32}
-\contentsline {section}{\numberline {3.2}ILS Reduction Algorithms}{35}
-\contentsline {subsection}{\numberline {3.2.1}Computing the LLL Reduction}{36}
-\contentsline {subsubsection}{Integer Gauss Transformations}{36}
-\contentsline {subsubsection}{Permutations}{37}
-\contentsline {subsubsection}{LLL Reduction}{37}
-\contentsline {subsection}{\numberline {3.2.2}New Unconstrained ILS Reduction}{38}
-\contentsline {subsection}{\numberline {3.2.3}ILS Reduction Results}{41}
-\contentsline {chapter}{\numberline {4}Alternate Search Strategies}{42}
-\contentsline {section}{\numberline {4.1}Best First Search}{44}
-\contentsline {section}{\numberline {4.2}Controlling BFS Memory Usage}{46}
-\contentsline {section}{\numberline {4.3}Combining BFS and SE Search}{49}
-\contentsline {section}{\numberline {4.4}Search Strategy Results}{51}
-\contentsline {chapter}{\numberline {5}Conclusions}{53}
-\contentsline {extrachapter}{References}{54}
+\contentsline {section}{\numberline {1.3}Applications}{4}
+\contentsline {section}{\numberline {1.4}Previous Work}{5}
+\contentsline {subsection}{\numberline {1.4.1}Search Strategies}{6}
+\contentsline {subsection}{\numberline {1.4.2}Reduction Strategies}{8}
+\contentsline {section}{\numberline {1.5}Objectives and Contribution}{9}
+\contentsline {section}{\numberline {1.6}Outline}{11}
+\contentsline {chapter}{\numberline {2}Schnorr-Euchner Enumeration}{12}
+\contentsline {chapter}{\numberline {3}Reduction Strategies}{17}
+\contentsline {section}{\numberline {3.1}BILS Reduction Algorithms}{19}
+\contentsline {subsection}{\numberline {3.1.1}Previous Reductions}{19}
+\contentsline {subsection}{\numberline {3.1.2}CH Algorithm}{22}
+\contentsline {subsection}{\numberline {3.1.3}SW Original Algorithm}{25}
+\contentsline {subsection}{\numberline {3.1.4}SW Algorithm Interpretation and Improvements}{32}
+\contentsline {subsection}{\numberline {3.1.5}Proof of Equivalence of SW and CH}{35}
+\contentsline {subsection}{\numberline {3.1.6}New Algorithm}{36}
+\contentsline {section}{\numberline {3.2}ILS Reduction Algorithms}{38}
+\contentsline {subsection}{\numberline {3.2.1}Computing the LLL Reduction}{40}
+\contentsline {subsubsection}{Integer Gauss Transformations}{41}
+\contentsline {subsubsection}{Permutations}{41}
+\contentsline {subsubsection}{LLL Reduction}{42}
+\contentsline {subsection}{\numberline {3.2.2}New Unconstrained ILS Reduction}{44}
+\contentsline {subsection}{\numberline {3.2.3}ILS Reduction Results}{48}
+\contentsline {chapter}{\numberline {4}Alternate Search Strategies}{54}
+\contentsline {section}{\numberline {4.1}Best First Search}{56}
+\contentsline {section}{\numberline {4.2}Controlling BFS Memory Usage}{59}
+\contentsline {section}{\numberline {4.3}Combining BFS and SE Search}{61}
+\contentsline {section}{\numberline {4.4}Search Strategy Results}{64}
+\contentsline {chapter}{\numberline {5}Conclusions and Future Work}{67}
+\contentsline {extrachapter}{References}{69}

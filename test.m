@@ -1,22 +1,22 @@
-n = 33;
-sigmas = [0.4];
+n = 45;
+sigmas = [0.6];
 
-maxIter = 100;
-time1 = zeros(3,maxIter);
-time2 = zeros(3,maxIter);
-time3 = zeros(3,maxIter);
-time4 = zeros(3,maxIter);
-condNum = zeros(3,maxIter);
+maxIter = 1000;
+time1 = zeros(length(sigmas),maxIter);
+time2 = zeros(length(sigmas),maxIter);
+time3 = zeros(length(sigmas),maxIter);
+time4 = zeros(length(sigmas),maxIter);
+condNum = zeros(length(sigmas),maxIter);
 lb = -inf(n,1);
 ub = inf(n,1);
-babBetter = zeros(3,maxIter);
+babBetter = zeros(length(sigmas),maxIter);
 
 outerCount=0;
 for sigma = sigmas
     outerCount=outerCount+1;
     for count = 1:maxIter
     outerCount,count
-    H = genMatrixAll(n,10);
+    H = genMatrixAll(n,11);
     x = (-1*ones(n,1)).^(mod(round(rand(n,1)*10),2)+1).*round(rand(n,1)*10);
     snr = norm(H*x)^2/(n*sigma^2);
     v = sigma*randn(n,1);
@@ -69,13 +69,11 @@ for sigma = sigmas
 
         z_ils2 = Z2*z_ils2;
     else
-        tic;
-        [z_ils2] = searchExtra(R2,y2,babai1(outerCount,count)^2+10^-6,0);
-        t_z2 = toc
-        z_ils2 = Z2*z_ils2;
-
+        z_ils2 = z_ils;
+        t_z2 = t_z1;
+        %z_ils2 = Z2*z_ils2;
         z_ils3 = z_ils2;
-        t_z3 = t_z2
+        t_z3 = t_z2;
     end
 
 
@@ -86,11 +84,16 @@ for sigma = sigmas
         error('Wrong Answer!');
     end
 
+    
+    if(t_z1 - 10 > t_z2)
+        error('Got one');
+    end
     time1(outerCount,count) = t_z1;
     time2(outerCount,count) = t_z2;
     time3(outerCount,count) = t_z3;
     time4(outerCount,count) = t_z4;
 
+    
     end
 
 end

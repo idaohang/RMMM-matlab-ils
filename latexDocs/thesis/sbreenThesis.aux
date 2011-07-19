@@ -14,17 +14,20 @@
 \@writefile{toc}{\contentsline {section}{\numberline {1.2}Integer Least Squares Problems}{2}}
 \newlabel{eq:ils0}{{1.5}{2}}
 \newlabel{eq:boxCon}{{1.6}{2}}
-\@writefile{toc}{\contentsline {section}{\numberline {1.3}Applications}{3}}
+\citation{AgrEVZ02}
+\@writefile{lof}{\contentsline {figure}{\numberline {{1--1}}{\ignorespaces An example of a lattice with two different sets of basis vectors.}}{3}}
+\newlabel{fig:latticeBasis}{{{1--1}}{3}}
+\@writefile{toc}{\contentsline {section}{\numberline {1.3}Applications}{4}}
 \citation{SchE94}
+\@writefile{toc}{\contentsline {section}{\numberline {1.4}Previous Work}{5}}
+\newlabel{sec:prevWork}{{1.4}{5}}
 \citation{MurGDC06}
 \citation{XuWZW04}
 \citation{FukMU04}
 \citation{StuBF07}
 \citation{DaiY08}
-\@writefile{toc}{\contentsline {section}{\numberline {1.4}Previous Work}{4}}
-\newlabel{sec:prevWork}{{1.4}{4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.1}Search Strategies}{4}}
 \citation{MurGDC06}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.1}Search Strategies}{6}}
 \citation{StoVH08}
 \citation{SchFL09}
 \citation{LenLL82}
@@ -33,129 +36,144 @@
 \citation{WubBRKK01}
 \citation{SuW05}
 \citation{ChaH05}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.2}Reduction Strategies}{8}}
 \citation{MurGDC06}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.2}Reduction Strategies}{6}}
 \citation{LenLL82}
 \citation{ChaH05}
 \citation{SuW05}
-\@writefile{toc}{\contentsline {section}{\numberline {1.5}Objectives and Contribution}{7}}
+\@writefile{toc}{\contentsline {section}{\numberline {1.5}Objectives and Contribution}{9}}
 \citation{SchE94}
-\@writefile{toc}{\contentsline {section}{\numberline {1.6}Outline}{8}}
+\@writefile{toc}{\contentsline {section}{\numberline {1.6}Outline}{11}}
 \citation{SchE94}
-\@writefile{toc}{\contentsline {chapter}{\numberline {2}Schnorr-Euchner Enumeration}{10}}
-\newlabel{chap:SESearch}{{2}{10}}
-\newlabel{eq:ils}{{2.1}{10}}
-\newlabel{eq:searchIneq0}{{2.2}{10}}
-\newlabel{eq:searchC}{{2.3}{11}}
-\newlabel{eq:searchLevelK}{{2.4}{11}}
-\@writefile{lof}{\contentsline {figure}{\numberline {{2--1}}{\ignorespaces An example of the search process with solution $x = [-1,3,1]^T$.}}{12}}
-\newlabel{fig:treeSearch}{{{2--1}}{12}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {3}Reduction Strategies}{14}}
-\newlabel{chap:Reduction}{{3}{14}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {2}Schnorr-Euchner Enumeration}{12}}
+\newlabel{chap:SESearch}{{2}{12}}
+\newlabel{eq:ils}{{2.1}{12}}
+\newlabel{eq:searchIneq0}{{2.2}{12}}
+\newlabel{eq:searchC}{{2.3}{13}}
+\newlabel{eq:searchIneq1}{{2.4}{13}}
+\newlabel{eq:searchLevelK}{{2.5}{13}}
+\@writefile{lof}{\contentsline {figure}{\numberline {{2--1}}{\ignorespaces An example of the search process with solution $x = [-1,3,1]^T$.}}{15}}
+\newlabel{fig:treeSearch}{{{2--1}}{15}}
+\citation{ChaH05}
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Reduction Strategies}{17}}
+\newlabel{chap:Reduction}{{3}{17}}
 \citation{FosGVW99}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}BILS Reduction Algorithms}{19}}
+\newlabel{sec:BILSReduction}{{3.1}{19}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}Previous Reductions}{19}}
 \citation{ChaH05}
 \citation{WubBRKK01}
-\@writefile{toc}{\contentsline {section}{\numberline {3.1}BILS Reduction Algorithms}{16}}
-\newlabel{sec:BILSReduction}{{3.1}{16}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}Previous Reductions}{16}}
 \citation{SuW05}
 \citation{ChaH05}
 \citation{ChaH05}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}CH Algorithm}{19}}
-\newlabel{eq:swappedCols}{{3.7}{19}}
-\newlabel{eq:givensRotation}{{3.8}{20}}
-\newlabel{eq:subDiagEntries}{{3.9}{20}}
-\newlabel{eq:xic}{{3.10}{21}}
-\newlabel{eq:dic}{{3.11}{21}}
-\newlabel{eq:subc}{{3.12}{21}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}CH Algorithm}{22}}
+\newlabel{subsec:CH}{{3.1.2}{22}}
+\newlabel{eq:swappedCols}{{3.7}{23}}
+\newlabel{eq:givensRotation}{{3.8}{23}}
+\newlabel{eq:subDiagEntries}{{3.9}{24}}
+\newlabel{eq:xic}{{3.10}{24}}
+\newlabel{eq:dic}{{3.11}{24}}
+\newlabel{eq:subc}{{3.12}{25}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.3}SW Original Algorithm}{25}}
+\newlabel{subsec:SW}{{3.1.3}{25}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces CH Algorithm - Returns $p$, the column permutation vector}}{26}}
+\newlabel{alg:CH}{{1}{26}}
+\newlabel{l:chg}{{9}{26}}
+\@writefile{lof}{\contentsline {figure}{\numberline {{3--1}}{\ignorespaces Geometry of the search with two different column ordering.}}{27}}
+\newlabel{SEGeometry}{{{3--1}}{27}}
 \citation{SuW05}
 \citation{SuW05}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.3}SW Original Algorithm}{22}}
-\newlabel{subsec:SW}{{3.1.3}{22}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces CH Algorithm - Returns $p$, the column permutation vector}}{23}}
-\newlabel{alg:CH}{{1}{23}}
-\newlabel{l:chg}{{9}{23}}
-\@writefile{lof}{\contentsline {figure}{\numberline {{3--1}}{\ignorespaces Geometry of the search with two different column ordering.}}{24}}
-\newlabel{SEGeometry}{{{3--1}}{24}}
 \citation{SuW05}
 \citation{SuW05}
-\newlabel{eq:xis}{{3.13}{26}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces SW Algorithm - Returns $p$, the column permutation vector}}{27}}
-\newlabel{alg:SWOrig}{{2}{27}}
-\newlabel{l:swG}{{3}{27}}
-\newlabel{l:swx}{{7}{27}}
-\newlabel{l:swbx}{{8}{27}}
-\newlabel{l:swd}{{9}{27}}
-\newlabel{l:swy}{{17}{27}}
-\newlabel{l:swg}{{19}{27}}
+\newlabel{eq:xis}{{3.13}{30}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces SW Algorithm - Returns $p$, the column permutation vector}}{31}}
+\newlabel{alg:SWOrig}{{2}{31}}
+\newlabel{l:swG}{{3}{31}}
+\newlabel{l:swx}{{7}{31}}
+\newlabel{l:swbx}{{8}{31}}
+\newlabel{l:swd}{{9}{31}}
+\newlabel{l:swy}{{17}{31}}
+\newlabel{l:swg}{{19}{31}}
 \citation{Cli64}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.4}SW Algorithm Interpretation and Improvements}{28}}
-\newlabel{sec:improvedSW}{{3.1.4}{28}}
-\newlabel{eq:newDist}{{3.14}{28}}
-\newlabel{eq:gup}{{3.15}{28}}
-\newlabel{eq:yup}{{3.16}{29}}
-\newlabel{eq:subs}{{3.17}{29}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.4}SW Algorithm Interpretation and Improvements}{32}}
+\newlabel{sec:improvedSW}{{3.1.4}{32}}
+\newlabel{eq:newDist}{{3.14}{32}}
+\newlabel{eq:gup}{{3.15}{32}}
 \citation{SuW05}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.5}Proof of Equivalence of SW and CH}{31}}
-\newlabel{eq:xics}{{3.18}{31}}
-\newlabel{eq:disc}{{3.19}{32}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.6}New Algorithm}{32}}
-\newlabel{subsec:newReduction}{{3.1.6}{32}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces New algorithm}}{34}}
-\newlabel{alg:NEW}{{3}{34}}
+\newlabel{eq:yup}{{3.16}{33}}
+\newlabel{eq:subs}{{3.17}{33}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.5}Proof of Equivalence of SW and CH}{35}}
+\newlabel{eq:xics}{{3.18}{35}}
+\newlabel{eq:disc}{{3.19}{35}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.6}New Algorithm}{36}}
+\newlabel{subsec:newReduction}{{3.1.6}{36}}
 \citation{LenLL82}
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}ILS Reduction Algorithms}{35}}
-\newlabel{eq:LLLConditions}{{3.20}{35}}
-\newlabel{eq:LLLdiagonal}{{3.23}{35}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Computing the LLL Reduction}{36}}
-\@writefile{toc}{\contentsline {subsubsection}{Integer Gauss Transformations}{36}}
-\newlabel{subsec:IGT}{{3.2.1}{36}}
-\@writefile{toc}{\contentsline {subsubsection}{Permutations}{37}}
-\newlabel{subsec:Perm}{{3.2.1}{37}}
-\@writefile{toc}{\contentsline {subsubsection}{LLL Reduction}{37}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {4}{\ignorespaces LLL Algorithm - Returns R the LLL reduced upper triangular matrix and Z a product of IGTs and permutations}}{38}}
-\newlabel{alg:LLL}{{4}{38}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}New Unconstrained ILS Reduction}{38}}
-\@writefile{lof}{\contentsline {figure}{\numberline {{3--2}}{\ignorespaces LLL Reduction vs LLL Reduction and Permutations. Residual from the Babai points.}}{40}}
-\newlabel{fig:LLLvsPermuBabai}{{{3--2}}{40}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}ILS Reduction Results}{41}}
-\newlabel{sec:ILSReductionResults}{{3.2.3}{41}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}ILS Reduction Algorithms}{38}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces New algorithm}}{39}}
+\newlabel{alg:NEW}{{3}{39}}
+\newlabel{eq:LLLConditions}{{3.22}{40}}
+\newlabel{eq:LLLdiagonal}{{3.25}{40}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Computing the LLL Reduction}{40}}
+\@writefile{toc}{\contentsline {subsubsection}{Integer Gauss Transformations}{41}}
+\newlabel{subsec:IGT}{{3.2.1}{41}}
+\@writefile{toc}{\contentsline {subsubsection}{Permutations}{41}}
+\newlabel{subsec:Perm}{{3.2.1}{41}}
+\citation{LenLL82}
+\@writefile{toc}{\contentsline {subsubsection}{LLL Reduction}{42}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {4}{\ignorespaces LLL Algorithm - Returns R the LLL reduced upper triangular matrix and Z a product of IGTs and permutations}}{43}}
+\newlabel{alg:LLL}{{4}{43}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}New Unconstrained ILS Reduction}{44}}
+\@writefile{lof}{\contentsline {figure}{\numberline {{3--2}}{\ignorespaces LLL Reduction vs LLL+PERMU. Residual from the Babai points.}}{46}}
+\newlabel{fig:LLLvsPermuBabai}{{{3--2}}{46}}
+\newlabel{tab:successRateLLL}{{3.2.3}{48}}
+\@writefile{lot}{\contentsline {table}{\numberline {{3--1}}{\ignorespaces Success Rate (out of 200) for LLL Reduction on various problem sizes and levels of noise.}}{48}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}ILS Reduction Results}{48}}
+\newlabel{sec:ILSReductionResults}{{3.2.3}{48}}
+\@writefile{lof}{\contentsline {figure}{\numberline {{3--3}}{\ignorespaces LLL Reduction vs LLL Reduction and Permutations vs LLL Reduction with Permutation Initial Radius.}}{49}}
+\newlabel{fig:LLLvsPermuvsBabai}{{{3--3}}{49}}
+\newlabel{tab:successRatePermu}{{3.2.3}{49}}
+\@writefile{lot}{\contentsline {table}{\numberline {{3--2}}{\ignorespaces Success Rate (out of 200) for LLL+PERMU on various problem sizes and levels of noise.}}{49}}
+\@writefile{lof}{\contentsline {figure}{\numberline {{3--4}}{\ignorespaces LLL Reduction vs LLL + PERMU. Residual from the Babai points on ill conditioned problems.}}{51}}
+\newlabel{fig:lllvspermubabaiill}{{{3--4}}{51}}
+\@writefile{lof}{\contentsline {figure}{\numberline {{3--5}}{\ignorespaces LLL Reduction vs LLL +PERMU vs LLL + BABAI on ill conditioned problems.}}{52}}
+\newlabel{fig:lllvspermuvsbabaiill}{{{3--5}}{52}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Alternate Search Strategies}{54}}
+\newlabel{chap:Searches}{{4}{54}}
+\newlabel{eq:optimalSearchCond}{{4.1}{54}}
 \citation{FukMU04}
 \citation{XuWZW04}
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Alternate Search Strategies}{42}}
-\newlabel{chap:Searches}{{4}{42}}
-\newlabel{eq:optimalSearchCond}{{4.1}{42}}
 \citation{StuBF07}
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}Best First Search}{44}}
-\newlabel{sec:BFS}{{4.1}{44}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}Controlling BFS Memory Usage}{46}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Best First Search}{56}}
+\newlabel{sec:BFS}{{4.1}{56}}
 \citation{DaiY08}
 \citation{StuBF07}
 \citation{StuBF07}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Controlling BFS Memory Usage}{59}}
 \citation{StuBF07}
-\@writefile{toc}{\contentsline {section}{\numberline {4.3}Combining BFS and SE Search}{49}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.4}Search Strategy Results}{51}}
-\newlabel{sub:SearchResults}{{4.4}{51}}
-\@writefile{lof}{\contentsline {figure}{\numberline {{4--1}}{\ignorespaces Run time results for the combined search process with varying parameter $\alpha $.}}{52}}
-\newlabel{fig:searchresults}{{{4--1}}{52}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Combining BFS and SE Search}{61}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}Search Strategy Results}{64}}
+\newlabel{sub:SearchResults}{{4.4}{64}}
+\@writefile{lof}{\contentsline {figure}{\numberline {{4--1}}{\ignorespaces Run time results for the combined search process with varying parameter $\alpha $.}}{66}}
+\newlabel{fig:searchsurface}{{{4--1}}{66}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Conclusions and Future Work}{67}}
+\newlabel{chap:Conclusion}{{5}{67}}
 \bibdata{../ILS}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Conclusions}{53}}
-\newlabel{chap:Conclusion}{{5}{53}}
-\bibcite{SchFL09}{1}
-\bibcite{Bor10}{2}
-\bibcite{ChaH05}{3}
-\bibcite{StuBF07}{4}
-\bibcite{Cli64}{5}
-\bibcite{FosGVW99}{6}
-\bibcite{FukMU04}{7}
-\bibcite{HasV05}{8}
-\bibcite{LenLL82}{9}
-\bibcite{StoVH08}{10}
-\@writefile{toc}{\contentsline {extrachapter}{References}{54}}
-\bibcite{MurGDC06}{11}
-\bibcite{SchE94}{12}
-\bibcite{SuW05}{13}
-\bibcite{XuWZW04}{14}
-\bibcite{WubBRKK01}{15}
-\bibcite{DaiY08}{16}
+\bibcite{AgrEVZ02}{1}
+\bibcite{SchFL09}{2}
+\bibcite{Bor10}{3}
+\bibcite{ChaH05}{4}
+\bibcite{StuBF07}{5}
+\bibcite{Cli64}{6}
+\bibcite{FosGVW99}{7}
+\bibcite{FukMU04}{8}
+\bibcite{HasV05}{9}
+\bibcite{LenLL82}{10}
+\@writefile{toc}{\contentsline {extrachapter}{References}{69}}
+\bibcite{StoVH08}{11}
+\bibcite{MurGDC06}{12}
+\bibcite{SchE94}{13}
+\bibcite{SuW05}{14}
+\bibcite{XuWZW04}{15}
+\bibcite{WubBRKK01}{16}
+\bibcite{DaiY08}{17}
 \bibstyle{plain}

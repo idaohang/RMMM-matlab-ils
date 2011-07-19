@@ -39,6 +39,7 @@
 \newcommand{\by}{{\bar{y}}}
 \newcommand{\bz}{{\bar{z}}}
 \newcommand{\dist}{\mathrm{dist}}
+\newcommand{\vsp}{\vspace{\baselineskip}}
 
 %\usepackage{tex4ht}
 %\usepackage{amsmath}
@@ -98,7 +99,7 @@ number of algorithms proposed to solve it and some of its variations e.g., the
 box-constrained ILS problem (BILS). There are typically two stages to solving an
 ILS problem, the reduction and the search. Obviously we would like to solve
 instances of the ILS problem as quickly as possible, however most of the
-literature does not compare the run-time or FLOP counts of the algorithms,
+literature does not compare the run-time or FLOP counts of the algorithms;
 instead they use a more abstract metric (the number of nodes explored during the
 search). This metric does not always coincide with the algorithms run-time.
 This thesis will review some of the most effective reduction and search
@@ -140,7 +141,7 @@ Where $y\in\mathbb{R}^m$, $H\in\mathbb{R}^{m \times n}$ is called the
 ``design matrix'' and has full column rank, and $v\in\mathbb{R}^m$ is a
 noise vector which we assume is normally distributed with mean $0$ and
 covariance matrix $\sigma^2I$. We would like to find the unique solution
-$x\in\mathbb{R}^m$ which minimizes the least squares residual,
+$x\in\mathbb{R}^n$ which minimizes the least squares residual,
 \be
 \label{eq:realLSResidual}
  \left \| Hx - y \right \|^2_2.
@@ -157,9 +158,9 @@ well known ``normal equations'' which can be written in matrix form as,
 
 The solution of the least squares problem has numerous applications in many fields of science and engineering.
 
-\section{Integer Least Squares Problems}
+\vsp \section{Integer Least Squares Problems}
 The integer least squares (ILS) problem is a modification of the LS problem
-where the solution vector $x\in\mathbb{Z}^m$ is an unknown integer vector. We
+where the solution vector $x\in\mathbb{Z}^n$ is an unknown integer vector. We
 no longer have a closed-form solution for $x$ in this case, in fact, the
 problem is provably NP-Hard. The ILS problem can be expressed as:
 \be
@@ -179,73 +180,92 @@ u_i\in\mathbb{Z} \}.
 
 Even though the problem is NP-Hard, we still have some hope to get solutions
 quickly. In \cite{HasV05} the authors prove that under reasonable assumptions
-on the variance in the noise, the ILS problem will have an expected polynomial complexity using standard search algorithms.
+on the variance in the noise, the ILS problem will have an expected polynomial complexity when using standard algorithms to solve it.
 
 The usual approach to solving an ILS or BILS problem consists of two phases,
 reduction and search. In the reduction phase, we transform the problem into an
 equivalent, but easier one. This typically involves manipulations on the design matrix $H$ such as column permutations
 or integer gauss transformations to try and achieve certain properties. After reduction, we proceed to the search phase where we try to enumerate the possible solutions in an efficient manner.
 
-\section{Applications}
+In lattice theory, the matrix $H$ is called the ``generator matrix''. This is because it generates a lattice $\cal{L}$ defined as follows:
+\begin{equation}
+{\cal{L}} = \{Hx: x\in \mathbb{Z}^n\}
+\end{equation}
+The columns of $H$ are called the basis vectors of the lattice. A single lattice may have many different sets of basis vectors or equivalenty, many different generator matrices $H$. Figure \ref{fig:latticeBasis} shows an example of a 2 dimensional lattice with two different sets of basis vectors.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.4]{latticebasis.png}
+\caption{An example of a lattice with two different sets of basis vectors.}
+\label{fig:latticeBasis}
+\end{figure}
+
+In this context, the ILS and BILS problems can be thought of as a search for the closest lattice point to some real point $y$. This thesis will not focus on the geometrical lattice interpretation of the problem; for more details on it, see \cite{AgrEVZ02}.
+
+\vsp \section{Applications}
 
 Some important applications such as MIMO wireless signal decoding depend on the
 solution of the BILS problem. MIMO stands for ``multiple-input
 multiple-output'', it refers to the case where a wireless system has multiple
 input antennas transmitting a signal which is received by multiple output
-antennas. The signal received is our input vector $y$ from
+antennas. The purpose of a MIMO system is to maximize the throughput of the communications channel. Throughput is defined as ''the average rate of successful message delivery over a communication channel``. 
+
+The signal received is our input vector $y$ from
 \eqref{eq:realLSModel}, it has undergone some linear transformation by the known
 ``channel matrix'' $H$ (design matrix) and some noise has been introduced during
 the transmission. Originally, we know that each element of $x$ came from some
 finite set of symbols that we may want to transmit or receive (we model
 this property with $\boxcon$). The purpose of such a system is to maximize
 throughput, however, the overall throughput of the system will depend on how
-quickly we can solve the BILS problem. Of course we need not solve the BILS
-problem exactly, however under the assumption that the noise has $0$ mean and is
+quickly and accurately we can solve the BILS problem. Of course we need not solve the BILS
+problem exactly each time, however under the assumption that the noise has $0$ mean and is
 normally distributed, the BILS solution is more likely than any other possible
-solution to be the true solution $x$. For this reason, we say that a receiver which is decoding transmissions using an algorithm which solves the BILS problem exactly achieves ``optimal performance''; performance refers to the likelihood that the vector found by the decoder is equal to the transmitted vector $x$.
+solution to be the true integer parameter vector $x$. For this reason, we say that a receiver which is decoding transmissions using an algorithm which solves the BILS problem exactly achieves ``optimal performance''; performance refers to the likelihood that the vector found by the decoder is equal to the transmitted vector $x$.
 
 Another application of the ILS problem arises in global positioning systems where carrier phase measurements are used. In GPS, there are two types of measurements that can be used to determine the position of a receiver, code phase and carrier phase. Code phase measurements can give accuracy to a few meters, while carrier phase are accurate to centimeters. To make use of the more accurate carrier phase measurements, we must know how many cycles the carrier wave has gone through between the satellite and the receiver. The number of cycles will be an integer, we can form a linear model for this system and obtain an estimate at the number of cycles by solving an ILS problem. 
 
 Other applications of BILS and ILS include cryptography and lattice design. For any application where the elements of $x$
 are known to be integer, we should use ILS. If the elements of $x$ are drawn from some finite set, BILS is appropriate.
 
-\section{Previous Work} \label{sec:prevWork}
-Due to the important applications of the BILS and ILS problems, much work has gone into solving them efficiently. There have been many algorithms proposed that yield a fast, approximate solution to the problem, some giving statistical bounds on the likelihood of error. This thesis however will only deal with finding the optimal solution to the problem.  Even for finding the optimal solution to the ILS problem, there are a few different approaches that are quite different from each other. This thesis will further be restricted to considering only what are known as 'enumeration based' approaches which are most often used in practice because of their efficiency and simplicity. The enumeration based approaches, as the name implies, try to find the optimal solution by enumerating vectors in the search space until all possible solutions but one are eliminated.
+\vsp \section{Previous Work} \label{sec:prevWork}
+Due to the important applications of the BILS and ILS problems, much work has gone into solving them efficiently. There have been many algorithms proposed that yield a fast, approximate solution to the problem, some giving statistical bounds on the likelihood of error. This thesis however will only deal with finding the optimal solution to the problem.  Even for finding the optimal solution to the ILS problem, there are a few completely different approaches. This thesis will further be restricted to considering only what are known as `enumeration based' approaches which are most often used in practice because of their efficiency and simplicity. The enumeration based approaches, as the name implies, try to find the optimal solution by enumerating vectors in the search space one element at a time until all possible solutions but one are eliminated. The order in which the elements of the solution vectors are enumerated plays a critical role in how long the search algorithm will take to run; the reasons for this will become clear later.
 
-\subsection{Search Strategies}
-In chapter \ref{chap:SESearch}, it will be shown that the enumeration process can be reduced to a tree search problem. The most widely used algorithm, the Schnorr Euchner (SE) enumeration \cite{SchE94} can be thought of as a fairly straight forward depth first search in such a tree. Other tree search algorithms may also be used to solve the problem.
+\vsp \subsection{Search Strategies}
+In chapter \ref{chap:SESearch}, it will be shown that the enumeration process can be reduced to a tree search problem. The tree in question will have a depth of $n$; each node on a path from root to leaf represents a valid element in the solution vector. Therefore the tree will have exponential width. To see an example of such a tree, refer to figure \ref{fig:treeSearch}. The most widely used algorithm for the ILS search process, the Schnorr Euchner (SE) enumeration \cite{SchE94}, can be thought of as a fairly straight forward depth first search in such a tree. Other tree search algorithms may also be used to solve the problem with varying degrees of efficiency.
 
-In the literature, some modifications to the best first tree search strategy have also been proposed, a few such proposals are given in \cite{MurGDC06}, \cite{XuWZW04}, \cite{FukMU04}, \cite{StuBF07} and \cite{DaiY08}. When doing a tree search, the disadvantage of the best first approach is that the memory requirements can be exponential in the worst case and there is a significant overhead to visit each tree node. Compared to the depth first search where the memory requirements are linear and there is very little cost to visit a node in the tree. The advantage of the best first approach is that it can guarantee to explore the least number of nodes in the tree. Some of the papers listed above propose a pure best first search, while others try to make some sort of trade off to achieve lower memory usage.
+In the literature, some modifications to the best first tree search strategy have also been proposed to solve this problem. A few such proposals are given in \cite{MurGDC06}, \cite{XuWZW04}, \cite{FukMU04}, \cite{StuBF07} and \cite{DaiY08}. When doing a tree search, the disadvantage of the best first approach is that the memory requirements can be exponential in the worst case and there is a significant overhead to visit each tree node. Compared to the depth first search where the memory requirements are linear and there is very little cost to visit a node in the tree. The advantage of the best first approach is that it can guarantee to explore the least number of nodes in the tree. Some of the papers listed above propose a pure best first search, while others try to make some sort of trade off to achieve lower memory usage.
 
 There have been some attempts to compare different enumeration algorithms for the ILS search process. One such paper is \cite{MurGDC06}. The authors here devise a common framework (based on a tree search) that many search algorithms can be described within and from there they can do a comparison on the estimated computational complexity of each. Unfortunately through this theoretical comparison, we can only relate the number of nodes in the search tree that will be explored by various algorithms, this does not consider the amount of time processing each node which is often a computational bottleneck.
 
-There have been other suggestions to improve the enumeration based search algorithms as well. In \cite{StoVH08}, it is proposed that by using lower bounds on the residual from the optimal solution, we can shrink the search space (equivalently, prune the search tree). A few such lower bounds are given for special cases of the ILS problem and one for the general ILS and BILS problem. Unfortunately, the computational complexity of computing some of these bounds can be prohibitive.
+There have been other suggestions to improve the enumeration based search algorithms as well. In \cite{StoVH08}, it is proposed that by using lower bounds on the residual from the optimal solution, we can shrink the search space (equivalently, prune the search tree). A few such lower bounds are given for special cases of the ILS problem and one for the general ILS and BILS problem. Unfortunately, the computational complexity of computing some of these bounds can be prohibitive since it adds to the processing that must be performed at each node in the tree. Overall it seems that these lower bounds do not offer a decrease in computational complexity during the search process if the search is performed on a reduced problem.
 
-Another method that attempts to shrink the search space is given in \cite{SchFL09}. They propose a simple stopping criteria for the search process that in theory should allow it to terminate earlier. Unfortunately, the bound derived here is not tight enough to be useful in practice and is rarely or never satisfied.
+Another method that attempts to shrink the search space is given in \cite{SchFL09}. They propose a simple stopping criteria for the search process that in theory should allow it to terminate earlier. Unfortunately, the bound derived here is not tight enough to be useful in practice and is rarely or never satisfied. Also it is proposed that after computing the bound, one can increment it with a low risk of achieving a suboptimal solution; this thesis will not consider this since it is only concerned with the exact solution of the ILS and BILS problems. 
 
-\subsection{Reduction Strategies}
+\vsp \subsection{Reduction Strategies}
 
-The standard reduction algorithm used in practice for the unconstrained ILS problems is the LLL reduction \cite{LenLL82}. In \cite{Bor10}, it was found that many of the operations used in the original LLL algorithm are not always required as they do not affect the search process when the SE algorithm is used. The new reduction that results from applying only a subset of the operations is called the partial LLL reduction.
+As mentioned previously, the purpose of the ILS and BILS reduction is to transform the problem to an equivalent, but easier to solve one. This section will review some existing reduction strategies.
 
-Unfortunately, the LLL reduction is not applicable to the BILS problem. For the BILS problem, there are other reduction strategies that focus only on permuting the columns of the matrix $H$. We can separate algorithms that try and find these permutations into two categories, those that only use the information contained in the matrix $H$, and algorithms that use both the information in $H$ and the vector $y$.
+The standard reduction algorithm used in practice for the unconstrained ILS problems is the LLL reduction \cite{LenLL82}. It is an old but very effective reduction strategy. In \cite{Bor10}, it was found that many of the operations used in the original LLL algorithm are not always required as they do not affect the search process when the SE algorithm is used. The new reduction that results from applying only a subset of the operations is called the partial LLL reduction.
+
+Unfortunately, neither the LLL reduction or partial LLL reduction are applicable to the BILS problem. For the BILS problem, there are other reduction strategies that focus only on permuting the columns of the matrix $H$, where the LLL reduction performs some other operations that will be described in \ref{chap:Reduction}. We can separate reduction algorithms which simply try and find some optimal permutation of the columns of the matrix $H$ into two categories, those that only use the information contained in the matrix $H$, and algorithms that use both the information in $H$ and the vector $y$.
 
 Two algorithms that only use the information in $H$ are VBLAST \cite{FosGVW99} and SQRD \cite{WubBRKK01}. An examination of these two algorithms reveals very similar motivations behind each.
 
 Algorithms that use the information in both $H$ and $y$ are a fairly new development. The first was \cite{SuW05} in 2005, and then \cite{ChaH05} in 2008. Numerical results show that these algorithms can offer great improvements over the previous reductions that use only the information contained in $H$.
 
-\section{Objectives and Contribution}
-With many different algorithms for both the reduction and search process, it is not always clear how they relate. In \cite{MurGDC06} the authors propose a tree search framework to compare various search algorithms. This is an interesting idea, but results from such a comparison may not relate to real world run time since they do not consider the time spent at each step of each algorithm, only how many steps are taken to solve the problem. This thesis will consider some of the various search strategies and do a more realistic comparison of actual run time performance. Using the results from such a comparison, we can see the advantages of the different approaches and use them to devise a new hybrid search algorithm.
+\vsp \section{Objectives and Contribution}
+With many different algorithms for both the reduction and search process, it is not always clear how they relate. In \cite{MurGDC06} the authors propose a tree search framework to compare various search algorithms. This is an interesting idea, but results from such a comparison may not relate to real applications run time since they do not consider the time spent at each step of each algorithm, only how many steps are taken to solve the problem. This thesis will consider combining two popular and efficient search strategies where a parameter will control the influence of each individual algorithm. Using actual run time simulation results from a comparison of this combined algorithm with various settings of its parameter, we can see the strengths of each of the different approaches. This allows us tune the new combined algorithm so that it outperforms either of the originals. This also provides some insight into the runtime performance comparison of each algorithm individually.
 
-For the reduction step, the LLL reduction \cite{LenLL82} is the strategy most used in practice for the ILS problem. How the LLL reduction relates to the ILS problem has been studied in detail, and it also yields excellent results in practice. Unfortunately, for the BILS problem, the LLL reduction should not be used, the reason for this will be described in chapter \ref{chap:Reduction}. For the BILS problem, we are limited to performing only column permutations on the matrix $H$. There are a few algorithms which calculate how we should permute the columns of $H$, some of which were briefly described in section \ref{sec:prevWork}. Two more recent developments, \cite{ChaH05} and \cite{SuW05}, use both the matrix $H$ and the vector $y$ to calculate the permutations. These algorithms have shown excellent results. In this thesis it will be proven that these two algorithms are theoretically equivalent. Knowing that they are equivalent, we can use the best ideas from both to create a new reduction strategy that is faster than either of the originals and is numerically stable. Another advantage of these algorithms being equivalent is that since one had a geometric motivation and the other was derived algebraically, we now how both geometric and algebraic justification for why the column orderings given by these algorithms should help speed up the search process. Also, the SW algorithm was derived through a geometric motivation and as such is described in terms of geometry in the original paper. This thesis will provide an algebraic explanation for the SW algorithm and offer some improvements to the original.
+For the reduction step, the LLL reduction \cite{LenLL82} is the strategy most used in practice for the ILS problem. How the LLL reduction theoretically relates to the ILS problem has been studied in detail, and it also yields excellent results in practice. Unfortunately, for the BILS problem, the LLL reduction should not be used, the reason for this will be described in chapter \ref{chap:Reduction}. For the BILS problem, we are limited to performing only column permutations on the matrix $H$. There are a few algorithms which calculate how we should permute the columns of $H$, some of which were briefly described in section \ref{sec:prevWork}. Two more recent developments, \cite{ChaH05} and \cite{SuW05}, use both the matrix $H$ and the vector $y$ to calculate the permutations. These algorithms have shown excellent results. In this thesis it will be proven that these two algorithms are theoretically equivalent. Knowing that they are equivalent, we can use the best ideas from both to create a new reduction strategy that is faster than either of the originals and is numerically stable (the faster of the two original algorithms is not). Another advantage of these algorithms being equivalent is that since one had a geometric motivation and the other was derived algebraically, we now how both geometric and algebraic justification for why the column orderings given by these algorithms should help speed up the search process. Also, since the SW algorithm was derived through a geometric motivation and as such is described in terms of geometry in the original paper; this thesis will provide an algebraic explanation for the SW algorithm and offer some improvements to the original.
 
-The motivation for the permutation based reduction strategies is not specific to the BILS problem, in theory these reduction strategies should reduce the run time for ILS problems as well. However, the LLL reduction provides better results than using permutations alone. One way to think about what each type of algorithm is doing is, the LLL reduction finds a new set of shorter and more orthogonal basis vectors, while the permutation based reductions are just finding an ordering for these vectors that performs well in the search process. By first performing LLL reduction to get a good set of basis vectors, and then applying a permutation based reduction to re-order them, we can sometimes greatly improve the performance of the search process. In this thesis, the strategy of first applying a LLL reduction, and then column permutations will be explored.
+The motivation for the permutation based reduction strategies is not specific to the BILS problem; in theory these reduction strategies should reduce the run time for ILS problems as well. However, the very effective LLL reduction provides better results than using permutations alone. One way to think about what each type of algorithm is doing is, the LLL reduction finds a new set of shorter and more orthogonal basis vectors, while the permutation based reductions are just finding an ordering for these vectors that performs well in the search process. Consider figure \ref{fig:latticeBasis} suppose the original matrix $H$ has columns $v_1$ and $v_2$, the LLL reduced matrix may have columns $u_1$ and $u_2$. It is known that shorter more orthogonal basis vectors are preferable in the search process. By first performing LLL reduction to get a good set of basis vectors, and then applying a permutation based reduction to re-order them, we can sometimes greatly improve the performance of the search process. In this thesis, the strategy of first applying a LLL reduction, and then column permutations will be explored.
 
-\section{Outline}
+\vsp \section{Outline}
 The rest of the thesis will be organized as follows;
 
 In chapter \ref{chap:SESearch}, the Schnorr-Euchner (SE) enumeration algorithm \cite{SchE94} will be presented in detail, much of the remainder of the thesis will use ideas and notation which comes from this algorithm. Also, since the reduction processes are trying to optimize the search process, it is critical to first understand the search process before considering the reduction.
 
-In chapter \ref{chap:Reduction}, an explanation will be given for why we need different reduction strategies for BILS and ILS problems. Then, strategies for reducing BILS and ILS problems will be presented separately.
+In chapter \ref{chap:Reduction}, an explanation will be given for why we need different reduction strategies for BILS and ILS problems. Then, strategies for reducing BILS and ILS problems will be presented separately. A new BILS reduction strategy will be introduced. Also it will be explained how we can take advantage of the BILS reduction for ILS many problems.
 
 In chapter \ref{chap:Searches}, some other notable search algorithms and modifications to the basic SE enumeration will be given. Also, a new hybrid search algorithm is proposed which combines two of the basic algorithms in order to take advantage of the positive features of each.
 
@@ -267,12 +287,12 @@ Then, with $\bar{y}=Q_1^Ty$ the ILS problem \eqref{eq:ils0} is reduced to
 \min_{x \in  {\mathbb{Z}}}  \| \by- Rx \|_2.
 \ee
 
-We would like to enumerate as few elements as possible, $ x \in \mathbb{Z}^n$ while still guaranteeing the optimal solution. Suppose we start with some initial bound on the error,
+We would like to enumerate as few elements as possible, $x \in \mathbb{Z}^n$ while still guaranteeing the optimal solution. Suppose we start with some initial bound on the error,
 \be 
 \label{eq:searchIneq0}
 \min_{x \in  {\mathbb{Z}}}  \| \by- Rx \|_2 \le \beta. 
 \ee
-We will discuss some better ideas for choosing an initial $\beta$ in later chapters, however one simple method is to choose $x$ to be the real LS solution with each element rounded to the nearest integer, and then calculate the residual. The inequality \eqref{eq:searchIneq0} defines an ellipsoid in terms of $x$ or a hyper-sphere in terms of the lattice points $w=Rx$ with radius $\beta$. For this reason, the problem is sometimes referred to as ``Sphere Decoding''.
+We will discuss some better ideas for choosing an initial $\beta$ in later chapters, however one simple method is as follows, let $b$ be the real LS solution and $\lfloor b \rceil$ is $b$ with each element rounded to the nearest integer, and then calculate the residual $\left \| R \lceil b \rfloor - \bar{y} \right \|_2^2$. We may use this residual as the initial $\beta$ since the optimal solution must have a residual less than or equal to it. The inequality \eqref{eq:searchIneq0} defines an ellipsoid in terms of $x$ or a hyper-sphere in terms of the lattice points $w=Rx$ with radius $\beta$. For this reason, the problem is sometimes referred to as ``Sphere Decoding''.
 
 Define
 \begin{equation}
@@ -281,33 +301,32 @@ Define
 \end{equation}
 where when $k=n$ the sum in the right hand side does not exist.
 Then \eqref{eq:searchIneq0} can be rewritten as
-$$
-\sum_{k=1}^n r_{kk}^2(x_k-c_k)^2 < \beta,
-$$
-which  is equivalent to the following
+\begin{equation}\label{eq:searchIneq1}
+\min_{x \in  {\mathbb{Z}}} \sum_{k=1}^n r_{kk}^2(x_k-c_k)^2 \le \beta,
+\end{equation}
+which implies the following
 set of inequalities:
 \begin{align}
 &\text{level } k: \ \ r_{kk}^2(x_k-c_k)^2 < \beta -\sum_{i=k+1}^nr_{ii}^2(x_i-c_i)^2, \label{eq:searchLevelK}
 \end{align}
 
-Define
-for $k=n,n-1,\ldots, 1$.
+Defined for $k=n,n-1,\ldots, 1$. Observing equation \eqref{eq:searchLevelK} we see that the values for $x_k$ which will satisfy the inequality depend only on which values were chosen for $x_{k+1:n}$. The SE search process will now be described.
 
 We begin the search process
-at level $n$. Choose $x_n = \lfloor c_n \rceil$, the nearest
-integer to $c_n$. If the inequality \eqref{eq:searchLevelK} with $k=n$
+at level $n$, therefore the valid values for $x_n$ only depends on the initial $\beta$. Choose $x_n = \lfloor c_n \rceil$, the nearest integer to $c_n$. If the inequality \eqref{eq:searchLevelK} with $k=n$
 is not satisfied, it will not be satisfied for any integer, this means $\beta$
-was chosen to be too small, it must be enlarged. With $x_n$ fixed, we can move
+was chosen to be too small, it must be enlarged and the search restarted. With $x_n$ fixed, we can move
 to level $n-1$ and choose $x_{n-1} = \lfloor c_{n-1} \rceil$ with $c_{n-1}$ calculated as in \eqref{eq:searchC}. At this point it is possible that the inequality \eqref{eq:searchLevelK} is no longer satisfied. If this is the case, we must move back to level $n$ and choose $x_n$ to be the second nearest integer to $c_n$.  We will continue this procedure until we reach
-level 1, moving back a level if ever the inequality for the current level is no longer satisfied. When we reach level $1$, we will have found an integer point $\hat{x}$. We then update $\beta = \left \| \bar{y} - R\hat{x} \right \|_2^2$ and try to find a better integer point which lies in the new, smaller ellipsoid. Finally in the search process, when we can no longer find any $x_n$ to satisfy \eqref{eq:searchLevelK} with $k=n$, the search process is complete and the last integer point $\hat{x}$ found is the solution. If we initially set $\beta = \infty$ the first point $\hat{x}$ that we find is known as the Babai point.
+level 1, moving back a level if ever the inequality for the current level is no longer satisfied. When we reach level $1$, we will have found an integer point $\hat{x}$. Since $\hat{x}$ satisfies \ref{eq:searchIneq1}, we can use it to define a new, smaller radius which will effectively shrink the search space since there will be fewer valid choices for values of $x$.  To do this, update $\beta = \left \| \bar{y} - R\hat{x} \right \|_2^2$ and try to find a better integer point which lies in the new, smaller ellipsoid. We do this by continuing the search process from the current level after the radius has been tightened. The next step in the process will be to move back to level $2$ since no new choice for $x_1$ will give a better solution. Finally in the search process, when we can no longer find any $x_n$ to satisfy \eqref{eq:searchLevelK} with $k=n$, the search process is complete and the last integer point $\hat{x}$ found is the solution. If we initially set $\beta = \infty$ the first point $\hat{x}$ that we find is known as the Babai point.
 
 \begin{figure}
+\centering
 \includegraphics{searchtree.png}
 \caption{An example of the search process with solution $x = [-1,3,1]^T$.}
 \label{fig:treeSearch}
 \end{figure}
 
-The above search process is actually a depth-first tree search in a tree of height $m$, see Fig.\ \ref{fig:treeSearch},
+The above search process is actually a depth-first tree search in a tree of height $n$, see Fig.\ \ref{fig:treeSearch},
 where the number  in a node  denotes the step number at which the node is encountered. Each edge going from level $i$ to $i-1$ represents fixing $x_{i-1}$ to some value, and each edge will have a weight which is given by $r_{ii}^2(z_i -
 c_i)^2$. Notice that if we take the sum of these weights from $m..i$ we simply get the partial
 residual for fixing $x_{i:m}$, which is defined as $\left \| R_{i:m,i:m}x_{i:m} -
@@ -316,10 +335,10 @@ represents an integer vector $x \in \mathbb{R}^m$ and its weight is the residual
 Rx - \bar{y} \right \|_2^2$. This means that the ILS problem is equivalent to
 finding the lowest-weight leaf in the tree. The SE enumeration takes advantage
 of the fact that we can easily calculate the lowest cost child of any given
-node to make the depth first search more efficient. In fact we can easily visit
+node to make the depth first search more efficient. Compared to a standard tree search problem where to find the lowest cost edge leaving a given node you may have to check each edge individually. In fact we can easily visit
 the children of a node in order of increasing weight or cost, that is what we are doing when we initially choose $x_k = \lfloor c_k \rceil$, and next choose it to be the second and third nearest integer to $c_k$.
 
-A modification of the SE enumeration can be used to solve the BILS problem. To ensure that we remain within the box constraint, instead of choosing $x_k = \lfloor c_k \rceil$ at step $k$, we choose $x_{k} = \lfloor c_{k} \rceil_{{\cal B}_{k}}$, where ${\cal B}_{k}$ comes from \eqref{eq:boxCon}. Suppose $x_{k-1}:x_n$ are fixed, then we must also ensure that as we explore the node corresponding to the second nearest integer (and all subsequent integers) for $x_k$ that we remain within the box constraint. This is trivial to accomplish, we simply stop incrementing $x_k$ if we hit the upper bound, and stop decrementing it if we hit the lower bound. If all values for $x_k$ that are within the box constraint have been used up but we are still within the area defined by the ellipsoid, we move back to level $k-1$. Following this process will yield the optimal BILS solution.
+A modification of the SE enumeration can be used to solve the BILS problem. To ensure that we remain within the box constraint, instead of choosing $x_k = \lfloor c_k \rceil$ at step $k$, we choose $x_{k} = \lfloor c_{k} \rceil_{{\cal B}_{k}}$, where ${\cal B}_{k}$ comes from \eqref{eq:boxCon}. Suppose $x_{k-1}:x_n$ are fixed, then we must also ensure that as we explore the node corresponding to the second nearest integer (and all subsequent integers) for $x_k$ that we remain within the box constraint. This is trivial to accomplish, we simply stop incrementing $x_k$ if we hit the upper bound, and stop decrementing it if we hit the lower bound. If all values for $x_k$ that are within the box constraint have been used up but we are still within the area defined by the ellipsoid, we move back to level $k-1$. Following this process will yield the optimal BILS solution. For more information on the BILS implementation of the SE algorithm, see \cite{ChaH05}.
 
 \chapter{Reduction Strategies} \label{chap:Reduction}
 
@@ -330,7 +349,7 @@ Consider the ILS problem \eqref{eq:ils0}. The goal of the reduction is to modify
 =&\min_{x\in {\mathbb{Z} }}  \| Hx - \bar{y} \|_2
 \end{align}
 
-The second type of transformation that we may apply to the matrix $H$ is any unimodular matrix. Unimodular matrices are square, integer matrices with determinant $+/-1$. Let $Z$ be some unimodular matrix. Another property of unimodular matrices is that the equation $Zx=b$ always has an integer solution $x$ if $b$ is integer. This property is very useful for our application. Consider applying such a unimodular matrix $Z$ to $H$ from the right, \eqref{eq:ils0} becomes: 
+The second type of transformation that we may apply to the matrix $H$ is any unimodular matrix. Unimodular matrices are square, integer matrices with determinant $+/-1$. Let $Z$ be some unimodular matrix. Another property of unimodular matrices is that the equation $Zx=b$ always has an integer solution $x$ if $b$ is integer, this is because the inverse of the unimodular matrix is also guaranteed to be integer and unimodular. This property is very useful for our application. Consider applying such a unimodular matrix $Z$ to $H$ from the right, \eqref{eq:ils0} becomes: 
 \begin{align}
 &\min_{x\in {\mathbb{Z} }}  \| HZx - y \|_2\\
 =&\min_{\hat{x}\in {\mathbb{Z} }}  \| H\hat{x} - y \|_2\\
@@ -341,11 +360,11 @@ Finally, it is worth mentioning that we may apply permutation matrices to $H$ as
 
 When reducing the BILS problem we must be more careful. Consider the constraints on the solution $x$, \eqref{eq:boxCon}. Applying orthogonal matrices to $H$ from the left has no effect on $x$, so the constraints are also unaffected. Applying permutation matrices to H from the right will re-order the elements of the solution $x$, so we must re-order the elements in the constraint vectors as well, which is a trivial operation. However if we apply a general unimodular matrix $Z$ to $H$ from the right, we can no longer easily enforce the constraints on the solution, the simple box constraints become complicated. To see why this is the case, recall the SE search process. Suppose the search is currently at some level $k$ and we would like to know to which value we should fix $\hat{x}_{k-1}$ (note that $\hat{x}$ denotes $Zx$). We know that $l_{k-1} \le x_{k-1} \le u_{k-1}$, but to determine such a bound for $\hat{x}_{k-1}$, we would need to know the entire vector $\hat{x}$ in order to compute $Z^{-1}_{k-1,:}\hat{x}$. At this point in the search, we only know the last $k$ elements of it. The only way to complete the search process is to ignore the bounds on $\hat{x}$, find a potential solution, compute $x = Z^{-1}\hat{x}$, and then check if each element of $x$ is within the bounds. This is extremely inefficient since many potential solutions could be eliminated very early on in the search if we were able to enforce the constraints during the search process. It is for this reason that when reducing BILS problems, we only consider orthogonal transformations and column permutations.
 
-\section{BILS Reduction Algorithms} \label{sec:BILSReduction}
+\vsp \section{BILS Reduction Algorithms} \label{sec:BILSReduction}
 
-The algorithms in this section will focus on finding some permutation of the columns of the matrix $H$ in order to optimize the search process.
+Due to the difficulty of applying general unimodular matrices to reduce the BILS problem, the algorithms in this section will focus on finding some permutation of the columns of the matrix $H$ in order to optimize the search process.
 
-\subsection{Previous Reductions}
+\vsp \subsection{Previous Reductions}
 The V-BLAST algorithm \cite{FosGVW99} mentioned in \ref{sec:prevWork} is a commonly used strategy to calculate the column permutations for $H$. Suppose we are working with $R$, which comes from the QR factorization of $H$. Recall that the product of the diagonal elements of an upper triangular matrix is equal to the matrices determinant, and this value is invariant under permutation. This means that any time we swap two columns in the matrix $H$ and re-calculate the QR factorization, one diagonal element of $R$ will always increase and the other will decrease.
 
 The goal of the V-BLAST algorithm is to proceed from $k=n \dots 1$ and find the column $h_p$ from the set of columns $h_1 \dots h_k$ such that when $h_p$ and $h_k$ are swapped, the diagonal element $r_{kk}$ is maximal There are efficient algorithms to compute such a column ordering, one such algorithm will become obvious later in this section.
@@ -364,7 +383,7 @@ Some modifications will be made so that the algorithm becomes more efficient
 and easier to understand and furthermore it can handle a general full column rank $H$.
 It is worth mentioning that the SW algorithm is not numerically stable. The numerical stability is not
 necessarily crucial since a wrong answer just results in a different set of
-permutations for the columns of H where any set of permutations is allowed.
+permutations for the columns of H where any set of permutations is allowable.
 Until this point, other column reordering algorithms only considered the matrix $H$.
 
 Independently  Chang and Han in \cite{ChaH05} proposed
@@ -375,10 +394,10 @@ the search process exactly what the CH column reordering is doing and why we
 should expect a reduced complexity in the search process. The detailed
 description of the CH column reordering is given in \cite{ChaH05} and it is easy
 for others to implement the algorithm.
-But our numerical tests indicated CH has a  higher complexity than SW, when SW
+But our numerical tests and theoretical analysis indicated CH has a higher complexity than SW, when SW
 is implemented efficiently.
 Our numerical tests also showed that CH and SW {\em almost} always   
-produced the same permutation matrix $P$.
+produced the same permutation matrix $P$, the only exception is when then matrix $H$ is very ill conditioned.
 
 In this section it will be shown that the CH algorithm and the  (modified)  SW algorithm give the same
 column reordering in theory. This is interesting because both algorithms were derived through different motivations
@@ -388,20 +407,20 @@ Furthermore, using the knowledge that certain steps in each algorithm are equiva
 we can combine the best parts from each into a new algorithm. The new algorithm
 has a lower flop count than either of the originals.
 This is important to the successive interference cancellation decoder, 
-which computes a suboptimal solution to the BILS problem.
+which computes a suboptimal solution to the BILS problem. When computing suboptimal solutions, the overall runtime may not be so dominated by the search, and the complexity of the reduction becomes a bottleneck.
 The new algorithm can be interpreted in the same way as CH,
 so it is easy to understand. 
 
 In the following subsections, the CH and SW algorithms will be described in detail. This is necessary to understanding the proof of their equivalence and to see the motivation for the new algorithm. Also, a new algebraic interpretation and some improvements will be given for the SW algorithm. Finally the proof of equivalence of CH and SW will be given, and the new algorithm will be presented.
 
-\subsection{CH Algorithm}
+\vsp \subsection{CH Algorithm} \label{subsec:CH}
 The CH algorithm first computes the QR factorization of $H$,
 then  tries to reorder the columns of $R$.
 The motivation for this algorithm comes from observing equation \eqref{eq:searchLevelK}.
 If the inequality is false we know that the current choice for the value of
-$x_k$ given $x_{k+1:n}$ are fixed is incorrect and we prune the search tree. We
+$x_k$ given $x_{k+1:n}$ are fixed is incorrect and we prune the search tree (we do not need to explore the subtree for the current node). We
 would like to choose the column permutations so that it is likely that the
-inequality will be false at higher levels in the search tree. The CH column reordering strategy
+inequality will be false at higher levels in the search tree, this way we waste less time exploring solutions that are not optimal. The CH column reordering strategy
 does this by trying to maximize the left hand side of  \eqref{eq:searchLevelK} with large values of $\left | r_{kk}
 \right |$ and minimize the right hand side by making $\left | r_{kk}(x_k-c_k) \right |$
 large for values of $k = n,n-1, \dots, 1$.
@@ -494,7 +513,7 @@ is met.
 Using $x_i^c$ would not be a good choice because $\left | x_i^c - c_n \right |$ might be 
 very small or even $0$, then column $i$ would not be chosen to be column $n$
 even if the corresponding $|r_{nn}|$ is large and on the contrary a column with small $|r_{nn}|$
-but large $|x_i^c-c_n|$ may be chosen. 
+but large $|x_i^c-c_n|$ may be chosen.
 
 Now we will consider the complexity of CH. The 
 significant cost comes from line \ref{l:chg} in Algorithm \ref{alg:CH},
@@ -540,13 +559,14 @@ triangular with Givens rotations, also apply the Givens rotations to $\hat{y}$ %
 \end{algorithmic}
 \end{algorithm}
 
-\subsection{SW Original Algorithm} \label{subsec:SW}
+\vsp \subsection{SW Original Algorithm} \label{subsec:SW}
 The motivation for the SW algorithm comes from examining the geometry of the search process.
 
 \ifx\du\undefined
   \newlength{\du}
 \fi
 \begin{figure}
+\centering
 \includegraphics{sumotivation.png}
 \caption{Geometry of the search  with two different column ordering.}
 \label{SEGeometry}
@@ -602,14 +622,14 @@ $\dist(y,F_1(x_1))$ and moves back up to level $2$.
 Note that this search process is mathematically equivalent to the one described in Chapter
 \ref{chap:SESearch}; the difference is that it  does projections
 because  the generator matrix is not assumed to be upper-triangular. 
-Computationally the former is more expensive than the latter.
+Computationally the former is more expensive than the latter since the cost for QR factorization is only incurred once and we avoid the expensive projections.
 
 To see the motivation of the SW algorithm for choosing a particular column ordering,
 consider Fig.\ \ref{SEGeometry}. Suppose the search algorithm has knowledge of
 the residual for the optimal solution (the radius of the circle in the diagram).
 With the column ordering chosen in (a), there are two possible choices for $x_2$,
 leading to the two dashed lines $F_2(-1)$ and $F_2(1)$ which cross the circle. This means
-that we will need to find $x_1$ for both of these choices
+that we will need to compute $x_1$ for both of these choices
 before we can determine which one leads to the optimum solution. In (b), there
 is only one possible choice for $x_1$,  leading to the only dashed line $F_1(-1)$
 which crosses the circle, meaning we only need to find $x_2$ to find the optimum solution.
@@ -683,7 +703,7 @@ Summing these costs over all loop iterations we get a total complexity of $2.5n^
 In the next subsection we will simplify some steps in Algorithm \ref{alg:SWOrig}
 and show how to  implement them efficiently.
 
-\subsection{SW Algorithm Interpretation and Improvements}
+\vsp \subsection{SW Algorithm Interpretation and Improvements}
 \label{sec:improvedSW}
 In this section we give new algebraic interpretation of some steps in Algorithm 2,
 simplify some key steps to improve the efficiency,
@@ -702,7 +722,7 @@ Note that $y^Tg_i$ and $\bar{x}_i^s$ have been computed in lines \ref{l:swx} and
 So the main cost of computing $\dist_i^s$ is the cost of computing $\|g_i\|_2$,
 requiring only $2n$ flops. 
 For $k=n$ in Algorithm 2,  $y^Tg_i=y^TH^{-T}e_i=(H^{-1}y)^Te_i$, i.e.,  $y^Tg_i$
-is the $i^{th}$ entry of the real solution for $Hx=y$. 
+is the $i^{th}$ entry of the real solution $x$ for $Hx=y$. 
 The interpretation can be generalized to  a general $k$. 
 
 In line \ref{l:swg} Algorithm 2,  
@@ -713,8 +733,7 @@ g_i^{\small \mbox{new}} & \equiv \mbox{proj}_{F_j(0)}(g_i)   \nonumber \\
 Using the last expression for computation needs only $4n$ flops
 (note that $\|g_j\|_2$ has been computed before, see \eqref{eq:newDist}).
 We can actually show that the above is performing updating of $G$, the Moore-Penrose generalized inverse of
-$H$ after we remove its $j^{th}$ column. 
-For proof of this, see \cite{Cli64}. 
+$H$ after we remove its $j^{th}$ column. This will allow us to interpret the subsequent steps of SW as operating on a subproblem. For proof of this, see \cite{Cli64}.
 
 In line \ref{l:swy} of Algorithm 2,
 \begin{align}
@@ -726,7 +745,7 @@ This means that after $x_j$ is fixed to be $x_j^s$, $h_jx_j^s$ is combined with 
 as CH does)  and then the vector is projected to the orthogonal complement of 
 the space spanned by $g_j$. 
 We can show that this guarantees that the updated $y$ is in the subspace spanned by
-the columns of $H$ which have not been chosen.
+the columns of $H$ which have not yet been chosen.
 This is consistent with the assumption that $H$ is nonsingular, which implies that 
 the original $y$  is in the space spanned by  the columns of $H$.
 However, it is not necessary to apply the orthogonal projector $I- \mbox{proj}_{g_j}$ to $y-h_jx_j^s$ in \eqref{eq:yup}.
@@ -784,7 +803,7 @@ mentioned above, we can show that it needs $4mn^2$ flops.
 We see the modified SW algorithm is much more efficient than both the CH algorithm
 and the SW algorithm implemented in a naive way we mentioned in the previous subsection.
 
-\subsection{Proof of Equivalence of SW and CH}
+\vsp \subsection{Proof of Equivalence of SW and CH}
 In this subsection we prove that  CH and  the modified  SW produce the same set of permutations
 for a general full column rank $H$.
 To prove this it will suffice to prove that $x_i^s = x_i^c$, $\bar{x}_i^s =\bar{x}_i^c$,
@@ -829,18 +848,24 @@ of $H_{:,1:n-1}P$, where $H_{:,1:n-1}$ is the matrix given in \eqref{eq:subs}
 and $P$ is a permutation matrix such that $\check{x}=P\tilde{x}$,
 and that $\bar{y}_{1:n-1}$ in  \eqref{eq:subc} is the multiplication of the transpose of 
 the $Q_1$-factor of the QR factorization of $H_{:,1:n-1}P$ and $y$ in \eqref{eq:subs}.
-Thus the two subproblems are equivalent. 
+Thus the two subproblems are equivalent. To see proof of this, simply observe the following:
+\begin{align}
+HP &= QRP \\
+&=QV^TVRP
+\end{align}
 
-\subsection{New Algorithm} \label{subsec:newReduction}
+Where $V$ is the product of Givens rotations which restores R to an upper triangular matrix after the permutation $P$. Therefore, $VRP$ is upper triangular and obviously equivalent to the matrix used in the second step of CH. The equivalence of $y$ in the second step should be simple to deduce.
+
+\vsp \subsection{New Algorithm} \label{subsec:newReduction}
 Now that we know the two algorithms are equivalent, we can take the best
 parts from both and combine them to form a new algorithm. 
 The main cost in CH is to interchange the columns of $R$ and return it to
 upper-triangular form using Givens rotations. 
 When we determine the $k^{th}$ column,  we must do this $k$ times. 
 We can avoid all but one of these column interchanges by computing $x_i^c$, 
-$\bar{x}_i^c$ and $\dist_i^c$ directly. 
+$\bar{x}_i^c$ and $\dist_i^c$ directly using the equations from SW. 
 
-After the QR factorization of $H$, we  solve the reduced ILS problem \eqref{eq:ils}.
+After the QR factorization of $H$, we  solve the reduced BILS problem \eqref{eq:ils}.
 We need only consider how to determine the last column of the final $R$.
 Other columns can be determined similarly. 
 Here we use the ideas from SW.
@@ -880,8 +905,8 @@ Both $\hat{R}_{1:n-1,1:n-1}$ and $\hat{G}_{1:n-1,1:n-1}$ will be used in the nex
 After this, as in the CH algorithm, we continue to work on the subproblem of size $n-1$. 
 The advantages of using the ideas from CH are that we always have a lower triangular $G$
 whose dimension is reduced by one at each step
-and the updating of $G$ is numerically stable as we use orthogonal transformations.
-We give the pseudocode of the new algorithm in Algorithm  \ref{alg:NEW}.
+and the updating of $G$ is numerically stable as we use orthogonal transformations. The lower triangular structure of $G$ and the upper triangular structure of $R$ allow us to save computation as the algorithm progresses.
+The pseudocode of the new algorithm is given in Algorithm  \ref{alg:NEW}.
 
 \begin{algorithm}
 \caption{New algorithm}
@@ -915,14 +940,14 @@ $\bsmx Q_1^T \\ Q_2^T \esmx H= \bsmx R\\ 0 \esmx$  \\
 \end{algorithmic}
 \end{algorithm}
 
-Here we consider the complexity analysis of our new algorithm. 
+Here we consider the complexity analysis of the new algorithm. 
 If we sum the costs in algorithm \ref{alg:NEW} over all loop iterations,
 we get a total of $\frac{7n^3}{3} + 2mn^2$ flops in the worst case. 
 The worst case is very unlikely to occur, it arises when $j=1$ each iteration of the outer loop. In the average case
 however, $j$ is around $k/2$ and we get an average case complexity of $\frac{4n^3}{3} + 2mn^2$ flops.
 In both cases, the complexity is less than the complexity of the modified SW algorithm.
 
-\section{ILS Reduction Algorithms}
+\vsp \section{ILS Reduction Algorithms}
 For the unconstrained ILS problem, the most common reduction strategy is to apply the LLL reduction \cite{LenLL82} to the matrix $H$. There are a few ways to describe the LLL reduction process and what it means for a matrix $H$ to be LLL reduced. In this thesis, we will look at the LLL algorithm as a matrix factorization, $H = QRZ$, where $Q$ is orthogonal, $R$ is upper triangular, and $Z$ is unimodular. After this $QRZ$ factorization, the matrix $R$ will be LLL reduced. We can say an upper triangular matrix is LLL reduced if it satisfies the following properties:
 
 \begin{align} \label{eq:LLLConditions}
@@ -936,12 +961,12 @@ From \eqref{eq:LLLConditions} we can easily obtain the following inequality:
 \left | r_{k-1,k-1} \right | \le \frac{2}{\sqrt{4\sigma -1}}\left | r_{k,k} \right |
 \end{equation}
 
-Looking at \eqref{eq:LLLdiagonal}, we can obtain some sense of why using a LLL reduced matrix $R$ in the search process should yield a performance improvement. Usually in practice, we use $\sigma=1$. We know from previous discussion that it is desirable to have large diagonal elements, with the largest possible diagonal elements toward the end, $r_{11} < \dots < r_{nn}$. The equation \eqref{eq:LLLdiagonal} gives us a guarantee about the relative sizes of the diagonal elements. In practice, the diagonal will usually end up being mostly increasing.
+Looking at \eqref{eq:LLLdiagonal}, we can obtain some sense of why using a LLL reduced matrix $R$ in the search process should yield a performance improvement. Usually in practice, we use $\sigma=1$, this is the maximum value for sigma and forces the most strict ordering of the diagonal. We know from previous discussion about the box constrained reductions that it is desirable to have large diagonal elements, with the largest possible diagonal elements toward the end, $r_{11} < \dots < r_{nn}$. This allows us to prune the search tree at higher levels without wasting computational effort on suboptimal solutions. The equation \eqref{eq:LLLdiagonal} gives us a guarantee about the relative sizes of the diagonal elements. In practice, the diagonal will usually end up being mostly increasing.
 
-\subsection{Computing the LLL Reduction}
-This section will give details on how the LLL reduction, or $QRZ$ factorization described above can be computed. It is interesting to note that this factorization is not unique.
+\vsp \subsection{Computing the LLL Reduction}
+This section will give details on how the LLL reduction, or $QRZ$ factorization described above can be computed. It is interesting to note that this factorization is not unique, other methods to compute it exist and may yield different but equally valid results.
 
-\subsubsection{Integer Gauss Transformations} \label{subsec:IGT}
+\vsp \subsubsection{Integer Gauss Transformations} \label{subsec:IGT}
 
 One special type of unimodular matrix is an integer Gauss transformation (IGT), which can be defined as follows:
 \begin{equation}
@@ -956,15 +981,15 @@ The overall effect of this transformation on the matrix R is that the $j^{th}$ c
 \begin{equation}
 \bar{r}_{kj} = r_{kj} - \mu r_{ki}, \quad k=1 \dots i
 \end{equation}
-If we take $\mu = \lfloor /frac{r_{ij}}{r_{ii}} \rceil$, it should be clear that $|\bar{r}_{ij}| \le \frac{1}{2}r_{ii}$, so given a particular colum, we should be able to use IGTs to satisfy the first condition in equation \eqref{eq:LLLConditions}.
+If we take $\mu = \lfloor /frac{r_{ij}}{r_{ii}} \rceil$, it should be clear that $|\bar{r}_{ij}| \le \frac{1}{2}r_{ii}$, so given a particular column in an upper triangular matrix $R$, we should be able to use IGTs to satisfy the first condition in equation \eqref{eq:LLLConditions} by applying $m$ IGTs.
 
-\subsubsection{Permutations} \label{subsec:Perm}
-After doing IGTs, there is no guarantee that the second condition in \eqref{eq:LLLConditions} will be satisfied, often it is not. In this case, we must permute the columns of $R$ in order for the conidtion to hold. If $r_{k-1,k-1} > \sqrt{r^2_{k-1,k} + r^2_{k,k}}$, then we will permute columns $k$ and $k-1$. After performing the column permutation, $R$ will no longer be upper triangular. To restore the upper triangular structure of $R$, we can apply Givens rotations as we did in section \ref{sec:BILSReduction}. In this case however, only one Givens rotation will be required.
-%Give the equations for a Givens rotation
+\vsp \subsubsection{Permutations} \label{subsec:Perm}
+After doing IGTs, there is no guarantee that the second condition in \eqref{eq:LLLConditions} will be satisfied, often it is not. In this case, we must permute the columns of $R$ in order for the condition to hold. If $r_{k-1,k-1} > \sqrt{r^2_{k-1,k} + r^2_{k,k}}$, then we will permute columns $k$ and $k-1$. After performing the column permutation, $R$ will no longer be upper triangular. To restore the upper triangular structure of $R$, we can apply Givens rotations as we did in section \ref{sec:BILSReduction}. In this case however, only one Givens rotation will be required to zero a single sub diagonal element.
+
 After the permutation, the second condition in \eqref{eq:LLLConditions} will hold. After performing this permutation, we also have the guarantee that element $r_{kk}$ will increase and $r_{k-1,k-1}$ will decrease, therefore the resulting matrix will have something closer to an increasing diagonal.
 
-\subsubsection{LLL Reduction}
-By putting subsections \ref{subsec:IGT} and \ref{subsec:Perm} together, we can devise an algorithm to satisfy the LLL conditions \eqref{eq:LLLConditions}. We will start by letting $H = QR$ denote the $QR$ factorization of the matrix $H$. We will work with the columns of $R$ from right to left, starting with column $k=n$. The idea is to move to the left so that at any step $k$, the columns $k+1:n$ satisfy the LLL conditions. In the $k^{th}$ step, we start by using IGTs to make sure column $k$ satisfies the first LLL condition, $|r_{ik}| < \frac{1}{2}r_{ii}, \quad i = k-1:-1:1$. If the second inequality in \ref{eq:LLLConditions} holds, we move to column $k-1$, otherwise column $k-1$ and $k$ are swapped with a column permutation and $R$ is brought back to upper triangular as described in \ref{subsec:Perm}. After applying a column permutation, we must move back to column $k+1$ since it is possible that the permutation will cause the conditions on the previous column to no longer be satisfied. When we reach column $1$, we know the matrix $R$ must be LLL reduced. Algorithm \ref{alg:LLL} describes this process.
+\vsp \subsubsection{LLL Reduction}
+By putting subsections \ref{subsec:IGT} and \ref{subsec:Perm} together, we can devise an algorithm to satisfy the LLL conditions \eqref{eq:LLLConditions}. We will start by letting $H = QR$ denote the $QR$ factorization of the matrix $H$. We will work with the columns of $R$ from right to left, starting with column $k=n$. The idea is to move to the left so that at any step $k$, the columns $k+1:n$ satisfy the LLL conditions. In the $k^{th}$ step, we start by using IGTs to make sure column $k$ satisfies the first LLL condition, $|r_{ik}| < \frac{1}{2}r_{ii}, \quad i = k-1:-1:1$. If the second inequality in \ref{eq:LLLConditions} holds, we move to column $k-1$, otherwise column $k-1$ and $k$ are swapped with a column permutation and $R$ is brought back to upper triangular as described in \ref{subsec:Perm}. After applying a column permutation, we must move back to column $k+1$ since it is possible that the permutation we applied will cause the conditions on the previous column to no longer be satisfied. When we reach column $1$, we know the matrix $R$ must be LLL reduced. Algorithm \ref{alg:LLL} describes this process. It is also know that this algorithm will terminate in a finite number of steps, for more detail and an alternate explanation of the process, see the original paper \cite{LenLL82}.
 
 \begin{algorithm}
 \caption{LLL Algorithm - Returns R the LLL reduced upper triangular matrix and Z a product of IGTs and permutations}
@@ -990,27 +1015,94 @@ By putting subsections \ref{subsec:IGT} and \ref{subsec:Perm} together, we can d
 \end{algorithmic}
 \end{algorithm}
 
-\subsection{New Unconstrained ILS Reduction}
-In subsection \ref{subsec:SW}, the motivation for the SW algorithm was given. While the SW algorithm does make use of the box constraint, the original motivation for their algorithm applies to the unconstrained ILS problem as well. Applying the SW algorithm directly to the matrix $H$ however may yield results that are much worse than those given by LLL on average. The reason for this is that the SW algorithm only reorders a given set of basis vectors in an attempt to optimize the ordering for the search. The LLL algorithm actually finds a new, better set of basis vectors (shorter and more orthogonal) and a reasonably good ordering for those vectors. The LLL algorithm however has no knowledge of the input vector $y$, since we have seen that the optimal ordering for the columns of $R$ depends on $y$, it is reasonable to assume that we should be able to find better column orderings for the search process than the one which LLL gives.
+\vsp \subsection{New Unconstrained ILS Reduction}
+In subsection \ref{subsec:SW}, the motivation for the SW algorithm was given. While the SW algorithm does make use of the box constraint, the original motivation for their algorithm applies to the unconstrained ILS problem as well. Similarly, the motivation for the CH algorithm also applies to the unconstrained problem; there is nothing specific about either motivation that only applies to box constrained problems. 
 
-The basic idea behind the proposed solution is simple, apply the LLL reduction to find a new set of basis vectors, then apply the new reduction strategy given in subsection \ref{subsec:newReduction} to re-order the basis vectors. Unfortunately after applying the permutations, the LLL conditions in the new matrix $\hat{R} = PR$ may no longer be satisfied. Whether the search will be faster for $\hat{R}$ or $R$ seems to be hard to predict consistently. It depends both on the matrices and the vector $y$ (which has a random component). Numerical experiments indicate that when the matrix $H$ is generated in some ways, and the standard deviation of the noise is within a certain range, we should apply the permutations, but not when $H$ is generated in some other ways, or when the noise is too high. The performance improvement in the search process can be quite significant on average for some practical cases, therefore further investigation into this reduction strategy is needed.
+Applying the SW or CH algorithm directly to the matrix $H$ however may yield results that are much worse than those given by LLL on average. The reason for this is that the SW algorithm only reorders a given set of basis vectors in an attempt to optimize the ordering for the search. The LLL algorithm actually finds a new, better set of basis vectors (shorter and more orthogonal) and a reasonably good ordering for those vectors. See figure \ref{fig:latticeBasis} for a picture of what this may look like. The LLL algorithm however has no knowledge of the input vector $y$, since we have seen that the optimal ordering for the columns of $R$ depends on $y$, it is reasonable to assume that we should be able to find better column orderings for the search process than the one which LLL gives.
 
-Recall the Babai point from chapter \ref{chap:SESearch}, denote the Babai point by the vector $z_0$. This is the first point found during the SE search process. The residual $\left \| Rz_0 - \bar{y} \right \|^2_2$ defines the initial radius of the search process. The number of nodes that the SE search will visit in the search tree is strongly related to the initial radius, the ordering of the columns and the shape of the lattice (the shape of the lattice defines how many integer points will be within the sphere defined by the radius). It is obvious how the initial radius and shape of the lattice relate to the search process, a smaller radius for a fixed lattice results in a smaller search space.
+The basic idea behind the proposed solution is simple, apply the LLL reduction to find a new set of basis vectors, then apply the new reduction strategy given in subsection \ref{subsec:newReduction} to re-order the basis vectors. We will call this reduction strategy ``LLL+PERMU'' from here on for convenience. Also, the matrix $R$ comes from the QR factorization and $\hat{R}$ comes from LLL reduction ($H = QR$ and $H = \hat{Q}\hat{R}Z$).Unfortunately after applying the permutations, the LLL conditions in the new matrix $\hat{R}$ may no longer be satisfied. Whether the search will be faster for $\hat{R}$ or $R$ seems to be hard to predict consistently. It depends both on the matrices and the vector $y$ (which has a random component). Numerical experiments indicate that when the matrix $H$ is generated in some ways, and the standard deviation of the noise is within a certain range, we should apply the permutations, but not when $H$ is generated in some other ways, or when the noise is too high. The performance improvement in the search process can be quite significant on average for some practical cases, therefore further investigation into this reduction strategy is needed.
 
-We will usually obtain a different Babai point after applying permutations to some matrix $R$. Since we know that the search time is related to the initial radius which is defined by the Babai point, one way to estimate whether the search process will proceed faster before or after permutations is to compare the initial radius in both cases. Figure \ref{fig:LLLvsPermuBabai} shows such a comparison for $100$ matrices $H$ generated randomly with their elements picked from a standard normal distribution. The elements in the vectors $x \in \mathbb{Z}$ were picked uniformly between $-10 \dots 10$ and the vector $y$ was generated as $y = Hx + v$, where $v$ is normally distributed with mean $0$ and standard deviation $0.5$ in this case.
+Recall the Babai point from chapter \ref{chap:SESearch}, denote the Babai point by the vector $z_0$. This is the first point found during the SE search process. The residual $\left \| Rz_0 - \bar{y} \right \|^2_2$ defines the initial radius of the search process. The number of nodes that the SE search will visit in the search tree is strongly related to the initial radius, the ordering of the columns and the shape of the lattice (the shape of the lattice defines how many integer points will be within the sphere defined by the radius). It is obvious how the initial radius and shape of the lattice relate to the search process, a smaller radius for a fixed lattice results in a smaller search space. If the lattice points are densely packed, even a small sphere radius could include many of them. To see this, again consider figure \ref{fig:latticeBasis}. Looking at the ``Babai Point Radius'' in the figure, we can see that there are many potential solutions that lie within it, these would all be valid candidate solutions if we had started with the ``Babai Point Radius'' as our initial radius. If this initial radius had been smaller, there would be fewer potential solutions and therefore the search space would be smaller as well.
+
+We will usually obtain a different Babai point after applying permutations to some matrix $R$. Since we know that the search time is related to the initial radius which is defined by the Babai point, one way to estimate whether the search process will proceed faster before or after permutations is to compare the initial radius in both cases. Figure \ref{fig:LLLvsPermuBabai} shows such a comparison for $200$ matrices $H \in \mathbb{R}^{50 \times 50}$ generated randomly with their elements picked from a standard normal distribution. The elements in the vectors $x \in \mathbb{Z}$ were picked uniformly between $-10 \dots 10$ and the vector $y$ was generated as $y = Hx + v$, where $v$ is normally distributed with mean $0$ and standard deviation $0.5$ in this case.
 
 \begin{figure}
-\includegraphics[scale=0.3]{lllvslllpermubabai.png}
-\caption{LLL Reduction vs LLL Reduction and Permutations. Residual from the Babai points.}
+\centering
+\includegraphics[width=6in,height=3in]{lllvslllpermubabai.png}
+\caption{LLL Reduction vs LLL+PERMU. Residual from the Babai points.}
 \label{fig:LLLvsPermuBabai}
 \end{figure}
 
-Looking at figure \ref{fig:LLLvsPermuBabai}, we can see that after permutations, the Babai point in this case is at least as good as the one before permutation. Occasionally it is significantly better. For cases where the Babai point is better, we can choose to use the permuted $R$ for the search process. Numerical results comparing this strategy to a simple LLL reduction can be found in section \ref{sec:ILSReductionResults}.
+Looking at figure \ref{fig:LLLvsPermuBabai}, we can see that after permutations, the Babai point in this case is at least as good as the one before permutation. Often it is significantly better. For cases where the Babai point is better, we can choose to use the permuted $R$ for the search process. Numerical results comparing this strategy to performing the search on a LLL reduced matrix can be found in section \ref{sec:ILSReductionResults}.
 
-Unforunately, there are certain types of ill conditioned problems where the above strategy does not work very well. Even though the new matrix $R$ after permutations gives a better Babai point, the search process visits more nodes. Some characteristics and examples of such problems are given in section \ref{sec:ILSReductionResults}. In these cases, we may use the permutation strategy just to help set the initial search radius, then perform the search on the LLL reduced matrix $R$. Since we only apply orthogonal transformations to the matrix $R$ and vector $y$ with our permutation strategy, we can use the residual from the Babai point in the permuted problem directly in the problem before permutation. The equation $\left \| GRPz_0 - Gy \right \|_2^2 = \left \| RPz_0 - y \right \|$ shows this. Using this residual in the LLL reduced problem when it is small than the residual to the Babai point given by LLL reduction is guaranteed to result in a faster search time. Since the permutation reduction process is very fast compared to the search, usually the overall time will be faster as well. Unfortunately, while this strategy is guaranteed to be faster than LLL reduction alone for the search process, it does not always give results as good as performing the search process on the permuted $R$. Some comparisons can be found in section \ref{sec:ILSReductionResults}.
+Unforunately, there are certain special types of ill conditioned problems where the above strategy does not work very well. Even though the new matrix $R$ after permutations gives a better Babai point, the search process visits more nodes. Some characteristics and examples of such problems are given in section \ref{sec:ILSReductionResults}. In these cases, we may use the permutation strategy just to help set an initial search radius $\beta$ from chapter \ref{chap:SESearch}. Then we may perform the search on the LLL reduced matrix $R$.
 
-\subsection{ILS Reduction Results} \label{sec:ILSReductionResults}
-In this subsection, some results will be presented to compare applying a simple LLL reduction and applying permutations to the LLL reduced matrix.
+Since we only apply orthogonal transformations to the matrix $R$ and vector $y$ with our permutation strategy, we can use the residual from the Babai point in the permuted problem directly in the problem before permutation. The equation $\left \| VRPz_0 - Vy \right \|_2^2 = \left \| RPz_0 - y \right \|$, where $V$ is a product of Givens rotations and $P$ is a permutation matrix, shows this. This means the $\beta$ given by this strategy will never be too small, forcing us to restart the search process. Using this residual in the search process on the LLL reduced problem when it is smaller than the residual to the Babai point given by LLL reduction alone is guaranteed to result in a faster search time. From here on we will refer to this strategy as LLL+BABAI. Since the permutation reduction process is very fast compared to the search, usually the overall run time, which is the time for the search plus the time for reduction, will be faster as well. There are some cases where we obtain better results by using the permuted matrix $R$ in the search, but as a general method to solve ILS problems, it is safer to use the LLL reduced $R$ with the initial radius $\beta$ given by the permutation strategy. Some comparisons can be found in section \ref{sec:ILSReductionResults}.
+
+\vsp \subsection{ILS Reduction Results} \label{sec:ILSReductionResults}
+In this subsection, some results will be presented to compare the speed of the search process after applying the reduction strategies presented previously in this chapter. We will compare the LLL reduction, LLL reduction plus permutations (LLL+PERMU), and the LLL reduction using the initial radius $\beta$ given by the permutation strategy (LLL+BABAI).
+
+Figure \ref{fig:LLLvsPermuvsBabai} shows the three reduction strategies compared when run on normally distributed, random matrices $H$ of sizes from $35 \times 35$ to $50 \times 50$. The horizontal axis displays varying values for $\sigma$ which is the noise parameter. The vertical axis is the average time taken for the search process over $200$ runs where on each run a new matrix $H$, vector $x$ and noise vector $v$ were generated.
+
+\begin{figure}
+\centering
+\includegraphics[width=6.5in,height=5in]{lllvspermuvsbabai.png}
+\caption{LLL Reduction vs LLL Reduction and Permutations vs LLL Reduction with Permutation Initial Radius.}
+\label{fig:LLLvsPermuvsBabai}
+\end{figure}
+
+Looking at figure \ref{fig:LLLvsPermuvsBabai}, we see that when the noise is small, the search process is too fast for any extra reduction to make a difference. As the noise becomes larger, LLL+PERMU starts to offer a significant advantage in terms of search time. LLL+PERMU and LLL+BABAI perform similarly at moderate levels of noise in this case. As the noise rises further, LLL+PERMU actually becomes worse than LLL, however LLL+BABAI maintains a significant advantage in all cases.
+
+\begin{table} \label{tab:successRateLLL}
+\caption{Success Rate (out of 200) for LLL Reduction on various problem sizes and levels of noise.}
+\begin{tabular}{|l|l|l|l|l|l|l|l|} 
+\hline
+ &              $0.05$ & $0.1$ & $0.3$ & $0.4$ & $0.5$ & $0.7$ & $0.8$ \\ \hline
+$35 \times 35$& $200$  & $200$ & $199$ & $192$ & $178$ & $89$  & $44$\\ \hline
+$40 \times 40$& $200$  & $200$ & $200$ & $196$ & $175$ & $75$  & $45$\\ \hline
+$45 \times 45$& $200$  & $200$ & $200$ & $193$ & $175$ & $79$  & $42$\\ \hline
+$50 \times 50$& $200$  & $200$ & $200$ & $196$ & $167$ & $89$  & $44$\\
+\hline
+\end{tabular}
+\end{table}
+
+
+\begin{table} \label{tab:successRatePermu}
+\caption{Success Rate (out of 200) for LLL+PERMU on various problem sizes and levels of noise.}
+\begin{tabular}{|l|l|l|l|l|l|l|l|} 
+\hline
+ &              $0.05$ & $0.1$ & $0.3$ & $0.4$ & $0.5$ & $0.7$ & $0.8$ \\ \hline
+$35 \times 35$& $200$  & $200$ & $200$ & $200$ & $198$ & $132$  & $76$\\ \hline
+$40 \times 40$& $200$  & $200$ & $200$ & $200$ & $198$ & $120$  & $77$\\ \hline
+$45 \times 45$& $200$  & $200$ & $200$ & $200$ & $194$ & $141$  & $86$\\ \hline
+$50 \times 50$& $200$  & $200$ & $200$ & $199$ & $196$ & $137$  & $94$\\
+\hline
+\end{tabular}
+\end{table}
+
+Tables \ref{tab:successRateLLL} and \ref{tab:successRatePermu} show how many times out of $200$ runs that the Babai point was equal to the true solution $x$. If we take this as a percentage it is known as the "Success Rate". This is an important number because many practical applications may decide not to solve the ILS problem completely and instead just use the Babai point as an estimate at the solution. Here we see that the LLL+PERMU strategy can offer a significantly better success rate in all cases tested; even in cases where the search process may be slower on average if we use the permuted $R$.
+
+It is not fully clear why LLL+PERMU fails to perform well in the search process when the noise is high. One reason is because the matrix $R$ after the permutations is usually further from a LLL reduced matrix when the noise is high as opposed to when the noise is low. This has been confirmed through numerical experiments where when the second inequality in \ref{eq:LLLConditions} was not satisfied, the difference $r_{k-1,k-1}^2 - (r{k,k}^2 + r{k-1,k}^2)$ was added to a sum. For a LLL reduced matrix this sum taken from $1 \dots n$ should be $0$, as the matrix becomes further from LLL reduced the sum will increase. A rough explanation as to why this happens is as follows; when the noise is very low the permutation algorithm finds the column permutations that maximize the diagonal entries in the order from $n \dots 1$. As the noise rises, this property is lost. To see this consider the motivation for the CH algorithm in \ref{subsec:CH} and consider what happens when $y = Hx$. One goal of the LLL reduction is also to maximize the diagonal entries in order from $n \dots 1$ in a way, it however also considers the off diagonal and previous diagonal entry. When the noise is lower, the permutation algorithm is likely to do fewer permutations since the ordering is more likely to already be somewhat satisfied since we started with a LLL reduced matrix. Therefore the matrix is likely to remain closer to a LLL reduced matrix.
+
+The next set of results demonstrates a case where the permutation strategy should not be used. In figures \ref{fig:lllvspermubabaiill} and \ref{lllvspermuill} the matrix $H$ is generated by first generating two random, normally distributed matrices $A$ and $B$. Then the $QR$ factorization of each matrix is taken, so we will have $A = Q_AR_A$ and $B = Q_BR_B$. Next we generate a diagonal matrix $D$, where $d_{ii} = 10^{-\frac{(i-1)*4}{(n-1)}}$. Recalling that the condition number of a matrix is the first singular value divided by the last one; we will construct a  matrix with condition number $10^4$ by forming the product of the SVD, $H = Q_ADQ_B$. We generate $x$ and $y$ in the same way as the previous results.
+
+\begin{figure}
+\centering
+\includegraphics[width=6in,height=3in]{lllvspermubabaiill.png}
+\caption{LLL Reduction vs LLL + PERMU. Residual from the Babai points on ill conditioned problems.}
+\label{fig:lllvspermubabaiill}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=6.5in,height=5in]{lllvspermuvsbabaiill.png}
+\caption{LLL Reduction vs LLL +PERMU vs LLL + BABAI on ill conditioned problems.}
+\label{fig:lllvspermuvsbabaiill}
+\end{figure}
+
+Figure \ref{fig:lllvspermubabaiill} shows the residual for the Babai point both before and after permutation where $H \in \mathbb{R}^{40 \times 40}$ and $\sigma = 0.5$. Comparing to figure \ref{fig:LLLvsPermuBabai}, we notice that it is much different. First, the residual both before and after permutation is much smaller in magnitude. The residual after permutation is slightly better than before on average, but the difference is nearly insignificant. With the smaller residual one may expect that the Babai point in this case is more likely to be equal to the true solution $x$. This however is not the case at all. Out of the $200$ runs in figure \ref{fig:lllvspermubabaiill}, not once was the Babai point equal to the true solution; compared to the example in figure \ref{fig:LLLvsPermuBabai} where $167/200$ times the Babai point was the correct solution before permutations were performed.
+
+Knowing that the Babai point does not seem to be significantly better when the matrix $H$ is generated in this way, we can predict that the run time performance of the search process will probably be worse in the case where we use LLL+PERMU and about the same for LLL+BABAI. Figure \ref{fig:lllvspermuvsbabaiill} confirms this.
 
 \chapter{Alternate Search Strategies} \label{chap:Searches}
 
@@ -1018,28 +1110,28 @@ Chapter \ref{chap:SESearch} described the most common search strategy used to so
 
 While the depth first search corresponding to the SE algorithm is usually very fast, it is not optimal in terms of the number of nodes visited during the search process. Let $x_{i:n}^p$ denote the node in the search tree that results from fixing $x_{i:n}$ to some particular set of values, we may call this a partial solution. Then the partial residual given by this partial solution is equivalent to its cost in the search tree and can be defined as $\left \| R_{i:n,i:n}x_{i:n}^p - \bar{y}_{i:n}\right \|_2^2$. An optimal algorithm for the ILS problem visits only nodes in the search tree with partial residuals that are less than the optimal ILS solutions residual. Therefore all nodes explored by the optimal search process will satisfy the following:
 \begin{equation}\label{eq:optimalSearchCond}
-\left \| R_{i:n,i:n}x_{i:n}^p - \bar{y}_{i:n}\right \|_2^2 \le \left \| Rx - \bar{y} \right \|_2^2
+\left \| R_{i:n,i:n}x_{i:n}^p - \bar{y}_{i:n}\right \|_2^2 \le \left \| Rx_{ILS} - \bar{y} \right \|_2^2
 \end{equation}
 
-Assuming no other special knowledge of the search problem, any other search algorithm must at least explore this set of nodes to guarantee there is no other leaf in the tree with a lower residual than the one found.
+Where $x_{ILS}$ here denotes the optimal ILS solution, which depending on the noise may not be the same as the original integer vector. Assuming no other special knowledge of the search problem, any other search algorithm must at least explore this set of nodes to guarantee there is no other leaf in the tree with a lower residual than the one found. There are in fact ways to reduce the number of nodes visited beyond this point, one technique involves using lower bounds on the optimal solutions residual. Unfortunately after numerical testing it was found that these methods incur too much per-node overhead to provide faster solutions to {\em reduced} ILS and BILS problems.
 
-One algorithm that satisfies the requirement in \eqref{eq:optimalSearchCond} is called the "Best First Search" which will be referred to as BFS from here on for convienience. This algorithm has been proposed in the literature a number of times, \cite{FukMU04} and \cite{XuWZW04} are two examples, although they appear different on the surface. Later in this chapter a detailed description of the BFS will be given. For now it is enough to note that the BFS pays a price to achieve the goal of expanding the minimum number of nodes, it must permanently store each node explored during the search in memory and always keep track of the node with minimum cost. For this reason it is not always practical to use the BFS strategy, one reason is often hardware applications have limited memory, another is that when the number of nodes explored becomes very large, the overhead of finding the one with minimum cost becomes significant.
+One algorithm that satisfies the requirement in \eqref{eq:optimalSearchCond} is called the "Best First Search" which will be referred to as BFS from here on for convienience. This algorithm has been proposed in the literature a number of times, \cite{FukMU04} and \cite{XuWZW04} are two examples, although they appear different on the surface. Later in this chapter a detailed description of the BFS will be given. For now it is enough to note that the BFS pays a price to achieve the goal of expanding the minimum number of nodes, it must permanently store each node explored during the search in memory and always keep track of the node with minimum cost. Also, when the nodes are later accessed from memory, since they are not stored in a simple manner like the SE search, it is likely that we will incur cache penalties when accessing nodes. For these reasons it is not always practical to use the BFS strategy, one problem is that often hardware applications have limited memory, another is that when the number of nodes explored becomes very large, the overhead of finding the one with minimum cost becomes significant and this must be done at each iteration.
 
 Unfortunately, some of the literature such as \cite{StuBF07} does not properly consider the overhead of finding the minimum cost node when comparing search algorithms, instead only considering the goal of limiting the memory usage of BFS while still exploring as few nodes as possible. Comparing the number of nodes explored by two different search processes may not always be meaningful if one process spends much more time on each node than the other.
 
 The following sections will explain the BFS, quickly overview a couple of attempts that have been made to control the memory usage of the BFS, and then propose a new idea for combining the BFS with the SE search in order to limit memory usage and decrease computational complexity.
 
-\section{Best First Search} \label{sec:BFS}
+\vsp \section{Best First Search} \label{sec:BFS}
 
 A quick review from chapter \ref{chap:SESearch}; we will explore the search tree which has depth $n$ and each edge has a cost to traverse. Define a given nodes cost as the sum of the costs of all the edges traversed to reach the node, that is the length of the path between the node and the root. This cost is equal to the partial residual for fixing $x_{i:n}$ to a set of values, e.g. $\left \| R_{i:n,i:n}x_{i:n}^p - \bar{y}_{i:n}\right \|_2^2$. We would like to find the leaf with minimal cost. For the BFS, we will define a nodes ``next best child" as the child of that node with the lowest cost that has not yet been visited. This is simple to compute; the first ``next best child'' for a node is just $\lfloor c_k \rceil$ as defined in chapter \ref{chap:SESearch}. The next will be $\lfloor c_k \rceil \pm 1$, such that we get the second nearest integer to $c_k$, we proceed in this way, always taking the next nearest integer to define the ``next best child''. This is the exact same strategy that the SE search uses.
 
-The core data structure used to efficiently implement a best first search is called a priority queue. The priority queue is an abstract data structure whose basic operations are $insert(element,cost)$, and $findmin()$. The $insert(element,cost)$ operation adds an element to the queue with some integer cost. The $findmin()$ operation finds and removes the element with minimum cost from the queue. The implementation details are not particularly relevant to this thesis, but it is important to note that there are various implementations used in practice. The usual cost for the $insert(element,cost)$ operation is $\theta(1)$ and for the $findmin()$ operation $\theta(log(N))$ where $N$ is the number of elements currently in the queue.
+The core data structure used to efficiently implement a best first search is called a priority queue. The priority queue is an abstract data structure whose basic operations are $insert(element,cost)$, and $findmin()$. The $insert(element,cost)$ operation adds an element to the queue with some real value cost. The $findmin()$ operation finds and removes the element with minimum cost from the queue. The implementation details are not particularly relevant to this thesis, but it is important to note that there are various implementations used in practice. The usual cost for the $insert(element,cost)$ operation is $\theta(1)$ and for the $findmin()$ operation $\theta(log(N))$ where $N$ is the number of elements currently in the queue.
 
 As mentioned above, for the ILS application, we can quickly find a given nodes ``next best child", it is the node corresponding to the next choice of $x_k$ chosen as in the SE algorithm. The ``first best child'' of a node at level $k-1$ assuming $x_{k-1:n}$ are fixed, is always the node corresponding to $x_k = \lfloor c_k \rceil$, where $c_k$ comes from \eqref{eq:searchC}.
 
 In the first step of the BFS, we initialize an empty priority queue, $pq$ and define the root node as having a cost of $0$ and being at level $n+1$. The ``next best child" of the root node will correspond to $x_n = \lfloor \bar{y}_n/R_{n,n} \rceil$ and the cost to visit this child will be equal to the partial residual $(R_{n,n}x_n - \bar{y}_n)^2$, we will call this cost the ``next best child cost". The root node will store its current ``next best child" and ``next best child cost" and then be inserted into $pq$, elements in this priority queue will always be sorted by their ``next best child cost".
 
-In the next step, we will visit the first child of the root, $x_{n-1}$. First, we perform the $findmin()$ operation on the priority queue, since currently the root is the only element, it will be returned. We would like to visit the first child of the current node (which is now the root). To visit a node involves calculating the ``next best child" and the ``next best child cost", therefore we must compute these quantities for the node corresponding to $x_{n}$ (which is the first child of the root). The ``next best child" of $x_n$ will be given by $x_{n-1} = \lfloor c_{n-1} \rceil$ and its cost  will be the partial residual $\left \| R_{n-1:n,n-1:n}x_{n-1:n}^p - \bar{y}_{n-1:n}\right \|_2^2$. Notice if we expand the cost as follows, $(R_{n,n}x_n - \bar{y}_n)^2 + (R_{n-1,n}x_n + R_{n-1,n-1}x_{n-1} - \bar{y}_{n-1})^2$ that the first term in the cost is just the cost of the parent node. We then insert $x_n$ into the priority queue with its ``next child'' and ``next child cost''.
+In the next step, we will visit the first child of the root, $x_{n-1}$. First, we perform the $findmin()$ operation on the priority queue, since currently the root is the only element, it will be returned. We would like to visit the first child of the current node (which is now the root). To visit a node involves calculating the ``next best child" and the ``next best child cost", therefore we must compute these quantities for the node corresponding to $x_{n}$ (which is the first child of the root). The ``next best child" of $x_n$ will be given by $x_{n-1} = \lfloor c_{n-1} \rceil$ and its cost  will be the partial residual $\left \| R_{n-1:n,n-1:n}x_{n-1:n}^p - \bar{y}_{n-1:n}\right \|_2^2$. We then insert $x_n$ into the priority queue with its ``next child'' and ``next child cost''. Notice if we expand the cost as follows, $(R_{n,n}x_n - \bar{y}_n)^2 + (R_{n-1,n}x_n + R_{n-1,n-1}x_{n-1} - \bar{y}_{n-1})^2$ that the first term in the cost is just the cost of the parent node; this means to calculate the cost for a child at level $i$, we only need to add the $i^{th}$ term from the sum defined by $\left \| R_{i,i:n}x_{i:n}^p - \bar{y}_{i}\right \|_2^2$ to the cost of the parent.
 
 Since we are now visiting the first child of the root, we must generate the roots new ``next best child", $x_n = \lfloor c_n \rceil ^+_- 1$ and the cost for this child (also the partial residual), $(R_{n,n}x_n - y_n)^2$. We may now insert the root back into the priority queue with the newly calculated ``next best child cost" and ``next best child''.
  
@@ -1047,29 +1139,31 @@ At this step, the next node to be visited will be the one at the top of the prio
 
 By proceeding in this way, we always visit the nodes in the order of increasing partial residual. The next node we visit is always the one with the next smallest partial residual (in the whole tree) from the previous one, even if those 2 nodes are at different levels. In this way we can guarantee that the first time we find a leaf in the tree, it must be the leaf with the smallest squared residual and is therefore the solution. Also, at the point where we find a leaf, we know we have explored only and all of those nodes that have a partial residual within the radius of the optimal hyper-sphere.
 
-\section{Controlling BFS Memory Usage}
+It should also be noted that trivial modifications to this BFS search algorithm can be made so that it will solve the BILS problem. We just need to make sure that at every step, the value chosen for $x_k$ is within the proper bounds defined in \ref{eq:boxCon}.
 
-In \ref{sec:BFS}, notice that in each step a new node is added to the priority queue, but nodes are never removed (yes, the $findmin()$ operation removes a node, but we just update the cost and insert it back in). This means that each node visited during the search will be kept permanently in the priority queue. Since the number of nodes visited can potentially be exponential in $n$ this can become a problem for two reasons. The first and most obvious reason is memory usage. The second which is often over looked is, as the priority queue grows, it costs more and more to maintain it at each step; the cost for each operation is $\theta(log(N))$, where $N$ is the number of nodes visited so far. Depending on the implementation of the priority queue, there could also be some large constants involved with this cost meaning that for even small $N$ we are paying a significant overhead to maintain the priority queue. Also consider that the cost to visit a node in an efficient implementation of the SE algorithm is only about $2k$, where $k$ is the level of the node in the tree.
+\vsp \section{Controlling BFS Memory Usage}
 
-With the rough cost analysis in the previous paragraph, it should be obvious that just because the BFS will explore fewer nodes than SE, does not mean it will be faster. In both \cite{DaiY08} and \cite{StuBF07} the authors try to find a balance between the number of nodes that we keep in memory at any given time, and visiting the smallest number of nodes possible; this section will briefly describe the approach taken in \cite{StuBF07}. Note that the algorithm described here is slightly different in that an extra parameter has been eliminated, according to the authors results, this parameter seems to always make the performance worse anyways, and will just take longer to explain.
+In \ref{sec:BFS}, notice that in each step a new node is added to the priority queue, but nodes are never removed (yes, the $findmin()$ operation removes a node, but we just update the cost and insert it back in). This means that each node visited during the search will be kept permanently in the priority queue. Since the number of nodes visited can potentially be exponential in $n$ this can become a problem for two reasons. The first and most obvious reason is memory usage. The second which is often over looked is, as the priority queue grows, it costs more and more to maintain it at each step; the cost for each operation is $\theta(log(N))$, where $N$ is the number of nodes visited so far. Depending on the implementation of the priority queue, there could also be some significant constants involved with this cost meaning that for even small $N$ we are paying a significant overhead to maintain the priority queue. Also consider that the cost to visit a node in an efficient implementation of the SE algorithm is only about $2k$, where $k$ is the level of the node in the tree.
 
-The idea is only slightly different from the BFS. The authors do not use the concept of a priority queue, and instead use ordered lists to find the node with minimal cost at each step. Suppose we have a list $S$ in which nodes are stored, also this list is sorted by each nodes level in the search tree (lower levels are toward the back). This list, like the priority queue in the BFS starts with only the root node. At each step, a new node is added by finding the node with minimal cost in $S$ (this will take $|S|$ operations) and visiting its ``next best child''. Now suppose we allow the user to specify some parameter $\alpha$. Instead of scanning the whole list $S$ to find the node with the lowest ``next best child cost'' to visit next, we simply look at the first $\alpha$ elements in $S$ and make our decision based on these. Such a strategy forces the BFS to proceed down the tree much faster than it would otherwise.
+With the rough cost analysis in the previous paragraph, it should be obvious that just because the BFS will explore fewer nodes than SE, does not mean it will be faster. In both \cite{DaiY08} and \cite{StuBF07} the authors try to find a balance between the number of nodes that we keep in memory at any given time, and visiting the smallest number of nodes possible; this section will briefly describe the approach taken in \cite{StuBF07}. Note that the algorithm described here is slightly different in that an extra parameter has been eliminated, according to the authors results, this parameter seems to always make the performance worse anyways. It is not clear why they included it in their paper and it would just take longer to explain.
 
-Unfortunately, when a leaf is reached, we no longer have the guarantee that it is the optimal solution. We do know however that we no longer have to consider any of the last $\alpha$ nodes in $S$ since they all must have a cost greater than the cost of the leaf we had just found. We may remove the last $\alpha$ nodes in $S$, update the search radius to be the residual given by this leaf, and continue the BFS. Any time a node is visited with a ``next best child cost'' that is greater than the current search radius, we may discard the first $\alpha$ nodes in $S$. When $S$ is empty we may terminate with the optimal solution.
+The idea is only slightly different from the BFS. The authors do not use the concept of a priority queue, and instead use ordered lists to find the node with minimal cost at each step. Suppose we have a list $S$ in which nodes are stored, also this list is sorted by each nodes level in the search tree (lower levels are toward the back). This list, like the priority queue in the BFS starts with only the root node. At each step, a new node is added to the back of the list by finding the node with minimal cost in $S$ (this will take $|S|$ operations) and visiting its ``next best child''. Now suppose we allow the user to specify some parameter $\alpha$. Instead of scanning the whole list $S$ to find the node with the lowest ``next best child cost'' to visit next, we simply look at the last $\alpha$ elements in $S$ (which correspond to the $\alpha$ lowest nodes in the tree) and make our decision based on these. Such a strategy forces the BFS to proceed down the tree much faster than it would otherwise.
+
+Unfortunately, when a leaf is reached, we no longer have the guarantee that it is the optimal solution. We do know however that we no longer have to consider any of the last $\alpha$ nodes in $S$ since they all must have a cost greater than the cost of the leaf we had just found. We may remove the last $\alpha$ nodes in $S$, update the search radius to be the residual given by this leaf, and continue the BFS. Any time a node is visited with a ``next best child cost'' that is greater than the current search radius, we may discard the last $\alpha$ nodes in $S$. When $S$ is empty we may terminate with the optimal solution.
 
 The authors also give some good bounds on the amount of memory this algorithm requires based on how the parameter $\alpha$ is chosen. They present some results, but do not give FLOP counts or CPU time, instead focusing on memory usage and the number of nodes visited.
 
-There are a few drawbacks to this algorithm. One is that it is not clear how to implement this in practice. Consider setting the parameter $\alpha$ to a relatively high number. When $\alpha$ is higher, we will explore fewer nodes and we will discard more nodes each time we have the opportunity to discard. Unfortunately as $\alpha$ gets larger, a naive list based implementation becomes impractical. Scanning through $\alpha$ elements in a list at each step could impose significant overhead. Also consider that $S$ must be sorted by the nodes levels in the search tree. If we wish to add a new node which has a level larger than the smallest leveled nodes currently in $S$, we must move all of the lower nodes in the tree one place to the right in memory, again this could cost $\alpha$ operations. This suggests that we may want to use a priority queue based implementation for large alpha and a list based implementation for small alpha. 
+There are a few drawbacks to this algorithm. One is that it is not clear how to implement this in practice. Consider setting the parameter $\alpha$ to a relatively high number. When $\alpha$ is higher, we will explore fewer nodes since it will be closer to the BFS, and we will discard more nodes each time we have the opportunity to discard. Unfortunately as $\alpha$ gets larger, a naive list based implementation becomes impractical. Scanning through $\alpha$ elements in a list at each step could impose significant overhead. Also consider that $S$ must be sorted by the nodes levels in the search tree. If we wish to add a new node which has a level larger than the smallest leveled nodes currently in $S$, we must move all of the lower nodes in the tree one place to the right in memory, again this could cost $\alpha$ operations. This suggests that we may want to use a priority queue based implementation for large alpha and a list based implementation for small alpha. 
 
 With these problems, it is worthwhile to explore some other options to limit the memory usage of the BFS, but at the same time also try to decrease the amount of time spent processing each node in the tree.
 
-\section{Combining BFS and SE Search}
+\vsp \section{Combining BFS and SE Search}
 
 Here a new method for controlling the memory usage of the BFS will be presented. Like the method in \cite{StuBF07} it is quite simple and relies on a parameter supplied by the user.
 
 One of the main problems with the SE search occurs when elements high up in the tree (e.g. $x_n, x_n-1 \dots$) are initially chosen incorrectly. We must explore the entire subtree looking for the ILS solution, visiting many nodes that may have partial residuals higher than the residual given by the ILS solution. Eventually we make our way back up the tree to correct the mistake. The BFS doesn't have this problem since it does not restrict itself to visiting only children of the current node.
 
-In order to avoid making expensive mistakes at high levels, we may consider cutting the search tree at some level $\alpha$ which will be supplied by the user. We begin with a BFS, when the BFS reaches a node at level $k=\alpha$, it uses a SE search to find the optimal solution in that nodes subtree. Suppose a we are at some node in the BFS which is given by fixing $x_{k+1:n}$ to some particular values (so we are at level k), then we will solve the subproblem  given by:
+In order to avoid making expensive mistakes at high levels, we may consider cutting the search tree at some level $\alpha$ which will be supplied by the user. We begin with a BFS, when the BFS reaches a node at level $k=\alpha$, it uses a SE search to find the optimal solution in that nodes subtree. Suppose a we are at some node in the BFS which is given by fixing $x_{k+1:n}$ to some particular values (so we are at level $k=\alpha$), then we will solve the subproblem  given by:
 
 \begin{align} 
 &\hat{y} = y(1:k) - R_{1:k,k+1:n}x_{k+1:n} \\
@@ -1080,21 +1174,35 @@ By solving this subproblem, we can find the optimal solution assuming $x_{k+1:n}
 
 With this approach and an appropriate choice of the parameter $\alpha$, we can avoid making expensive mistakes at higher levels in the search tree. We also will incur a much smaller overhead to maintain the priority queue, since it will not contain nearly as many nodes if $\alpha$ is chosen to be near $n$, and with the smaller priority queue, there will be less memory usage. 
 
-There are some useful tricks which can be used in conjunction with the combined search process to improve performance. Consider that the first SE search will very often be the one that costs the most in terms of run time. This is because we have no sphere constraint to use as a stopping condition and must solve the subproblem completely. The best case occurs when the first subproblem we solve contains the ILS solution, in this case we get the smallest possible sphere radius to use in subsequent SE searches as a stopping criteria, and will therefore prune more nodes. To make this more likely to occur, we may delay solving the first subproblem as follows. When we visit a node at level $\alpha$, we can decide not to solve the subproblem stemming from this node, instead we put the node into a list of ``unsolved subproblems'' and continue the BFS. One example of when we may not want to solve a subproblem is when the Babai point given by solving it results in a large residual. Eventually we will need to perform the SE search to find a leaf, once a suitable node is visited by the BFS (one with a relatively low residual to the Babai point is a good choice), we perform the SE search and find a leaf in the tree corresponding to a potential solution. Now we simply go back to the list of ``unsolved subproblems'' and solve them all, using the residual from the previous solution as an initial sphere radius. The unsolved problems that had Babai points yielding high residuals are now likely to terminate much more quickly because not many nodes should be within the current sphere radius if the subproblem that we chose to solve gave a good solution. 
+There are some useful tricks which can be used in conjunction with the combined search process to improve performance. Consider that the first SE search will very often be the one that costs the most in terms of run time. This is because we have no sphere constraint to use as a stopping condition and must solve the subproblem completely. The best case occurs when the first subproblem we solve contains the ILS solution, in this case we get the smallest possible sphere radius to use in subsequent SE searches as a stopping criteria, and will therefore prune more nodes. To make this more likely to occur, we may delay solving the first subproblem as follows. When we visit a node at level $\alpha$, we can decide not to solve the subproblem stemming from this node, instead we put the node into a list of ``unsolved subproblems'' and continue the BFS. One example of when we may not want to solve a subproblem is when the Babai point given by that subproblem has a large residual. Eventually we will need to perform the SE search to find a leaf, once a suitable node is visited by the BFS (one with a relatively low residual to the Babai point is a good choice), we perform the SE search and find a leaf in the tree corresponding to a potential solution. Now we simply go back to the list of ``unsolved subproblems'' and solve them all, using the residual from the previous solution as an initial sphere radius. The unsolved problems that had Babai points yielding high residuals are now likely to terminate much more quickly because not many nodes should be within the current sphere radius if the subproblem that we chose to solve gave a good solution. 
 
-\section{Search Strategy Results} \label{sub:SearchResults}
+Finally, it should be mentioned that while this combined BFS and SE search strategy has been described in a way to solve ILS problems, it is also applicable to BILS problems. Only minor modifications must be made in order to ensure the elements of $x$ satisfy the constraints defined in \ref{eq:boxCon}.
+
+\vsp \section{Search Strategy Results} \label{sub:SearchResults}
 In this section, results will be given to compare the SE search, BFS and the combination of the two. To this point, there has not been much said about how to choose the parameter $\alpha$. This section will attempt to address this question through some numerical experiments. We need to choose $\alpha$ low enough to avoid mistakes at high levels in the tree, but high enough so that we get the advantages of the SE search being faster at processing each node. Note that when $\alpha = n$, we have a pure SE search, and when $\alpha = 1$, the combined search strategy degrades to a BFS. 
 
 For all of the results in this section, the matrices will simply be generated randomly with elements drawn from a standard normal distribution. The vectors $x$ will have elements uniformly distributed between $-10 \dots 10$ and the vectors $y$ are generated as $y = Hx+v$ where $v$ is normally distributed with some standard deviation $\sigma$.
 
+Figure \ref{fig:searchsurface} shows runtime results as the parameter $\alpha$ varies for $50$ different randomly generated problems of size $50 \times 50$. Here the noise vector was has $\sigma = 0.8$, which is quite high. The x-axis which varies from $1 \dots 50$ represents the choices of the parameter $\alpha$. The y-axis gives the search time in seconds, and each line down the z-axis represents one of the $50$ random problems. On the far right of the graph where $\alpha$ is small, we have a search process equivalent to the BFS and toward the left as $\alpha$ gets larger it is equivalent to the  SE search. Notice that on both ends there are sometimes spikes in the run time, while if we follow the line defined by $\alpha = x = 40$, we see that there is a consistent trough in the runtime. This is interesting and tells us that for this particular type of problem, it is best to choose the parameter $\alpha$ somewhere around $40$. Also notice that choosing the parameter slightly incorrectly is usually not a big deal, there is a fairly wide range of good choices. We know the search behaves fairly consistently as the parameter $\alpha$ changes, and there is a wide range for good choices of the parameter; to choose $\alpha$ for some new type of problem generated in some other way, it is recommended to simply run it a few times with various parameter settings and choose the one that performs best.
+
 \begin{figure}
-%\includegraphics{searchresults.png}
+\centering
+\includegraphics[width=6.5in,height=4in]{searchsurface.png}
 \caption{Run time results for the combined search process with varying parameter $\alpha$.}
-\label{fig:searchresults}
+\label{fig:searchsurface}
 \end{figure}
 
+\chapter{Conclusions and Future Work} \label{chap:Conclusion}
 
-\chapter{Conclusions} \label{chap:Conclusion}
+This thesis focused on improving both the reduction and search processes in solving ILS and BILS problems. In chapter \ref{chap:Reduction} it was shown that two effective reduction strategies for the BILS problem are in fact theoretically equivalent. Using the knowledge of their equivalence a new reduction strategy was proposed that uses ideas from each to compute the same solution more efficiently and in a numerically stable manner. Also in Chapter \ref{chap:Reduction}, it was shown that under some practical conditions, this reduction process can be used to improve the performance of the ILS search process as well. This improvement seems to be a result of the Babai point after the permutations having both a lower residual and higher success rate (defined as the probability that the Babai point is equal to the true solution $x$). Since the Babai point has a tendency to have lower residual and higher success rate after applying these permutations, we can conclude that for both BILS and ILS problems, applications which use the Babai point as an estimate to the ILS solution should apply this permutations strategy in order to improve their success rate.
+
+Some more investigation into the permutation reduction algorithm is still needed. It is not quite clear exactly when we should perform the search on the permuted matrix $R$ and when we should search the LLL reduced $R$. It is also possible that there exists another reduction strategy that can combine the properties of the permutations and LLL reduction. This was investigated but nothing significant was found. It would also be interesting if we could use some easy to calculate properties of the matrix $H$, vector $y$ and noise vector standard deviation $\sigma$ to decide whether we should use the permutations or not. Such a general result would be very useful in determining what types of practical applications this new reduction applies to.
+
+In chapter \ref{chap:Searches} the ``Best First Search'' approach was described. The BFS has the property that it will visit the fewest nodes of any search algorithm. Unfortunately the BFS is not always ideal because of its high memory usage and complexity per node visited in the search tree. Previous attempts to improve upon the BFS were mentioned and a new one introduced. The new algorithm tries to address both the problem of memory usage and high complexity per node. Run time results were given comparing this new algorithm to the SE search process and the improvement was shown to be significant. 
+
+It would be interesting to see if some theory could be worked out for how to choose the parameter $\alpha$ in the new search method. It is currently unclear how to choose it given a particular ILS problem. Since the optimal value for the parameter seems somewhat stable for fixed problem size and levels of noise, this may be possible.
+
+
 
 \bibHeading{References}
 \bibliography{../ILS}

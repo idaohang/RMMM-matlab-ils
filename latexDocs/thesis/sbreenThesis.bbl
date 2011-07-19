@@ -1,5 +1,11 @@
 \begin{thebibliography}{10}
 
+\bibitem{AgrEVZ02}
+E.~Agrell, T.~Eriksson, A.~Vardy, and K.~Zeger.
+\newblock Closest point search in lattices.
+\newblock {\em IEEE Transactions on Information Theory}, 48(8):2201--2214,
+  2002.
+
 \bibitem{SchFL09}
 Lutz~Lampe Andreas~Schenk, Robert~Fischer.
 \newblock A stopping radius for the sphere decoder and its application to msdd
