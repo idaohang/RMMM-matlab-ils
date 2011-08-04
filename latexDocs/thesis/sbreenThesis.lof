@@ -1,8 +1,11 @@
-\contentsline {figure}{\numberline {{1--1}}{\ignorespaces An example of a lattice with two different sets of basis vectors.}}{3}
+\contentsline {figure}{\numberline {{1--1}}{\ignorespaces An example of a lattice with two different sets of basis vectors.}}{4}
 \contentsline {figure}{\numberline {{2--1}}{\ignorespaces An example of the search process with solution $x = [-1,3,1]^T$.}}{15}
 \contentsline {figure}{\numberline {{3--1}}{\ignorespaces Geometry of the search with two different column ordering.}}{27}
-\contentsline {figure}{\numberline {{3--2}}{\ignorespaces LLL Reduction vs LLL+PERMU. Residual from the Babai points.}}{46}
-\contentsline {figure}{\numberline {{3--3}}{\ignorespaces LLL Reduction vs LLL Reduction and Permutations vs LLL Reduction with Permutation Initial Radius.}}{49}
-\contentsline {figure}{\numberline {{3--4}}{\ignorespaces LLL Reduction vs LLL + PERMU. Residual from the Babai points on ill conditioned problems.}}{51}
-\contentsline {figure}{\numberline {{3--5}}{\ignorespaces LLL Reduction vs LLL +PERMU vs LLL + BABAI on ill conditioned problems.}}{52}
-\contentsline {figure}{\numberline {{4--1}}{\ignorespaces Run time results for the combined search process with varying parameter $\alpha $.}}{66}
+\contentsline {figure}{\numberline {{3--2}}{\ignorespaces LLL Reduction vs LLL+PERMU. Residual from the Babai points.}}{44}
+\contentsline {figure}{\numberline {{3--3}}{\ignorespaces LLL Reduction vs LLL Reduction and Permutations vs LLL Reduction with Permutation Initial Radius.}}{46}
+\contentsline {figure}{\numberline {{3--4}}{\ignorespaces LLL Reduction vs LLL + PERMU. Residual from the Babai points on ill conditioned problems.}}{48}
+\contentsline {figure}{\numberline {{3--5}}{\ignorespaces LLL Reduction vs LLL +PERMU vs LLL + BABAI on ill conditioned problems.}}{49}
+\contentsline {figure}{\numberline {{4--1}}{\ignorespaces Run time results for the combined search process with varying parameter $\alpha $ on random problems.}}{62}
+\contentsline {figure}{\numberline {{4--2}}{\ignorespaces Average run time results for the combined search process with varying parameter $\alpha $ on random problems.}}{63}
+\contentsline {figure}{\numberline {{4--3}}{\ignorespaces Run time results for the combined search process on ill conditioned problems with varying parameter $\alpha $.}}{65}
+\contentsline {figure}{\numberline {{4--4}}{\ignorespaces Average run time results for the combined search process with varying parameter $\alpha $ on ill conditioned problems.}}{66}
