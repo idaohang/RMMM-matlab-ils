@@ -239,7 +239,24 @@ solution to be the true integer parameter vector $x$ \cite{Han11}. For this reas
 Other applications of BILS and OILS include cryptography, lattice design and number theory. For a more detail on some of these applications see \cite{HanPS11}.
 
 \vsp \section{Previous Work} \label{sec:prevWork}
-Due to the important applications of the BILS and OILS problems, much work has gone into solving them efficiently. To solve ILS problems exactly there are three main families of algorithms. One family uses ``Voronoi cells'', we will not consider algorithms in this family because they are known to be relatively inefficient. Another family of algorithms can be referred to as ``Continuous Relaxation Branch and Bound Methods''. Using these algorithms to solve ILS problems is a relatively new idea and no comprehensive comparisons have been done to study their efficiency, although some preliminary tests indicate they can be quite efficient in some circumstances. The last main family of algorithms that solve ILS problems exactly are ``discrete search methods''. This thesis will focus on studying these discrete search methods since they are known to be efficient. There have also been some algorithms proposed that yield a fast, approximate solution to the problems, some giving statistical bounds on the likelihood of error. These algorithms can sometimes be referred to as ``randomized'' algorithms. This thesis however will only deal with finding the optimal solution to the problem. For more details on the randomized algorithms and Voronoi cell algorithms, see \cite{HansPS11}. For details on the CRBB methods see \cite{Ku11}. 
+Due to the important applications of the BILS and OILS problems, much work has
+gone into solving them efficiently. To solve ILS problems exactly there are
+three main families of algorithms. One family uses ``Voronoi cells'', we will
+not consider algorithms in this family because they are known to be relatively
+inefficient. Another family of algorithms can be referred to as ``Continuous
+Relaxation Branch and Bound Methods''. Using these algorithms to solve ILS
+problems is a relatively new idea and no comprehensive comparisons have been
+done to study their efficiency, although some preliminary tests indicate they
+can be quite efficient in some circumstances. The last main family of algorithms
+that solve ILS problems exactly are ``discrete search methods''. This thesis
+will focus on studying these discrete search methods since they are known to be
+efficient. There have also been some algorithms proposed that yield a fast,
+approximate solution to the problems, some giving statistical bounds on the
+likelihood of error. These algorithms can sometimes be referred to as
+``randomized'' algorithms. This thesis however will only deal with finding the
+optimal solution to the problem. For more details on the randomized algorithms
+and Voronoi cell algorithms, see \cite{HanPS11}. For details on the CRBB methods
+see \cite{Ku11}. 
 
 The discrete search based approaches which will be studied in this thesis try to find the optimal solution by enumerating vectors in the search space one element at a time until all possible solutions but one are eliminated. The order in which the elements of the solution vectors are enumerated plays a critical role in how long the search algorithm will take to run; the reasons for this will become clear later.
 
@@ -254,11 +271,26 @@ There have been other suggestions to improve the discrete search based algorithm
 
 Another method that attempts to shrink the search space is given in \cite{SchFL09}. They propose a simple stopping criteria for the search process that in theory should allow it to terminate earlier. Unfortunately, the bound derived here is not tight enough to be useful in practice and is rarely or never satisfied. Also it is proposed that after computing the bound, one can increase it by some amount with a low risk of achieving a suboptimal solution; this thesis will not consider this since it is only concerned with the exact solution of the OILS and BILS problems. 
 
-\vsp \subsection{Reduction Strategies}
+\vsp \subsection{Reduction Strategies} \label{subsec:Reductions}
 
 As mentioned previously, the purpose of the OILS and BILS reduction is to transform the problem to an equivalent, but easier to solve one. This section will review some existing reduction strategies.
 
-One very effective reduction strategy is known as the Korkine-Zolotarev (KZ) reduction. Unfortunately the KZ reduction is prohibitively expensive to compute, it requires solving a number of NP hard problems. The only time this reduction may be practical is when a very large number of input vectors $y$ must be decoded for the same matrix $H$. For more information on the KZ reduction see \cite{AgrEVZ02}. The standard reduction algorithm used in practice for reducing the unconstrained OILS problems is the LLL reduction \cite{LenLL82}. It is usually much more efficient to compute than the KZ reduction, in fact any KZ reduced matrix is also LLL reduced. For more detail on how the LLL reduction and KZ reduction are related, again see \cite{AgrEVZ02}. The LLL reduction has been proven to have average case polynomial complexity when the basis vectors are normally distributed inside the unit sphere in $\mathbb{R}^m$. There are also results that bound the complexity based on the condition number of the input matrix. For more details on these bounds see \cite{WubSJM11}.
+One very effective reduction strategy is known as the Korkine-Zolotarev (KZ)
+reduction. Unfortunately the KZ reduction is prohibitively expensive to compute,
+it requires solving a number of NP hard problems. The only time this reduction
+may be practical is when a very large number of input vectors $y$ must be
+decoded for the same matrix $H$. For more information on the KZ reduction see
+\cite{AgrEVZ02}. The standard reduction algorithm used in practice for reducing
+the unconstrained OILS problems is the ``Lenstra-Lenstra-Lovasz'' or LLL
+reduction \cite{LenLL82}. It is usually much more efficient to compute than the
+KZ reduction, in fact any KZ reduced matrix is also LLL reduced. For more detail
+on how the LLL reduction and KZ reduction are related, again see
+\cite{AgrEVZ02}. The LLL reduction has been proven to converge in a finite
+number of steps and to have average case polynomial complexity when the basis
+vectors are normally distributed inside the unit sphere in $\mathbb{R}^m$. There
+are also results that bound the complexity based on the condition number of the
+input matrix. For more details on these bounds and the complexity of LLL
+reduction, see \cite{WubSJM11}.
 
 In \cite{XieCB11}, it was found that many of the operations used in the original LLL algorithm are not always required as they do not affect the search process when the SE algorithm is used. The new reduction that results from applying only a subset of the operations is called the partial LLL reduction.
 
@@ -978,23 +1010,55 @@ R\\
 where $Q = [Q_1, Q_2] \in \mathbb{R}^{m \times m} $ is orthogonal, $R$ is upper triangular, and $Z \in \mathbb{Z}^{n \times n}$ is unimodular. After this $QRZ$ decomposition, the matrix $R$ is LLL reduced i.e.,
 
 \begin{align} \label{eq:LLLConditions1}
-&\left | r_{k-1,j} \right | \le \frac{1}{2} \left | r_{k-1,k-1} \right | \\
+&\left | r_{k-1,j} \right | \le \frac{1}{2} \left | r_{k-1,k-1} \right |, \quad
+j = k:n, k=2:n \\
 \label{eq:LLLConditions2}
-&\delta r_{k-1,k-1}^2 \le r_{k-1,k}^2 + r_{k,k}^2 \\
-&j = k:n, k=2:n
+&\delta r_{k-1,k-1}^2 \le r_{k-1,k}^2 + r_{k,k}^2
 \end{align}
 
-From \eqref{eq:LLLConditions1} and \eqref{eq:LLLConditions2} we can easily obtain the following inequality:
+From \eqref{eq:LLLConditions1} which is known as the ``size reduction''
+condition and \eqref{eq:LLLConditions2} which is called the ``Lovasz''
+condition, we can easily obtain the following inequality:
 \begin{equation} \label{eq:LLLdiagonal}
 \left | r_{k-1,k-1} \right | \le \frac{2}{\sqrt{4\delta -1}}\left | r_{k,k} \right |.
 \end{equation}
 
-The parameter $\delta$ can range from $1/4, \dots , 1$. Looking at \eqref{eq:LLLdiagonal}, we can obtain some sense of why using a LLL reduced matrix $R$ in the search process should yield a performance improvement. In many applications, we use $\delta=1$, this is the maximum value for $\delta$ and forces the most strict ordering of the diagonal. From here on when we discuss the LLL algorith, we will assume $\delta = 1$. We know from previous discussion about the box constrained reductions that it is desirable to have large diagonal elements, with the largest possible diagonal elements toward the end, $|r_{11}| <, \dots,< |r_{nn}|$. This allows us to prune the search tree at higher levels without wasting computational effort on suboptimal solutions. Unfortunately this ordering is not always possible to obtain. The equation \eqref{eq:LLLdiagonal} gives us a guarantee about the relative sizes of the diagonal elements.
+The parameter $\delta$ can range from $1/4, \dots , 1$. Looking at
+\eqref{eq:LLLdiagonal}, we can obtain some sense of why using a LLL reduced
+matrix $R$ in the search process should yield a performance improvement. In many
+applications, we use $\delta=1$, this is the maximum value for $\delta$ and
+forces the most strict ordering of the diagonal. From here on when we discuss
+the LLL algorithm, we will assume $\delta = 1$.
+
+We know from previous discussion
+about the box constrained reductions that it is desirable to have large diagonal
+elements, with the largest possible diagonal elements toward the end, $|r_{11}|
+<, \dots,< |r_{nn}|$. Also, we would like the diagonal elements to be
+relatively close to one another, meaning the difference between the smallest
+and largest element should not be too big and the super diagonal elements
+should be as small as possible. For further explanation of how these properties
+affect the search process and how they relate to the LLL algorithm see
+\cite{XiAC11}.
+
+These properties allows us to prune the search
+tree at higher levels without wasting computational effort on suboptimal
+solutions. Unfortunately these properties are not always possible to obtain.
+However, the equation \eqref{eq:LLLdiagonal} does give us a guarantee about the
+relative sizes of the diagonal elements and the LLL conditions give some bounds
+on the size of the super diagonal.
 
 \vsp \subsection{Computing the LLL Reduction}
-This section will give details on how the LLL reduction, or $QRZ$ decomposition described above can be computed. It is interesting to note that this decomposition is not unique, other methods to compute it exist and may yield different but equally valid results.
 
-\vsp \subsubsection{Integer Gauss Transformations} \label{subsec:IGT}
+This section will give details on how the LLL reduction described above can be
+computed. It is interesting to note that the LLL reduction is not unique, other
+methods to compute it exist and may yield different but still valid results.
+
+In the following paragraphs the matrix operations that will be used by the LLL
+reduction will be described. Once the operations which the reduction uses have
+been presented, the LLL algorithm will be described and pseudocode given to
+compute it.
+
+\vsp \subsubsection{Integer Gauss Transformations.} \label{subsec:IGT}
 
 One special type of unimodular matrix is an integer Gauss transformation (IGT), which can be defined as follows:
 \begin{equation}
@@ -1009,22 +1073,54 @@ The overall effect of this transformation on the matrix R is that the $j^{th}$ c
 \begin{equation}
 \bar{r}_{kj} = r_{kj} - \mu r_{ki}, \quad k=1 , \dots, i.
 \end{equation}
-If we take $\mu = \lfloor \frac{r_{ij}}{r_{ii}} \rceil$, it should be clear that $|\bar{r}_{ij}| \le \frac{1}{2}|r_{ii}|$, so given a particular column in an upper triangular matrix $R$, we should be able to use $m$ IGTs to satisfy the first condition given in equation \eqref{eq:LLLConditions1}.
+If we take $\mu = \lfloor \frac{r_{ij}}{r_{ii}} \rceil$, it should be clear that
+$|\bar{r}_{ij}| \le \frac{1}{2}|r_{ii}|$, so given a particular column $j$ in an
+upper triangular matrix $R$, we should be able to use $j-1$ IGTs to satisfy the
+size reduction condition \eqref{eq:LLLConditions1}.
 
-\vsp \subsubsection{Permutations} \label{subsec:Perm}
-After doing IGTs, there is no guarantee that the second LLL condition, \eqref{eq:LLLConditions2} will be satisfied, often it is not. In this case, we must permute the columns of $R$ in order for the condition to hold. If $|r_{k-1,k-1}| > \sqrt{r^2_{k-1,k} + r^2_{k,k}}$, then we will permute columns $k$ and $k-1$. After performing the column permutation, $R$ will no longer be upper triangular. To restore the upper triangular structure of $R$, we can apply Givens rotations as we did in section \ref{sec:BILSReduction}. In this case however, only one Givens rotation will be required to zero a single sub diagonal element.
+\vsp \subsubsection{Permutations.} \label{subsec:Perm}
+After doing IGTs, there is no guarantee that the Lovasz condition,
+\eqref{eq:LLLConditions2} will be satisfied, often it is not. In this case, we
+must permute the columns of $R$ in order for the condition to hold. If
+$|r_{k-1,k-1}| > \sqrt{r^2_{k-1,k} + r^2_{k,k}}$, then we will permute columns
+$k$ and $k-1$. After performing the column permutation, $R$ will no longer be
+upper triangular. To restore the upper triangular structure of $R$, we can apply
+Givens rotations as we did in section \ref{sec:BILSReduction}. In this case
+however, only one Givens rotation will be required to zero a single sub diagonal
+element.
 
-After the permutation, the second condition, \eqref{eq:LLLConditions2} will hold. After performing this permutation, we also have the guarantee that value of $|r_{kk}|$ will increase and $|r_{k-1,k-1}|$ will decrease, therefore the resulting matrix will have something closer to an increasing diagonal.
+After the permutation, the Lovasz condition, \eqref{eq:LLLConditions2} will
+hold. After performing this permutation, we also have the guarantee that value
+of $|r_{kk}|$ will increase and $|r_{k-1,k-1}|$ will decrease, therefore the
+resulting matrix will have something closer to an increasing diagonal.
 
-\vsp \subsubsection{LLL Reduction}
-By putting subsections \ref{subsec:IGT} and \ref{subsec:Perm} together, we can devise an algorithm to satisfy both of the LLL conditions \eqref{eq:LLLConditions1} and \eqref{eq:LLLConditions2}. We will start by letting $H = QR$ denote the $QR$ decomposition of the matrix $H$. We will work with the columns of $R$ from right to left, starting with column $k=n$. The idea is to move to the left so that at any step $k$, the columns $k+1:n$ satisfy the LLL conditions. In the $k^{th}$ step, we start by using IGTs to make sure column $k$ satisfies the first LLL condition \eqref{eq:LLLConditions1}, $|r_{ik}| < \frac{1}{2}|r_{ii}|, \quad i = k-1:-1:1$. If the second inequality in \ref{eq:LLLConditions2} holds, we move to column $k-1$, otherwise column $k-1$ and $k$ are swapped with a column permutation and $R$ is brought back to upper triangular as described in \ref{subsec:Perm}. After applying a column permutation, we must move back to column $k+1$ since it is possible that the permutation we applied will cause the conditions on the previous column to no longer be satisfied. When we reach column $1$, we know the matrix $R$ must be LLL reduced. Algorithm \ref{alg:LLL} describes this process. It is also know that this algorithm will terminate in a finite number of steps, for more detail and an alternate explanation of the process, see the original paper \cite{LenLL82}.
+By using the above permutations and IGTs together, we can devise an algorithm to
+satisfy both of the LLL conditions \eqref{eq:LLLConditions1} and
+\eqref{eq:LLLConditions2}. We will start by letting $H=[Q_1, Q_2] \bmx R \\ 0
+\emx$ denote the $QR$ decomposition of the matrix $H$. We will work with the
+columns of $R$ from right to left, starting with column $k=n$. The idea is to
+move to the left so that at any step $k$, the columns $k+1:n$ satisfy the LLL
+conditions. In the $k^{th}$ step, we start by using IGTs to make sure column $k$
+satisfies the size reduction condition \eqref{eq:LLLConditions1}, $|r_{ik}| <
+\frac{1}{2}|r_{ii}|, \quad i = k-1:-1:1$. If the Lovasz conidtion in
+\ref{eq:LLLConditions2} holds, we move to column $k-1$, otherwise column $k-1$
+and $k$ are swapped with a column permutation and $R$ is brought back to upper
+triangular as described in \ref{subsec:Perm}. After applying a column
+permutation, we must move back to column $k+1$ since it is possible that the
+permutation we applied will cause the conditions on the previous column to no
+longer be satisfied. When we reach column $1$, we know the matrix $R$ must be
+LLL reduced. Algorithm \ref{alg:LLL} describes this process. As mentioned
+previously in \ref{subsec:Reductions}, in theory this algorithm terminates in a
+finite number of iterations (although this has not been proven for floating
+point arithmetic). There are also some bounds on the complexity, for more
+detail on the complexity and convergence, see \cite{WubSJM11}.
 
 \begin{algorithm}
 \caption{LLL Algorithm - Returns R the LLL reduced upper triangular matrix and Z a product of IGTs and permutations}
 \label{alg:LLL}
 \begin{algorithmic}[1]
 \STATE Compute the QR decomposition of $H$: $\bsmx Q_1^T \\ Q_2^T \esmx H= \bsmx R\\ 0 \esmx$
-\STATE $Z := n \times n$ Identity matrix
+\STATE $Z := I_n$
 \STATE $k := n$
 \WHILE{$k \ge 2$}
 	\IF{$k > n$}
@@ -1032,9 +1128,8 @@ By putting subsections \ref{subsec:IGT} and \ref{subsec:Perm} together, we can d
 	\ENDIF
 	\STATE Compute IGTs so that column $k$ satisfies $|r_{ik}| < \frac{1}{2}|r_{ii}|, \quad i = k-1:-1:1$, apply the IGTs 		to Z and R
 	\IF{$r_{k,k}^2 + r_{k-1,k}^2 < r_{k-1,k-1}^2$}
-		\STATE $P := $ Permutation matrix to swap column $k$ and $k-1$
-		\STATE $R := RP$
-		\STATE $Z := ZP$
+		\STATE Swap columns $k$ and $k-1$ in R
+		\STATE Swap columns $k$ and $k-1$ in Z
 		\STATE $k := k+1$
 	\ELSE
 		\STATE $k := k-1$
@@ -1048,20 +1143,46 @@ In subsection \ref{subsec:SW}, the motivation for the SW algorithm was given. Wh
 
 Applying the SW or CH algorithm directly to the matrix $H$ however may yield results that are much worse than those given by LLL on average. The reason for this is that the SW algorithm only reorders a given set of basis vectors in an attempt to optimize the ordering for the search. The LLL algorithm actually finds a new, better set of basis vectors (shorter and more orthogonal) and a reasonably good ordering for those vectors. See Figure \ref{fig:latticeBasis} for a picture of what this may look like. The LLL algorithm however has no knowledge of the input vector $y$, since we have seen that the optimal ordering for the columns of $R$ depends on $y$, it is reasonable to assume that we should be able to find better column orderings for the search process than the one which LLL gives.
 
-The basic idea behind the proposed solution is simple, apply the LLL reduction to find a new set of basis vectors, then apply the new reduction strategy given in subsection \ref{subsec:newReduction} to re-order the basis vectors. We will call this reduction strategy ``LLL+PERMU'' from here on for convenience. Suppose we have $H=QRZ$. Unfortunately after applying the permutations, the LLL conditions in the new upper triangular matrix $VRP$ may no longer be satisfied. Whether the search will be faster for $VRP$ or $R$ seems to be hard to predict consistently. It depends both on the matrices and the vector $y$ (which has a random component). Numerical experiments indicate that when the matrix $H$ is generated in some ways, and the standard deviation of the noise is within a certain range, we should apply the permutations, but not when $H$ is generated in some other ways, or when the noise is too high. The performance improvement in the search process can be quite significant on average for some practical cases, therefore further investigation into this reduction strategy is needed.
+The basic idea behind the proposed solution is simple, apply the LLL reduction
+to find a new set of basis vectors, then apply the new reduction strategy given
+in subsection \ref{subsec:newReduction} to re-order the basis vectors. We will
+call this reduction strategy ``LLL+PERMU'' from here on for convenience. Suppose
+we have a matrix $R$ which comes from the LLL reduction of some $H$, e.g.,
+$$\begin{bmatrix}
+Q_1^T\\ 
+Q_2^T
+\end{bmatrix}
+HZ = 
+\begin{bmatrix}
+R\\ 
+0
+\end{bmatrix}.$$
+
+Unfortunately after applying the permutations, the LLL
+conditions in the new upper triangular matrix $VRP$ may no longer be satisfied.
+Whether the search will be faster for $VRP$ or $R$ seems to be hard to predict
+consistently. It depends both on the matrices and the vector $y$ (which has a
+random component). Numerical experiments indicate that when the matrix $H$ is
+generated in some ways, and the standard deviation of the noise is within a
+certain range, we should apply the permutations, but not when $H$ is generated
+in some other ways, or when the noise is too high. The performance improvement
+in the search process can be quite significant on average for some practical
+cases, therefore further investigation into this reduction strategy is needed.
 
 Recall the Babai point from Chapter \ref{chap:SESearch}, denote the Babai point by the vector $z_0$. This is the first point found during the SE search process. The residual $$\left \| Rz_0 - \bar{y} \right \|^2_2$$ defines the initial radius of the search process. The number of nodes that the SE search will visit in the search tree is strongly related to the initial radius, the ordering of the columns and the shape of the lattice (the shape of the lattice defines how many integer points will be within the sphere defined by the radius). It is obvious how the initial radius and shape of the lattice relate to the search process, a smaller radius for a fixed lattice results in a smaller search space. If the lattice points are densely packed, even a small sphere radius could include many of them. To see this, again consider Figure \ref{fig:latticeBasis}. Looking at the ``Babai Point Radius'' in the figure, we can see that there are many potential solutions that lie within it, these would all be valid candidate solutions if we had started with the ``Babai Point Radius'' as our initial radius. If this initial radius had been smaller, there would be fewer potential solutions and therefore the search space would be smaller as well.
 
-We will usually obtain a different Babai point after applying permutations to the design matrix $H$ (or equivalently $R$). Since we know that the search time is related to the initial radius which is defined by the Babai point, one way to estimate whether the search process will proceed faster before or after permutations is to compare the initial radius in both cases. Figure \ref{fig:LLLvsPermuBabai} shows such a comparison for $200$ matrices $H \in \mathbb{R}^{50 \times 50}$ generated randomly with their elements picked from a standard normal distribution. The elements in the vectors $x \in \mathbb{Z}^n$ were picked uniformly between $-10 , \dots, 10$ and the vector $y$ was generated as $y = Hx + v$, where $v$ is normally distributed with mean $0$ and standard deviation $0.5$ in this case.
-
-\begin{figure}
-\centering
-\includegraphics[width=6in,height=3in]{lllvslllpermubabai.png}
-\caption{LLL Reduction vs LLL+PERMU. Residual from the Babai points.}
-\label{fig:LLLvsPermuBabai}
-\end{figure}
-
-Looking at Figure \ref{fig:LLLvsPermuBabai}, we can see that after permutations, the Babai point in this case is at least as good as the one before permutation. Often it is significantly better. For cases where the Babai point is better, we can choose to use the permuted $R$ for the search process. Numerical results comparing this strategy to performing the search on a LLL reduced matrix can be found in section \ref{sec:ILSReductionResults}.
+We will usually obtain a different Babai point after applying permutations to
+the design matrix $H$ (or equivalently $R$). Since we know that the search time
+is related to the initial radius which is defined by the Babai point, one way to
+estimate whether the search process will proceed faster before or after
+permutations is to compare the initial radius in both cases. Figure
+\ref{fig:LLLvsPermuBabai} shows such a comparison. Looking at Figure
+\ref{fig:LLLvsPermuBabai}, we can see that after permutations, the Babai point
+in this case is at least as good as the one before permutation. Often it is
+significantly better. For cases where the Babai point is better, we can choose
+to use the permuted $R$ for the search process. Numerical results comparing this
+strategy to performing the search on a LLL reduced matrix can be found in
+section \ref{sec:ILSReductionResults}.
 
 Unforunately, there are certain special types of ill conditioned problems where the above strategy does not work very well. Even though the new matrix $R$ after permutations gives a better Babai point, the search process visits more nodes. Some characteristics and examples of such problems are given in section \ref{sec:ILSReductionResults}. In these cases, we may use the permutation strategy just to help set an initial search radius $\beta$ as was discussed in Chapter \ref{chap:SESearch}. Then we may perform the search on the LLL reduced matrix $R$.
 
@@ -1069,6 +1190,22 @@ Since we only apply orthogonal transformations to the matrix $R$ and vector $y$ 
 
 \vsp \subsection{OILS Reduction Results} \label{sec:ILSReductionResults}
 In this subsection, some results will be presented to compare the speed of the search process after applying the reduction strategies presented previously in this chapter. We will compare the LLL reduction, LLL reduction plus permutations (LLL+PERMU), and the LLL reduction using the initial radius $\beta$ given by the permutation strategy (LLL+BABAI).
+
+Figure \ref{fig:LLLvsPermuBabai} which was discussed in the previous subsection
+shows the residual to the Babai point before and after the PERMU strategy has
+been applied. This figure shows results for $200$ matrices $H \in\mathbb{R}^{50
+\times 50}$ generated randomly with their elements picked from a standard normal
+distribution. The elements in the vectors $x \in \mathbb{Z}^n$ were picked
+uniformly between $-10 , \dots, 10$ and the vector $y$ was generated as $y = Hx
++ v$, where $v$ is normally distributed with mean $0$ and standard deviation
+$0.5$ in this case.
+
+\begin{figure}
+\centering
+\includegraphics[width=6in,height=3in]{lllvslllpermubabai.png}
+\caption{LLL Reduction vs LLL+PERMU. Residual from the Babai points.}
+\label{fig:LLLvsPermuBabai}
+\end{figure}
 
 Figure \ref{fig:LLLvsPermuvsBabai} shows the three reduction strategies compared when run on normally distributed, random matrices $H$ of sizes from $35 \times 35$ to $50 \times 50$. The horizontal axis displays varying values for $\sigma$ which is the noise parameter. The vertical axis is the average time taken for the search process over $200$ runs where on each run a new matrix $H$, vector $x$ and noise vector $v$ were generated.
 
@@ -1079,40 +1216,73 @@ Figure \ref{fig:LLLvsPermuvsBabai} shows the three reduction strategies compared
 \label{fig:LLLvsPermuvsBabai}
 \end{figure}
 
-Looking at Figure \ref{fig:LLLvsPermuvsBabai}, we see that when the noise is small, the search process is too fast for any extra reduction to make a difference. As the noise becomes larger, LLL+PERMU starts to offer a significant advantage in terms of search time. LLL+PERMU and LLL+BABAI perform similarly at moderate levels of noise in this case. As the noise rises further, LLL+PERMU actually becomes worse than LLL, however LLL+BABAI maintains a significant advantage in all cases.
-
-\begin{table} 
-\caption{Success Rate (out of 200) for LLL Reduction on various problem sizes and levels of noise.}
- \label{tab:successRateLLL}
-\begin{tabular}{|l|l|l|l|l|l|l|l|}
-\hline
- &              $0.05$ & $0.1$ & $0.3$ & $0.4$ & $0.5$ & $0.7$ & $0.8$ \\ \hline
-$35 \times 35$& $200$  & $200$ & $199$ & $192$ & $178$ & $89$  & $44$\\ \hline
-$40 \times 40$& $200$  & $200$ & $200$ & $196$ & $175$ & $75$  & $45$\\ \hline
-$45 \times 45$& $200$  & $200$ & $200$ & $193$ & $175$ & $79$  & $42$\\ \hline
-$50 \times 50$& $200$  & $200$ & $200$ & $196$ & $167$ & $89$  & $44$\\
-\hline
-\end{tabular}
-\end{table}
-
+Looking at Figure \ref{fig:LLLvsPermuvsBabai}, we see that when the noise is
+small, the search process is too fast for any extra reduction to make a
+difference. As the noise becomes larger, LLL+PERMU starts to offer a significant
+advantage in terms of search time. LLL+PERMU and LLL+BABAI perform similarly at
+moderate levels of noise in this case. As the noise rises further, LLL+PERMU
+actually becomes worse than LLL, however LLL+BABAI maintains a significant
+advantage in all cases.
 
 \begin{table}
-\caption{Success Rate (out of 200) for LLL+PERMU on various problem sizes and levels of noise.}
-\label{tab:successRatePermu}
-\begin{tabular}{|l|l|l|l|l|l|l|l|}  
+\caption{Success Rate (out of 200) for LLL and LLL+PERMU on various problem
+sizes and levels of noise.}
+\label{tab:successRates}
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|}
 \hline
- &              $0.05$ & $0.1$ & $0.3$ & $0.4$ & $0.5$ & $0.7$ & $0.8$ \\ \hline
-$35 \times 35$& $200$  & $200$ & $200$ & $200$ & $198$ & $132$  & $76$\\ \hline
-$40 \times 40$& $200$  & $200$ & $200$ & $200$ & $198$ & $120$  & $77$\\ \hline
-$45 \times 45$& $200$  & $200$ & $200$ & $200$ & $194$ & $141$  & $86$\\ \hline
-$50 \times 50$& $200$  & $200$ & $200$ & $199$ & $196$ & $137$  & $94$\\
+&               \multicolumn{2}{|l|}{$35 \times 35$} & \multicolumn{2}{|l|}{$40
+\times 40$} &\multicolumn{2}{|l|}{$45 \times 45$} & \multicolumn{2}{|l|}{$50
+\times 50$} \\ \hline
+&               LLL & LLL+PERMU & LLL & LLL+PERMU & LLL & LLL+PERMU & LLL &
+LLL+PERMU \\ \hline
+$0.05$&         $200$ & $200$ & $200$ & $200$ & $200$ & $200$ & $200$ & $200$ 
+\\ \hline        
+$0.1$&           $200$ & $200$ & $200$ & $200$ & $200$ & $200$ & $200$ & $200$
+\\ \hline
+$0.3$&           $199$ & $200$ & $200$ & $200$ & $200$ & $200$ & $200$ & $200$
+\\ \hline
+$0.4$&           $192$ & $200$ & $196$ & $200$ & $193$ & $200$ & $196$ & $199$
+\\ \hline
+$0.5$&           $178$ & $198$ & $175$ & $198$ & $175$ & $194$ & $167$ & $196$
+\\ \hline
+$0.7$&            $89$ & $132$ &  $75$ & $120$ & $79$  & $141$ & $89$  & $137$
+\\ \hline
+$0.8$&            $44$ &  $76$ &  $45$ &  $77$ & $42$  & $86$  & $44$  & $94$
+\\ 
 \hline
 \end{tabular}
 \end{table}
 
-Tables \ref{tab:successRateLLL} and \ref{tab:successRatePermu} show how many times out of $200$ runs that the Babai point was equal to the true solution $x$. If we take this as a percentage it is known as the ``Success Rate''. This is an important number because many practical applications may decide not to solve the OILS problem completely and instead just use the Babai point as an estimate at the solution. Here we see that the LLL+PERMU strategy can offer a significantly better success rate in all cases tested; even in cases where the search process may be slower on average if we use the permuted $R$.
+Table \ref{tab:successRates} shows how many times out of $200$ runs that the
+Babai point was equal to the true solution $x$ for both LLL reduction and
+LLL+PERMU. The vertical axis of the table shows the various levels of noise,
+$\sigma$, and the horizontal gives the different problem sizes. If we take this
+as a percentage it is known as the ``Success Rate''. This is an important number
+because many practical applications may decide not to solve the OILS problem
+completely and instead just use the Babai point as an estimate at the solution.
+Here we see that the LLL+PERMU strategy can offer a significantly better success
+rate in all cases tested; even in cases where the search process may be slower
+on average if we use the permuted $R$.
 
-It is not fully clear why LLL+PERMU fails to perform well in the search process when the noise is high. One reason is because the matrix $R$ after the permutations is usually further from a LLL reduced matrix when the noise is high as opposed to when the noise is low. This has been confirmed through numerical experiments where when the second inequality in \ref{eq:LLLConditions2} was not satisfied, the difference $r_{k-1,k-1}^2 - (r_{k,k}^2 + r_{k-1,k}^2)$ was added to a sum. For a LLL reduced matrix this sum taken from $1 , \dots, n$ should be $0$, as the matrix becomes further from LLL reduced the sum will increase. A rough explanation as to why this happens is as follows; when the noise is very low the permutation algorithm finds the column permutations that maximize the diagonal entries in the order from $n , \dots, 1$. As the noise rises, this property is lost. To see this consider the motivation for the CH algorithm in \ref{subsec:CH} and consider what happens when $y = Hx$. One goal of the LLL reduction is also to maximize the diagonal entries in order from $n , \dots, 1$ in a way, it however also considers the off diagonal and previous diagonal entry. When the noise is lower, the permutation algorithm is likely to do fewer permutations since the ordering is more likely to already be somewhat satisfied since we started with a LLL reduced matrix. Therefore the matrix is likely to remain closer to a LLL reduced matrix.
+It is not fully clear why LLL+PERMU fails to perform well in the search process
+when the noise is high. One reason is because the matrix $R$ after the
+permutations is usually further from a LLL reduced matrix when the noise is high
+as opposed to when the noise is low. This has been confirmed through numerical
+experiments where when the Lovasz condition in \ref{eq:LLLConditions2} was not
+satisfied, the difference $r_{k-1,k-1}^2 - (r_{k,k}^2 + r_{k-1,k}^2)$ was added
+to a sum. For a LLL reduced matrix this sum taken from $1 , \dots, n$ should be
+$0$, as the matrix becomes further from LLL reduced the sum will increase. A
+rough explanation as to why this happens is as follows; when the noise is very
+low the permutation algorithm finds the column permutations that maximize the
+diagonal entries in the order from $n , \dots, 1$. As the noise rises, this
+property is lost. To see this consider the motivation for the CH algorithm in
+\ref{subsec:CH} and consider what happens when $y = Hx$. One goal of the LLL
+reduction is also to maximize the diagonal entries in order from $n , \dots, 1$
+in a way, it however also considers the off diagonal and previous diagonal
+entry. When the noise is lower, the permutation algorithm is likely to do fewer
+permutations since the ordering is more likely to already be somewhat satisfied
+since we started with a LLL reduced matrix. Therefore the matrix is likely to
+remain closer to a LLL reduced matrix.
 
 The next set of results demonstrates a case where the permutation strategy should not be used. In figures \ref{fig:lllvspermubabaiill} and \ref{fig:lllvspermuvsbabaiill} the matrix $H$ is generated by first generating two random, normally distributed matrices $A$ and $B$. Then the $QR$ decomposition of each matrix is taken, so we will have $A = Q_AR_A$ and $B = Q_BR_B$. Next we generate a diagonal matrix $D$, where $d_{ii} = 10^{-\frac{(i-1)*4}{(n-1)}}$. Recalling that the condition number of a matrix is the first singular value divided by the last one; we will construct a  matrix with condition number $10^4$ by forming the product of the SVD, $H = Q_ADQ_B$. We generate $x$ and $y$ in the same way as the previous results.
 

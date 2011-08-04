@@ -4,9 +4,9 @@ Introduction
 	Integer Least Squares/Box Constrained Integer Least Sqaures Introduction
 
 Search Process
-	Schnorr-Euchner Unconstrained and Constrained Algorithms
-		Modifications - Chang/Han constrained, Lower Bound, Initial Radius (review literature for more notable modifications)
-	Best First Search/Best First Search Constrained
+	Schnorr-Euchner Algorithm
+		Modifications - Chang/Han constrained, Lower Bound, (review literature for more notable modifications to DFS)
+	Best First Search Constrained/Unconstrained
 	Combined Best First/Depth First Search
 
 Reduction

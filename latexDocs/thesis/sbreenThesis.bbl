@@ -12,16 +12,27 @@ Lutz~Lampe Andreas~Schenk, Robert~Fischer.
   of dpsk.
 \newblock {\em IEEE Communications Letters}, 13:465--467, 2009.
 
-\bibitem{Bor10}
-Mazen~Al Borno.
-\newblock Reduction in solving some integer least squares problems.
-\newblock Master's thesis, McGill University, 2010.
+\bibitem{Bjo96}
+{\AA}.~Bj{\"o}rck.
+\newblock {\em Numerical Methods for Least Squares Problem}.
+\newblock Philadelphia: SIAM, 1996.
+
+\bibitem{BreC11}
+Stephen Breen and Xiao-Wen Chang.
+\newblock Column reordering for box-constrained integer least squares problems.
+\newblock In {\em IEEE Globecom 2011}, 2011.
 
 \bibitem{ChaH05}
 X.-W. Chang and Q.~Han.
 \newblock Solving box-constrained integer least-squares problems.
 \newblock {\em IEEE Transactions on Wireless Communications}, 7(1):277--287,
   2008.
+
+\bibitem{ChaP07}
+X.-W. Chang and C.C. Paige.
+\newblock Euclidean distances and least squares problems for a given set of
+  vectors.
+\newblock {\em Applied Numerical Mathematics}, 57:1240--1244, 2007.
 
 \bibitem{StuBF07}
 Wolfgang~Fichtner Christoph~Studer, Andreas~Burg.
@@ -48,16 +59,25 @@ T.~Fukatani, R.~Matsumoto, and T.~Uyematsu.
 \newblock In {\em Proceedings of International Symposium on Information Theory
   and its Applications}, pages 34--38, Parma, Italy, October 2004.
 
-\bibitem{HasV05}
-Babak Hassibi and Haris Vikalo.
-\newblock On the sphere-decoding algorithm i. expected complexity.
-\newblock In {\em IEEE Transactions on Signal Processing}, volume~53, August
-  2005.
+\bibitem{HanPS11}
+Guillaume Hanrot, Xavier Pujol, and Damien Stehlé.
+\newblock Algorithms for the shortest and closest lattice vector problems.
+\newblock In {\em International Workshop on Coding and Cryptology}, 2011.
+
+\bibitem{Jan04}
+Mohinder Jankiraman.
+\newblock {\em Space-Time Codes and MIMO Systems}.
+\newblock Artech House Publishers, 2004.
 
 \bibitem{LenLL82}
 A.K. Lenstra, J.H.W. Lenstra, and L.~Lovasz.
 \newblock Factoring polynomials with rational coefficients.
 \newblock {\em Mathematische Annalen}, 261:515--534, 1982.
+
+\bibitem{Mic01}
+D.~Micciancio.
+\newblock The hardness of the closest vector problem with preprocessing.
+\newblock {\em IEEE Transactions on Information Theory}, 47:1212--1215, 2001.
 
 \bibitem{StoVH08}
 Babak~Hassibi Mihailo~Stojnic, Haris~Vikalo.
@@ -70,6 +90,12 @@ A.D. Murugan, H.~El Gamal, M.~O. Damen, and G.~Caire.
 \newblock A unified framework for tree search decoding: rediscovering the
   sequential decoder.
 \newblock {\em IEEE Transactions on Information Theory}, 52(3):933--953, 2006.
+
+\bibitem{Pho81}
+M.~Pohst.
+\newblock On the computation of lattice vectors of minimal length, successive
+  minima and reduced bases with applications.
+\newblock {\em ACM SIGSAM Bulletin}, 15:37--44, February 1981.
 
 \bibitem{SchE94}
 C.P. Schnorr and M.~Euchner.
@@ -92,6 +118,22 @@ Zucheng Zhou Jing~Wang Weiyu~Xu, Youzheng~Wang.
 D.~Wubben, R.~Bohnke, J.~Rinas, V.~Kuhn, and K.D. Kammeyer.
 \newblock Efficient algorithm for decoding layered space-time codes.
 \newblock {\em IEEE Electronics Letters}, 37(22):1348--1350, October 2001.
+
+\bibitem{WubSJM11}
+Dirk Wubben, Dominik Seethaler, Joakim Jalden, and Gerald Matz.
+\newblock Lattice reduction - a survey with applications in wireless
+  communications.
+\newblock {\em IEEE Signal Processing Magazine}, May:70--92, 2011.
+
+\bibitem{XieCB11}
+Xiaohu Xie, Xiao-Wen Chang, and Mazen~Al Borno.
+\newblock Partial lll reduction.
+\newblock In {\em IEEE Globecom}, 2011.
+
+\bibitem{Xu07}
+Guochang Xu.
+\newblock {\em GPS: theory, algorithms, and applications}.
+\newblock Springer-Verlag, 2007.
 
 \bibitem{DaiY08}
 Zhiyuan~Yan Yongmei~Dai.

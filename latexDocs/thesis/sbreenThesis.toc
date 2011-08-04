@@ -25,15 +25,14 @@
 \contentsline {subsection}{\numberline {3.1.6}New Algorithm}{36}
 \contentsline {section}{\numberline {3.2}OILS Reduction Algorithms}{37}
 \contentsline {subsection}{\numberline {3.2.1}Computing the LLL Reduction}{40}
-\contentsline {subsubsection}{Integer Gauss Transformations}{40}
-\contentsline {subsubsection}{Permutations}{40}
-\contentsline {subsubsection}{LLL Reduction}{41}
-\contentsline {subsection}{\numberline {3.2.2}New OILS Reduction}{41}
+\contentsline {subsubsection}{Integer Gauss Transformations.}{40}
+\contentsline {subsubsection}{Permutations.}{41}
+\contentsline {subsection}{\numberline {3.2.2}New OILS Reduction}{42}
 \contentsline {subsection}{\numberline {3.2.3}OILS Reduction Results}{45}
-\contentsline {chapter}{\numberline {4}Alternate Search Strategies}{51}
-\contentsline {section}{\numberline {4.1}Best First Search}{53}
-\contentsline {section}{\numberline {4.2}Controlling BFS Memory Usage}{56}
-\contentsline {section}{\numberline {4.3}Combining BFS and SE Search}{58}
-\contentsline {section}{\numberline {4.4}Search Strategy Results}{60}
-\contentsline {chapter}{\numberline {5}Conclusions and Future Work}{67}
-\contentsline {extrachapter}{References}{69}
+\contentsline {chapter}{\numberline {4}Alternate Search Strategies}{52}
+\contentsline {section}{\numberline {4.1}Best First Search}{54}
+\contentsline {section}{\numberline {4.2}Controlling BFS Memory Usage}{57}
+\contentsline {section}{\numberline {4.3}Combining BFS and SE Search}{59}
+\contentsline {section}{\numberline {4.4}Search Strategy Results}{61}
+\contentsline {chapter}{\numberline {5}Conclusions and Future Work}{68}
+\contentsline {extrachapter}{References}{70}
