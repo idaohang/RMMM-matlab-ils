@@ -1,0 +1,17 @@
+Lots of changes to test
+--This line, and those below, will be ignored--
+
+M    test.m~
+M    testReduction2.m
+M    test.m
+M    latexDocs/missfont.log
+M    latexDocs/bare_conf.log
+M    latexDocs/thesis/sbreenThesis.toc
+M    latexDocs/thesis/sbreenThesis.aux
+M    latexDocs/thesis/sbreenThesis.tex
+M    latexDocs/thesis/sbreenThesis.pdf
+M    latexDocs/thesis/sbreenThesis.log
+M    latexDocs/bare_conf.pdf
+M    testReduction.m
+A    testReduction3.m
+M    LLL/swap.m

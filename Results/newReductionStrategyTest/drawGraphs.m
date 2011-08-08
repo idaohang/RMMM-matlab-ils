@@ -1,5 +1,5 @@
-st=4;
-nd = 7;
+st=6;
+nd = 9;
 for i = st:nd
     subplot(2,2,i-st+1);
     plot(noises,mean(squeeze(time1(i,:,:))'),'-x',noises,mean(squeeze(time2(i,:,:))'),'-o',noises,mean(squeeze(time3(i,:,:))'),'--');    

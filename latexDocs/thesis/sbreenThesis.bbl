@@ -6,6 +6,11 @@ E.~Agrell, T.~Eriksson, A.~Vardy, and K.~Zeger.
 \newblock {\em IEEE Transactions on Information Theory}, 48(8):2201--2214,
   2002.
 
+\bibitem{AhoHU83}
+A.V. Aho, J.E. Hopcroft, and J.D. Ullman.
+\newblock {\em Data Structures and Algorithms}.
+\newblock Addison-Wesley, 1983.
+
 \bibitem{SchFL09}
 Lutz~Lampe Andreas~Schenk, Robert~Fischer.
 \newblock A stopping radius for the sphere decoder and its application to msdd
@@ -64,10 +69,20 @@ Guillaume Hanrot, Xavier Pujol, and Damien Stehlé.
 \newblock Algorithms for the shortest and closest lattice vector problems.
 \newblock In {\em International Workshop on Coding and Cryptology}, 2011.
 
+\bibitem{Han11}
+Sevan Hanssian.
+\newblock Successs rates of integer parameter estimates in linear models.
+\newblock Master's thesis, McGill University, School of Computer Science, 2011.
+
 \bibitem{Jan04}
 Mohinder Jankiraman.
 \newblock {\em Space-Time Codes and MIMO Systems}.
 \newblock Artech House Publishers, 2004.
+
+\bibitem{Ku11}
+Wen-Yang Ku.
+\newblock Lattice basis reduction and integer least squares problems.
+\newblock Master's thesis, McGill University, School of Computer Science, 2011.
 
 \bibitem{LenLL82}
 A.K. Lenstra, J.H.W. Lenstra, and L.~Lovasz.

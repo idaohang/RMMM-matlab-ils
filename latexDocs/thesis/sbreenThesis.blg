@@ -2,8 +2,6 @@ This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
 The top-level auxiliary file: sbreenThesis.aux
 The style file: plain.bst
 Database file #1: ../ILS.bib
-Warning--I didn't find a database entry for "Han11"
-Warning--I didn't find a database entry for "Ku11"
 Warning--I didn't find a database entry for "XiAC11"
 Too many commas in name 1 of "Weiyu Xu, Youzheng Wang, Zucheng Zhou, Jing Wang" for entry XuWZW04
 while executing---line 1049 of file plain.bst
@@ -11,45 +9,45 @@ Warning--can't use both author and editor fields in Jan04
 Too many commas in name 1 of "Weiyu Xu, Youzheng Wang, Zucheng Zhou, Jing Wang" for entry XuWZW04
 while executing---line 1090 of file plain.bst
 Warning--can't use both author and editor fields in Xu07
-You've used 25 entries,
+You've used 28 entries,
             2118 wiz_defined-function locations,
-            674 strings with 7867 characters,
-and the built_in function-call counts, 8060 in all, are:
-= -- 783
-> -- 334
+            685 strings with 8161 characters,
+and the built_in function-call counts, 8730 in all, are:
+= -- 849
+> -- 366
 < -- 3
-+ -- 139
-- -- 108
-* -- 551
-:= -- 1334
-add.period$ -- 75
-call.type$ -- 25
-change.case$ -- 126
++ -- 152
+- -- 118
+* -- 582
+:= -- 1464
+add.period$ -- 84
+call.type$ -- 28
+change.case$ -- 139
 chr.to.int$ -- 0
-cite$ -- 27
-duplicate$ -- 320
-empty$ -- 691
-format.name$ -- 108
-if$ -- 1683
+cite$ -- 30
+duplicate$ -- 348
+empty$ -- 741
+format.name$ -- 118
+if$ -- 1817
 int.to.chr$ -- 0
-int.to.str$ -- 25
-missing$ -- 28
-newline$ -- 128
-num.names$ -- 50
-pop$ -- 140
+int.to.str$ -- 28
+missing$ -- 30
+newline$ -- 143
+num.names$ -- 56
+pop$ -- 156
 preamble$ -- 1
-purify$ -- 104
+purify$ -- 115
 quote$ -- 0
-skip$ -- 201
+skip$ -- 219
 stack$ -- 0
-substring$ -- 547
-swap$ -- 53
+substring$ -- 562
+swap$ -- 54
 text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 94
+type$ -- 104
 warning$ -- 2
-while$ -- 80
-width$ -- 27
-write$ -- 270
+while$ -- 86
+width$ -- 30
+write$ -- 302
 (There were 2 error messages)
