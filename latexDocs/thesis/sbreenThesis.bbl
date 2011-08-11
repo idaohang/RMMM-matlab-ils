@@ -1,20 +1,20 @@
 \begin{thebibliography}{10}
 
 \bibitem{AgrEVZ02}
-E.~Agrell, T.~Eriksson, A.~Vardy, and K.~Zeger.
+E.~Agrell, T.~Eriksson, A.~Vardy, K.~Zeger.
 \newblock Closest point search in lattices.
 \newblock {\em IEEE Transactions on Information Theory}, 48(8):2201--2214,
   2002.
 
 \bibitem{AhoHU83}
-A.V. Aho, J.E. Hopcroft, and J.D. Ullman.
+A.V. Aho, J.E. Hopcroft, J.D. Ullman.
 \newblock {\em Data Structures and Algorithms}.
 \newblock Addison-Wesley, 1983.
 
 \bibitem{SchFL09}
-Lutz~Lampe Andreas~Schenk, Robert~Fischer.
-\newblock A stopping radius for the sphere decoder and its application to msdd
-  of dpsk.
+L.~Lampe, A.~Schenk, R.~Fischer.
+\newblock A stopping radius for the sphere decoder and its application to MSDD
+  of DPSK.
 \newblock {\em IEEE Communications Letters}, 13:465--467, 2009.
 
 \bibitem{Bjo96}
@@ -23,69 +23,69 @@ Lutz~Lampe Andreas~Schenk, Robert~Fischer.
 \newblock Philadelphia: SIAM, 1996.
 
 \bibitem{BreC11}
-Stephen Breen and Xiao-Wen Chang.
+S. Breen, X.-W. Chang.
 \newblock Column reordering for box-constrained integer least squares problems.
 \newblock In {\em IEEE Globecom 2011}, 2011.
 
 \bibitem{ChaH05}
-X.-W. Chang and Q.~Han.
+X.-W. Chang, Q.~Han.
 \newblock Solving box-constrained integer least-squares problems.
 \newblock {\em IEEE Transactions on Wireless Communications}, 7(1):277--287,
   2008.
 
 \bibitem{ChaP07}
-X.-W. Chang and C.C. Paige.
+X.-W. Chang, C.C. Paige.
 \newblock Euclidean distances and least squares problems for a given set of
   vectors.
 \newblock {\em Applied Numerical Mathematics}, 57:1240--1244, 2007.
 
 \bibitem{StuBF07}
-Wolfgang~Fichtner Christoph~Studer, Andreas~Burg.
+W.~Fichtner, C.~Studer, A.~Burg.
 \newblock A unification of ml-optimal tree-search decoders.
 \newblock In {\em In Proceedings of IEEE Signals, Systems and Computers}, 2007.
 
 \bibitem{Cli64}
-Randall~E. Cline.
+R.~E. Cline.
 \newblock Representations for the generalized inverse of a partitioned matrix.
 \newblock {\em Journal of the Society for Industrial and Applied Mathematics},
   12(3):588--600, September 1964.
 
 \bibitem{FosGVW99}
-G.~J. Foscini, G.~D. Golden, R.~A. Valenzuela, and P.~W. Wolniansky.
+G.~J. Foscini, G.~D. Golden, R.~A. Valenzuela, P.~W. Wolniansky.
 \newblock Simplified processing for high spectral efficiency wireless
   communication employing multi-element arrays.
 \newblock {\em IEEE Journal on Selected Areas in Communications},
   17(11):1841--1852, November 1999.
 
 \bibitem{FukMU04}
-T.~Fukatani, R.~Matsumoto, and T.~Uyematsu.
+T.~Fukatani, R.~Matsumoto, T.~Uyematsu.
 \newblock Two methods for decreasing the computational complexity of the {MIMO}
   {ML} decoder.
 \newblock In {\em Proceedings of International Symposium on Information Theory
   and its Applications}, pages 34--38, Parma, Italy, October 2004.
 
 \bibitem{HanPS11}
-Guillaume Hanrot, Xavier Pujol, and Damien Stehlé.
+G. Hanrot, X. Pujol, D. Stehlé.
 \newblock Algorithms for the shortest and closest lattice vector problems.
 \newblock In {\em International Workshop on Coding and Cryptology}, 2011.
 
 \bibitem{Han11}
-Sevan Hanssian.
+S. Hanssian.
 \newblock Successs rates of integer parameter estimates in linear models.
 \newblock Master's thesis, McGill University, School of Computer Science, 2011.
 
 \bibitem{Jan04}
-Mohinder Jankiraman.
+M. Jankiraman.
 \newblock {\em Space-Time Codes and MIMO Systems}.
 \newblock Artech House Publishers, 2004.
 
 \bibitem{Ku11}
-Wen-Yang Ku.
+W. Ku.
 \newblock Lattice basis reduction and integer least squares problems.
 \newblock Master's thesis, McGill University, School of Computer Science, 2011.
 
 \bibitem{LenLL82}
-A.K. Lenstra, J.H.W. Lenstra, and L.~Lovasz.
+A.K. Lenstra, J.H.W. Lenstra, L.~Lovasz.
 \newblock Factoring polynomials with rational coefficients.
 \newblock {\em Mathematische Annalen}, 261:515--534, 1982.
 
@@ -95,13 +95,13 @@ D.~Micciancio.
 \newblock {\em IEEE Transactions on Information Theory}, 47:1212--1215, 2001.
 
 \bibitem{StoVH08}
-Babak~Hassibi Mihailo~Stojnic, Haris~Vikalo.
+B.~Hassibi M.~Stojnic, H.~Vikalo.
 \newblock Speeding up the sphere decoder with h-infinity and sdp inspired lower
   bounds.
 \newblock {\em IEEE Transactions On Signam Processing}, 56:712--726, 2008.
 
 \bibitem{MurGDC06}
-A.D. Murugan, H.~El Gamal, M.~O. Damen, and G.~Caire.
+A.D. Murugan, H.~El Gamal, M.~O. Damen, G.~Caire.
 \newblock A unified framework for tree search decoding: rediscovering the
   sequential decoder.
 \newblock {\em IEEE Transactions on Information Theory}, 52(3):933--953, 2006.
@@ -113,45 +113,45 @@ M.~Pohst.
 \newblock {\em ACM SIGSAM Bulletin}, 15:37--44, February 1981.
 
 \bibitem{SchE94}
-C.P. Schnorr and M.~Euchner.
+C.P. Schnorr, M.~Euchner.
 \newblock Lattice basis reduction: improved practical algorithms and solving
   subset sum problems.
 \newblock {\em Mathematical Programming}, 66:181--199, 1994.
 
 \bibitem{SuW05}
-Karen Su and Ian~J. Wassell.
+K. Su, I. Wassell.
 \newblock A new ordering for efficient sphere decoding.
 \newblock In {\em IEEE International Conference on Communications}, volume~3,
   pages 1906--1910, 2005.
 
 \bibitem{XuWZW04}
-Zucheng Zhou Jing~Wang Weiyu~Xu, Youzheng~Wang.
+Z. Zhou J.~Wang Weiyu~Xu, Youzheng~Wang.
 \newblock A computationally efficient exact ml sphere decoder.
 \newblock In {\em Proceedings of IEEE Globecom 2004}, 2004.
 
 \bibitem{WubBRKK01}
-D.~Wubben, R.~Bohnke, J.~Rinas, V.~Kuhn, and K.D. Kammeyer.
+D.~Wubben, R.~Bohnke, J.~Rinas, V.~Kuhn, K.D. Kammeyer.
 \newblock Efficient algorithm for decoding layered space-time codes.
 \newblock {\em IEEE Electronics Letters}, 37(22):1348--1350, October 2001.
 
 \bibitem{WubSJM11}
-Dirk Wubben, Dominik Seethaler, Joakim Jalden, and Gerald Matz.
+D. Wubben, D. Seethaler, J. Jalden, G. Matz.
 \newblock Lattice reduction - a survey with applications in wireless
   communications.
 \newblock {\em IEEE Signal Processing Magazine}, May:70--92, 2011.
 
 \bibitem{XieCB11}
-Xiaohu Xie, Xiao-Wen Chang, and Mazen~Al Borno.
+X. Xie, X.-W. Chang, M.~A. Borno.
 \newblock Partial lll reduction.
 \newblock In {\em IEEE Globecom}, 2011.
 
 \bibitem{Xu07}
-Guochang Xu.
+G. Xu.
 \newblock {\em GPS: theory, algorithms, and applications}.
 \newblock Springer-Verlag, 2007.
 
 \bibitem{DaiY08}
-Zhiyuan~Yan Yongmei~Dai.
+Z.~Yan, Y.~Dai.
 \newblock Memory-constrained ml-optimal tree search detection.
 \newblock In {\em In Proceedings of IEEE Information Sciences and Systems},
   2008.

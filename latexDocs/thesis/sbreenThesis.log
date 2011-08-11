@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.14)  8 AUG 2011 17:23
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.14)  11 AUG 2011 18:16
 entering extended mode
  %&-line parsing enabled.
 **sbreenThesis.tex
@@ -535,6 +535,269 @@ File: tikzlibrarytopaths.code.tex 2008/01/09 v2.00 (rcs-revision 1.1)
 ))) (/usr/share/texmf-texlive/tex/latex/ltxmisc/relsize.sty
 Package: relsize 2003/07/04 ver 3.1
 )
+(/usr/share/texmf-texlive/tex/generic/babel/babel.sty
+Package: babel 2008/07/06 v3.8l The Babel package
+
+(/usr/share/texmf-texlive/tex/generic/babel/english.ldf
+Language: english 2005/03/30 v3.3o English support from the babel system
+
+(/usr/share/texmf-texlive/tex/generic/babel/babel.def
+File: babel.def 2008/07/06 v3.8l Babel common definitions
+\babel@savecnt=\count134
+\U@D=\dimen163
+)
+\l@british = a dialect from \language\l@english 
+\l@UKenglish = a dialect from \language\l@english 
+\l@canadian = a dialect from \language\l@american 
+\l@australian = a dialect from \language\l@british 
+\l@newzealand = a dialect from \language\l@british 
+)
+(/usr/share/texmf-texlive/tex/generic/babel/frenchb.ldf
+Language: frenchb 2009/03/16 v2.3d French support from the babel system
+
+
+Package babel Warning: No hyphenation patterns were loaded for
+(babel)                the language `French'
+(babel)                I will use the patterns loaded for \language=0 instead.
+
+\l@french = a dialect from \language0
+Package babel Info: Making : an active character on input line 120.
+Package babel Info: Making ; an active character on input line 121.
+Package babel Info: Making ! an active character on input line 122.
+Package babel Info: Making ? an active character on input line 123.
+\FB@Mht=\dimen164
+\std@mcc=\count135
+\dec@mcc=\count136
+\parindentFFN=\dimen165
+*************************************
+* Local config file frenchb.cfg used
+*
+(/usr/share/texmf-texlive/tex/generic/babel/frenchb.cfg)))
+(/usr/share/texmf-texlive/tex/latex/carlisle/scalefnt.sty)
+(/usr/share/texmf-texlive/tex/latex/base/fontenc.sty
+Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
+
+(/usr/share/texmf-texlive/tex/latex/base/t1enc.def
+File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
+))
+(/usr/share/texmf-texlive/tex/latex/base/inputenc.sty
+Package: inputenc 2008/03/30 v1.1d Input encoding file
+\inpenc@prehook=\toks39
+\inpenc@posthook=\toks40
+
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+Now handling font encoding OML ...
+... no UTF-8 mapping file for font encoding OML
+Now handling font encoding T1 ...
+... processing UTF-8 mapping file for font encoding T1
+
+(/usr/share/texmf-texlive/tex/latex/base/t1enc.dfu
+File: t1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
+   defining Unicode char U+00A1 (decimal 161)
+   defining Unicode char U+00A3 (decimal 163)
+   defining Unicode char U+00AB (decimal 171)
+   defining Unicode char U+00BB (decimal 187)
+   defining Unicode char U+00BF (decimal 191)
+   defining Unicode char U+00C0 (decimal 192)
+   defining Unicode char U+00C1 (decimal 193)
+   defining Unicode char U+00C2 (decimal 194)
+   defining Unicode char U+00C3 (decimal 195)
+   defining Unicode char U+00C4 (decimal 196)
+   defining Unicode char U+00C5 (decimal 197)
+   defining Unicode char U+00C6 (decimal 198)
+   defining Unicode char U+00C7 (decimal 199)
+   defining Unicode char U+00C8 (decimal 200)
+   defining Unicode char U+00C9 (decimal 201)
+   defining Unicode char U+00CA (decimal 202)
+   defining Unicode char U+00CB (decimal 203)
+   defining Unicode char U+00CC (decimal 204)
+   defining Unicode char U+00CD (decimal 205)
+   defining Unicode char U+00CE (decimal 206)
+   defining Unicode char U+00CF (decimal 207)
+   defining Unicode char U+00D0 (decimal 208)
+   defining Unicode char U+00D1 (decimal 209)
+   defining Unicode char U+00D2 (decimal 210)
+   defining Unicode char U+00D3 (decimal 211)
+   defining Unicode char U+00D4 (decimal 212)
+   defining Unicode char U+00D5 (decimal 213)
+   defining Unicode char U+00D6 (decimal 214)
+   defining Unicode char U+00D8 (decimal 216)
+   defining Unicode char U+00D9 (decimal 217)
+   defining Unicode char U+00DA (decimal 218)
+   defining Unicode char U+00DB (decimal 219)
+   defining Unicode char U+00DC (decimal 220)
+   defining Unicode char U+00DD (decimal 221)
+   defining Unicode char U+00DE (decimal 222)
+   defining Unicode char U+00DF (decimal 223)
+   defining Unicode char U+00E0 (decimal 224)
+   defining Unicode char U+00E1 (decimal 225)
+   defining Unicode char U+00E2 (decimal 226)
+   defining Unicode char U+00E3 (decimal 227)
+   defining Unicode char U+00E4 (decimal 228)
+   defining Unicode char U+00E5 (decimal 229)
+   defining Unicode char U+00E6 (decimal 230)
+   defining Unicode char U+00E7 (decimal 231)
+   defining Unicode char U+00E8 (decimal 232)
+   defining Unicode char U+00E9 (decimal 233)
+   defining Unicode char U+00EA (decimal 234)
+   defining Unicode char U+00EB (decimal 235)
+   defining Unicode char U+00EC (decimal 236)
+   defining Unicode char U+00ED (decimal 237)
+   defining Unicode char U+00EE (decimal 238)
+   defining Unicode char U+00EF (decimal 239)
+   defining Unicode char U+00F0 (decimal 240)
+   defining Unicode char U+00F1 (decimal 241)
+   defining Unicode char U+00F2 (decimal 242)
+   defining Unicode char U+00F3 (decimal 243)
+   defining Unicode char U+00F4 (decimal 244)
+   defining Unicode char U+00F5 (decimal 245)
+   defining Unicode char U+00F6 (decimal 246)
+   defining Unicode char U+00F8 (decimal 248)
+   defining Unicode char U+00F9 (decimal 249)
+   defining Unicode char U+00FA (decimal 250)
+   defining Unicode char U+00FB (decimal 251)
+   defining Unicode char U+00FC (decimal 252)
+   defining Unicode char U+00FD (decimal 253)
+   defining Unicode char U+00FE (decimal 254)
+   defining Unicode char U+00FF (decimal 255)
+   defining Unicode char U+0102 (decimal 258)
+   defining Unicode char U+0103 (decimal 259)
+   defining Unicode char U+0104 (decimal 260)
+   defining Unicode char U+0105 (decimal 261)
+   defining Unicode char U+0106 (decimal 262)
+   defining Unicode char U+0107 (decimal 263)
+   defining Unicode char U+010C (decimal 268)
+   defining Unicode char U+010D (decimal 269)
+   defining Unicode char U+010E (decimal 270)
+   defining Unicode char U+010F (decimal 271)
+   defining Unicode char U+0110 (decimal 272)
+   defining Unicode char U+0111 (decimal 273)
+   defining Unicode char U+0118 (decimal 280)
+   defining Unicode char U+0119 (decimal 281)
+   defining Unicode char U+011A (decimal 282)
+   defining Unicode char U+011B (decimal 283)
+   defining Unicode char U+011E (decimal 286)
+   defining Unicode char U+011F (decimal 287)
+   defining Unicode char U+0130 (decimal 304)
+   defining Unicode char U+0131 (decimal 305)
+   defining Unicode char U+0132 (decimal 306)
+   defining Unicode char U+0133 (decimal 307)
+   defining Unicode char U+0139 (decimal 313)
+   defining Unicode char U+013A (decimal 314)
+   defining Unicode char U+013D (decimal 317)
+   defining Unicode char U+013E (decimal 318)
+   defining Unicode char U+0141 (decimal 321)
+   defining Unicode char U+0142 (decimal 322)
+   defining Unicode char U+0143 (decimal 323)
+   defining Unicode char U+0144 (decimal 324)
+   defining Unicode char U+0147 (decimal 327)
+   defining Unicode char U+0148 (decimal 328)
+   defining Unicode char U+014A (decimal 330)
+   defining Unicode char U+014B (decimal 331)
+   defining Unicode char U+0150 (decimal 336)
+   defining Unicode char U+0151 (decimal 337)
+   defining Unicode char U+0152 (decimal 338)
+   defining Unicode char U+0153 (decimal 339)
+   defining Unicode char U+0154 (decimal 340)
+   defining Unicode char U+0155 (decimal 341)
+   defining Unicode char U+0158 (decimal 344)
+   defining Unicode char U+0159 (decimal 345)
+   defining Unicode char U+015A (decimal 346)
+   defining Unicode char U+015B (decimal 347)
+   defining Unicode char U+015E (decimal 350)
+   defining Unicode char U+015F (decimal 351)
+   defining Unicode char U+0160 (decimal 352)
+   defining Unicode char U+0161 (decimal 353)
+   defining Unicode char U+0162 (decimal 354)
+   defining Unicode char U+0163 (decimal 355)
+   defining Unicode char U+0164 (decimal 356)
+   defining Unicode char U+0165 (decimal 357)
+   defining Unicode char U+016E (decimal 366)
+   defining Unicode char U+016F (decimal 367)
+   defining Unicode char U+0170 (decimal 368)
+   defining Unicode char U+0171 (decimal 369)
+   defining Unicode char U+0178 (decimal 376)
+   defining Unicode char U+0179 (decimal 377)
+   defining Unicode char U+017A (decimal 378)
+   defining Unicode char U+017B (decimal 379)
+   defining Unicode char U+017C (decimal 380)
+   defining Unicode char U+017D (decimal 381)
+   defining Unicode char U+017E (decimal 382)
+   defining Unicode char U+200C (decimal 8204)
+   defining Unicode char U+2013 (decimal 8211)
+   defining Unicode char U+2014 (decimal 8212)
+   defining Unicode char U+2018 (decimal 8216)
+   defining Unicode char U+2019 (decimal 8217)
+   defining Unicode char U+201A (decimal 8218)
+   defining Unicode char U+201C (decimal 8220)
+   defining Unicode char U+201D (decimal 8221)
+   defining Unicode char U+201E (decimal 8222)
+   defining Unicode char U+2030 (decimal 8240)
+   defining Unicode char U+2031 (decimal 8241)
+   defining Unicode char U+2039 (decimal 8249)
+   defining Unicode char U+203A (decimal 8250)
+   defining Unicode char U+2423 (decimal 9251)
+)
+Now handling font encoding OT1 ...
+... processing UTF-8 mapping file for font encoding OT1
+
+(/usr/share/texmf-texlive/tex/latex/base/ot1enc.dfu
+File: ot1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
+   defining Unicode char U+00A1 (decimal 161)
+   defining Unicode char U+00A3 (decimal 163)
+   defining Unicode char U+00B8 (decimal 184)
+   defining Unicode char U+00BF (decimal 191)
+   defining Unicode char U+00C5 (decimal 197)
+   defining Unicode char U+00C6 (decimal 198)
+   defining Unicode char U+00D8 (decimal 216)
+   defining Unicode char U+00DF (decimal 223)
+   defining Unicode char U+00E6 (decimal 230)
+   defining Unicode char U+00EC (decimal 236)
+   defining Unicode char U+00ED (decimal 237)
+   defining Unicode char U+00EE (decimal 238)
+   defining Unicode char U+00EF (decimal 239)
+   defining Unicode char U+00F8 (decimal 248)
+   defining Unicode char U+0131 (decimal 305)
+   defining Unicode char U+0141 (decimal 321)
+   defining Unicode char U+0142 (decimal 322)
+   defining Unicode char U+0152 (decimal 338)
+   defining Unicode char U+0153 (decimal 339)
+   defining Unicode char U+2013 (decimal 8211)
+   defining Unicode char U+2014 (decimal 8212)
+   defining Unicode char U+2018 (decimal 8216)
+   defining Unicode char U+2019 (decimal 8217)
+   defining Unicode char U+201C (decimal 8220)
+   defining Unicode char U+201D (decimal 8221)
+)
+Now handling font encoding OMS ...
+... processing UTF-8 mapping file for font encoding OMS
+
+(/usr/share/texmf-texlive/tex/latex/base/omsenc.dfu
+File: omsenc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
+   defining Unicode char U+00A7 (decimal 167)
+   defining Unicode char U+00B6 (decimal 182)
+   defining Unicode char U+00B7 (decimal 183)
+   defining Unicode char U+2020 (decimal 8224)
+   defining Unicode char U+2021 (decimal 8225)
+   defining Unicode char U+2022 (decimal 8226)
+)
+Now handling font encoding OMX ...
+... no UTF-8 mapping file for font encoding OMX
+Now handling font encoding U ...
+... no UTF-8 mapping file for font encoding U
+   defining Unicode char U+00A9 (decimal 169)
+   defining Unicode char U+00AA (decimal 170)
+   defining Unicode char U+00AE (decimal 174)
+   defining Unicode char U+00BA (decimal 186)
+   defining Unicode char U+02C6 (decimal 710)
+   defining Unicode char U+02DC (decimal 732)
+   defining Unicode char U+200C (decimal 8204)
+   defining Unicode char U+2026 (decimal 8230)
+   defining Unicode char U+2122 (decimal 8482)
+   defining Unicode char U+2423 (decimal 9251)
+))
 \keylist@idxfile=\write4
 \openout4 = `keylist.idx'.
 
@@ -551,23 +814,23 @@ LaTeX Warning: Unused global option(s):
 (./sbreenThesis.aux)
 \openout1 = `sbreenThesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 76.
- (/usr/share/texmf-texlive/tex/latex/psnfss/ot1ptm.fd
-File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Try loading font information for T1+ptm on input line 79.
+ (/usr/share/texmf-texlive/tex/latex/psnfss/t1ptm.fd
+File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 )
-LaTeX Info: Redefining \selectfont on input line 76.
+LaTeX Info: Redefining \selectfont on input line 79.
 
 **************************************
 * Executing Begin Document Statement *
@@ -614,23 +877,26 @@ driver: dvips
 -----------------------
 (/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count134
-\scratchdimen=\dimen163
+\scratchcounter=\count137
+\scratchdimen=\dimen166
 \scratchbox=\box41
-\nofMPsegments=\count135
-\nofMParguments=\count136
-\everyMPshowfont=\toks39
-\MPscratchCnt=\count137
-\MPscratchDim=\dimen164
-\MPnumerator=\count138
-\everyMPtoPDFconversion=\toks40
+\nofMPsegments=\count138
+\nofMParguments=\count139
+\everyMPshowfont=\toks41
+\MPscratchCnt=\count140
+\MPscratchDim=\dimen167
+\MPnumerator=\count141
+\everyMPtoPDFconversion=\toks42
 )
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 78.
+LaTeX Info: Redefining \degres on input line 79.
+LaTeX Info: Redefining \dots on input line 79.
+LaTeX Info: Redefining \up on input line 79.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 81.
  (/usr/share/texmf-texlive/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 78.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 81.
  [1
 Non-PDF special ignored!
 Non-PDF special ignored!
@@ -652,14 +918,14 @@ Non-PDF special ignored!
 Non-PDF special ignored!
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 84.
+LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 87.
 
 [2
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 96--96
+Underfull \hbox (badness 10000) in paragraph at lines 100--100
 
  []
 
@@ -672,12 +938,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 96--96
 ] [5
 
 ] (./sbreenThesis.toc
-LaTeX Font Info:    Try loading font information for U+msa on input line 1.
+LaTeX Font Info:    Try loading font information for U+msa on input line 2.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 1.
+LaTeX Font Info:    Try loading font information for U+msb on input line 2.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
@@ -707,7 +973,7 @@ File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 
 ]
 ***************************
-CHAPTER 1.
+Chapter 1.
 ***************************
 [1
 
@@ -718,7 +984,7 @@ File: latticebasis.png Graphic file (type png)
 <use latticebasis.png> [5 <./latticebasis.png (PNG copy)>] [6] [7] [8] [9]
 [10] [11] [12] [13]
 ***************************
-CHAPTER 2.
+Chapter 2.
 ***************************
 [14
 
@@ -727,15 +993,15 @@ File: searchtree.png Graphic file (type png)
 
 <use searchtree.png> [16 <./searchtree.png (PNG copy)>] [17] [18]
 ***************************
-CHAPTER 3.
+Chapter 3.
 ***************************
 [19
 
 ] [20] [21] [22] [23] [24]
-Overfull \hbox (2.30887pt too wide) in paragraph at lines 561--570
-\OT1/ptm/m/n/12 which rep-re-sents the par-tial resid-ual given when $\OML/cmm/
-m/it/12 x[]$ \OT1/ptm/m/n/12 is taken to be $[]$. Let $\OML/cmm/m/it/12 j \OT1/
-cmr/m/n/12 = [][][][]$\OT1/ptm/m/n/12 .
+Overfull \hbox (2.30887pt too wide) in paragraph at lines 565--574
+\T1/ptm/m/n/12 which rep-re-sents the par-tial resid-ual given when $\OML/cmm/m
+/it/12 x[]$ \T1/ptm/m/n/12 is taken to be $[]$. Let $\OML/cmm/m/it/12 j \OT1/cm
+r/m/n/12 = [][][][]$\T1/ptm/m/n/12 .
  []
 
 [25]
@@ -746,95 +1012,92 @@ File: sumotivation.png Graphic file (type png)
 <use sumotivation.png> [26] [27 <./sumotivation.png (PNG copy)>] [28] [29]
 [30] [31] [32]
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 807.
+LaTeX Font Warning: Command \small invalid in math mode on input line 811.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 807.
+LaTeX Font Warning: Command \small invalid in math mode on input line 811.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 818.
+LaTeX Font Warning: Command \small invalid in math mode on input line 822.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 818.
+LaTeX Font Warning: Command \small invalid in math mode on input line 822.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 828.
+LaTeX Font Warning: Command \small invalid in math mode on input line 832.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 828.
+LaTeX Font Warning: Command \small invalid in math mode on input line 832.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 829.
+LaTeX Font Warning: Command \small invalid in math mode on input line 833.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 829.
+LaTeX Font Warning: Command \small invalid in math mode on input line 833.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 835.
+LaTeX Font Warning: Command \small invalid in math mode on input line 839.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 835.
+LaTeX Font Warning: Command \small invalid in math mode on input line 839.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 835.
+LaTeX Font Warning: Command \small invalid in math mode on input line 839.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 835.
+LaTeX Font Warning: Command \small invalid in math mode on input line 839.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 835.
+LaTeX Font Warning: Command \small invalid in math mode on input line 839.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 835.
+LaTeX Font Warning: Command \small invalid in math mode on input line 839.
 
-[33] [34] [35] [36] [37]
-Missing character: There is no Ã in font ptmr7t!
-Missing character: There is no ¡ in font ptmr7t!
- [38] [39] [40] [41] [42] [43] [44] [45] [46]
+[33] [34] [35] [36] [37] [38] [39] [40] [41] [42] [43] [44] [45] [46]
 <lllvslllpermubabai.png, id=193, 1284.8pt x 460.119pt>
 File: lllvslllpermubabai.png Graphic file (type png)
 
 <use lllvslllpermubabai.png>
-Overfull \hbox (32.52303pt too wide) in paragraph at lines 1198--1199
+Overfull \hbox (32.52303pt too wide) in paragraph at lines 1202--1203
  [][] 
  []
 
 
-Overfull \hbox (3.9951pt too wide) in paragraph at lines 1203--1204
-\OT1/ptm/m/n/12 LLL+PERMU, LLL+BABAI) are used to re-duce some nor-mally dis-tr
-ibuted, ran-dom square
- []
-
-[47 <./lllvslllpermubabai.png (PNG copy)>]
-Overfull \hbox (8.31584pt too wide) in paragraph at lines 1205--1211
-\OT1/ptm/m/n/12 fast for any ex-tra re-duc-tion to make a dif-fer-ence. As the 
-noise be-comes larger, LLL+PERMU
+Overfull \hbox (3.9951pt too wide) in paragraph at lines 1207--1208
+\T1/ptm/m/n/12 LLL+PERMU, LLL+BABAI) are used to re-duce some nor-mally dis-tri
+buted, ran-dom square
  []
 
 
-Overfull \hbox (11.1944pt too wide) in paragraph at lines 1205--1211
-\OT1/ptm/m/n/12 and LLL+BABAI start to of-fer a sig-nif-i-cant ad-van-tage in t
-erms of search time. LLL+PERMU
+Overfull \hbox (8.31584pt too wide) in paragraph at lines 1209--1215
+\T1/ptm/m/n/12 fast for any ex-tra re-duc-tion to make a dif-fer-ence. As the n
+oise be-comes larger, LLL+PERMU
  []
 
-<lllvspermuvsbabai.png, id=197, 1284.8pt x 599.841pt>
+
+Overfull \hbox (11.1944pt too wide) in paragraph at lines 1209--1215
+\T1/ptm/m/n/12 and LLL+BABAI start to of-fer a sig-nif-i-cant ad-van-tage in te
+rms of search time. LLL+PERMU
+ []
+
+[47] <lllvspermuvsbabai.png, id=197, 1284.8pt x 599.841pt>
 File: lllvspermuvsbabai.png Graphic file (type png)
 
 <use lllvspermuvsbabai.png>
-Overfull \hbox (32.52303pt too wide) in paragraph at lines 1214--1215
+Overfull \hbox (32.52303pt too wide) in paragraph at lines 1218--1219
  [][] 
  []
 
-[48 <./lllvspermuvsbabai.png (PNG copy)>]
-<spikefig.png, id=201, 1284.8pt x 599.841pt>
+<spikefig.png, id=198, 1284.8pt x 599.841pt>
 File: spikefig.png Graphic file (type png)
  <use spikefig.png>
-Overfull \hbox (32.52303pt too wide) in paragraph at lines 1223--1224
+Overfull \hbox (32.52303pt too wide) in paragraph at lines 1227--1228
  [][] 
  []
 
-[49 <./spikefig.png (PNG copy)>]
-Overfull \hbox (67.28189pt too wide) in paragraph at lines 1238--1261
+[48 <./lllvslllpermubabai.png (PNG copy)>] [49 <./lllvspermuvsbabai.png (PNG co
+py)> <./spikefig.png (PNG copy)>]
+Overfull \hbox (67.28189pt too wide) in paragraph at lines 1242--1265
 [][] 
  []
 
@@ -842,7 +1105,7 @@ Overfull \hbox (67.28189pt too wide) in paragraph at lines 1238--1261
 File: lllvspermubabaiill.png Graphic file (type png)
 
 <use lllvspermubabaiill.png>
-Overfull \hbox (32.52303pt too wide) in paragraph at lines 1269--1270
+Overfull \hbox (32.52303pt too wide) in paragraph at lines 1273--1274
  [][] 
  []
 
@@ -850,64 +1113,61 @@ Overfull \hbox (32.52303pt too wide) in paragraph at lines 1269--1270
 File: lllvspermuvsbabaiill.png Graphic file (type png)
 
 <use lllvspermuvsbabaiill.png>
-Overfull \hbox (32.52303pt too wide) in paragraph at lines 1276--1277
+Overfull \hbox (32.52303pt too wide) in paragraph at lines 1280--1281
  [][] 
  []
 
 [51 <./lllvspermubabaiill.png (PNG copy)>] [52 <./lllvspermuvsbabaiill.png (PNG
  copy)>]
 ***************************
-CHAPTER 4.
+Chapter 4.
 ***************************
 [53
 
-] [54] [55] [56] [57] [58] [59] [60] [61] [62] [63]
-<searchsurface.png, id=251, 1284.8pt x 444.059pt>
+] [54] [55] [56] [57] [58] [59] [60] [61] [62] [63] [64]
+<searchsurface.png, id=255, 1284.8pt x 444.059pt>
 File: searchsurface.png Graphic file (type png)
  <use searchsurface.png>
-Overfull \hbox (39.73746pt too wide) in paragraph at lines 1380--1381
+Overfull \hbox (32.52303pt too wide) in paragraph at lines 1384--1385
  [][] 
  []
 
-<averageSearchTimes.png, id=252, 1284.8pt x 460.119pt>
+<averageSearchTimes.png, id=256, 1284.8pt x 460.119pt>
 File: averageSearchTimes.png Graphic file (type png)
 
 <use averageSearchTimes.png>
-Overfull \hbox (39.73746pt too wide) in paragraph at lines 1387--1388
+Overfull \hbox (32.52303pt too wide) in paragraph at lines 1391--1392
  [][] 
  []
 
-[64] [65 <./searchsurface.png (PNG copy)>] [66 <./averageSearchTimes.png (PNG c
-opy)>] <illConditionedSearch.png, id=263, 1284.8pt x 599.841pt>
+[65 <./searchsurface.png (PNG copy)> <./averageSearchTimes.png (PNG copy)>]
+<illConditionedSearch.png, id=260, 1284.8pt x 599.841pt>
 File: illConditionedSearch.png Graphic file (type png)
 
 <use illConditionedSearch.png>
-Overfull \hbox (32.52303pt too wide) in paragraph at lines 1400--1401
+Overfull \hbox (32.52303pt too wide) in paragraph at lines 1404--1405
  [][] 
  []
 
-<averageSearchTimesIll.png, id=264, 1284.8pt x 460.119pt>
+<averageSearchTimesIll.png, id=261, 1284.8pt x 460.119pt>
 File: averageSearchTimesIll.png Graphic file (type png)
 
 <use averageSearchTimesIll.png>
-Overfull \hbox (32.52303pt too wide) in paragraph at lines 1407--1408
+Overfull \hbox (32.52303pt too wide) in paragraph at lines 1411--1412
  [][] 
  []
 
-[67] [68 <./illConditionedSearch.png (PNG copy)> <./averageSearchTimesIll.png (
+[66] [67 <./illConditionedSearch.png (PNG copy)> <./averageSearchTimesIll.png (
 PNG copy)>]
 ***************************
-CHAPTER 5.
+Chapter 5.
 ***************************
-[69
+[68
 
-] (./sbreenThesis.bbl [70]
-Missing character: There is no Ã in font ptmr7t!
-Missing character: There is no © in font ptmr7t!
- [71
+] (./sbreenThesis.bbl [69] [70
 
 
-] [72] [73])
+] [71])
 No file keylist.ind found.
 No file abbr.ind found.
 (./sbreenThesis.aux)
@@ -979,7 +1239,19 @@ pgfcomp-version-1-18.sty    2007/07/23 v2.00 (rcs-revision 1.1)
   pgffor.code.tex
     tikz.code.tex
  relsize.sty    2003/07/04 ver 3.1
-  ot1ptm.fd    2001/06/04 font definitions for OT1/ptm.
+   babel.sty    2008/07/06 v3.8l The Babel package
+ english.ldf    2005/03/30 v3.3o English support from the babel system
+ frenchb.ldf    2009/03/16 v2.3d French support from the babel system
+ frenchb.cfg
+scalefnt.sty    
+ fontenc.sty
+   t1enc.def    2005/09/27 v1.99g Standard LaTeX file
+inputenc.sty    2008/03/30 v1.1d Input encoding file
+    utf8.def    2008/04/05 v1.1m UTF-8 support for inputenc
+   t1enc.dfu    2008/04/05 v1.1m UTF-8 support for inputenc
+  ot1enc.dfu    2008/04/05 v1.1m UTF-8 support for inputenc
+  omsenc.dfu    2008/04/05 v1.1m UTF-8 support for inputenc
+   t1ptm.fd    2001/06/04 font definitions for T1/ptm.
 supp-pdf.mkii
   omsptm.fd    
     umsa.fd    2009/06/22 v3.00 AMS symbols A
@@ -999,18 +1271,15 @@ averageSearchTimesIll.png    Graphic file (type png)
 sbreenThesis.bbl
  ***********
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
- 10084 strings out of 495061
- 165568 string characters out of 1182621
- 231103 words of memory out of 3000000
- 12970 multiletter control sequences out of 15000+50000
- 22116 words of font info for 52 fonts, out of 3000000 for 9000
+ 11177 strings out of 495061
+ 178180 string characters out of 1182621
+ 248485 words of memory out of 3000000
+ 14023 multiletter control sequences out of 15000+50000
+ 35516 words of font info for 53 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 47i,10n,49p,2013b,559s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 47i,10n,49p,2013b,619s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-texli
 ve/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-texlive/fonts/ty
 pe1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-texlive/fonts/type1/public/
@@ -1024,9 +1293,9 @@ ts/cm/cmsy8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/symbols/m
 sbm10.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/shar
 e/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/font
 s/type1/urw/times/utmri8a.pfb>
-Output written on sbreenThesis.pdf (82 pages, 653396 bytes).
+Output written on sbreenThesis.pdf (80 pages, 654991 bytes).
 PDF statistics:
- 335 PDF objects out of 1000 (max. 8388607)
+ 329 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  61 words of extra memory for PDF output out of 10000 (max. 10000000)
 

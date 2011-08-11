@@ -2,7 +2,6 @@ This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
 The top-level auxiliary file: sbreenThesis.aux
 The style file: plain.bst
 Database file #1: ../ILS.bib
-Warning--I didn't find a database entry for "XiAC11"
 Too many commas in name 1 of "Weiyu Xu, Youzheng Wang, Zucheng Zhou, Jing Wang" for entry XuWZW04
 while executing---line 1049 of file plain.bst
 Warning--can't use both author and editor fields in Jan04
@@ -11,7 +10,7 @@ while executing---line 1090 of file plain.bst
 Warning--can't use both author and editor fields in Xu07
 You've used 28 entries,
             2118 wiz_defined-function locations,
-            685 strings with 8161 characters,
+            683 strings with 8149 characters,
 and the built_in function-call counts, 8730 in all, are:
 = -- 849
 > -- 366
