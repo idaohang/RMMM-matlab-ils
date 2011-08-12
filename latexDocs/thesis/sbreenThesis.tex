@@ -105,17 +105,28 @@ I would like to acknowledge: \\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \SetAbstractEnName{\MakeUppercase{Abstract}}%
 \SetAbstractEnText{
-This thesis is concerned with integer least squares (ILS) problems. One often used approach for ILS problems is the discrete search method which typically involves two stages, the reduction and the search.\\
-\indent The box-constrained integer least squares problem (BILS) arises in MIMO wireless
-communications applications. In order to make the search algorithm
-more efficient, the columns of the the input matrix in the BILS problem have to
-be reordered. There are currently two algorithms for column reordering that provide the best known results. 
-Both use all available information, but they were derived respectively from geometric and algebraic points of view
-and look different. In this thesis we modify one to make it more computationally efficient and easier to comprehend.
-Then we prove the modified one and the other actually give the same column reordering in theory.
-Finally we propose a new mathematically equivalent algorithm, which is more computationally efficient
-and is still easy to understand. This thesis will also consider the reduction of ordinary integer least squares (OILS) problems. For OILS problems, another new reduction algorithm is derived which is based on the new BILS reduction. This new reduction algorithm is shown to be more efficient than current reduction algorithms in some practical applications.\\
-\indent We will also review some common algorithms for the search stage of the ILS problem. A new algorithm is proposed which is based on a combination of two previous algorithms. This new algorithm is shown to be more efficient and easier to implement than previous algorithms for some practical applications.
+This thesis is concerned with integer least squares (ILS) problems, also referred to
+as closest vector problems. One often used approach to solving ILS problems is the
+discrete search method, which typically involves two stages, the reduction and the
+search. The main purpose of the first stage is to make the second stage faster.\\
+\indent For the box-constrained integer least squares problem, the reduction strategy
+involves column reordering of the the given matrix. There are currently two
+algorithms for column reordering that are most effective for the search stage.
+Both use all available information of the problem, but they were derived
+respectively from geometric and algebraic points of view and look different. In this
+thesis we first modify one to make it more computationally efficient and easier to
+comprehend. Then we prove the modified one and the other actually give the same column
+reordering in theory. After that we propose a new mathematically equivalent
+algorithm, which is more computationally efficient and is still easy to understand.
+This thesis then extends the idea to ordinary integer least squares (OILS)
+problems. A new reduction algorithm which combines the well-known
+Lenstra–Lenstra–Lovász (LLL) reduction and the column reordering strategy is
+proposed. The new reduction can be much more effective than the LLL reduction
+sometimes.\\
+\indent The thesis also reviews some common search algorithms. A new algorithm is proposed,
+which is based on two previous algorithms, the depth-first search and the best-first search.
+This hybrid algorithm makes use of the advantages of both algorithms, is more
+efficient than either one and is easier to implement than previous hybrid algorithms.
 }
 \AbstractEn%
 
@@ -142,17 +153,17 @@ non-déterministe polynomial ardu. Depuis que sa solution détient de nombreuses
 
 \chapter{Introduction}
 
-This thesis will deal with efficient algorithms for solving the integer least squares (ILS) problem. In some areas this problem is referred to as ``Sphere Decoding'', or the ``Closest Vector Problem'' (CVP). This problem has been well studied in mathematics for over $100$ years. The ILS problem has been proven to be NP hard \cite{Mic01}, meaning that the time needed to solve the problem can depend exponentially on the problems size. Since ILS problems arise in a number of time sensitive practical applications, it is worthwhile to study algorithms which can solve them quickly. In this thesis an efficient class of algorithms for solving ILS problems will be studied. New algorithms will also be proposed which offer decreased complexity when used to solve problems that arise in some practical applications.
+This thesis deals with efficient algorithms for solving integer least squares (ILS) problems, sometimes referred to as closes vector problems (CVP). This problem has been well studied in mathematics for over $100$ years \cite{HanPS11}. The ordinary ILS problem has been proven to be NP hard \cite{Mic01}, meaning that the time needed to solve the problem can depend exponentially on the problems size. Since ILS problems arise in a number of time sensitive practical applications, it is worthwhile to study algorithms which can solve them quickly. In this thesis an efficient class of algorithms for solving ILS problems will be studied. New algorithms will also be proposed which offer decreased computational or memory cost when used to solve problems that arise in some practical applications.
 
-In this chapter an introduction to ordinary real least squares and integer least squares problems will be given; the distinction between the two will be made clear. Some applications for the ILS problem will be examined and then previous work which has dealt with solving these problems efficiently will be reviewed. 
+In this chapter an introduction to ordinary real least squares and integer least squares problems will be given; the distinction between the two will be made clear. Some applications for the ILS problem will be mentioned and then previous work which has dealt with solving these problems efficiently will be reviewed. 
 
 \section{Notation}
 
-This section will introduce the notation which will be used throughout this thesis. Matrices will be denoted using capital letters while vectors and scalars will be in lower case. Subscripts will be used to identify elements of vectors and matrices and also columns of matrices. For example, if we have a matrix $A$, $a_j$ denotes the $j^{th}$ column and $a_{i,j}$ denotes the element in row $i$, column $j$. For a vector $v$, $v_j$ denotes the $j^{th}$ element. The identity matrix of size $n$ will be denoted as $I_n$ and the $i^{th}$ column of this identity matrix can be written as the vector $e_i$. Occasionally MatLab like notation will be used to denote subsets of rows/columns in a matrix or vector. For example $A_{:,j:k}$ denotes the matrix formed by columns $j, j+1, \dots, k$ of the matrix $A$.
+This section introduces the notation which will be used throughout this thesis. Matrices will be denoted by capital letters while vectors and scalars will be in lower case. Subscripts will be used to identify elements of vectors and matrices and also columns of matrices. For example, if we have a matrix $A$, $a_j$ denotes the $j^{th}$ column and $a_{i,j}$ denotes the element in row $i$, column $j$. For a vector $v$, $v_j$ denotes the $j^{th}$ element. The identity matrix of size $n$ will be denoted as $I_n$ or $I$ and the $i^{th}$ column of this identity matrix is denoted as the vector $e_i$. Occasionally MatLab like notation will be used to denote subsets of rows/columns in a matrix or vector. For example $A_{:,j:k}$ denotes the matrix formed by columns $j, j+1, \dots, k$ of the matrix $A$.
 
-Rounding of a real valued scalar or the elements of a real valued vector to the nearest integer will be written as $\lfloor x \rceil$, where $x$ is the vector or scalar. Suppose we have some set of integers ${\cal B}$, rounding to the nearest value in this set will be denoted as  $\lfloor x \rceil_{{\cal B}}$.
+Rounding of a real valued scalar or the elements of a real valued vector to the nearest integer(s) will be written as $\lfloor x \rceil$, where $x$ is the scalar or vector. Suppose we have some set of integers ${\cal B}$, rounding of $x$ to the nearest value in this set will be denoted as  $\lfloor x \rceil_{{\cal B}}$.
 
-Some of the variables that will be discussed in this thesis will be normally distributed. To describe a scalar or vector whose elements are drawn from a normal distribution, we can write $v \sim N(0,\sigma^2I)$. This would mean a vector $v$ has its elements drawn from a normal distribution with mean $0$ and standard deviation $\sigma$. The first parameter (in this case $0$) specifies the mean and the second gives the covariance matrix for the normal distribution in question.
+For a random vector $v$ following a normal distribution with $0$ mean and covariance matrix $\sigma^2I$, we write $v \sim N(0,\sigma^2I)$.
 
 \section{List of Abbreviations}
 
@@ -163,74 +174,66 @@ The following is a list of abbreviations which will often be used in this thesis
 \item RLS: Real Least Squares.
 \item OILS: Ordinary Integer Least Squares (no constraints on the solution).
 \item BILS: Box constrained Integer Least Squares (box constraint on the solution).
-\item MIMO: Multiple Input, Multiple Output. A practical application for BILS problems.
-\item SE: The Schnor-Euchner Enumeration search strategy for solving ILS problems, \cite{SchE94}.
+\item MIMO: Multiple Input, Multiple Output.
+\item SE: The Schnor-Euchner Enumeration search strategy for ILS problems, \cite{SchE94}.
 \item BFS: Best First Search, a tree search algorithm.
 \item DFS: Depth First Search, another tree search algorithm.
 \item CH: Chang and Han's algorithm for BILS reduction.
 \item SW: Su and Wassell's algorithm for BILS reduction.
-\item LLL: The Lenstra-Lenstra-Lovasz reduction strategy used for OILS problems.
+\item LLL: The Lenstra-Lenstra-Lovasz reduction strategy.
 \end{itemize}
 
 \section{Ordinary Real Least Squares Problem}
 Consider the following linear model,
 \begin{equation}
 \label{eq:realLSModel}
-y = Hx+v.
+y = Hx+v,
 \end{equation}
-
-Where $y\in\mathbb{R}^m$, $H\in\mathbb{R}^{m \times n}$ is called the
-``design matrix'' and has full column rank, and $$v \sim N(0,\sigma^2I) \in\mathbb{R}^m$$ is a
-noise vector. We would like to find the estimate to the solution $x$ which we will call
-$x_{\scriptscriptstyle{RLS}}$ that minimizes the least squares residual,
+where $y\in\mathbb{R}^m$ is the observation vector, $H\in\mathbb{R}^{m \times n}$ is called the
+``design matrix'' and has full column rank, $x \in \mathbb{R}^n$ is the unknown parameter vector and $v \in \mathbb{R}^m$ is the noise vector with $v \sim N(0,\sigma^2I) \in\mathbb{R}^m$. To estimate $x$ from \eqref{eq:realLSModel}, an often used approach is to solve the following ordinary real least squares problem:
 \be
 \label{eq:realLSResidual}
-	\min_x \left \| Hx - y \right \|^2_2.
+	\min_{x \in \mathbb{R}^n} \left \| y- Hx \right \|^2_2.
 \ee
 
-Under the assumption that $v$ is normally distributed, the solution to this problem, $x_{\scriptscriptstyle{RLS}}$ has the property that it is the maximum likelihood estimator for the true parameter vector $x$. This means that $x_{\scriptscriptstyle{RLS}}$ is more likely than any other vector to be equal to the true, unknown parameter vector $x$. 
+The solution to this problem, $x_{\scriptscriptstyle{\mathrm{RLS}}}$ has the property that it is the maximum likelihood estimator of the true parameter vector $x$. This means that $x_{\scriptscriptstyle{\mathrm{RLS}}}$ is more likely than any other vector to be equal to the true, unknown parameter vector $x$. 
 
 If we expand equation \eqref{eq:realLSResidual} and set its gradient to $0$, we will arrive at the
-well known ``normal equations'' which can be written in matrix form as,
+well known ``normal equations'', which can be written in matrix form as,
 \begin{equation}
 H^THx = H^Ty.
 \label{eq:normalEquations}
 \end{equation}
-The solution to these normal equations will satisfy the following:
-$$x_{\scriptscriptstyle{RLS}} = (H^TH)^{-1}H^Ty.$$
-Some numerical methods to compute the solution of these least squares problems efficiently can be found in \cite{Bjo96}.
+The solution to these normal equations satisfies the following:
+$$x_{\scriptscriptstyle{\mathrm{RLS}}} = (H^TH)^{-1}H^Ty.$$
+Some numerical methods to compute the solution of these least squares problems efficiently and reliably can be found in \cite{Bjo96}.
 
-Least squares estimation has numerous applications in many fields such as science, engineering and economics.
+Least squares estimation has numerous applications in many fields in science, engineering and economics.
 
 \vsp \section{Integer Least Squares Problems}
-The ordinary integer least squares (OILS) problem is a modification of the LS problem
-where the parameter vector $x\in\mathbb{Z}^n$ is defined to be an unknown integer vector and the solution $x_{\scriptscriptstyle{ILS}}$ satisfies the following: 
+In some applications, the unknown parameter vector $x$ in equation \eqref{eq:realLSModel} is an integer vector, to estimate $x$ in this case, we instead solve the following integer least squares (ILS) problem:
+
 \be
 \label{eq:ils0}
 \min_{x \in {\mathbb{Z}}^n}  \| y- Hx \|_2. 
 \ee
 
-We no longer have a closed-form representation for the optimal solution $x_{\scriptscriptstyle{ILS}}$ in this case, in fact, the
-problem is provably NP-Hard \cite{Mic01}.  
+We no longer have a closed-form representation for the optimal solution $x_{\scriptscriptstyle{\mathrm{ILS}}}$ in this case, in fact, the
+problem is provably NP-hard \cite{Mic01}.  
 
-Sometimes the parameter vector $x$ will be subject to constraints. One example of such constraints is given by the box-constrained integer least squares
-problem (BILS). Here we have the following constraint on the solution, 
+Sometimes the integer parameter vector $x$ is subject to constraints. One example of such constraints is the following set of box constraints:
 \begin{align} \label{eq:boxCon}
 &x\in \boxcon,\\
 &{\cal B} = {\cal B}_1  \times \cdots \times {\cal B}_n,\\
 &\boxcon_i = \{x_i\in\mathbb{Z} : l_i\le x_i \le u_i, l_i\in \mathbb{Z},
 u_i\in\mathbb{Z} \}.
 \end{align}
+The constrained integer least squares problem corresponding to these constraints is reffed to as the box-constrained integer least squares (BILS) problem. 
 
-Even though the problem is NP-Hard, we still have some hope to get solutions
-quickly for certain types of problems. The problems that arise in many practical applications can often be solved in reasonable amounts of time if efficient algorithms are used.
+Even though the problem \eqref{eq:ils0} is NP-hard, we still have some hope to get solutions
+quickly for certain instances. The problems that arise in many practical applications can often be solved in reasonable amounts of time if efficient algorithms are used.
 
-One of the well known approaches for solving an OILS or BILS problem consists of two phases,
-reduction and search. In the reduction phase, we transform the problem into an
-equivalent, but easier one. This typically involves manipulations on the design matrix $H$ such as column permutations
-or integer gauss transformations to try and achieve certain properties. After reduction, we proceed to the search phase where we try to enumerate the possible solutions in an efficient manner.
-
-In lattice theory, the matrix $H$ is called the ``generator matrix''. This is because it generates a lattice ${\cal{L}}(H)$ defined as follows:
+In lattice theory, the matrix $H$ is called the ``lattice generator matrix''. This is because it generates a lattice ${\cal{L}}(H)$ defined as follows:
 \begin{equation}
 {\cal{L}}(H) = \{Hx: x\in \mathbb{Z}^n\}.
 \end{equation}
@@ -243,14 +246,13 @@ The columns of $H$ are called the basis vectors of the lattice. A single lattice
 \label{fig:latticeBasis}
 \end{figure}
 
-In this context, the OILS and BILS problems can be thought of as trying to locate the closest lattice point to some real point $y$. This thesis will not focus on the geometrical lattice interpretation of the problem; for more details on it, see \cite{AgrEVZ02}.
+In this context, the OILS and BILS problems can be thought of as trying to locate the closest lattice point to some real point $y$. This is why the problem is sometimes referred to as the closest vector problem (CVP).
 
 \vsp \section{Applications}
-One application of the OILS problem arises in GPS where carrier phase measurements are used. In GPS, there are two types of measurements that can be used to determine the position of a receiver, code phase and carrier phase. Code phase measurements can give accuracy to a few meters, while carrier phase are accurate to centimeters. To make use of the more accurate carrier phase measurements, we must know how many cycles the carrier wave has gone through between the satellite and the receiver. The number of cycles is a real number but we would like to estimate the integer part of it, we can form a linear model for this system and obtain an estimate of this integer by solving an OILS problem. For more information on this problem, see \cite{Xu07}. 
+One application of the OILS problem arises in GPS, where carrier phase measurements are used. In GPS, there are two types of measurements that can be used to determine the position of a receiver, code phase and carrier phase. Code phase measurements can give accuracy to a few meters, while carrier phase are accurate to centimeters. To make use of the more accurate carrier phase measurements, we must know how many cycles the carrier wave has gone through between a satellite and a receiver. GPS can only directly know the fractional part of the number of cycles and the difference in the number of cycles between two successive measurements. The problem of estimating the integer part of the number of cycles is called integer ambiguity estimation and one of the usual approaches taken to solve it is to construct and solve an ILS problem. For details on how the problem is formed and the usual approaches taken to solve this problem, see \cite{Xu07}. 
 
-Some important applications such as MIMO wireless signal decoding depend on the
-solution of the BILS problem. MIMO stands for ``multiple-input
-multiple-output'' and it refers to the case where a wireless system has multiple
+Some important applications such as MIMO (multiple-input, multiple-output) wireless signal decoding depend on the
+solution of the BILS problem. MIMO refers to the case where a wireless system has multiple
 input antennas transmitting a signal which is received by multiple output
 antennas. The purpose of a MIMO system is to maximize the throughput of the communications channel. Throughput is defined as ``the average rate of successful message delivery over a communication channel''. 
 
@@ -265,29 +267,25 @@ quickly and accurately we can solve the BILS problem. As the number of antennas 
 normally distributed, the BILS solution is more likely than any other possible
 solution to be the true integer parameter vector $x$ \cite{Han11}. For this reason, we say that a receiver which is decoding transmissions using an algorithm which solves the BILS problem exactly achieves ``optimal performance''; performance refers to the likelihood that the vector found by the decoder is equal to the transmitted vector $x$. For more information on this problem refer to \cite{Jan04}.
 
-Other applications of BILS and OILS include cryptography, lattice design and number theory. For a more detail on some of these applications see \cite{HanPS11}.
+Other applications of OILS and BILS include cryptography, lattice design and number theory. For a more detail on some of these applications see \cite{HanPS11}.
 
 \vsp \section{Previous Work} \label{sec:prevWork}
-Due to the important applications of the BILS and OILS problems, much work has
-gone into solving them efficiently. To solve ILS problems exactly there are
-three main families of algorithms. One family uses ``Voronoi cells'', we will
-not consider algorithms in this family because they are known to be relatively
-inefficient. Another family of algorithms can be referred to as ``Continuous
-Relaxation Branch and Bound'' methods or CRBB methods. Using these algorithms to solve ILS
+Due to the important applications of the OILS and BILS problems, much work has
+gone into solving them efficiently. There are three main families of algorithms to solve these problems exactly. One family uses ``voronoi cells'', and will not be considered in this thesis because they are known to be relatively
+inefficient \ref{HanPS11}. Another family of algorithms can be referred to as ``real
+relaxation based branch and bound'' methods or RRBB methods. Using these algorithms to solve ILS
 problems is a relatively new idea and no comprehensive comparisons have been
 done to study their efficiency, although some preliminary tests indicate they
-can be quite efficient in some circumstances. The last main family of algorithms
+can be quite efficient or inefficient in some circumstances \ref{Ku11}. The last main family of algorithms
 that solve ILS problems exactly are ``discrete search methods''. This thesis
-will focus on studying these discrete search methods since they are known to be
-efficient. There have also been some algorithms proposed that yield fast,
+will focus on studying these discrete search methods since they are often used in applications. There have also been some algorithms proposed that yield fast,
 approximate solutions to the problems, some giving statistical bounds on the
 likelihood of error. These algorithms can sometimes be referred to as
 ``randomized'' algorithms. This thesis however will only deal with finding the
 optimal solution to the problem. For more details on the randomized algorithms
-and Voronoi cell algorithms, see \cite{HanPS11}. For details on the CRBB methods
-see \cite{Ku11}. 
+and Voronoi cell algorithms, see \cite{HanPS11} and references therein.
 
-The discrete search based approaches which will be studied in this thesis try to find the optimal solution by enumerating vectors in the search space one element at a time until all possible solutions but one are eliminated. The order in which the elements of the solution vectors are enumerated plays a critical role in how long the search algorithm takes to run; the reasons for this will become clear later.
+The discrete search based approaches which will be studied in this thesis try to find the optimal solution by enumerating vectors in the search space one element at a time until the optimal solution is found. The order in which the elements of the solution vectors are enumerated plays a critical role in how long the search algorithm takes to run; the reasons for this will become clear later.
 
 \vsp \subsection{Search Strategies}
 In Chapter \ref{chap:SESearch}, it is shown that the discrete search process is equivalent to a tree search problem. The tree in question has a depth of $n$; each node on a path from root to leaf (where we define leaves as nodes at depth $n$) represents a valid element in the solution vector. Therefore the tree has exponential width. To see an example of a subset of the nodes in such a tree, refer to Figure \ref{fig:treeSearch}. The most widely used algorithm for the OILS search process, the Schnorr Euchner (SE) enumeration \cite{SchE94}, can be thought of as a fairly straight forward depth first search in such a tree. The SE search is a simple modification to a previous algorithm known as the Pohst enumeration \cite{Pho81}. Other tree search algorithms may also be used to solve the problem with varying degrees of efficiency.
@@ -341,7 +339,7 @@ The rest of the thesis will be organized as follows;
 
 In Chapter \ref{chap:SESearch}, the Schnorr-Euchner (SE) enumeration algorithm \cite{SchE94} will be presented in detail, much of the remainder of the thesis will use ideas and notation which comes from this algorithm. Also, since the reduction processes are trying to optimize the search process, it is critical to first understand the search process before considering the reduction.
 
-In Chapter \ref{chap:Reduction}, an explanation will be given for why we need different reduction strategies for BILS and OILS problems. Then, strategies for reducing BILS and OILS problems will be presented separately. A new BILS reduction strategy will be introduced. Also it will be explained how we can take advantage of the new BILS reduction for many OILS problems.
+In Chapter \ref{chap:Reduction}, an explanation will be given for why we need different reduction strategies for OILS and BILS problems. Then, strategies for reducing OILS and BILS problems will be presented separately. A new BILS reduction strategy will be introduced. Also it will be explained how we can take advantage of the new BILS reduction for many OILS problems.
 
 In Chapter \ref{chap:Searches}, some other notable search algorithms and modifications to the basic SE enumeration will be given. Also, a new hybrid search algorithm is proposed which combines two of the original algorithms in order to take advantage of the positive features of each.
 
@@ -365,7 +363,7 @@ Then, with $\bar{y}=Q_1^Ty$ the OILS problem \eqref{eq:ils0} is reduced to
 \min_{x \in  {\mathbb{Z}^n}}  \| \by- Rx \|_2.
 \ee
 
-The goal of the search strategy is to enumerate the values for the elements of $x$ until the optimal solution $x_{\scriptscriptstyle{ILS}}$ is found. We would like to enumerate as few integer points as possible, $x \in \mathbb{Z}^n$ while still guaranteeing the optimal solution. Suppose the optimal solution satisfies,
+The goal of the search strategy is to enumerate the values for the elements of $x$ until the optimal solution $x_{\scriptscriptstyle{\mathrm{ILS}}}$ is found. We would like to enumerate as few integer points as possible, $x \in \mathbb{Z}^n$ while still guaranteeing the optimal solution. Suppose the optimal solution satisfies,
 \be 
 \label{eq:searchIneq0}
 \min_{x \in  {\mathbb{Z}^n}}  \| \by- Rx \|_2 < \beta. 
@@ -419,7 +417,7 @@ the children of a node in order of increasing cost, that is what we are doing wh
 
 A modification of the SE enumeration can be used to solve the BILS problem. To ensure that we remain within the box constraint, instead of choosing $x_k = \lfloor c_k \rceil$ at step $k$, we choose $x_{k} = \lfloor c_{k} \rceil_{{\cal B}_{k}}$, where ${\cal B}_{k}$ comes from \eqref{eq:boxCon}. Also recall that the notation $\lfloor c_{k} \rceil_{{\cal B}_{k}}$ denotes rounding $c_k$ to the nearest integer in the set ${\cal B}_{k}$. Suppose $x_{k-1:n}$ are fixed, then we must also ensure that as we visit the node corresponding to the second nearest integer (and all subsequent integers) for $x_k$ that we remain within the box constraint. This is trivial to accomplish, we simply stop incrementing $x_k$ if we hit the upper bound, and stop decrementing it if we hit the lower bound. If all values for $x_k$ that are within the box constraint have been used up but we are still within the area defined by the ellipsoid, we move back to level $k-1$. Following this process will yield the optimal BILS solution. For more information on the BILS implementation of the SE algorithm, see \cite{ChaH05}.
 
-The choice of the initial value for $\beta$ can have a large impact on the number of nodes visited during the search. If $\beta$ is initially chosen to be infinity, the first point found by the SE search is the Babai integer point. One simple method for choosing an initial $\beta$ which may provide better results than infinity is as follows. Let $x_{\scriptscriptstyle{RLS}}$ be the real LS solution, then calculate the residual $$\left \| R \lceil x_{\scriptscriptstyle{RLS}} \rfloor - \bar{y} \right \|_2.$$ We may use this residual as the initial $\beta$ since the optimal solution must have a residual less than or equal to it. While the search process is never slower when using this initial $\beta$, often it will just end up being equivalent to using infinity since the Babai integer point is usually a better estimate than the rounded real least squares solution. In Chapter \ref{chap:Reduction} another idea for choosing an initial $\beta$ will be introduced.
+The choice of the initial value for $\beta$ can have a large impact on the number of nodes visited during the search. If $\beta$ is initially chosen to be infinity, the first point found by the SE search is the Babai integer point. One simple method for choosing an initial $\beta$ which may provide better results than infinity is as follows. Let $x_{\scriptscriptstyle{\mathrm{RLS}}}$ be the real LS solution, then calculate the residual $$\left \| R \lceil x_{\scriptscriptstyle{\mathrm{RLS}}} \rfloor - \bar{y} \right \|_2.$$ We may use this residual as the initial $\beta$ since the optimal solution must have a residual less than or equal to it. While the search process is never slower when using this initial $\beta$, often it will just end up being equivalent to using infinity since the Babai integer point is usually a better estimate than the rounded real least squares solution. In Chapter \ref{chap:Reduction} another idea for choosing an initial $\beta$ will be introduced.
 
 \chapter{Reduction Strategies} \label{chap:Reduction}
 
@@ -1415,7 +1413,7 @@ Also with these ill conditioned problems, the run times are all on a similar sca
 
 \chapter{Conclusions and Future Work} \label{chap:Conclusion}
 
-This thesis focused on improving both the reduction and search processes in solving OILS and BILS problems. In Chapter \ref{chap:Reduction} it was shown that two effective reduction strategies in the literature for the BILS problem are theoretically equivalent. Using the knowledge of their equivalence a new reduction strategy was proposed that uses ideas from each to compute the same solution more efficiently and in a numerically stable manner. Also in Chapter \ref{chap:Reduction}, it was shown that under some practical conditions, this new reduction process can be used to improve the performance of the OILS search process as well. This improvement seems to be a result of the Babai integer point given by the new reduction having both a smaller residual and higher success rate (defined as the probability that the Babai integer point is equal to the true solution $x$). Since the Babai integer point has a tendency to have smaller residual and higher success rate after applying these permutations, we can conclude that for both BILS and OILS problems, applications which use the Babai integer point as an estimate to the ILS solution should apply this permutations strategy in order to improve their success rate.
+This thesis focused on improving both the reduction and search processes in solving OILS and BILS problems. In Chapter \ref{chap:Reduction} it was shown that two effective reduction strategies in the literature for the BILS problem are theoretically equivalent. Using the knowledge of their equivalence a new reduction strategy was proposed that uses ideas from each to compute the same solution more efficiently and in a numerically stable manner. Also in Chapter \ref{chap:Reduction}, it was shown that under some practical conditions, this new reduction process can be used to improve the performance of the OILS search process as well. This improvement seems to be a result of the Babai integer point given by the new reduction having both a smaller residual and higher success rate (defined as the probability that the Babai integer point is equal to the true solution $x$). Since the Babai integer point has a tendency to have smaller residual and higher success rate after applying these permutations, we can conclude that for both OILS and BILS problems, applications which use the Babai integer point as an estimate to the ILS solution should apply this permutations strategy in order to improve their success rate.
 
 Some more investigation into the new reduction algorithm is still needed. The new reduction presented in subsection \ref{subsec:newOILS} has two phases, first we do the LLL reduction which uses IGTs and permutations together to achieve some properties in the upper triangular matrix $R$. The second phase applies another set of permutations to $R$ to try and achieve some different properties. We would like to investigate reduction algorithms that try to consider both sets of these properties in a single phase instead of having two disconnected phases. This will require a deeper understanding of exactly why the new LLL+PERMU reduction gives good results.
 
