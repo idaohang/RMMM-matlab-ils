@@ -4,49 +4,50 @@ The style file: plain.bst
 Database file #1: ../ILS.bib
 Too many commas in name 1 of "Weiyu Xu, Youzheng Wang, Zucheng Zhou, Jing Wang" for entry XuWZW04
 while executing---line 1049 of file plain.bst
+Warning--can't use both volume and number fields in HasV05
 Warning--can't use both author and editor fields in Jan04
 Too many commas in name 1 of "Weiyu Xu, Youzheng Wang, Zucheng Zhou, Jing Wang" for entry XuWZW04
 while executing---line 1090 of file plain.bst
 Warning--can't use both author and editor fields in Xu07
-You've used 28 entries,
+You've used 34 entries,
             2118 wiz_defined-function locations,
-            683 strings with 8149 characters,
-and the built_in function-call counts, 8730 in all, are:
-= -- 849
-> -- 366
-< -- 3
-+ -- 152
-- -- 118
-* -- 582
-:= -- 1464
-add.period$ -- 84
-call.type$ -- 28
-change.case$ -- 139
+            720 strings with 8992 characters,
+and the built_in function-call counts, 10559 in all, are:
+= -- 1028
+> -- 437
+< -- 5
++ -- 181
+- -- 140
+* -- 696
+:= -- 1761
+add.period$ -- 102
+call.type$ -- 34
+change.case$ -- 167
 chr.to.int$ -- 0
-cite$ -- 30
-duplicate$ -- 348
-empty$ -- 741
-format.name$ -- 118
-if$ -- 1817
+cite$ -- 37
+duplicate$ -- 429
+empty$ -- 899
+format.name$ -- 140
+if$ -- 2205
 int.to.chr$ -- 0
-int.to.str$ -- 28
-missing$ -- 30
-newline$ -- 143
-num.names$ -- 56
-pop$ -- 156
+int.to.str$ -- 34
+missing$ -- 37
+newline$ -- 173
+num.names$ -- 68
+pop$ -- 190
 preamble$ -- 1
-purify$ -- 115
+purify$ -- 138
 quote$ -- 0
-skip$ -- 219
+skip$ -- 277
 stack$ -- 0
-substring$ -- 562
-swap$ -- 54
-text.length$ -- 3
+substring$ -- 666
+swap$ -- 73
+text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 104
-warning$ -- 2
-while$ -- 86
-width$ -- 30
-write$ -- 302
+type$ -- 126
+warning$ -- 3
+while$ -- 105
+width$ -- 36
+write$ -- 366
 (There were 2 error messages)

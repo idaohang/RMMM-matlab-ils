@@ -536,7 +536,8 @@
 
 @MASTERSTHESIS{Ku11,
   author = {Wen-Yang Ku},
-  title = {Lattice Basis Reduction and Integer Least Squares Problems},
+  title = {Lattice Preconditioning for the Real Relaxation Based Branch and
+	Bound Methods for Integer Least Squares Problems},
   school = {McGill University, School of Computer Science},
   year = {2011},
   owner = {steve},
@@ -577,6 +578,16 @@
   institution = {University of Amsterdam, Dept. Of Mathematics},
   year = {1981},
   number = {TR 81-03}
+}
+
+@ARTICLE{LinMH10,
+  author = {Cong Ling and Wai Ho Mow and Nick Howgrave-Graham},
+  title = {Variants of the LLL algorithm in digital communications: Complexity
+	analysis and fixed-complexity implementation},
+  journal = {IEEE Transactions On Information Theory},
+  year = {2010},
+  owner = {steve},
+  timestamp = {2011.08.12}
 }
 
 @INPROCEEDINGS{LuoPWB03,
@@ -683,6 +694,15 @@
   publisher = {Wiley, New York},
   year = {1988},
   author = {G. L. Nemhauser and L. A. Wolsey}
+}
+
+@BOOK{NguV10,
+  title = {The LLL Algorithm - Survey and Applications},
+  publisher = {Springer},
+  year = {2010},
+  author = {Phong Nguyen and Brigitte Vallée},
+  owner = {steve},
+  timestamp = {2011.08.12}
 }
 
 @BOOK{NocW99,
@@ -971,7 +991,7 @@
 }
 
 @BOOK{Xu07,
-  title = {GPS: theory, algorithms, and applications},
+  title = {GPS: Theory, Algorithms, and Applications},
   publisher = {Springer-Verlag},
   year = {2007},
   editor = {Guochang Xu},

@@ -88,14 +88,11 @@ Master of Science in Computer Science}%
 
 \SetAcknowledgeName{\MakeUppercase{Acknowledgements}}%
 \SetAcknowledgeText{
-I would like to acknowledge: \\
-\begin{itemize}
-\item Xiao-Wen Chang, my supervisor for his excellent guidance and many helpful comments and ideas.
-\item NSERC and McGill University for their generous support.
-\item My lab mates in the Scientific Computing lab for the numerous times that they have helped me through difficult problems.
-\item My co-workers at MedRunner who have been very understanding with my lack of availability over the past two years.
-\item Finally, my friends and family who have remained close over time and distance.
-\end{itemize}
+First I would like to thank my supervisor, Xiao-Wen Chang for his excellent guidance and many helpful comments and ideas. Working with Xiao-Wen has been an excellent experience, I feel that he was able to push me to produce the best work I am capable of.\\
+\indent I would also like to thank NSERC and McGill University for their generous financial support, without which this thesis would not have been possible.\\
+\indent Thanks to my lab mates in the Scientific Computing lab, especially Wen-Yang Ku, Xiaohu Xie and Sevan Hanssian for the numerous times that they have helped me through difficult problems.\\
+\indent I would like to thank my co-workers, Todd Murphy, Kevin Garnett, Jackie Howatt, and Allan Cameron at MedRunner, who have been very understanding with my lack of availability over the past two years.\\
+\indent Finally I thank my friends and family who have remained close over time and distance. Especially my good friend Marya Sawaf to whom I owe the excellent last minute French translation of my abstract. Thanks to her for always being there.
 }%
 \Acknowledge%
 
@@ -153,13 +150,13 @@ non-déterministe polynomial ardu. Depuis que sa solution détient de nombreuses
 
 \chapter{Introduction}
 
-This thesis deals with efficient algorithms for solving integer least squares (ILS) problems, sometimes referred to as closes vector problems (CVP). This problem has been well studied in mathematics for over $100$ years \cite{HanPS11}. The ordinary ILS problem has been proven to be NP hard \cite{Mic01}, meaning that the time needed to solve the problem can depend exponentially on the problems size. Since ILS problems arise in a number of time sensitive practical applications, it is worthwhile to study algorithms which can solve them quickly. In this thesis an efficient class of algorithms for solving ILS problems will be studied. New algorithms will also be proposed which offer decreased computational or memory cost when used to solve problems that arise in some practical applications.
+This thesis deals with efficient algorithms for solving integer least squares (ILS) problems, sometimes referred to as closest vector problems (CVP). This problem has been well studied in mathematics for over $100$ years \cite{HanPS11}. The ordinary ILS problem has been proven to be NP hard \cite{Mic01}, meaning that the time needed to solve the problem can depend exponentially on the problems size. Since ILS problems arise in a number of time sensitive practical applications, it is worthwhile to study algorithms which can solve them quickly. In this thesis an efficient class of algorithms for solving ILS problems will be studied. New algorithms will also be proposed which offer decreased computational or memory cost when used to solve problems that arise in some practical applications.
 
 In this chapter an introduction to ordinary real least squares and integer least squares problems will be given; the distinction between the two will be made clear. Some applications for the ILS problem will be mentioned and then previous work which has dealt with solving these problems efficiently will be reviewed. 
 
 \section{Notation}
 
-This section introduces the notation which will be used throughout this thesis. Matrices will be denoted by capital letters while vectors and scalars will be in lower case. Subscripts will be used to identify elements of vectors and matrices and also columns of matrices. For example, if we have a matrix $A$, $a_j$ denotes the $j^{th}$ column and $a_{i,j}$ denotes the element in row $i$, column $j$. For a vector $v$, $v_j$ denotes the $j^{th}$ element. The identity matrix of size $n$ will be denoted as $I_n$ or $I$ and the $i^{th}$ column of this identity matrix is denoted as the vector $e_i$. Occasionally MatLab like notation will be used to denote subsets of rows/columns in a matrix or vector. For example $A_{:,j:k}$ denotes the matrix formed by columns $j, j+1, \dots, k$ of the matrix $A$.
+This section introduces the notation which will be used throughout this thesis. Matrices will be denoted by capital letters while vectors and scalars will be in lower case. Subscripts will be used to identify elements of vectors and matrices and also columns of matrices. For example, if we have a matrix $A$, $a_j$ denotes the $j^{th}$ column and $a_{i,j}$ denotes the element in row $i$, column $j$. For a vector $v$, $v_j$ denotes the $j^{th}$ element. The identity matrix of size $n$ will be denoted as $I_n$ or $I$ and the $i^{th}$ column of the identity matrix is denoted as the vector $e_i$. Occasionally MatLab like notation will be used to denote subsets of rows/columns in a matrix or vector. For example $A_{:,j:k}$ denotes the matrix formed by columns $j, j+1, \dots, k$ of the matrix $A$.
 
 Rounding of a real valued scalar or the elements of a real valued vector to the nearest integer(s) will be written as $\lfloor x \rceil$, where $x$ is the scalar or vector. Suppose we have some set of integers ${\cal B}$, rounding of $x$ to the nearest value in this set will be denoted as  $\lfloor x \rceil_{{\cal B}}$.
 
@@ -190,7 +187,7 @@ Consider the following linear model,
 y = Hx+v,
 \end{equation}
 where $y\in\mathbb{R}^m$ is the observation vector, $H\in\mathbb{R}^{m \times n}$ is called the
-``design matrix'' and has full column rank, $x \in \mathbb{R}^n$ is the unknown parameter vector and $v \in \mathbb{R}^m$ is the noise vector with $v \sim N(0,\sigma^2I) \in\mathbb{R}^m$. To estimate $x$ from \eqref{eq:realLSModel}, an often used approach is to solve the following ordinary real least squares problem:
+``design matrix'' and has full column rank, $x \in \mathbb{R}^n$ is the unknown parameter vector and $v \in \mathbb{R}^m$ is the noise vector with $v \sim N(0,\sigma^2I)$. To estimate $x$ from \eqref{eq:realLSModel}, an often used approach is to solve the following ordinary real least squares problem:
 \be
 \label{eq:realLSResidual}
 	\min_{x \in \mathbb{R}^n} \left \| y- Hx \right \|^2_2.
@@ -228,7 +225,7 @@ Sometimes the integer parameter vector $x$ is subject to constraints. One exampl
 &\boxcon_i = \{x_i\in\mathbb{Z} : l_i\le x_i \le u_i, l_i\in \mathbb{Z},
 u_i\in\mathbb{Z} \}.
 \end{align}
-The constrained integer least squares problem corresponding to these constraints is reffed to as the box-constrained integer least squares (BILS) problem. 
+The constrained integer least squares problem corresponding to these constraints is referred to as the box-constrained integer least squares (BILS) problem. 
 
 Even though the problem \eqref{eq:ils0} is NP-hard, we still have some hope to get solutions
 quickly for certain instances. The problems that arise in many practical applications can often be solved in reasonable amounts of time if efficient algorithms are used.
@@ -272,11 +269,11 @@ Other applications of OILS and BILS include cryptography, lattice design and num
 \vsp \section{Previous Work} \label{sec:prevWork}
 Due to the important applications of the OILS and BILS problems, much work has
 gone into solving them efficiently. There are three main families of algorithms to solve these problems exactly. One family uses ``voronoi cells'', and will not be considered in this thesis because they are known to be relatively
-inefficient \ref{HanPS11}. Another family of algorithms can be referred to as ``real
+inefficient \cite{HanPS11}. Another family of algorithms can be referred to as ``real
 relaxation based branch and bound'' methods or RRBB methods. Using these algorithms to solve ILS
 problems is a relatively new idea and no comprehensive comparisons have been
 done to study their efficiency, although some preliminary tests indicate they
-can be quite efficient or inefficient in some circumstances \ref{Ku11}. The last main family of algorithms
+can be quite efficient in some circumstances and inefficient in others \cite{Ku11}. The last main family of algorithms
 that solve ILS problems exactly are ``discrete search methods''. This thesis
 will focus on studying these discrete search methods since they are often used in applications. There have also been some algorithms proposed that yield fast,
 approximate solutions to the problems, some giving statistical bounds on the
@@ -285,10 +282,37 @@ likelihood of error. These algorithms can sometimes be referred to as
 optimal solution to the problem. For more details on the randomized algorithms
 and Voronoi cell algorithms, see \cite{HanPS11} and references therein.
 
-The discrete search based approaches which will be studied in this thesis try to find the optimal solution by enumerating vectors in the search space one element at a time until the optimal solution is found. The order in which the elements of the solution vectors are enumerated plays a critical role in how long the search algorithm takes to run; the reasons for this will become clear later.
+The discrete search based approaches which will be studied in this thesis try to find the optimal solution by enumerating vectors in the search space one element at a time until the optimal solution is found. Discrete search algorithms typically involve two stages, the reduction and the search. The first stage is the reduction, it performs manipulations on the matrix $H$ and vector $y$ from \eqref{eq:ils0} in order to optimize the problem for the search stage. There are a special set of manipulations which we may perform so that the solution is not modified. The search is performed after the reduction. In the search stage we enumerate integer points until we find the optimal one.
+
+\vsp \subsection{Reduction Strategies} \label{subsec:Reductions}
+
+As mentioned previously, the purpose of the OILS and BILS reduction is to transform the problem to an equivalent, but easier to solve one. This section will review some existing reduction strategies.
+
+One very effective reduction strategy is known as the Korkine-Zolotarev (KZ) 
+reduction \cite{KorZ73}. Unfortunately the KZ reduction is prohibitively expensive to compute,
+it requires solving a number of so called ``shortest vector problems'' which are suspected to be NP-hard. The only time this reduction
+may be practical is when a very large number of input vectors $y$ must be
+decoded for the same matrix $H$ \cite{AgrEVZ02}. The standard reduction algorithm used in practice for reducing unconstrained OILS problems is the ``Lenstra-Lenstra-Lovasz'' or LLL
+reduction \cite{LenLL82}. It is usually much more efficient to compute than the
+KZ reduction, in fact any KZ reduced matrix is also LLL reduced. For more detail
+on how the LLL reduction and KZ reduction are related, again see
+\cite{AgrEVZ02}. The LLL reduction has been proven to converge in a finite
+number of steps and to have average case polynomial complexity when the basis
+vectors are normally distributed inside the unit sphere in $\mathbb{R}^m$ \cite{LinMH10}. There
+are also results that bound the complexity based on the condition number of the
+input matrix. For more details on the algorithms, complexity, properties and applications for LLL
+reduction, see \cite{WubSJM11} and \cite{NguV10}.
+
+In \cite{XieCB11}, it was found that many of the operations used in the original LLL algorithm are not always required as they do not affect the search process when the SE algorithm is used. The new reduction that results from applying only a subset of the operations is called the partial LLL reduction.
+
+Unfortunately, applying LLL or partial LLL reduction will change a box constraint to a much more complicated constraint which will make the search process more difficult. For the BILS problem, there are other reduction strategies that focus only on permuting the columns of the matrix $H$, while the LLL reduction performs some other operations that are described in Chapter \ref{chap:Reduction}. We can separate reduction algorithms which simply try and find some optimal permutation of the columns of the matrix $H$ into two categories, those that only use the information contained in the matrix $H$, and algorithms that use all of the information in $H$, $y$ and the box constraint.
+
+Two algorithms that only use the information in $H$ are the ``Vertical-Bell Laboratories Layered Space-Time'' or V-BLAST column reordering \cite{FosGVW99} and the ``Sorted QR Decomposition'' or SQRD column reordering \cite{WubBRKK01}. An examination of these two algorithms reveals very similar motivations behind each.
+
+Algorithms that use all of the information in $H$, $y$ and the box-constraint are a fairly new development. The first was proposed by Su and Wassell in 2005 \cite{SuW05}, and the second by Chang and Han in 2008 \cite{ChaH05}. Numerical results show that these algorithms can offer great improvements over the previous reductions that use only the information contained in $H$.
 
 \vsp \subsection{Search Strategies}
-In Chapter \ref{chap:SESearch}, it is shown that the discrete search process is equivalent to a tree search problem. The tree in question has a depth of $n$; each node on a path from root to leaf (where we define leaves as nodes at depth $n$) represents a valid element in the solution vector. Therefore the tree has exponential width. To see an example of a subset of the nodes in such a tree, refer to Figure \ref{fig:treeSearch}. The most widely used algorithm for the OILS search process, the Schnorr Euchner (SE) enumeration \cite{SchE94}, can be thought of as a fairly straight forward depth first search in such a tree. The SE search is a simple modification to a previous algorithm known as the Pohst enumeration \cite{Pho81}. Other tree search algorithms may also be used to solve the problem with varying degrees of efficiency.
+In Chapter \ref{chap:SESearch}, it will be shown that the discrete search process is equivalent to a tree search problem. The tree in question has a depth of $n$; each node on a path from root to leaf (where we define leaves as nodes at depth $n$) represents a valid element in the solution vector. Therefore the tree has exponential width. To see an example of a subset of the nodes in such a tree, refer to Figure \ref{fig:treeSearch} on page \pageref{fig:treeSearch}. The most widely used algorithm for the OILS search process, the Schnorr Euchner (SE) enumeration \cite{SchE94}, can be thought of as a fairly straight forward depth first search in such a tree. The SE search is based on previous work such as the Pohst \cite{Pho81} and Kannan \cite{Kan83} enumeration algorithms. Other tree search algorithms may also be used to solve the problem with varying degrees of efficiency.
 
 In the literature, some modifications to the best first tree search strategy have also been proposed to solve this problem. A few such algorithms are given in \cite{MurGDC06}, \cite{XuWZW04}, \cite{FukMU04}, \cite{StuBF07} and \cite{DaiY08}. When doing a tree search, the disadvantage of the best first approach is that the memory requirements can be exponential in the worst case and there is a significant overhead to visit each tree node. This is compared to the depth first search where the memory requirements are linear in the problem size $n$ and there is very little computational cost to visit a node in the tree. The advantage of the best first approach is that it is guaranteed to visit the least number of nodes in the tree. Some of the papers listed above propose a pure best first search, while others try to make some sort of trade off to achieve lower memory usage.
 
@@ -296,66 +320,38 @@ There have been some attempts to compare different discrete search algorithms fo
 
 There have been other suggestions to improve the discrete search based algorithms as well. In \cite{StoVH08}, it is proposed that by using lower bounds on the residual from the optimal solution, we can shrink the search space (equivalently, prune the search tree). A few such lower bounds are given for special cases of the OILS problem and one for the general OILS and BILS problem. Unfortunately, the computational complexity of computing some of these bounds can be prohibitive since it adds to the processing that must be performed at each node in the tree. Overall it seems that these lower bounds do not offer a decrease in computational complexity during the search process if the search is performed on a reduced problem.
 
-Another method that attempts to shrink the search space is given in \cite{SchFL09}. They propose a simple stopping criteria for the search process that in theory should allow it to terminate earlier. Unfortunately, the bound derived here is not tight enough to be useful in practice and is rarely or never satisfied. Also it is proposed that after computing the bound, one can increase it by some amount with a low risk of achieving a suboptimal solution; this thesis will not consider this since it is only concerned with the exact solution of the OILS and BILS problems. 
-
-\vsp \subsection{Reduction Strategies} \label{subsec:Reductions}
-
-As mentioned previously, the purpose of the OILS and BILS reduction is to transform the problem to an equivalent, but easier to solve one. This section will review some existing reduction strategies.
-
-One very effective reduction strategy is known as the Korkine-Zolotarev (KZ)
-reduction. Unfortunately the KZ reduction is prohibitively expensive to compute,
-it requires solving a number of NP hard problems. The only time this reduction
-may be practical is when a very large number of input vectors $y$ must be
-decoded for the same matrix $H$. For more information on the KZ reduction see
-\cite{AgrEVZ02}. The standard reduction algorithm used in practice for reducing unconstrained OILS problems is the ``Lenstra-Lenstra-Lovasz'' or LLL
-reduction \cite{LenLL82}. It is usually much more efficient to compute than the
-KZ reduction, in fact any KZ reduced matrix is also LLL reduced. For more detail
-on how the LLL reduction and KZ reduction are related, again see
-\cite{AgrEVZ02}. The LLL reduction has been proven to converge in a finite
-number of steps and to have average case polynomial complexity when the basis
-vectors are normally distributed inside the unit sphere in $\mathbb{R}^m$. There
-are also results that bound the complexity based on the condition number of the
-input matrix. For more details on the bounds,complexity and convergence of LLL
-reduction, see \cite{WubSJM11}.
-
-In \cite{XieCB11}, it was found that many of the operations used in the original LLL algorithm are not always required as they do not affect the search process when the SE algorithm is used. The new reduction that results from applying only a subset of the operations is called the partial LLL reduction.
-
-Unfortunately, neither the LLL reduction or partial LLL reduction are applicable to the BILS problem. For the BILS problem, there are other reduction strategies that focus only on permuting the columns of the matrix $H$, where the LLL reduction performs some other operations that are described in Chapter \ref{chap:Reduction}. We can separate reduction algorithms which simply try and find some optimal permutation of the columns of the matrix $H$ into two categories, those that only use the information contained in the matrix $H$, and algorithms that use both the information in $H$ and the vector $y$.
-
-Two algorithms that only use the information in $H$ are the ``Vertical-Bell Laboratories Layered Space-Time'' or V-BLAST column reordering \cite{FosGVW99} and the ``Sorted QR Decomposition'' or SQRD column reordering \cite{WubBRKK01}. An examination of these two algorithms reveals very similar motivations behind each.
-
-Algorithms that use the information in both $H$ and $y$ are a fairly new development. The first was proposed by Su and Wassell in 2005 \cite{SuW05}, and the second by Chang and Han in 2008 \cite{ChaH05}. Numerical results show that these algorithms can offer great improvements over the previous reductions that use only the information contained in $H$.
+Another method that attempts to shrink the search space is given in \cite{SchFL09}, in which the authors propose a simple stopping criteria for the search process that in theory should allow it to terminate earlier. Unfortunately, the bound derived here is not tight enough to be useful in practice and is rarely or never satisfied. To make the bound more likely to be satisfied, they propose to increase it by some amount. Unfortunately increasing the bound in this way means we may terminate with a suboptimal solution; this thesis will not consider this since it is only concerned with the exact solution of the OILS and BILS problems. 
 
 \vsp \section{Objectives and Contribution}
 
-This thesis will study both the search and reduction steps of the discrete search based ILS algorithms. For the reduction step, the LLL reduction \cite{LenLL82} is the strategy most used in practice for the OILS problem. How the LLL reduction theoretically relates to the OILS problem has been studied in detail, and it also yields excellent results in practice. Unfortunately, for the BILS problem, the LLL reduction should not be used, the reason for this is described in Chapter \ref{chap:Reduction}. For the BILS problem, we are limited to performing only column permutations on the matrix $H$. There are a few algorithms which calculate how we should permute the columns of $H$, some of which were briefly introduced in section \ref{sec:prevWork}. Two more recent developments, \cite{ChaH05} and \cite{SuW05}, use both the matrix $H$ and the vector $y$ to calculate the permutations. These algorithms have shown excellent results. In this thesis it will be proven that these two algorithms are theoretically equivalent. Knowing that they are equivalent, we can use the best ideas from both to create a new reduction strategy that is faster than either of the originals and is numerically stable (the faster of the two original algorithms is not). Another advantage of these algorithms being equivalent is that since one had a geometric motivation and the other was derived algebraically, we now have both geometric and algebraic justification for why the column orderings given by these algorithms should help speed up the search process. Also, the algorithm in \cite{SuW05} was derived through a geometric motivation and as such is described in terms of geometry in the original paper; this thesis will provide an algebraic explanation for the algorithm presented in \cite{SuW05} and offer some improvements to the original. The work which has been done with these reduction algorithms for this thesis has been accepted to the IEEE Globecom 2011 conference \cite{BreC11}.
+This thesis will study both the search and reduction steps of the discrete search based ILS algorithms. For BILS reduction algorithms, we are limited to performing only column permutations on the matrix $H$; the reason for this will be explained in Chapter \ref{chap:Reduction}. There are a few algorithms which calculate how we should permute the columns of $H$, some of which were briefly introduced in section \ref{sec:prevWork}. Two more recent developments, \cite{ChaH05} and \cite{SuW05}, use all of the information in the matrix $H$, vector $y$ and the box-constraint to calculate the permutations. These algorithms have shown excellent results. In this thesis it will be proven that these two algorithms are theoretically equivalent even though they look much different. Knowing that they are equivalent, we can use the best ideas from both to create a new reduction strategy that is faster than either of the originals and is numerically reliable (the faster of the two original algorithms is not). Another advantage of these algorithms being equivalent is that since one had a geometric motivation and the other was derived algebraically, we now have both geometric and algebraic justification for why the column orderings given by these algorithms should help speed up the search process. Also, the algorithm in \cite{SuW05} was derived through a geometric motivation and as such is described in terms of geometry in the original paper. Their geometric interpretation is difficult to understand, perhaps due to page limit; this thesis will provide an algebraic explanation for the algorithm presented in \cite{SuW05} and offer some insight to the original. A shorter version of this work has been accepted by the IEEE GLOBECOM 2011 conference \cite{BreC11}.
 
-The motivation for the permutation based reduction strategies is not specific to the BILS problem; in theory these reduction strategies should reduce the run time for OILS problems as well. However, the very effective LLL reduction provides better results than using permutations alone. One way to think about what each type of algorithm is doing is, the LLL reduction finds a new set of shorter and more orthogonal basis vectors, while the permutation based reductions are just finding an ordering for the basis vectors that performs well in the search process. Consider Figure \ref{fig:latticeBasis} suppose the original matrix $H$ has columns $v_1$ and $v_2$, the LLL reduced matrix may have columns $u_1$ and $u_2$. The permutation based reductions are limited to simply changing the ordering so that $v_1 = v_2$ and $v_2 = v_1$. It is known that shorter more orthogonal basis vectors are preferable in the search process. By first performing LLL reduction to get a good set of basis vectors, and then applying a permutation based reduction to reorder them, we can sometimes greatly improve the performance of the search process. In this thesis, the strategy of first applying a LLL reduction, and then column permutations will be explored.
+The motivation for the permutation based reduction strategies is not specific to the BILS problem; these reduction algorithms can also reduce the run time for OILS problems as well. However, the very effective LLL reduction provides better results than using the above permutation strategy alone. One way to think about what each type of algorithm is doing is, the LLL reduction finds a new set of shorter and more orthogonal basis vectors, while the permutation based reductions are just finding an ordering for the basis vectors that performs well in the search process. Consider Figure \ref{fig:latticeBasis} and suppose the original matrix $H$ has columns $v_1$ and $v_2$, the LLL reduced matrix may have columns $u_1$ and $u_2$. The permutation based reductions are limited to simply changing the ordering so that $v_1 = v_2$ and $v_2 = v_1$. It is known that shorter more orthogonal basis vectors are preferable in the search process. By first performing LLL reduction to get a good set of basis vectors, and then applying a permutation based reduction to reorder them, we can sometimes greatly improve the performance of the search process. In this thesis, the strategy of first applying the LLL reduction, and then column permutations will be explored.
 
-With many different algorithms for both the reduction and search process, it is not always clear how they relate. In \cite{MurGDC06} the authors propose a tree search framework to relate some of the various discrete search algorithms. This tree search framework makes the trade off between memory usage and the number of nodes visited in the tree search clear. Also we can see that as the memory usage increases, the computational complexity of visiting a node does as well. This thesis will consider combining two efficient search strategies in a new way which is not considered by this framework. A parameter will control the influence of each individual algorithm. Using actual run time simulation results from a comparison of this combined algorithm with various settings of its parameter, we can see the strengths of each of the different approaches. This allows us to tune the new combined algorithm so that it outperforms either of the originals in some practical applications. This also provides some insight into the runtime performance comparison of each algorithm individually.
+With many different algorithms for both the reduction and search process, it is not always clear how they relate. In \cite{MurGDC06} the authors propose a tree search framework to relate some of the various discrete search algorithms. This tree search framework makes the trade off between memory usage and the number of nodes visited in the tree search clear. Also we can see that as the memory usage increases, the computational complexity of visiting a node does as well. This thesis will consider combining two efficient search strategies (the SE search and best first search) in a new way which is not considered by this framework. A parameter will control the influence of each individual algorithm. Using actual run time simulation results from a comparison of this combined algorithm with various settings of its parameter, we can see the strengths of each of the different approaches. This allows us to tune the new combined algorithm so that it outperforms either of the originals in some practical applications. This also provides some insight into the runtime performance of each algorithm individually.
 
 \vsp \section{Outline}
-The rest of the thesis will be organized as follows;
+The rest of the thesis will be organized as follows.
 
 In Chapter \ref{chap:SESearch}, the Schnorr-Euchner (SE) enumeration algorithm \cite{SchE94} will be presented in detail, much of the remainder of the thesis will use ideas and notation which comes from this algorithm. Also, since the reduction processes are trying to optimize the search process, it is critical to first understand the search process before considering the reduction.
 
-In Chapter \ref{chap:Reduction}, an explanation will be given for why we need different reduction strategies for OILS and BILS problems. Then, strategies for reducing OILS and BILS problems will be presented separately. A new BILS reduction strategy will be introduced. Also it will be explained how we can take advantage of the new BILS reduction for many OILS problems.
+In Chapter \ref{chap:Reduction}, an explanation will be given for why we need different reduction strategies for OILS and BILS problems. Then, strategies for reducing OILS and BILS problems will be presented separately. After introducing two effective algorithms for BILS reduction from the literature, we will give a new interpretation and some improvements for one of them. Using this new interpretation, we can prove that the two algorithms are mathematically equivalent. A new BILS reduction strategy will then be introduced which is based on the equivalence of the two algorithms. Finally, we will introduce a new reduction strategy for OILS problems.
 
 In Chapter \ref{chap:Searches}, some other notable search algorithms and modifications to the basic SE enumeration will be given. Also, a new hybrid search algorithm is proposed which combines two of the original algorithms in order to take advantage of the positive features of each.
 
-Finally, Chapter \ref{chap:Conclusion} will give a summary and highlight areas where some future work could be done.
+Finally, Chapter \ref{chap:Conclusion} will give a summary and highlight problems which need further investigation.
 
 \chapter{Schnorr-Euchner Enumeration} \label{chap:SESearch}
 
-As mentioned previously, there are two steps to solving ILS problems by the discrete search approach, reduction and search. The purpose of the reduction step is to transform the problem to an easier but equivalent one so the search proceeds more quickly. Therefore the reduction is performed before the search. In this thesis the details on the search process are presented first for easier understanding. The reason for this is that the reduction manipulates the matrix $H$ in such a way to optimize it for the search process, therefore understanding the search process is crucial to understanding the reduction.
+As mentioned previously, there are two steps to solve ILS problems by the discrete search approach, reduction and search. The purpose of the reduction step is to transform the problem to an easier but equivalent one so the search proceeds more quickly. Therefore the reduction is performed before the search. In this thesis the details on the search process are presented first for easier understanding. The reason for this is that the reduction manipulates the matrix $H$ in such a way to optimize it for the search process, therefore understanding the search process is crucial to understanding the reduction.
 
 There are many search algorithms that have been proposed to solve the OILS problem. One of the most effective algorithms in terms of both overall runtime and memory consumption is the Schnorr-Euchner enumeration \cite{SchE94}. The SE search strategy is an improvement to a prior strategy called the Pohst enumeration strategy. For more detail on the Pohst algorithm and how it relates to the SE algorithm, see \cite{AgrEVZ02}. In this chapter, the SE algorithm is presented in detail, since concepts from it will be used throughout the remainder of the thesis.
 
-Let $H$ have the QR decomposition
+Let $H$ from the ILS problem in equation \eqref{eq:ils0} have the QR decomposition
 $$
 H=[Q_1, Q_2] \bmx R \\ 0 \emx,
 $$
-where $$[\underset{n}{Q_1}, \underset{m-n}{Q_2}]  \in \mathbb{R}^{m\times m}$$ is orthogonal
+where $[\underset{n}{Q_1}, \underset{m-n}{Q_2}]  \in \mathbb{R}^{m\times m}$ is orthogonal
 and $R\in \mathbb{R}^{n\times n}$ is upper triangular. 
 Then, with $\bar{y}=Q_1^Ty$ the OILS problem \eqref{eq:ils0} is reduced to 
 \be 
@@ -363,12 +359,12 @@ Then, with $\bar{y}=Q_1^Ty$ the OILS problem \eqref{eq:ils0} is reduced to
 \min_{x \in  {\mathbb{Z}^n}}  \| \by- Rx \|_2.
 \ee
 
-The goal of the search strategy is to enumerate the values for the elements of $x$ until the optimal solution $x_{\scriptscriptstyle{\mathrm{ILS}}}$ is found. We would like to enumerate as few integer points as possible, $x \in \mathbb{Z}^n$ while still guaranteeing the optimal solution. Suppose the optimal solution satisfies,
+The goal of the search strategy is to enumerate the values for the elements of $x$ until the optimal solution $x_{\scriptscriptstyle{\mathrm{ILS}}}$ is found. We would like to enumerate as few integer points as possible to find the optimal solution. Suppose that the optimal solution satisfies
 \be 
 \label{eq:searchIneq0}
-\min_{x \in  {\mathbb{Z}^n}}  \| \by- Rx \|_2 < \beta. 
+ \| \by- Rx \|_2 < \beta. 
 \ee
-We will discuss some good ideas for choosing an initial $\beta$ later. The inequality \eqref{eq:searchIneq0} defines an ellipsoid in terms of $x$ or a hyper-sphere in terms of the lattice points $w=Rx$ with radius $\beta$. For this reason, the problem is sometimes referred to as ``Sphere Decoding''. For an example of what the geometry may look like, refer to Figure \ref{fig:latticeBasis} and consider the two circles.
+We will discuss some good ideas for choosing an initial $\beta$ later. The inequality \eqref{eq:searchIneq0} defines a hyper-ellipsoid in terms of $x$ or a hyper-sphere in terms of the lattice points $w=Rx$ with radius $\beta$. A search algorithm finds the optimal lattice point within this hyper-sphere. For this reason, the problem is sometimes referred to as ``Sphere Decoding'' in communications \cite{HasV05}. For an example of what the geometry may look like, refer to Figure \ref{fig:latticeBasis} and consider the two circles.
 
 Define
 \begin{equation}
@@ -378,21 +374,21 @@ Define
 where when $k=n$ the sum in the right hand side does not exist. Notice that $c_k$ depends on $x_{k+1:n}$.
 Then \eqref{eq:searchIneq0} can be rewritten as
 \begin{equation}\label{eq:searchIneq1}
-\min_{x \in  {\mathbb{Z}^n}} \sum_{k=1}^n r_{kk}^2(x_k-c_k)^2 < \beta^2,
+\sum_{k=1}^n r_{kk}^2(x_k-c_k)^2 < \beta^2,
 \end{equation}
 which implies the following
 set of inequalities:
 \begin{align}
 &\text{level } k: \ \ r_{kk}^2(x_k-c_k)^2 < \beta^2 -\sum_{i=k+1}^nr_{ii}^2(x_i-c_i)^2, \label{eq:searchLevelK}
 \end{align}
-for $k=n,n-1,\ldots, 1$. Equation \eqref{eq:searchLevelK} shows that valid values for $c_k$ depend on the value of $c_{k+1:n}$. This suggests that to find an integer point which satisfies the inequality \ref{eq:searchIneq0} we could start by choosing $c_n$ since it does not depend on any previously chosen values. After $c_n$ is chosen we may calculate which values would satisfy the inequality for $c_{n-1}$ and so on. The SE search process will now be described.
+for $k=n,n-1,\ldots, 1$.
 
 We begin the search process
-at level $n$ as mentioned above, therefore the valid values for $x_n$ only depend on the initial $\beta$. Choose $x_n = \lfloor c_n \rceil$, the nearest integer to $c_n$. If the inequality \eqref{eq:searchLevelK} with $k=n$
+at level $n$, therefore the valid values for $x_n$ only depend on the initial $\beta$. Choose $x_n = \lfloor c_n \rceil$, the nearest integer to $c_n$. If the inequality \eqref{eq:searchLevelK} with $k=n$
 is not satisfied then it will not be satisfied for any integer. This means $\beta$
 was chosen to be too small initially so it must be enlarged and the search restarted. With $x_n$ fixed, we can move
 to level $n-1$ and choose $x_{n-1} = \lfloor c_{n-1} \rceil$ with $c_{n-1}$ calculated as in equation \eqref{eq:searchC}. At this point it is possible that the inequality \eqref{eq:searchLevelK} is no longer satisfied. If this is the case, we must move back to level $n$ and choose $x_n$ to be the second nearest integer to $c_n$.  We continue this procedure until we reach
-level 1, moving back a level if ever the inequality in \eqref{eq:searchLevelK} for the current level is no longer satisfied. When we reach level $1$, we will have found an integer point $\hat{x}$. Since $\hat{x}$ must satisfy \eqref{eq:searchIneq1}, we can use it to define a new, smaller radius which will effectively shrink the search space since there will be fewer valid choices for values of $x$.  To do this, update $$\beta = \left \| \bar{y} - R\hat{x} \right \|_2$$ and try to find a better integer point which lies in the new, smaller ellipsoid. We do this by continuing the search process from the current level after the radius has been tightened. The next step in the process is to move back to level $2$ since no new choice for $x_1$ will give a better solution. Finally in the search process, when we can no longer find any $x_n$ to satisfy \eqref{eq:searchLevelK} with $k=n$, the search is complete and the last integer point $\hat{x}$ found is the solution. If we initially set $\beta = \infty$ the first point $\hat{x}$ that we find is known as the Babai integer point.
+level 1, moving back a level if ever the inequality in \eqref{eq:searchLevelK} for the current level is no longer satisfied. When we finish with level $1$, we will have found an integer point $\hat{x}$. Since $\hat{x}$ must satisfy \eqref{eq:searchIneq1}, we can use it to define a new, smaller radius which will effectively shrink the search space since there will be fewer valid choices for values of $x$.  To do this, update $\beta$ as follows, $$\beta = \left \| \bar{y} - R\hat{x} \right \|_2$$ and try to find a better integer point which lies in the new, smaller ellipsoid. We do this by continuing the search process from the current level after the radius has been tightened. However, at the current level $1$, there will be no integer which satisfies the inequality \eqref{eq:searchLevelK}, therefore we will have to start moving back up the search tree. Finally in the search process, when we can no longer find any $x_n$ to satisfy \eqref{eq:searchLevelK} with $k=n$, the search is complete and the last integer point $\hat{x}$ found is the solution.
 
 \begin{figure}
 \centering
@@ -403,13 +399,12 @@ level 1, moving back a level if ever the inequality in \eqref{eq:searchLevelK} f
 
 The above search process is actually a depth-first tree search in a tree of height $n$, see Figure \ref{fig:treeSearch},
 where the number in a node  denotes the step number at which the node is encountered. Each edge going from level $i$ to $i-1$ represents fixing $x_{i-1}$ to some value, and each edge has a weight which is given by $r_{ii}^2(z_i -
-c_i)^2$. We call the sum of the edge weights from the root to any node in the tree the ``cost'' to visit that node. This cost should not be confused with computational cost, when we discuss computational cost it will be mentioned explicitly. Notice that if we take the sum of these weights from $i, \dots, n$ we simply get the partial
-residual squared for fixing $x_{i:n}$, which is defined as $$\left \| R_{i:n,i:n}x_{i:n} -
-\bar{y}_{i:n} \right \|_2^2.$$ 
+c_i)^2$. We call the sum of the edge weights from the root to any node in the tree the ``cost'' to visit that node. This cost should not be confused with computational cost, when we discuss computational cost it will be mentioned explicitly. Notice that if we take the sum of these weights from $i$ to $n$ we simply get the partial
+residual squared for fixing $x_{i:n}$, which is defined as $$\left \| \bar{y}_{i:n} - R_{i:n,i:n}x_{i:n} \right \|_2^2.$$ 
 
 In this tree we define all leaves to have depth $n$. For example, we would not consider node $6$ in Figure \ref{fig:treeSearch} a leaf, it does not have children in the figure simply because none of its possible children satisfied the constraint from the search process \eqref{eq:searchIneq1}. This implies that each leaf in the tree
 represents an integer vector $x \in \mathbb{Z}^n$ and its cost is the squared residual $$\left \|
-Rx - \bar{y} \right \|_2^2.$$ This means that the OILS problem is equivalent to
+ \bar{y} - Rx \right \|_2^2.$$ This means that the OILS problem is equivalent to
 finding the lowest cost leaf in the tree. The SE enumeration takes advantage
 of the fact that we can easily calculate the lowest cost child of any given
 node to make the depth first search more efficient. Compared to a standard tree search problem where to find the lowest weight edge leaving a given node you may have to check each edge individually. In fact we can easily visit
@@ -417,24 +412,23 @@ the children of a node in order of increasing cost, that is what we are doing wh
 
 A modification of the SE enumeration can be used to solve the BILS problem. To ensure that we remain within the box constraint, instead of choosing $x_k = \lfloor c_k \rceil$ at step $k$, we choose $x_{k} = \lfloor c_{k} \rceil_{{\cal B}_{k}}$, where ${\cal B}_{k}$ comes from \eqref{eq:boxCon}. Also recall that the notation $\lfloor c_{k} \rceil_{{\cal B}_{k}}$ denotes rounding $c_k$ to the nearest integer in the set ${\cal B}_{k}$. Suppose $x_{k-1:n}$ are fixed, then we must also ensure that as we visit the node corresponding to the second nearest integer (and all subsequent integers) for $x_k$ that we remain within the box constraint. This is trivial to accomplish, we simply stop incrementing $x_k$ if we hit the upper bound, and stop decrementing it if we hit the lower bound. If all values for $x_k$ that are within the box constraint have been used up but we are still within the area defined by the ellipsoid, we move back to level $k-1$. Following this process will yield the optimal BILS solution. For more information on the BILS implementation of the SE algorithm, see \cite{ChaH05}.
 
-The choice of the initial value for $\beta$ can have a large impact on the number of nodes visited during the search. If $\beta$ is initially chosen to be infinity, the first point found by the SE search is the Babai integer point. One simple method for choosing an initial $\beta$ which may provide better results than infinity is as follows. Let $x_{\scriptscriptstyle{\mathrm{RLS}}}$ be the real LS solution, then calculate the residual $$\left \| R \lceil x_{\scriptscriptstyle{\mathrm{RLS}}} \rfloor - \bar{y} \right \|_2.$$ We may use this residual as the initial $\beta$ since the optimal solution must have a residual less than or equal to it. While the search process is never slower when using this initial $\beta$, often it will just end up being equivalent to using infinity since the Babai integer point is usually a better estimate than the rounded real least squares solution. In Chapter \ref{chap:Reduction} another idea for choosing an initial $\beta$ will be introduced.
+The choice of the initial value for $\beta$ can have a large impact on the number of nodes visited during the search. If $\beta$ is initially chosen to be infinity, the first point found by the SE search is known as the Babai integer point \cite{Bab86}. In some literature the Babai point refers to the corresponding lattice point $Rx$. One simple method for choosing an initial $\beta$ which may provide better results than infinity is as follows. Let $x_{\scriptscriptstyle{\mathrm{RLS}}}$ be the ordinary real LS solution. Then we may use the following initial $\beta$ for BILS problems,  $$\left \| R \lceil x_{\scriptscriptstyle{\mathrm{RLS}}} \rfloor_{{\cal B}} - \bar{y} \right \|_2,$$ for OILS problems we may use  $$\left \| R \lceil x_{\scriptscriptstyle{\mathrm{RLS}}} \rfloor - \bar{y} \right \|_2.$$ Obviously the optimal solution must have a residual less than or equal to these initial values for $\beta$. While the search process is never slower when using this initial $\beta$, often it will just end up being equivalent to using infinity since the Babai integer point is usually a better estimate than the rounded real least squares solution. In Chapter \ref{chap:Reduction} another idea for choosing an initial $\beta$ will be introduced.
 
 \chapter{Reduction Strategies} \label{chap:Reduction}
 
-This chapter focuses on the reduction stage for solving ILS problems. The goal is to modify the matrix $H$ and vector $y$ in such a way to preserve the original solution but make the problem easier. First the types of operations that we may perform on $H$ and $y$ will be described. The operations that are allowed are different for OILS and BILS problems, the difference and reason for it will be explained. Next some BILS reduction strategies will be described, we will show that two of the more effective strategies in the literature are actually equivalent and present a new algorithm that is based on combining ideas from these two. Finally, it was found that some of the ideas from the BILS reduction algorithms can be applied to the OILS problems as well. This idea will be explored and some numerical results presented.
+This chapter focuses on the reduction stage for solving ILS problems. The goal is to modify the matrix $H$ and vector $y$ in such a way to preserve the original solution but make the problem easier. First the types of operations that we may perform on $H$ and $y$ will be described. The operations that are allowed are different for OILS and BILS problems, the difference and reason for it will be explained. Next some BILS reduction strategies will be described, we will show that two of the most effective strategies in the literature are actually equivalent and present a new algorithm that is based on combining ideas from these two which is more efficient than the originals and numerically reliable. Finally, it was found that some of the ideas from the BILS reduction algorithms can be applied to the OILS problems as well. This idea will be explored and some numerical results presented.
 
-Consider the OILS problem defined in equation \eqref{eq:ils0}. The goal of the reduction is to modify the matrix $H$ in such a way that we still obtain the same solution $x$, but in fewer steps. With this goal, it is essential to know what types of operations we are allowed to perform on the matrix $H$ so that the solution $x$ is not modified. The first type of operation to consider is the orthogonal transformation. Suppose we apply some orthogonal matrix $Q$ from the left, then it is easy to see that equation \eqref{eq:ils0} becomes: $$ \| Q^T(y- Hx)\|_2 = \| (y- Hx) \|_2.$$ 
+Consider the OILS problem defined in equation \eqref{eq:ils0}. The goal of the reduction is to modify the matrix $H$ in such a way that we still obtain the same solution $x$, but in fewer steps. With this goal, it is essential to know what types of operations we are allowed to perform on the matrix $H$ so that the solution $x$ is not modified. The first type of operation to consider is the orthogonal transformation. Suppose we apply some orthogonal matrix $Q$ to $H$ and $y$ from the left, then it is easy to see that the value of the objective function in equation \eqref{eq:ils0} remains unchanged. 
 
-The second type of transformation that we may apply to the matrix $H$ is any unimodular matrix. Unimodular matrices are square, integer matrices with determinant $1$ or $-1$. We can show that the inverse of a unimodular matrix is an integer matrix through basic linear algebra; this property is very useful for our application. Consider applying such a unimodular matrix $Z$ to $H$ from the right, equation \eqref{eq:ils0} becomes: 
-\begin{align}
-&\min_{x\in {\mathbb{Z}^n }}  \| HZZ^{-1}x - y \|_2\\
-=&\min_{z\in {\mathbb{Z}^n }}  \| \bar{H}z - y \|_2,
-\end{align}
-where $\bar{H} = HZ$ and $z = Z^{-1}x$. When we solve this new OILS problem, we obtain some solution $z$. If $Z$ is a known unimodular matrix, we can solve for $x$ by computing $x = Zz$, this gives us the OILS solution to the original problem. Note that if Z were not unimodular, we would have no guarantee that $Zz$ would be integer.
+The second type of transformation that we may apply to the matrix $H$ from the right is any unimodular matrix. Unimodular matrices are square, integer matrices with determinant $1$ or $-1$. We can show that the inverse of a unimodular matrix is an integer matrix through basic linear algebra; this property is crucial for our application. Consider applying such a unimodular matrix $Z$ to $H$ from the right, equation \eqref{eq:ils0} becomes: 
+$$
+\| y - Hx  \|_2 = \| y - HZZ^{-1}x  \|_2 = \| y - \bar{H}z \|_2,
+$$
+where $\bar{H} = HZ$ and $z = Z^{-1}x$. When we solve this new OILS problem, we obtain some solution $z$. If $Z$ is a known unimodular matrix, we can solve for $x$ by computing $x = Zz$, this gives us the OILS solution to the original problem. Note that the unimodular matrix $Z$ guarantees the transformation from integer vectors to integer vectors.
 
 Finally, it is worth mentioning that permutation matrices are unimodular since they will be used extensively throughout this chapter. It is obvious that the effect on the solution vector $x$ from applying a permutation matrix to $H$ from the right is to reorder the elements of the the solution $x$, this is important when considering the BILS problem.
 
-When reducing the BILS problem we must be more careful. Consider the constraints on the solution $x$, defined in equation \eqref{eq:boxCon}. Applying orthogonal matrices to $H$ from the left has no effect on $x$, so the constraints are also unaffected. Applying permutation matrices to $H$ from the right will reorder the elements of the solution $x$, so we must reorder the elements in the constraint vectors as well, which is a trivial operation. However if we apply a general unimodular matrix $Z$ to $H$ from the right, we can no longer easily enforce the constraints on the solution; the simple box constraints become complicated. To see why this is the case, recall the SE search process. Suppose the search is currently at some level $k$ and we would like to know to which value we should fix $z_{k-1}$ (note that $z$ denotes $Z^{-1}x$). We know that $$l_{k-1} \le x_{k-1} \le u_{k-1},$$ but to determine such a bound for $z_{k-1}$, we would need to know the entire vector $z$ in order to compute $Z_{k-1,:}z$. At this point in the search, we only know the last $k$ elements of it. The only way to complete the search process is to ignore the bounds on $z$, find a potential solution, compute $x = Zz$, and then check if each element of $x$ is within the bounds. This is extremely inefficient since many potential solutions could be eliminated very early on in the search if we were able to enforce the constraints during the search process. It is for this reason that when reducing BILS problems, we only consider orthogonal transformations and column permutations.
+When reducing the BILS problem we must be more careful. Consider the constraints on the solution $x$, defined in equation \eqref{eq:boxCon}. Applying orthogonal matrices to $H$ from the left has no effect on $x$, so the constraints are also unaffected. Applying permutation matrices to $H$ from the right will reorder the elements of the solution $x$, so we must reorder the elements in the constraint vectors as well, which is a trivial operation. However if we apply a general unimodular matrix $Z$ to $H$ from the right, the simple box constraints become complicated; we can no longer easily enforce the constraints on the solution during the search process. To see why this is the case, recall the SE search process. Suppose the search is currently at level $n$ and we would like to know to which value we should fix $z_{n}$ (note that $z$ denotes $Z^{-1}x$). We know that $$l_{n} \le x_{n} \le u_{n},$$ but the bound for $z_{n}$ is more complicated, $$l_{n} \le Z_{n,:}z \le u_{n}.$$ We would need to know the entire vector $z$ in order to compute $Z_{n,:}z$. At this point in the search, we have not yet fixed any of the values in $z$. The only way to complete the search process is to ignore the bounds on $z$, find a potential solution, compute $x = Zz$, and then check if each element of $x$ is within the bounds. This is extremely inefficient since many potential solutions could be eliminated very early on in the search if we were able to enforce the constraints during the search process. It is for this reason that when reducing BILS problems, we only consider orthogonal transformations and column permutations.
 
 \vsp \section{BILS Reduction Algorithms} \label{sec:BILSReduction}
 
@@ -524,12 +518,12 @@ Equation \ref{eq:swappedCols} shows the matrix directly after the column swap. W
 \begin{equation} \label{eq:givensRotation}
 \begin{bmatrix}
 I_{k-1} &  &  & \\ 
- & c & -s & \\ 
+ & c & s & \\ 
  & -s & c & \\ 
  &  &  & I_{n-k-1}
 \end{bmatrix} ,\quad c^2+s^2=1
 \end{equation}
-where $$c=\frac{R_{k,j}}{\sqrt{R_{k,j}^2+R_{k+1,j}^2}}$$ and $$s=\frac{R_{k+1,j}}{\sqrt{R_{k,j}^2+R_{k+1,j}^2}}.$$
+where $c=\frac{r_{k,j}}{\sqrt{r_{k,j}^2+r_{k+1,j}^2}}$ and $s=\frac{r_{k+1,j}}{\sqrt{r_{k,j}^2+r_{k+1,j}^2}}.$
 
 We can use rotations $G_{n-1,n}, G_{n-2,n-1}, \dots, G_{i,i+1}$ to zero the subdiagonal elements in the $i^{th}$ column, however this creates subdiagonal elements in columns $i+1, \dots, n$. Equation \eqref{eq:subDiagEntries} shows the matrix after applying this first round of Givens rotatations.
 
@@ -926,11 +920,9 @@ and $P$ is a permutation matrix such that $\check{x}=P\tilde{x}$,
 and that $\bar{y}_{1:n-1}$ in  \eqref{eq:subc} is the multiplication of the transpose of 
 the $Q_1$-factor of the QR decomposition of $H_{:,1:n-1}P$ and $y$ in \eqref{eq:subs}.
 Thus the two subproblems are equivalent. To see proof of this, simply observe the following:
-\begin{align}
-HP &= QRP \\
-&=QV^TVRP
-\end{align}
-
+$$
+HP = QRP = QV^TVRP.
+$$
 Where $V$ is the product of Givens rotations which restores R to an upper triangular matrix after the permutation $P$. Therefore, $VRP$ is upper triangular and obviously equivalent to the matrix used in the second step of CH by its definition; it is just a permutation applied to $R$ which is then restored to upper triangular through the product of Givens rotations $V$. The equivalence of $y$ in the second step should be simple to deduce.
 
 \vsp \subsection{New Algorithm} \label{subsec:newReduction}
@@ -1024,7 +1016,7 @@ The worst case is very unlikely to occur, it arises when $j=1$ each iteration of
 however, $j$ is around $k/2$ and we get an average case complexity of $\frac{4n^3}{3} + 2mn^2$ flops.
 In both cases, the complexity is less than the complexity of the modified SW algorithm.
 
-\vsp \section{OILS Reduction Algorithms} \label{sec:oilsreduction}
+\vsp \section{Reduction for OILS Problems} \label{sec:oilsreduction}
 For the OILS problem, the most common reduction strategy is to apply the ``Lenstra-Lenstra-Lovász'' or LLL reduction \cite{LenLL82} to the matrix $H$. There are a few ways to describe the LLL reduction process and what it means for a matrix $H$ to be LLL reduced. In this thesis, we will look at the LLL algorithm as a matrix factorization, 
 $$\begin{bmatrix}
 Q_1^T\\ 
@@ -1034,7 +1026,7 @@ HZ =
 \begin{bmatrix}
 R\\ 
 0
-\end{bmatrix}$$,
+\end{bmatrix},$$
 where $Q = [Q_1, Q_2] \in \mathbb{R}^{m \times m} $ is orthogonal, $R$ is upper triangular, and $Z \in \mathbb{Z}^{n \times n}$ is unimodular. After this special $QRZ$ decomposition (the $QRZ$ decomposition is not unique), the matrix $R$ is LLL reduced i.e.,
 
 \begin{align} \label{eq:LLLConditions1}
@@ -1160,7 +1152,7 @@ detail on the complexity and convergence, see \cite{WubSJM11}.
 \end{algorithmic}
 \end{algorithm}
 
-\vsp \subsection{New OILS Reduction} \label{subsec:newOILS}
+\vsp \subsection{New Reduction Algorithm} \label{subsec:newOILS}
 In section \ref{sec:BILSReduction}, the motivation for the permutation based reductions was given. While these algorithms make use of the box constraint, the original motivation for them does not rely on it. We may apply these permutation based strategies to unconstrained problems by simply setting the constraints to -infinity and +infinity.
 
 Applying a permutation based reduction algorithm directly to the matrix $H$ however may yield results that are much worse than those given by LLL on average, this was confirmed through numerical experiments. There are a few reasons for why this is the case. First, since the permutation based reductions do not use IGTs, we can not reduce the super diagonal entries. In \cite{XieCB11} it was shown that reducing super diagonal entries is important for the search process. Also, we can not control the distribution of the diagonal entries without IGTs, and using only permutations there are no strict guarantees on the behavior of the diagonal elements like we get from the LLL conditions, \eqref{eq:LLLdiagonal}. Another way to think about this is to consider the geometry. The permutation based reduction only reorders a given set of basis vectors in an attempt to optimize the ordering for the search. The LLL algorithm actually finds a new, better set of basis vectors. See Figure \ref{fig:latticeBasis} for a picture of what this may look like. The LLL algorithm however has no knowledge of the input vector $y$, since we have seen that the optimal ordering for the columns of $R$ depends on $y$, it is reasonable to assume that we should be able to find better column orderings for the search process than the one which LLL gives.
@@ -1183,7 +1175,7 @@ Unforunately, there are certain special types of ill conditioned problems where 
 
 We may use the residual from the Babai integer point obtained from the LLL+PERMU reduction directly as the initial $\beta$ in the LLL reduced problem. Using this residual in the search process on the LLL reduced problem when it is smaller than the residual to the Babai integer point given by LLL reduction alone is guaranteed to result in a shorter search time. From here on we will refer to this strategy as LLL+BABAI. Since the permutation reduction process is very fast compared to the search, usually the overall run time, which is the time for the search plus the time for reduction, will be faster as well. There are some cases where we obtain better results by using the matrix from the LLL+PERMU strategy in the search, and some where it is better to use the LLL+BABAI strategy. Some comparisons can be found in section \ref{sec:ILSReductionResults}.
 
-\vsp \subsection{OILS Numerical Experiments} \label{sec:ILSReductionResults}
+\vsp \subsection{Numerical Experiments} \label{sec:ILSReductionResults}
 In this subsection, some numerical results will be presented to compare the speed of the search process after applying the reduction strategies presented in section \ref{sec:oilsreduction}. We will compare the LLL reduction, LLL reduction plus permutations (LLL+PERMU), and the LLL reduction using the initial radius $\beta$ given by the permutation strategy (LLL+BABAI). For all of the search time results the time to find the Babai integer point is not included.
 
 Figure \ref{fig:LLLvsPermuBabai} which was discussed in the previous subsection
@@ -1192,8 +1184,7 @@ been applied. This figure shows numerical results for $200$ matrices $H \in\math
 \times 50}$ generated randomly with their elements picked from a normal
 distribution, $N(0,1)$. The elements in the vectors $x \in \mathbb{Z}^n$ were picked
 uniformly on the interval $[-10,10]$ and the vector $y$ was generated as $y = Hx
-+ v$, where $v$ is normally distributed with mean $0$ and standard deviation
-$0.5$ in this case.
++ v$, where $v \sim N(0,(0.5)^2I)$ in this case.
 
 \begin{figure}
 \centering
@@ -1229,7 +1220,7 @@ To better understand the behavior of the search process with the three reduction
 
 Table \ref{tab:successRates} shows how many times out of $200$ runs that the
 Babai integer point was equal to the true solution $x$ for both LLL reduction and
-LLL+PERMU. The vertical axis of the table shows the various levels of noise,
+LLL+PERMU. The label ``New'' refers to the LLL+PERMU algorithm. The vertical axis of the table shows the various levels of noise,
 $\sigma$, and the horizontal gives the different problem sizes. If we take this
 as a percentage it is known as the ``success rate'', it gives the probability that the Babai integer point is equal to the true parameter vector. This is an important number for GPS applications where we are required to solve OILS problems. In GPS the success rate can be estimated based on the problem. If the estimated success rate is high enough, the expensive OILS problem is not solved, the Babai integer point is simply used as an estimate for the parameter vector instead. In communications applications the success rate is generally not considered, instead there are other measure like the ``bit error rate'' and ``symbol error rate''. The success rate is shown here because we are considering OILS problems and communications applications deal with BILS problems. Here we see that the LLL+PERMU strategy can offer a significantly better success rate in all cases tested; even in cases where the search process may be slower on average if we use the permuted $R$.
 
@@ -1237,13 +1228,13 @@ as a percentage it is known as the ``success rate'', it gives the probability th
 \caption{Success Rate (out of 200) for LLL and LLL+PERMU on various problem
 sizes and levels of noise.}
 \label{tab:successRates}
-\begin{tabular}{|l|l|l|l|l|l|l|l|l|}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
 \hline
 &               \multicolumn{2}{|l|}{$35 \times 35$} & \multicolumn{2}{|l|}{$40
 \times 40$} &\multicolumn{2}{|l|}{$45 \times 45$} & \multicolumn{2}{|l|}{$50
 \times 50$} \\ \hline
-&               LLL & LLL+PERMU & LLL & LLL+PERMU & LLL & LLL+PERMU & LLL &
-LLL+PERMU \\ \hline
+&               LLL & New & LLL & New & LLL & New & LLL &
+New \\ \hline
 $0.05$&         $200$ & $200$ & $200$ & $200$ & $200$ & $200$ & $200$ & $200$ 
 \\ \hline        
 $0.1$&           $200$ & $200$ & $200$ & $200$ & $200$ & $200$ & $200$ & $200$
@@ -1294,9 +1285,9 @@ While the depth first search corresponding to the SE algorithm is usually very f
 
 Consider the search problem only as a tree search, assume we have the nodes and edges with their weights but have no other knowledge of the problem. Then we can define an optimal algorithm for an ILS problem as one which visits only nodes in the search tree with partial residuals that are less than or equal to the optimal ILS solutions residual. Therefore all nodes visited by an optimal search process satisfy the following inequality:
 \begin{equation}\label{eq:optimalSearchCond}
-\left \| R_{i:n,i:n}x_{i:n}^p - \bar{y}_{i:n}\right \|_2^2 \le \left \| Rx_{ILS} - \bar{y} \right \|_2^2.
+\left \| \bar{y}_{i:n} - R_{i:n,i:n}x_{i:n}^p \right \|_2^2 \le \left \| \bar{y} - Rx_{\scriptscriptstyle{\mathrm{ILS}}} \right \|_2^2.
 \end{equation}
-Here  $R$ and $\bar{y}$ come from reducing an ILS problem defined by $H$ and $y$, and $x_{ILS}$ denotes the optimal ILS solution, which depending on the noise may not be the same as the original integer vector. 
+Here  $R$ and $\bar{y}$ come from reducing an ILS problem defined by $H$ and $y$, and $x_{\scriptscriptstyle{\mathrm{ILS}}}$ denotes the optimal ILS solution, which depending on the noise may not be the same as the original integer vector. 
 
 Assuming no other knowledge of the search problem beyond the tree, any search algorithm must at least visit this set of nodes to guarantee there is no other leaf in the tree with a smaller residual than the one found (recall from Chapter \ref{chap:SESearch} leaves all lie at depth $n$). This means all optimal search algorithms as defined above visit the same set of nodes but possibly in a different order. The SE search presented in Chapter \ref{chap:SESearch} is not optimal since some of the nodes which it visits may not satisfy \eqref{eq:optimalSearchCond}. 
 
@@ -1320,7 +1311,7 @@ In the first step of the BFS, we initialize an empty priority queue and define t
 
 In the next step, we visit the first child of the root, $x_{n}$. First, we perform the $findmin()$ operation on the priority queue, since currently the root is the only element, it will be returned. We would like to visit the first child of the current node (which is now the root). To visit a node involves calculating the ``next best child" and the ``next best child cost", therefore we must compute these quantities for the node corresponding to $x_{n}$ (which is the first child of the root). The ``next best child" of $x_n$ will be given by $x_{n-1} = \lfloor c_{n-1} \rceil$ and its cost is the partial residual squared: $$\left \| R_{n-1:n,n-1:n}x_{n-1:n}^p - \bar{y}_{n-1:n}\right \|_2^2.$$ We then insert $x_n$ into the priority queue with its ``next best child'' and ``next best child cost''. Notice that if we expand the cost as follows, $(R_{n,n}x_n - \bar{y}_n)^2 + (R_{n-1,n}x_n + R_{n-1,n-1}x_{n-1} - \bar{y}_{n-1})^2$ then the first term in the cost is just the cost of the parent node; this means to calculate the cost for a child at level $i$, we only need to add the $(n-i+1)^{th}$ term from the sum defined by $$\left \| R_{i,i:n}x_{i:n}^p - \bar{y}_{i}\right \|_2^2$$ to the cost of the parent.
 
-Since we are now visiting the first child of the root, we must generate the new ``next best child" for the root node, $x_n = \lfloor c_n \rceil \pm 1$ and the cost for this child (also the partial residual), $(R_{n,n}x_n - y_n)^2$. We may now insert the root back into the priority queue with the newly calculated ``next best child cost" and ``next best child''.
+Since we are now visiting the first child of the root, we must generate the new ``next best child" for the root node, $x_n = \lfloor c_n \rceil \pm 1$ and the cost for this child (also the partial residual), $(y_n - R_{n,n}x_n)^2$. We may now insert the root back into the priority queue with the newly calculated ``next best child cost" and ``next best child''.
  
 At this step, the next node to be visited will be the one at the top of the priority queue with the smallest ``next best child cost". Currently there are two nodes in the priority queue, one at level $n+1$ (the root) and one at level $n$. If the former has a smaller ``next best child cost'', we will visit the second best child of $x_{n+1}$, the new $x_{n}$ next. Otherwise we will visit the first child of the node $x_{n}$, which is at level $n-1$.
 
@@ -1379,7 +1370,7 @@ We know the search behaves fairly consistently as the parameter $\alpha$ changes
 
 \begin{figure}
 \centering
-\includegraphics[scale=0.36]{searchsurface.png}
+\includegraphics[width=6in, height=4in]{searchsurface.png}
 \caption{Run time results for the combined search process with varying parameter $\alpha$ on random problems.}
 \label{fig:searchsurface}
 \end{figure}
@@ -1399,7 +1390,7 @@ Also with these ill conditioned problems, the run times are all on a similar sca
  
 \begin{figure}
 \centering
-\includegraphics[scale=0.36]{illConditionedSearch.png}
+\includegraphics[width=6in,height=4in]{illConditionedSearch.png}
 \caption{Run time results for the combined search process on ill conditioned problems with varying parameter $\alpha$.}
 \label{fig:illConditionedSearch}
 \end{figure}

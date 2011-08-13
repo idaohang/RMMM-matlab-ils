@@ -13,29 +13,29 @@
 \contentsline {section}{\numberline {1.4}Integer Least Squares Problems}{3}
 \contentsline {section}{\numberline {1.5}Applications}{4}
 \contentsline {section}{\numberline {1.6}Previous Work}{6}
-\contentsline {subsection}{\numberline {1.6.1}Search Strategies}{7}
-\contentsline {subsection}{\numberline {1.6.2}Reduction Strategies}{9}
+\contentsline {subsection}{\numberline {1.6.1}Reduction Strategies}{7}
+\contentsline {subsection}{\numberline {1.6.2}Search Strategies}{9}
 \contentsline {section}{\numberline {1.7}Objectives and Contribution}{10}
 \contentsline {section}{\numberline {1.8}Outline}{12}
-\contentsline {chapter}{\numberline {2}Schnorr-Euchner Enumeration}{13}
-\contentsline {chapter}{\numberline {3}Reduction Strategies}{18}
-\contentsline {section}{\numberline {3.1}BILS Reduction Algorithms}{20}
-\contentsline {subsection}{\numberline {3.1.1}Previous Reductions}{20}
-\contentsline {subsection}{\numberline {3.1.2}CH Algorithm}{22}
-\contentsline {subsection}{\numberline {3.1.3}SW Original Algorithm}{25}
-\contentsline {subsection}{\numberline {3.1.4}SW Algorithm Interpretation and Improvements}{31}
-\contentsline {subsection}{\numberline {3.1.5}Proof of Equivalence of SW and CH}{34}
-\contentsline {subsection}{\numberline {3.1.6}New Algorithm}{36}
-\contentsline {section}{\numberline {3.2}OILS Reduction Algorithms}{37}
-\contentsline {subsection}{\numberline {3.2.1}Computing the LLL Reduction}{40}
-\contentsline {subsubsection}{Integer Gauss Transformations.}{40}
-\contentsline {subsubsection}{Permutations.}{41}
-\contentsline {subsection}{\numberline {3.2.2}New OILS Reduction}{42}
-\contentsline {subsection}{\numberline {3.2.3}OILS Numerical Experiments}{46}
-\contentsline {chapter}{\numberline {4}Alternate Search Strategies}{52}
-\contentsline {section}{\numberline {4.1}Best First Search}{54}
-\contentsline {section}{\numberline {4.2}Controlling BFS Memory Usage}{57}
-\contentsline {section}{\numberline {4.3}Combining BFS and SE Search}{59}
-\contentsline {section}{\numberline {4.4}Numerical Testing Results}{63}
-\contentsline {chapter}{\numberline {5}Conclusions and Future Work}{67}
-\contentsline {extrachapter}{References}{69}
+\contentsline {chapter}{\numberline {2}Schnorr-Euchner Enumeration}{14}
+\contentsline {chapter}{\numberline {3}Reduction Strategies}{19}
+\contentsline {section}{\numberline {3.1}BILS Reduction Algorithms}{21}
+\contentsline {subsection}{\numberline {3.1.1}Previous Reductions}{21}
+\contentsline {subsection}{\numberline {3.1.2}CH Algorithm}{23}
+\contentsline {subsection}{\numberline {3.1.3}SW Original Algorithm}{26}
+\contentsline {subsection}{\numberline {3.1.4}SW Algorithm Interpretation and Improvements}{32}
+\contentsline {subsection}{\numberline {3.1.5}Proof of Equivalence of SW and CH}{35}
+\contentsline {subsection}{\numberline {3.1.6}New Algorithm}{37}
+\contentsline {section}{\numberline {3.2}Reduction for OILS Problems}{38}
+\contentsline {subsection}{\numberline {3.2.1}Computing the LLL Reduction}{41}
+\contentsline {subsubsection}{Integer Gauss Transformations.}{41}
+\contentsline {subsubsection}{Permutations.}{42}
+\contentsline {subsection}{\numberline {3.2.2}New Reduction Algorithm}{43}
+\contentsline {subsection}{\numberline {3.2.3}Numerical Experiments}{47}
+\contentsline {chapter}{\numberline {4}Alternate Search Strategies}{53}
+\contentsline {section}{\numberline {4.1}Best First Search}{55}
+\contentsline {section}{\numberline {4.2}Controlling BFS Memory Usage}{58}
+\contentsline {section}{\numberline {4.3}Combining BFS and SE Search}{60}
+\contentsline {section}{\numberline {4.4}Numerical Testing Results}{64}
+\contentsline {chapter}{\numberline {5}Conclusions and Future Work}{69}
+\contentsline {extrachapter}{References}{71}
