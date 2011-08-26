@@ -88,11 +88,11 @@ Master of Science in Computer Science}%
 
 \SetAcknowledgeName{\MakeUppercase{Acknowledgements}}%
 \SetAcknowledgeText{
-First I would like to thank my supervisor, Xiao-Wen Chang for his excellent guidance and many helpful comments and ideas. Working with Xiao-Wen has been an excellent experience, I feel that he was able to push me to produce the best work I am capable of.\\
+First I would like to thank my supervisor, Xiao-Wen Chang for his excellent guidance and many helpful comments and ideas. From him I have learned the meaning of being rigorous and precise in ones work and how imprecise I often can be.\\
 \indent I would also like to thank NSERC and McGill University for their generous financial support, without which this thesis would not have been possible.\\
 \indent Thanks to my lab mates in the Scientific Computing lab, especially Wen-Yang Ku, Xiaohu Xie and Sevan Hanssian for the numerous times that they have helped me through difficult problems.\\
 \indent I would like to thank my co-workers, Todd Murphy, Kevin Garnett, Jackie Howatt, and Allan Cameron at MedRunner, who have been very understanding with my lack of availability over the past two years.\\
-\indent Finally I thank my friends and family who have remained close over time and distance. Especially my good friend Marya Sawaf to whom I owe the excellent last minute French translation of my abstract. Thanks to her for always being there.
+\indent Finally I thank my friends and family who have remained close over time and distance. Especially my good friend Marya Sawaf to whom I owe the excellent last minute editing and French translation of the abstract. Thanks to her for always being there.
 }%
 \Acknowledge%
 
@@ -102,28 +102,9 @@ First I would like to thank my supervisor, Xiao-Wen Chang for his excellent guid
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \SetAbstractEnName{\MakeUppercase{Abstract}}%
 \SetAbstractEnText{
-This thesis is concerned with integer least squares (ILS) problems, also referred to
-as closest vector problems. One often used approach to solving ILS problems is the
-discrete search method, which typically involves two stages, the reduction and the
-search. The main purpose of the first stage is to make the second stage faster.\\
-\indent For the box-constrained integer least squares problem, the reduction strategy
-involves column reordering of the the given matrix. There are currently two
-algorithms for column reordering that are most effective for the search stage.
-Both use all available information of the problem, but they were derived
-respectively from geometric and algebraic points of view and look different. In this
-thesis we first modify one to make it more computationally efficient and easier to
-comprehend. Then we prove the modified one and the other actually give the same column
-reordering in theory. After that we propose a new mathematically equivalent
-algorithm, which is more computationally efficient and is still easy to understand.
-This thesis then extends the idea to ordinary integer least squares (OILS)
-problems. A new reduction algorithm which combines the well-known
-Lenstra–Lenstra–Lovász (LLL) reduction and the column reordering strategy is
-proposed. The new reduction can be much more effective than the LLL reduction
-sometimes.\\
-\indent The thesis also reviews some common search algorithms. A new algorithm is proposed,
-which is based on two previous algorithms, the depth-first search and the best-first search.
-This hybrid algorithm makes use of the advantages of both algorithms, is more
-efficient than either one and is easier to implement than previous hybrid algorithms.
+This thesis is concerned with integer least squares problems, also referred to as closest vector problems. One often used approach to solving these problems is the discrete search method, which typically involves two stages, the reduction and the search. The main purpose of the reduction is to make the search faster.\\
+\indent Reduction strategies for box-constrained integer least squares problems involve column reordering of the input matrix. There are currently two algorithms for column reordering that are most effective for the search stage, referred to here as SW and CH. Although both use all available information in the problem, the SW and CH algorithms look different and were derived respectively from geometric and algebraic points of view. In this thesis we modify the SW algorithm to make it more computationally efficient and easier to comprehend. We then prove that the SW and CH algorithms actually give the same column reordering in theory. Finally, we propose a new mathematically equivalent algorithm, which is more computationally efficient and is still easy to understand. This thesis also extends the column permutation idea to ordinary integer least squares problems. A new reduction algorithm which combines the well-known Lenstra–Lenstra–Lovász (LLL) reduction and the new column reordering strategy is proposed. The new reduction can be much more effective than the LLL reduction in some cases.\\
+\indent The thesis also reviews some common search algorithms. A new one is proposed, which is based on two previous algorithms, the depth-first search and the best-first search. This hybrid algorithm makes use of the advantages of both originals, is more efficient than either and is easier to implement than other previous hybrid algorithms.
 }
 \AbstractEn%
 
@@ -131,8 +112,9 @@ efficient than either one and is easier to implement than previous hybrid algori
 %%         French Abstract                         %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \SetAbstractFrName{\MakeUppercase{ABR\'{E}G\'{E}}}%
-\SetAbstractFrText{Dans le plus compliqué des cas, le problème de la méthode de moindres carrés en nombres entiers (ILS) est un
-non-déterministe polynomial ardu. Depuis que sa solution détient de nombreuses applications pratiques, plusieurs algorithmes ont été proposées pour résoudre ce problème et certaines de ses variantes, tel le problème ILS sous contrainte de boîte (BILS). Il ya généralement deux étapes pour résoudre le problème ILS: la réduction et la recherche. Évidemment, nous aimerions résoudre les instances du problème ILS aussi rapidement que possible; cependant, la pluplart de la littérature ne compare pas le temps d'exécution et les "flop counts" des algorithmes. Ils utilisent plutôt une mesure abstraite (le nombre de nœuds visités durant la recherche) qui ne correspond pas toujours au temps d'exécution des algorithmes. Cette thèse passe en revue plusieurs des stratégies de réduction et de recherche pour les problèmes ILS et BILS. En comparant le temps d'exécution de différentes algorithmes de recherche, nous pouvons noter les avantages de chacune, ce qui nous permet de proposer une nouvelle stratégie de recherche plus efficace qui est une combinaison des deux autres. Il sera également démontré que deux stratégies de réduction BILS très efficaces sont semblables en théorie; nous proposons alors une nouvelle stratégie de réduction BILS équivalente aux autres, tout en étant plus efficace. Enfin, il sera démontré que la réduction BILS peut être appliquée au problème de ILS pour atteindre un amélioration significative en performance.
+\SetAbstractFrText{Cette thèse s'intéresse aux problèmes de moindres carrés entiers (ILS), ou les problèmes du vecteur le plus proche. Une approche souvent utilisée pour résoudre ces problèmes est la méthode de recherche discrète, qui implique deux étapes: la réduction et la recherche. Le but principal de la réduction est de rendre l’étape de recherche plus rapide.\\
+\indent Les stratégies de réduction des problèmes ILS sous contrainte de boîte impliquent la réorganisation de colonnes de la matrice de données. Il existe actuellement deux algorithmes pour la réorganisation des colonnes, appelés ici les algorithmes SW et CH,  qui sont les plus efficaces pour la phase de recherche. Bien que les deux utilisent toutes les informations disponibles dans le problème, les algorithmes SW et CH sont différents en apparence, et ont été obtenus respectivement à partir d’une point de vue géométrique et algébrique de vue. Dans cette thèse, nous modifions l'algorithme SW pour rendre son calcul plus efficace et plus facile à comprendre. Nous démontrons ensuite qu’en théorie, les algorithmes SW et CH donne effectivement la même réorganisation de colonnes. Enfin, nous proposons un nouveau algorithme mathématiquement équivalent qui est plus efficace, tout en demeurant facile à comprendre. Cette thèse étend également l'idée de permutation de colonnes aux problèmes ordinaires de moindres carrés entiers. Un nouveau algorithme de réduction qui combine le célèbre agorithme Lenstra-Lenstra-Lovász (LLL) avec la nouvelle stratégie de réorganisation de colonnes est proposé. La nouvelle réduction peut être plus efficace que la réduction LLL dans certains cas.\\
+\indent Cette thèse examine également certains algorithmes de recherche d’usage courant. Un nouveau est proposé qui est basé sur deux algorithmes précédents: l’algorithme de parcours en profondeur et celui de la recherche au meilleur d'abord. Notre algorithme hybride détient les avantages des deux originaux, tout en étant plus efficace et plus facile à utiliser que d’autres algorithmes hybrides déjà existants.
 }%
 \AbstractFr%
 
