@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.14)  14 AUG 2011 09:58
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.14)  20 OCT 2011 20:14
 entering extended mode
  %&-line parsing enabled.
 **sbreenThesis.tex
@@ -993,7 +993,7 @@ Chapter 3.
 [19
 
 ] [20] [21] [22] [23] [24]
-Overfull \hbox (2.30887pt too wide) in paragraph at lines 539--548
+Overfull \hbox (2.30887pt too wide) in paragraph at lines 540--549
 \T1/ptm/m/n/12 which rep-re-sents the par-tial resid-ual given when $\OML/cmm/m
 /it/12 x[]$ \T1/ptm/m/n/12 is taken to be $[]$. Let $\OML/cmm/m/it/12 j \OT1/cm
 r/m/n/12 = [][][][]$\T1/ptm/m/n/12 .
@@ -1006,23 +1006,17 @@ File: sumotivation.png Graphic file (type png)
  <use sumotivation.png>
 [26] [27] [28 <./sumotivation.png (PNG copy)>] [29] [30] [31]
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 785.
+LaTeX Font Warning: Command \small invalid in math mode on input line 786.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 785.
+LaTeX Font Warning: Command \small invalid in math mode on input line 786.
 
 [32]
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 796.
+LaTeX Font Warning: Command \small invalid in math mode on input line 797.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 796.
-
-
-LaTeX Font Warning: Command \small invalid in math mode on input line 806.
-
-
-LaTeX Font Warning: Command \small invalid in math mode on input line 806.
+LaTeX Font Warning: Command \small invalid in math mode on input line 797.
 
 
 LaTeX Font Warning: Command \small invalid in math mode on input line 807.
@@ -1031,22 +1025,28 @@ LaTeX Font Warning: Command \small invalid in math mode on input line 807.
 LaTeX Font Warning: Command \small invalid in math mode on input line 807.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 813.
+LaTeX Font Warning: Command \small invalid in math mode on input line 808.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 813.
+LaTeX Font Warning: Command \small invalid in math mode on input line 808.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 813.
+LaTeX Font Warning: Command \small invalid in math mode on input line 814.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 813.
+LaTeX Font Warning: Command \small invalid in math mode on input line 814.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 813.
+LaTeX Font Warning: Command \small invalid in math mode on input line 814.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 813.
+LaTeX Font Warning: Command \small invalid in math mode on input line 814.
+
+
+LaTeX Font Warning: Command \small invalid in math mode on input line 814.
+
+
+LaTeX Font Warning: Command \small invalid in math mode on input line 814.
 
 [33] [34] [35] [36] [37] [38] [39] [40] [41] [42] [43] [44] [45] [46]
 <lllvslllpermubabai.png, id=193, 1284.8pt x 460.119pt>
@@ -1267,7 +1267,7 @@ sbreenThesis.bbl
 Here is how much of TeX's memory you used:
  11181 strings out of 495061
  178204 string characters out of 1182621
- 248485 words of memory out of 3000000
+ 249485 words of memory out of 3000000
  14027 multiletter control sequences out of 15000+50000
  35516 words of font info for 53 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
@@ -1285,7 +1285,7 @@ ts/cm/cmsy8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/symbols/m
 sbm10.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/shar
 e/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/font
 s/type1/urw/times/utmri8a.pfb>
-Output written on sbreenThesis.pdf (82 pages, 657199 bytes).
+Output written on sbreenThesis.pdf (82 pages, 657631 bytes).
 PDF statistics:
  335 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

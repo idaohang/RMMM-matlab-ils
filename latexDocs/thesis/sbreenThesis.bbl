@@ -13,13 +13,13 @@ A.V. Aho, J.E. Hopcroft, and J.D. Ullman.
 
 \bibitem{SchFL09}
 L.~Lampe, A.~Schenk, and R.~Fischer.
-\newblock A stopping radius for the sphere decoder and its application to msdd
-  of dpsk.
+\newblock A stopping radius for the sphere decoder and its application to MSDD
+  of DPSK.
 \newblock {\em IEEE Communications Letters}, 13:465--467, 2009.
 
 \bibitem{Bab86}
 L.~Babai.
-\newblock On lovasz's lattice reduction and the nearest lattice point problem.
+\newblock On Lovasz's lattice reduction and the nearest lattice point problem.
 \newblock {\em Combinatorica}, 6(1):1--13, 1986.
 
 \bibitem{Bjo96}
@@ -46,8 +46,8 @@ X.-W. Chang and C.C. Paige.
 
 \bibitem{StuBF07}
 W.~Fichtner, C.~Studer, and A.~Burg.
-\newblock A unification of ml-optimal tree-search decoders.
-\newblock In {\em In Proceedings of IEEE Signals, Systems and Computers}, 2007.
+\newblock A unification of ML-Optimal tree-search decoders.
+\newblock In {\em In Proc. of IEEE Signals, Systems and Computers}, pages 2185--2189, 2007.
 
 \bibitem{Cli64}
 R.~E. Cline.
@@ -66,17 +66,17 @@ G.~J. Foscini, G.~D. Golden, R.~A. Valenzuela, and P.~W. Wolniansky.
 T.~Fukatani, R.~Matsumoto, and T.~Uyematsu.
 \newblock Two methods for decreasing the computational complexity of the {MIMO}
   {ML} decoder.
-\newblock In {\em Proceedings of International Symposium on Information Theory
+\newblock In {\em Proc. of Int. Symposium on Information Theory
   and its Applications}, pages 34--38, Parma, Italy, October 2004.
 
 \bibitem{HanPS11}
-Guillaume Hanrot, Xavier Pujol, and Damien Stehlé.
+G.~Hanrot, X.~Pujol, and D.~Stehlé.
 \newblock Algorithms for the shortest and closest lattice vector problems.
-\newblock In {\em International Workshop on Coding and Cryptology}, 2011.
+\newblock In {\em Int. Workshop on Coding and Cryptology}, 2011.
 
 \bibitem{Han11}
 S. Hanssian.
-\newblock Successs rates of integer parameter estimates in linear models.
+\newblock Success rates of integer parameter estimates in linear models.
 \newblock Master's thesis, McGill University, School of Computer Science, 2011.
 
 \bibitem{HasV05}
@@ -94,7 +94,7 @@ M. Jankiraman.
 R.~Kannan.
 \newblock Improved algorithms for integer programming and related lattice
   problems.
-\newblock In {\em Proceedings of ACM Symposium on Theory of Computing}, pages
+\newblock In {\em Proc. of ACM Symposium on Theory of Computing}, pages
   193--206, April 1983.
 
 \bibitem{KorZ73}
@@ -115,9 +115,9 @@ A.K. Lenstra, J.H.W. Lenstra, and L.~Lovasz.
 
 \bibitem{LinMH10}
 C. Ling, W.~Ho Mow, and N. Howgrave-Graham.
-\newblock Variants of the lll algorithm in digital communications: Complexity
+\newblock Variants of the LLL algorithm in digital communications: Complexity
   analysis and fixed-complexity implementation.
-\newblock {\em IEEE Transactions On Information Theory}, 2010.
+\newblock {\em IEEE Transactions on Information Theory}, 2010.
 
 \bibitem{Mic01}
 D.~Micciancio.
@@ -126,9 +126,9 @@ D.~Micciancio.
 
 \bibitem{StoVH08}
 B.~Hassibi M.~Stojnic, and H.~Vikalo.
-\newblock Speeding up the sphere decoder with h-infinity and sdp inspired lower
+\newblock Speeding up the sphere decoder with H-infinity and SDP inspired lower
   bounds.
-\newblock {\em IEEE Transactions On Signam Processing}, 56:712--726, 2008.
+\newblock {\em IEEE Transactions on Signal Processing}, 56:712--726, 2008.
 
 \bibitem{MurGDC06}
 A.D. Murugan, H.~El Gamal, M.~O. Damen, and G.~Caire.
@@ -156,13 +156,13 @@ C.P. Schnorr and M.~Euchner.
 \bibitem{SuW05}
 K. Su and I. Wassell.
 \newblock A new ordering for efficient sphere decoding.
-\newblock In {\em IEEE International Conference on Communications}, volume~3,
+\newblock In {\em IEEE Int. Conference on Communications}, volume~3,
   pages 1906--1910, 2005.
 
 \bibitem{XuWZW04}
 Z. Zhou, J.~Wang, W.~Xu, and Y.~Wang.
-\newblock A computationally efficient exact ml sphere decoder.
-\newblock In {\em Proceedings of IEEE Globecom 2004}, 2004.
+\newblock A computationally efficient exact ML sphere decoder.
+\newblock In {\em Proc. of IEEE Globecom 2004}, 2004.
 
 \bibitem{WubBRKK01}
 D.~Wubben, R.~Bohnke, J.~Rinas, V.~Kuhn, and K.D. Kammeyer.
@@ -177,7 +177,7 @@ D. Wubben, D. Seethaler, J. Jalden, and G. Matz.
 
 \bibitem{XieCB11}
 X. Xie, X.-W. Chang, and M.~A. Borno.
-\newblock Partial lll reduction.
+\newblock Partial LLL reduction.
 \newblock In {\em IEEE Globecom}, 2011.
 
 \bibitem{Xu07}
@@ -187,8 +187,8 @@ G. Xu.
 
 \bibitem{DaiY08}
 Z.~Yan and Y.~Dai.
-\newblock Memory-constrained ml-optimal tree search detection.
-\newblock In {\em In Proceedings of IEEE Information Sciences and Systems},
+\newblock Memory-constrained ML-optimal tree search detection.
+\newblock In {\em In Proc. of IEEE Information Sciences and Systems},
   2008.
 
 \end{thebibliography}
